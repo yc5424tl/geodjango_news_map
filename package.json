@@ -1,0 +1,7 @@
+{
+  "name": "geodjango_news_map",
+  "version": "1.0.0",
+  "dependencies": {
+    "leaflet": "^1.5.1"
+  }
+}

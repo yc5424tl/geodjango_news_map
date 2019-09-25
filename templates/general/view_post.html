@@ -1,0 +1,57 @@
+{% extends 'general/base.html' %}
+{% block title %}View Post - {{ block.super }}{% endblock %}
+{% block scripts %} {{ block.super }} {% endblock %}
+{% block content%}
+    <div class="row" id="view-post-upper">
+        <div class="col-6">
+            <div class="view-post-post">
+                <h3 class="lt-header" id="view-post-post-hdr">{{ post.title }}</h3>
+                <small class="view-post-post-detail">
+                    <span>By</span>
+                    <a class="view-post-author-link" href="{% url 'view_user' post.author.pk %}">{{ post.author.first_name }}</a>
+                    <span>{{ post.date_published }}</span>
+                </small>
+                <blockquote id="view-post-post-body"><pre>{{ post.body }}</pre></blockquote>
+                {% if user.pk == post.author.id %}
+                    <div class="btn-group-sm float-right">
+                        <a href="{% url 'update_post' post.pk %}"><button class="btn btn-link" id="view-post-upd-post-btn">EDIT</button></a>
+                        <a href="{% url 'delete_post' post.pk %}"><button class="btn btn-link" id="view-post-del-post-btn">DELETE</button></a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-6">
+            <div id="view-post-iframe-div">
+                <iframe id="view-post-iframe" src="{% url 'view_choro' post.query.pk %}"></iframe>
+            </div>
+        </div>
+    </div>
+    <div class="row" id="view-post-comments-container">
+        <div class="col-12">
+             <h3 id="view-post-comments-header">Comments</h3>
+            {% for comment in post.comments.all %}
+                <div class="view-post-comment">
+                    <blockquote class="view-post-comment-body"><pre>{{ comment.body }}</pre></blockquote>
+                    {% if comment.author.pk == user.pk %}
+                        <small class="view-post-comment-footer">
+                            Comment by <a href="{% url 'view_user' comment.author.pk %}">You</a> - {{ comment.date_published }}
+                            <span class="btn-group pull-right">
+                                <a role="button" class="btn pull-right" href="{% url 'update_comment' comment.pk %}"><button class="btn btn-link" id="view-post-upd-comment-btn">EDIT</button></a>
+                                <a role="button" class="btn pull-right" href="{% url 'delete_comment' comment.pk %}"><button class="btn btn-link" id="view-post-del-comment-btn">DELETE</button></a>
+                            </span>
+                        </small>
+                    {% else %}
+                        <small class="view-post-comment-footer">
+                            Comment by <a href="{% url 'view_user' comment.author.pk %}">{{ comment.author.first_name }}</a> - {{ comment.date_published }}
+                        </small>
+                    {% endif %}
+                </div>
+            {% empty %}
+                <p>No Comments Yet</p>
+            {% endfor %}
+            <a href="{% url 'new_comment' post.pk %}">
+                <button id="view-post-add-comment-btn" class="btn btn-default">Add Comment</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}
