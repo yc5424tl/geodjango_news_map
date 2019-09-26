@@ -140,11 +140,6 @@
 
 {% block footer-scripts %}
     <script>
-        {#$(document).ready(function() {#}
-        {#    let button = document.getElementById('view-user-view-last-comments-btn');#}
-        {#    let target = document.getElementById('view-user-last-post-comments-div');#}
-        {#    button.on('click', target.toggle())#}
-
         $(function() {
             $("#view-user-view-last-comments-btn").click(function() {
                 $("#view-user-last-post-comments-div").toggle();

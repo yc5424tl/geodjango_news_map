@@ -1,5 +1,4 @@
 from django.contrib.gis.admin import OSMGeoAdmin
-# from django.contrib import admin
 from django.contrib.gis import admin
 from .models import Source, Post, QueryResultSet, Article, Comment
 

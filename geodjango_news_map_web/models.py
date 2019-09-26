@@ -38,7 +38,6 @@ class QueryResultSet(models.Model):
     query_types = ( ('headlines', 'Headlines'), ('all', 'All') )
 
     _argument = models.CharField(max_length=500)
-    # _choropleth = models.FileField(upload_to=CHORO_MAP_ROOT, null=True, blank=True, default=None)
     _choropleth = models.FileField(upload_to='news_mapper_web/html/', null=False, blank=False, default=None, max_length=500)
     _choro_html = models.TextField(max_length=200000, blank=True)
     _data = models.CharField(max_length=200000, blank=True)
@@ -106,11 +105,6 @@ class QueryResultSet(models.Model):
     def date_last_modified(self, new_date):
         self._date_last_modified = new_date
 
-    # objects = QueryManager
-    #
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.choropleth = None
 
     def __str__(self):
         details = 'Argument = ' + self._argument + '\n' + '' \
@@ -224,12 +218,6 @@ class Article(models.Model):
     @property
     def author(self):
         return self._author
-
-    # @property
-    # def date_published(self):
-    #     if self._date_published:
-    #         return f'{self._date_published.month} {self._date_published.day}, {self._date_published.year}' \
-    #             if self._date_published else None
 
     @property
     def date_published(self):

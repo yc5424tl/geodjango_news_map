@@ -89,8 +89,6 @@ def new_query(request):
         for article in article_list:
             code = geo_map_mgr.map_source(source_country=article.source_country)
             geo_data_mgr.add_result(code)
-        # article_a3_codes = map(lambda article: geo_map_mgr.map_source(article.source_country), article_list)
-        # map(lambda a3_code: geo_data_mgr.add_result(a3_code), article_a3_codes)
         data_tup = geo_map_mgr.build_choropleth(query_mgr.argument, query_mgr.focus, geo_data_mgr)
         QueryResultSet.objects.filter(pk=query_set.pk).update(_choropleth=data_tup[0], _choro_html=data_tup[1], _filename=data_tup[2], _filepath=CHORO_MAP_ROOT + data_tup[2], _author=request.user.pk)
         return redirect('view_query', query_set.pk)

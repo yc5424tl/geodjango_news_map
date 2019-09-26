@@ -73,19 +73,10 @@
                                         <a href="#"><button type="submit" class="btn btn-link btn-sm" id="view-query-save-btn">SAVE</button></a>
                                         <a href={% url 'delete_query' query.pk %}><button class="btn btn-link btn-sm" role="link" id="view-query-del-btn">DELETE</button></a>
                                     </div>
-{#                                    <span><button type="submit" name="p-submit" value="post" class="btn btn-default">SAVE</button></span>#}
-{#                                    <span><button type="submit" name="p-submit" value="del" class="btn btn-default">DEL</button></span>#}
                                 </div>
                                 <input type="hidden" name="user_pk" value="{{ user.pk }}">
                                 <input type="hidden" name="query_pk" value="{{ query.pk }}">
                             </form>
-
-{#                            <div class="row" id="del-query-row">#}
-{#                                <form method="post" action="{% url 'delete_query' query.pk %}">#}
-{#                                    {% csrf_token %}#}
-{#                                    <button type="submit" class="btn btn-danger">DEL Query</button>#}
-{#                                </form>#}
-{#                            </div>#}
 
                         </div>
                     {% endif %}

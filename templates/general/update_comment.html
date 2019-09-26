@@ -35,10 +35,6 @@
                 <button type="submit" class="btn view-comment-upt-btn">SAVE</button>
             </form>
 
-
-{#        <blockquote class="view-comment-body">{{ comment.body }}</blockquote>#}
-
-
             <form method="post" action={% url 'delete_comment' comment.pk %}>
                 {% csrf_token %}
                 <input type="hidden" name="redirect_url" value="{% url 'view_post' comment.post.pk %}">

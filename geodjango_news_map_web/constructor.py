@@ -1,5 +1,5 @@
 from datetime import datetime
-from . models import Article, Post, QueryResultSet, Source
+from . models import Article, QueryResultSet, Source
 from logging import Logger
 from dateutil.parser import parse
 import json

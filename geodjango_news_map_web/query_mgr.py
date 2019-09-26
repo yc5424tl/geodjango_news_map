@@ -20,16 +20,6 @@ class Query:
         self.endpoint = endpoint
 
 
-    # @property
-    # def file(self):
-    #     return self._filename
-    #
-    # @file.setter
-    # def file(self, filename):
-    #     # date_created = datetime.now().strftime('%Y%m%d-%H%M%S')
-    #     # filename = f'api_data-{self.argument}_{self.focus}-{date_created}.json'
-    #     self._filename = filename
-
     def filename(self):
         date_created = datetime.now().strftime('%Y%m%d-%H%M%S')
         filename = f'api_data-{self.argument}_{self.focus}-{date_created}.json'
@@ -64,8 +54,6 @@ class Query:
 
 
 
-
-
     def execute_query(self):
         response = requests.get(self.endpoint)
         print(f'\nRESPONSE\nresponse == {response.json()}\nEND RESPONSE\n\n')
@@ -97,8 +85,6 @@ class Query:
 
 
     def to_file(self, data):
-        # date_created = datetime.now().strftime('%Y%m%d-%H%M%S')
-        # filename = f'api_data-{query.argument}_{query.focus}-{date_created}.json'
         try:
             with open(self.filename(), 'w+') as file:
                 file.write(str(data))
@@ -108,44 +94,6 @@ class Query:
             logger.exception(AttributeError, 'AttributeException during writing articles.json to file (QueryManager)')
         except TypeError:
             logger.exception(TypeError, 'TypeError while ')
-
-
-    # @staticmethod
-    # def verify_source(source_name):
-    #     if source_name:
-    #         try:
-    #             source = Source.objects.get(_name=source_name)
-    #             return source
-    #         except (AttributeError, Source.DoesNotExist) as e:
-    #             logger.exception(f'{e} propagating from query_mgr.verify_source({source_name})')
-    #             return False
-    #     elif not source_name:
-    #         logger.error(f'{source_name} retrieval failed.')
-    #         return False
-
-
-    # @staticmethod
-    # def verify_str(data):
-    #     if data and isinstance(data, str):
-    #         return data
-    #     else:
-    #         return None
-    #
-    #
-    # def verify_date(self, data):
-    #     f_data = self.format_date(data)
-    #     if data and isinstance(f_data, datetime):
-    #         return f_data
-    #     else:
-    #         return None
-    #
-    #
-    # @staticmethod
-    # def format_date(data):
-    #     try:
-    #         return parse(data)
-    #     except ValueError:
-    #         return None
 
 
 

@@ -20,12 +20,6 @@ class GeoMapManager:
 
     @staticmethod
     def map_source(source_country):
-        # if source_country is None:
-        #     return None
-        # else:
-        #     country = pycountry.countries.get(alpha_2=str(source_country).upper())
-        #     return country.alpha_3
-
         return (pycountry.countries.get(alpha_2=str(source_country).upper())).alpha_3 if source_country else None
 
 
@@ -53,10 +47,8 @@ class GeoMapManager:
                             # Pastel1 - Pastel2 - Spectral - Set1 - Set2 - Set3 - Dark2
 
         folium.TileLayer("stamenwatercolor", attr='attr').add_to(global_map)
-        # folium.TileLayer("Stamen Terrain", attr='attr').add_to(global_map)
         folium.TileLayer("stamenterrain", attr='attr').add_to(global_map)
         folium.TileLayer("cartodbpositron", attr='attr').add_to(global_map)
-        # folium.TileLayer("cartodbdark matter", attr='attr').add_to(global_map)
         folium.TileLayer("OpenStreetMap", attr='attr').add_to(global_map)
         folium.LayerControl().add_to(global_map)
 
@@ -64,11 +56,6 @@ class GeoMapManager:
         global_map.save(CHORO_MAP_ROOT + filename)
         global_map.save(f'templates/maps/{filename[0:-5]}.html')
         choro_html = global_map.get_root().render()
-
-        # if self.choro_to_file(choro_html, filename):
-        #     return global_map, choro_html, filename
-        # else:
-        #     return None
 
         return global_map, choro_html, filename if self.choro_to_file(choro_html, filename) else None
 
@@ -104,4 +91,3 @@ class GeoMapManager:
         except FileNotFoundError as e:
             logger.exception(f'{e} while writing map to file')
             return False
-
