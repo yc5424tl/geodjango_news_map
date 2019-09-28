@@ -94,13 +94,3 @@ class Query:
             logger.exception(AttributeError, 'AttributeException during writing articles.json to file (QueryManager)')
         except TypeError:
             logger.exception(TypeError, 'TypeError while ')
-
-
-
-
-
-
-
-
-
-

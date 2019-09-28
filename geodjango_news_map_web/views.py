@@ -3,11 +3,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import AuthenticationForm
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.shortcuts import render, redirect, get_object_or_404, Http404
-
+from django.db import transaction
 from .constructor import Constructor
-from .forms import AuthenticationForm, CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, \
+from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, \
     NewCommentForm
 from .geo_data_mgr import GeoDataManager
 from .geo_map_mgr import GeoMapManager, CHORO_MAP_ROOT
@@ -20,11 +21,12 @@ geo_data_mgr = GeoDataManager()
 geo_map_mgr = GeoMapManager()
 
 
-
+@transaction.atomic
 def index(request):
     if request.method == 'GET':
-        form = AuthenticationForm
+        form = AuthenticationForm()
         return render(request, 'general/index.html', {'form': form})
+
 
 def register_user(request):
     if request.method == 'POST':
