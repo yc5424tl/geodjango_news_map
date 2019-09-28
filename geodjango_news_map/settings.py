@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'geodjango_news_map_web',
-    #'geodjango_news_map_web.apps.PostgisNewsMapDockerConfig',
 ]
 
 MIDDLEWARE = [
