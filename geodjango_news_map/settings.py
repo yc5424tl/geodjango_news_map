@@ -84,12 +84,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'geodjango_news_map.wsgi.application'
 
 
-######
-
-# DATABASE_URL = os.environ['DATABASE_URL']
-
-######
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
