@@ -2,11 +2,12 @@ import pycountry
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.shortcuts import render, redirect, get_object_or_404, Http404
 from django.db import transaction
+from django.shortcuts import render, redirect, get_object_or_404, Http404
+
 from .constructor import Constructor
 from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, \
     NewCommentForm
@@ -14,7 +15,6 @@ from .geo_data_mgr import GeoDataManager
 from .geo_map_mgr import GeoMapManager, CHORO_MAP_ROOT
 from .models import QueryResultSet, Source, Post, Comment
 from .query_mgr import Query
-
 
 constructor = Constructor()
 geo_data_mgr = GeoDataManager()
