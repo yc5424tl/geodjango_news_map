@@ -8,9 +8,7 @@ import os
 from logging import Logger
 from datetime import datetime
 
-
 logger = Logger(__name__)
-
 
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(SETTINGS_DIR))
@@ -59,6 +57,8 @@ class GeoMapManager:
 
         return global_map, choro_html, filename if self.choro_to_file(choro_html, filename) else None
 
+
+
     @staticmethod
     def get_threshold(articles_per_country):
 
@@ -77,10 +77,12 @@ class GeoMapManager:
             threshold_scale = [0, 1, 2, 5, 10, articles_per_country.values.max()]
 
         else:
-            print('threshold-scale not being set in choropleth by articles_per_country.max')
+            logger.error('threshold-scale not being set in choropleth by articles_per_country.max')
             threshold_scale = [0, 1, 2, 3, 4, 5]
 
         return threshold_scale
+
+
 
     @staticmethod
     def choro_to_file(choro_html, filename):
