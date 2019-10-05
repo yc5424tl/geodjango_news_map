@@ -17,14 +17,14 @@ import dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
-# dotenv_file = os.path.join(BASE_DIR, '.env')
-# if os.path.isfile(dotenv_file):
-#     dotenv.load_dotenv(dotenv_file)
 
-dotenv_path = os.path.join(os.path.dirname(__file__), '../.env')
-dotenv.load_dotenv(dotenv_path)
+dotenv_file = os.path.join(BASE_DIR, '.env')
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+
+# dotenv_path = os.path.join(os.path.dirname(__file__), '../.env')
+# dotenv.load_dotenv(dotenv_path)
 
 
 
@@ -37,8 +37,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'geodjango_news_map.herokuapp.com']
-
+# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'geodjango_news_map.herokuapp.com']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -70,8 +70,8 @@ ROOT_URLCONF = 'geodjango_news_map.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,6 +86,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'geodjango_news_map.wsgi.application'
 
+DATABASES = {}
+DATABASES['default'] = dj_database_url.config(conn_max_age=600)
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -164,14 +166,14 @@ USE_TZ = True
 
 # STATIC_URL = '/static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_web/static/')
-
-
-STATIC__ROOT = os.path.join(BASE_DIR, 'staticfiles')
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
+STATIC__ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
-)
+
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFileStorage'
 
@@ -183,11 +185,12 @@ LOGOUT_REDIRECT_URL = 'index'
 
 BETTER_EXCEPTIONS = 1
 
-DATABASES = {}
-DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# DATABASES = {}
+# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
 # Activate Django-Heroku
 django_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
