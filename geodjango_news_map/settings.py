@@ -37,7 +37,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'geodjango_news_map.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'geodjango-news-map.herokuapp.com']
 
 
 # Application definition
@@ -166,7 +166,8 @@ USE_TZ = True
 # STATIC_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_web/static/')
 
 
-STATIC__ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
