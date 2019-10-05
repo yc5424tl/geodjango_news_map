@@ -1,4 +1,3 @@
-dotenv
 attrs==19.1.0
 better-exceptions==0.2.2
 branca==0.3.1
