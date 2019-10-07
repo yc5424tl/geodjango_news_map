@@ -1,1 +1,1 @@
-web: gunicorn geodjango_news_map.wsgi.application --log-file=-
+web: gunicorn geodjango_news_map.wsgi --log-file -
