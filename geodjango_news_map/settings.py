@@ -87,7 +87,16 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'geodjango_news_map.wsgi.application'
 
-DATABASES = {'default': dj_database_url.config(conn_max_age=600)}
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'geodjango_news_map_local',
+        'USER': 'admin',
+        'PASSWORD': 'sqlAdmin123!',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
@@ -191,6 +200,8 @@ BETTER_EXCEPTIONS = 1
 GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
+if 'ON_HEROKU' in os.environ:
+    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 # Activate Django-Heroku
-django_heroku.settings(locals())
-del DATABASES['default']['OPTIONS']['sslmode']
+    django_heroku.settings(locals())
+

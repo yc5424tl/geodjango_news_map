@@ -140,7 +140,7 @@ class QueryResultSet(models.Model):
         return self._archived
 
     @archived.setter
-    def archived(self, is_archived:bool):
+    def archived(self, is_archived):
         if isinstance(is_archived, bool):
             self._archived = is_archived
         else:
