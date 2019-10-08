@@ -109,7 +109,7 @@ def new_query(request):
         # qrs.choropleth.save(ContentFile(data_tup[0]))
         # file_data = qrs.choro_html.encode()
         # f = io.BytesIO(file_data)
-        f_type = type(data_tup[0].get_root().render().endocde())
+        f_type = type(data_tup[0].get_root().render().encode())
         # qrs.choropleth.save(name=qrs.filename, content=ContentFile(qrs.choro_html.encode()))
         print(f'type(choro_html.get_root() = {type(data_tup[0].get_root())}')
         qrs.choropleth.save(name=qrs.filename, content=ContentFile(data_tup[0].get_root().render().encode()))
