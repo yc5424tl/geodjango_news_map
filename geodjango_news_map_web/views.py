@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.core.files.base import ContentFile
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404, Http404
@@ -15,6 +16,9 @@ from .geo_data_mgr import GeoDataManager
 from .geo_map_mgr import GeoMapManager, CHORO_MAP_ROOT
 from .models import QueryResultSet, Source, Post, Comment
 from .query_mgr import Query
+from logging import Logger
+
+logger = Logger(__name__)
 
 constructor = Constructor()
 geo_data_mgr = GeoDataManager()
@@ -97,8 +101,10 @@ def new_query(request):
         qrs._choro_html = data_tup[0].get_root().render()
         qrs._filename = data_tup[1]
         qrs._author = User.objects.get(pk=request.user.pk)
+        qrs.choropleth.save(ContentFile(data_tup[0]))
         qrs.save()
         s3_path = qrs.choropleth.url
+        logger.debug(f'qrs.choropleth.url => {qrs.choropleth.url}')
         qrs._filepath = s3_path
         qrs.save()
         # QueryResultSet.objects.filter(pk=query_set.pk).update(_choropleth=data_tup[0], _choro_html=data_tup[1], _filename=data_tup[2], _filepath=CHORO_MAP_ROOT + data_tup[2], _author=request.user.pk)
