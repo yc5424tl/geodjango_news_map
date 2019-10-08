@@ -101,8 +101,8 @@ def new_query(request):
         qrs._choro_html = data_tup[0].get_root().render()
         qrs._filename = data_tup[1]
         qrs._author = User.objects.get(pk=request.user.pk)
-        with open(qrs.filename, 'b') as f:
-            f.write(qrs.choro_html)
+        with open(qrs.filename, 'w') as f:
+            f.write(qrs.choro_html.encode())
             qrs.choropleth.save(data_tup[1], ContentFile(f))
         # qrs.choropleth.save(ContentFile(data_tup[0]))
         qrs.save()
