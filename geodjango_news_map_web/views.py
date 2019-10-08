@@ -103,9 +103,8 @@ def new_query(request):
         qrs._author = User.objects.get(pk=request.user.pk)
         with open(qrs.filename, 'w') as f:
             f.write(qrs.choro_html)
-        f = open(qrs.filename, 'b')
-        qrs.choropleth.save(data_tup[1], ContentFile(f))
-        f.close()
+        with open(qrs.filename, 'rb') as f:
+            qrs.choropleth.save(data_tup[1], ContentFile(f))
         # qrs.choropleth.save(ContentFile(data_tup[0]))
         qrs.save()
         s3_path = qrs.choropleth.url
