@@ -96,7 +96,7 @@ def new_query(request):
         qrs._choropleth = data_tup[0]
         qrs._choro_html = data_tup[0].get_root().render()
         qrs._filename = data_tup[1]
-        qrs._author = request.user.pk
+        qrs._author = User.objects.get(pk=request.user.pk)
         qrs.save()
         s3_path = qrs.choropleth.url
         qrs._filepath = s3_path
