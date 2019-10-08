@@ -54,7 +54,7 @@ class GeoMapManager:
 
         filename = f"{datetime.ctime(datetime.now()).replace(' ', '_').replace(':', '-')}_{focus}_query_{argument}_choropleth_map.html"
         global_map.save(CHORO_MAP_ROOT + filename)
-        global_map.save(f'templates/maps/{filename[0:-5]}.html')
+        # global_map.save(f'templates/maps/{filename[0:-5]}.html')
         choro_html = global_map.get_root().render()
 
         # return global_map, choro_html, filename if self.choro_to_file(choro_html, filename) else None
