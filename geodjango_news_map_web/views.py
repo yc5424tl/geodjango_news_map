@@ -118,7 +118,7 @@ def new_query(request):
         # qrs.choropleth.save(name=qrs.filename, content=ContentFile(qrs.choro_html.encode()))
         # print(f'type(choro_html.get_root() = {type(data_tup[0].get_root())}')
         # qrs.choropleth.save(name=qrs.filename, content=ContentFile(data_tup[0].get_root().render().encode()))
-        qrs.choropleth.save(name=qrs.filename, content=File(new_file))
+        qrs.choropleth.save(name=qrs.filename, content=new_file)
         qrs.save()
         s3_path = qrs.choropleth.url
         logger.debug(f'qrs.choropleth.url => {qrs.choropleth.url}')
