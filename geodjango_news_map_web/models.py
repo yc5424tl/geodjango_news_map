@@ -2,11 +2,15 @@ import os
 from django.conf import settings
 from django.contrib.gis.db import models
 from django.db import models
+from geodjango_news_map.storage_backends import MediaStorage
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(SETTINGS_DIR))
 CHORO_MAP_ROOT = os.path.join(PROJECT_ROOT, 'geodjango_news_map_web/media/query_html_result/')
-
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'geodjango_news_map_web/static'),
+]
 
 class QueryManager(models.Manager):
     def create_query(self, argument, date_created, query_type, author=None, choropleth=None, choro_html=None, data=None, date_range_end=None, date_range_start=None,public=False):
@@ -28,7 +32,8 @@ class QueryManager(models.Manager):
 class QueryResultSet(models.Model):
     query_types = ( ('headlines', 'Headlines'), ('all', 'All') )
     _argument = models.CharField(max_length=500)
-    _choropleth = models.FileField(upload_to='news_mapper_web/html/', null=False, blank=False, default=None, max_length=500)
+    # _choropleth = models.FileField(upload_to='news_mapper_web/html/', null=False, blank=False, default=None, max_length=500)
+    _choropleth = models.FileField(storage=MediaStorage(), null=False, blank=False, default=None)
     _choro_html = models.TextField(max_length=200000, blank=True)
     _data = models.CharField(max_length=200000, blank=True)
     _date_created = models.DateField(auto_now_add=True)

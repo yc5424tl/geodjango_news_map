@@ -92,7 +92,16 @@ def new_query(request):
             code = geo_map_mgr.map_source(source_country=article.source_country)
             geo_data_mgr.add_result(code)
         data_tup = geo_map_mgr.build_choropleth(query_mgr.argument, query_mgr.focus, geo_data_mgr)
-        QueryResultSet.objects.filter(pk=query_set.pk).update(_choropleth=data_tup[0], _choro_html=data_tup[1], _filename=data_tup[2], _filepath=CHORO_MAP_ROOT + data_tup[2], _author=request.user.pk)
+        qrs = QueryResultSet.objects.get(pk=query_set.pk)
+        qrs.choropleth = data_tup[0]
+        qrs.choro_html = data_tup[0].get_root().render()
+        qrs.filename = data_tup[1]
+        qrs.author = request.user.pk
+        qrs.save()
+        s3_path = qrs.choropleth.url
+        qrs.filepath = s3_path
+        qrs.save()
+        # QueryResultSet.objects.filter(pk=query_set.pk).update(_choropleth=data_tup[0], _choro_html=data_tup[1], _filename=data_tup[2], _filepath=CHORO_MAP_ROOT + data_tup[2], _author=request.user.pk)
         return redirect('view_query', query_set.pk)
 
 

@@ -7,12 +7,14 @@ import os
 
 from logging import Logger
 from datetime import datetime
+from geodjango_news_map.settings import STATIC_ROOT, BASE_DIR
 
 logger = Logger(__name__)
 
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(SETTINGS_DIR))
-CHORO_MAP_ROOT = os.path.join(PROJECT_ROOT, 'geodjango_news_map_web/media/')
+# CHORO_MAP_ROOT = os.path.join(PROJECT_ROOT, 'geodjango_news_map_web/media/')
+CHORO_MAP_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_')
 
 class GeoMapManager:
 
@@ -55,8 +57,8 @@ class GeoMapManager:
         global_map.save(f'templates/maps/{filename[0:-5]}.html')
         choro_html = global_map.get_root().render()
 
-        return global_map, choro_html, filename if self.choro_to_file(choro_html, filename) else None
-
+        # return global_map, choro_html, filename if self.choro_to_file(choro_html, filename) else None
+        return global_map, filename if global_map and filename else None
 
 
     @staticmethod
