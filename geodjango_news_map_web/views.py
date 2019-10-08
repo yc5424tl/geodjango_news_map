@@ -97,11 +97,14 @@ def new_query(request):
             geo_data_mgr.add_result(code)
         data_tup = geo_map_mgr.build_choropleth(query_mgr.argument, query_mgr.focus, geo_data_mgr)
         qrs = QueryResultSet.objects.get(pk=query_set.pk)
-        qrs._choropleth = data_tup[0]
+        # qrs._choropleth = data_tup[0]
         qrs._choro_html = data_tup[0].get_root().render()
         qrs._filename = data_tup[1]
         qrs._author = User.objects.get(pk=request.user.pk)
-        qrs.choropleth.save(ContentFile(data_tup[0]))
+        with open(qrs.filename, 'w') as f:
+            f.write(qrs.choro_html)
+            qrs.choropleth.save(qrs.filename, f)
+        # qrs.choropleth.save(ContentFile(data_tup[0]))
         qrs.save()
         s3_path = qrs.choropleth.url
         logger.debug(f'qrs.choropleth.url => {qrs.choropleth.url}')
