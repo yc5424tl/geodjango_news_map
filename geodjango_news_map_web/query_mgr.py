@@ -56,7 +56,7 @@ class Query:
 
     def execute_query(self):
         response = requests.get(self.endpoint)
-        print(f'\nRESPONSE\nresponse == {response.json()}\nEND RESPONSE\n\n')
+        print(f'response == {response.json()}')
         article_count = response.json()['totalResults']
         article_data = response.json()['articles']
 
