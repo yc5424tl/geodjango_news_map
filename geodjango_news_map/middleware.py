@@ -8,7 +8,6 @@ class BetterExceptionsMiddleware:
     def __call__(self, request):
         return self.get_response(request)
 
-
     def process_exceptions(self, request, exception):
         excepthook(exception.__class__, exception, sys.exc_info()[2])
         return None

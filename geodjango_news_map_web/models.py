@@ -1,22 +1,15 @@
-from django.db import models
-
 import os
 from django.conf import settings
 from django.contrib.gis.db import models
-
-
+from django.db import models
 
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(SETTINGS_DIR))
 CHORO_MAP_ROOT = os.path.join(PROJECT_ROOT, 'geodjango_news_map_web/media/query_html_result/')
 
 
-
-
 class QueryManager(models.Manager):
-
     def create_query(self, argument, date_created, query_type, author=None, choropleth=None, choro_html=None, data=None, date_range_end=None, date_range_start=None,public=False):
-
         news_query = self.create(
             _argument =argument,
             _author=author,
@@ -29,14 +22,11 @@ class QueryManager(models.Manager):
             _filename=self.filename,
             _public=public,
             _query_type=query_type)
-
         return news_query
 
 
 class QueryResultSet(models.Model):
-
     query_types = ( ('headlines', 'Headlines'), ('all', 'All') )
-
     _argument = models.CharField(max_length=500)
     _choropleth = models.FileField(upload_to='news_mapper_web/html/', null=False, blank=False, default=None, max_length=500)
     _choro_html = models.TextField(max_length=200000, blank=True)
@@ -51,7 +41,6 @@ class QueryResultSet(models.Model):
     _query_type = models.CharField(default='all', choices=query_types, max_length=50)
     _author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='queries')
     _archived = models.BooleanField(default=False)
-
 
     @property
     def choropleth(self):
@@ -105,7 +94,6 @@ class QueryResultSet(models.Model):
     def date_last_modified(self, new_date):
         self._date_last_modified = new_date
 
-
     def __str__(self):
         details = 'Argument = ' + self._argument + '\n' + '' \
                   'Query Type = ' + str(self._date_created) + '\n' + \
@@ -114,10 +102,8 @@ class QueryResultSet(models.Model):
                   'Public = ' + str(self._public) + '\n' + \
                   'Data[:500] = ' + self._data[:500] + '\n' + \
                   'Choropleth HTML[:500] = ' + self._choro_html[:500]
-
         if self._filename:
             details = details + '\n' + 'Filename = ' + self._filename
-
         return details
 
     @property
@@ -147,10 +133,8 @@ class QueryResultSet(models.Model):
             raise TypeError('Property "archived" must be type bool.')
 
 
-
 class Source(models.Model):
-    source_categories = (
-        ('business', 'Business'),
+    source_categories = (('business', 'Business'),
         ('entertainment', 'Entertainment'),
         ('general', 'General'),
         ('health', 'Health'),
@@ -188,6 +172,7 @@ class Source(models.Model):
     @property
     def url(self):
         return self._url
+
 
 class Article(models.Model):
     _article_url = models.URLField(max_length=1000)
@@ -239,6 +224,7 @@ class Article(models.Model):
     def title(self):
         return self._title
 
+
 class Post(models.Model):
     _title = models.CharField(max_length=300, default='', null=True, blank=True)
     _body = models.CharField(max_length=50000, default='', null=True, blank=True)
@@ -247,7 +233,6 @@ class Post(models.Model):
     _date_last_edit = models.DateTimeField(auto_now_add=True)
     _query = models.OneToOneField(QueryResultSet, on_delete=models.PROTECT)
     _public = models.BooleanField(default=False)
-
 
     @property
     def author(self):

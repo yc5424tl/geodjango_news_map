@@ -13,20 +13,14 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 import os
 import dj_database_url
 import django_heroku
-
+import dotenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# dotenv_file = os.path.join(BASE_DIR, '.env')
-# if os.path.isfile(dotenv_file):
-#     dotenv.load_dotenv(dotenv_file)
-
-# dotenv_path = os.path.join(os.path.dirname(__file__), '../.env')
-# dotenv.load_dotenv(dotenv_path)
-
-
+dotenv_file = os.path.join(BASE_DIR, '.env')
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -37,7 +31,6 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'geodjango_news_map.herokuapp.com']
 ALLOWED_HOSTS = []
 
 # Application definition
@@ -51,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'geodjango_news_map_web',
+    'storages',
 ]
 
 MIDDLEWARE = [
@@ -72,7 +66,6 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'templates')]
         ,
-        # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,52 +80,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'geodjango_news_map.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'geodjango_news_map_local',
-        'USER': 'admin',
-        'PASSWORD': 'sqlAdmin123!',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
-}
-
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-
-###########################################################################
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': 'gis',
-#         'USER': 'user001',
-#         'PASSWORD': '123456789',
-#         'HOST': 'localhost',
-#         'PORT': '5432'
-#     }
-# }
-############################################################################
-
-############################################################################
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-#         'NAME': os.getenv('DB_NAME'),
-#         'USER': os.getenv('DB_USER'),
-#         'PASSWORD': os.getenv('DB_PASSWORD'),
-#         'HOST': os.getenv('DB_HOST'),
-#         'PORT': os.getenv('DB_PORT')
-#     }
-# }
-#
-# db_from_env = dj_database_url.config(conn_max_age=500)
-#
-# DATABASES['default'].update(db_from_env)
-#
-# DATABASES['default']['ENGINE'] = 'django.contrib.gis.db.backends.postgis'
-###############################################################################
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': os.environ.get('NBASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))EWS_MAP_DB_NAME'),
+        'USER': os.environ.get('NEWS_MAP_DB_USER'),
+        'PASSWORD': os.environ.get('NEWS_MAP_DB_PW'),
+        'HOST': os.environ.get('NEWS_MAP_DB_HOST'),
+        'PORT': os.environ.get('NEWS_MAP_DB_PORT'),
+    }
+}
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
@@ -173,18 +133,40 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-# STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_web/static/')
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_URL = '/static/'
-STATIC__ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
+# STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# STATICFILES_DIRS = (
+#     os.path.join(BASE_DIR, 'static'),
+# )
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'geodjango_news_map_web/static'),
+]
 
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_S3_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SEC')
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_MEDIA_BUCKET')
+AWS_STATIC_BUCKET = os.environ.get('AWS_STATIC_BUCKET')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_STATIC_CUSTOM_DOMAIN = f'{AWS_STATIC_BUCKET}.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
+AWS_LOCATION = 'static'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = f'https://{AWS_S3_STATIC_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+
+DEFAULT_FILE_STORAGE = 'geodjango_news_map.storage_backends.MediaStorage'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFileStorage'
+AWS_DEFAULT_ACL = None
+
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFileStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_web/media/')
@@ -194,14 +176,11 @@ LOGOUT_REDIRECT_URL = 'index'
 
 BETTER_EXCEPTIONS = 1
 
-# DATABASES = {}
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-
 GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
 if 'ON_HEROKU' in os.environ:
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# Activate Django-Heroku
+    # Activate Django-Heroku
     django_heroku.settings(locals())
 
