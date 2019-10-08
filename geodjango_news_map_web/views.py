@@ -4,8 +4,10 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from django.core.files.base import ContentFile
+from django.core.files.base import ContentFile, File
+from django.core.files import File
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.files.storage import default_storage
 from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404, Http404
 import io
@@ -102,17 +104,21 @@ def new_query(request):
         qrs._filename = data_tup[1]
         qrs._author = User.objects.get(pk=request.user.pk)
         qrs.save()
-        # with open(qrs.filename, 'w') as f:
-        #     f.write(qrs.choro_html)
+        with open(qrs.filename, 'w') as f:
+            new_file = File(f)
+            new_file.write(qrs.choro_html)
+            # f.write(qrs.choro_html)
         # with open(qrs.filename, 'rb') as f:
         #     qrs.choropleth.save(data_tup[1], ContentFile(f))
         # qrs.choropleth.save(ContentFile(data_tup[0]))
         # file_data = qrs.choro_html.encode()
         # f = io.BytesIO(file_data)
-        f_type = type(data_tup[0].get_root().render().encode())
+        f_type = type(data_tup[0].get_root().render())
+        nf_type = type(new_file)
         # qrs.choropleth.save(name=qrs.filename, content=ContentFile(qrs.choro_html.encode()))
-        print(f'type(choro_html.get_root() = {type(data_tup[0].get_root())}')
-        qrs.choropleth.save(name=qrs.filename, content=ContentFile(data_tup[0].get_root().render().encode()))
+        # print(f'type(choro_html.get_root() = {type(data_tup[0].get_root())}')
+        # qrs.choropleth.save(name=qrs.filename, content=ContentFile(data_tup[0].get_root().render().encode()))
+        qrs.choropleth.save(name=qrs.filename, content=File(new_file))
         qrs.save()
         s3_path = qrs.choropleth.url
         logger.debug(f'qrs.choropleth.url => {qrs.choropleth.url}')
