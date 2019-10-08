@@ -115,10 +115,11 @@ def new_query(request):
         # f = io.BytesIO(file_data)
         f_type = type(data_tup[0].get_root().render())
         nf_type = type(new_file)
+        filename_type = type(qrs.filename)
         # qrs.choropleth.save(name=qrs.filename, content=ContentFile(qrs.choro_html.encode()))
         # print(f'type(choro_html.get_root() = {type(data_tup[0].get_root())}')
         # qrs.choropleth.save(name=qrs.filename, content=ContentFile(data_tup[0].get_root().render().encode()))
-        qrs.choropleth.save(name=qrs.filename, content=new_file)
+        qrs.choropleth.save(name=str(qrs.filename), content=data_tup[0].get_root().render())
         qrs.save()
         s3_path = qrs.choropleth.url
         logger.debug(f'qrs.choropleth.url => {qrs.choropleth.url}')
