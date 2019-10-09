@@ -118,7 +118,8 @@
                 <div class="row" id="view-query-iframe-row">
                     <div class="col-12" id="view-query-iframe-col">
                         <div class="embed-responsive-16by9" id="view-query-iframe-div">
-                            <iframe class="embed-responsive-item" id="view-query-iframe" src="{% url 'view_choro' query.pk %}"></iframe>
+{#                            <iframe class="embed-responsive-item" id="view-query-iframe" src="{% url 'view_choro' query.pk %}"></iframe>#}
+                            {{ qrs.choropleth|safe }}
                         </div>
                     </div>
                 </div>
