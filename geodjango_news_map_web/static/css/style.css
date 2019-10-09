@@ -1153,7 +1153,7 @@ a.view-query-article-link.title-center:hover {
 
 #view-query-iframe-div {
     overflow: hidden;
-    padding-top: 56.25%;
+    /*padding-top: 56.25%;*/
     position: relative;
 }
 
