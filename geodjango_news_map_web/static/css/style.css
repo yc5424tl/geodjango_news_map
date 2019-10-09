@@ -763,8 +763,12 @@ button.btn-inactive {
 #view-post-iframe-div {
     margin: 1em;
     overflow: hidden;
-    padding-top: 66.66%;
+    /*padding-top: 66.66%;*/
     position: relative;
+}
+
+#view-post-iframe-div > div > div > iframe {
+    border: 2pt solid var(--main-color);
 }
 
 #view-post-iframe {
