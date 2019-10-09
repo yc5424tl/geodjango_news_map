@@ -103,7 +103,7 @@ def new_query(request):
         else:
             qrs = QueryResultSet.objects.get(pk=query_set.pk)
             # qrs._choropleth = data_tup[0]
-            qrs._choro_html = data_tup[0].get_root().render()
+            qrs._choro_html = data_tup[2].get_root().render()
             qrs._filename = data_tup[1]
             qrs._author = User.objects.get(pk=request.user.pk)
             qrs._choropleth = data_tup[0]
