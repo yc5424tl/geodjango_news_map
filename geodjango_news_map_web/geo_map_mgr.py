@@ -58,7 +58,7 @@ class GeoMapManager:
         choro_html = global_map.get_root().render()
 
         # return global_map, choro_html, filename if self.choro_to_file(choro_html, filename) else None
-        return global_map, filename if global_map and filename else None
+        return global_map._repr_html_(), filename if global_map and filename else None
 
 
     @staticmethod
