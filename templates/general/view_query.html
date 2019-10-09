@@ -119,7 +119,7 @@
                     <div class="col-12" id="view-query-iframe-col">
                         <div class="embed-responsive-16by9" id="view-query-iframe-div">
 {#                            <iframe class="embed-responsive-item" id="view-query-iframe" src="{% url 'view_choro' query.pk %}"></iframe>#}
-                            {{ qrs.choropleth|safe }}
+                            {{ choro_map|safe }}
                         </div>
                     </div>
                 </div>
@@ -179,8 +179,7 @@
             return (template.content.childNodes);
         }
         $(document).ready(function() {
-            htmlToTemplate( {{ query.choro_html|safe }} );
-        })
+            htmlToTemplate( {{ query.choro_html|safe }}
     </script>
 
     <script>
