@@ -98,18 +98,21 @@ def new_query(request):
             code = geo_map_mgr.map_source(source_country=article.source_country)
             geo_data_mgr.add_result(code)
         data_tup = geo_map_mgr.build_choropleth(query_mgr.argument, query_mgr.focus, geo_data_mgr)
-        qrs = QueryResultSet.objects.get(pk=query_set.pk)
-        # qrs._choropleth = data_tup[0]
-        qrs._choro_html = data_tup[0].get_root().render()
-        qrs._filename = data_tup[1]
-        qrs._author = User.objects.get(pk=request.user.pk)
-        qrs._choropleth = data_tup[0]._rep_html_()
-        qrs.save()
+        if data_tup is None:
+            return redirect('index', messages='build choropleth returned None')
+        else:
+            qrs = QueryResultSet.objects.get(pk=query_set.pk)
+            # qrs._choropleth = data_tup[0]
+            qrs._choro_html = data_tup[0].get_root().render()
+            qrs._filename = data_tup[1]
+            qrs._author = User.objects.get(pk=request.user.pk)
+            qrs._choropleth = data_tup[0].rep_html_()
+            qrs.save()
 
 
-        with open(qrs.filename, 'w') as f:
-            new_file = File(f)
-            new_file.write(qrs.choro_html)
+        # with open(qrs.filename, 'w') as f:
+        #     new_file = File(f)
+        #     new_file.write(qrs.choro_html)
             # f.write(qrs.choro_html)
 
         # with open(qrs.filename, 'rb') as f:
@@ -119,20 +122,20 @@ def new_query(request):
 
         # file_data = qrs.choro_html.encode()
         # f = io.BytesIO(file_data)
-        f_type = type(data_tup[0].get_root().render())
-        nf_type = type(new_file)
-        filename_type = type(qrs.filename)
+        # f_type = type(data_tup[0].get_root().render())
+        # nf_type = type(new_file)
+        # filename_type = type(qrs.filename)
 
 
         # qrs.choropleth.save(name=qrs.filename, content=ContentFile(qrs.choro_html.encode()))
         # print(f'type(choro_html.get_root() = {type(data_tup[0].get_root())}')
         # qrs.choropleth.save(name=qrs.filename, content=ContentFile(data_tup[0].get_root().render().encode()))
-        qrs.choropleth.save(name=str(qrs.filename), content=data_tup[0].get_root().render())
-        qrs.save()
-        s3_path = qrs.choropleth.url
-        logger.debug(f'qrs.choropleth.url => {qrs.choropleth.url}')
-        qrs._filepath = s3_path
-        qrs.save()
+        # qrs.choropleth.save(name=str(qrs.filename), content=data_tup[0].get_root().render())
+        # qrs.save()
+        # s3_path = qrs.choropleth.url
+        # logger.debug(f'qrs.choropleth.url => {qrs.choropleth.url}')
+        # qrs._filepath = s3_path
+        # qrs.save()
         # QueryResultSet.objects.filter(pk=query_set.pk).update(_choropleth=data_tup[0], _choro_html=data_tup[1], _filename=data_tup[2], _filepath=CHORO_MAP_ROOT + data_tup[2], _author=request.user.pk)
         return redirect('view_query', query_set.pk)
 
