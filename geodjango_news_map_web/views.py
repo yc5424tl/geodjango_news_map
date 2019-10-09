@@ -1,24 +1,21 @@
+from logging import Logger
+
 import pycountry
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
-from django.core.files.base import ContentFile, File
-from django.core.files import File
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.core.files.storage import default_storage
 from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404, Http404
-import io
+
 from .constructor import Constructor
-from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, \
-    NewCommentForm
+from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, NewCommentForm
 from .geo_data_mgr import GeoDataManager
-from .geo_map_mgr import GeoMapManager, CHORO_MAP_ROOT
+from .geo_map_mgr import GeoMapManager
 from .models import QueryResultSet, Source, Post, Comment
 from .query_mgr import Query
-from logging import Logger
 
 logger = Logger(__name__)
 
@@ -45,7 +42,6 @@ def register_user(request):
             messages.info(request, message=form.errors)
             form = CustomUserCreationForm()
             return render(request, 'general/new_user.html', {'form': form})
-
     if request.method == 'GET':
         form = CustomUserCreationForm()
         return render(request, 'general/new_user.html', {'form': form})
@@ -70,7 +66,6 @@ def login_user(request):
         return render(request, 'general/login_user.html', {'form': form})
 
 
-
 def logout_user(request):
     if request.user.is_authenticated:
         messages.info(request, 'Logout Successful', extra_tags='alert')
@@ -89,55 +84,27 @@ def new_query(request):
         query_mgr = Query(argument=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
         query_mgr.get_endpoint()
         article_data = query_mgr.execute_query()
-        query_set = QueryResultSet.objects.create(
-            _query_type=query_mgr.focus, _argument=query_mgr.argument, _data=article_data, _author=request.user)
+        query_set = QueryResultSet.objects.create(_query_type=query_mgr.focus, _argument=query_mgr.argument, _data=article_data, _author=request.user)
         query_set.save()
 
         article_list = constructor.build_article_data(article_data, query_set)
         for article in article_list:
             code = geo_map_mgr.map_source(source_country=article.source_country)
             geo_data_mgr.add_result(code)
+
         data_tup = geo_map_mgr.build_choropleth(query_mgr.argument, query_mgr.focus, geo_data_mgr)
         if data_tup is None:
             return redirect('index', messages='build choropleth returned None')
         else:
+            global_map = data_tup[0]
+            filename = data_tup[1]
             qrs = QueryResultSet.objects.get(pk=query_set.pk)
-            # qrs._choropleth = data_tup[0]
-            qrs._choro_html = data_tup[2].get_root().render()
-            qrs._filename = data_tup[1]
+            qrs._choro_html = global_map.get_root().render()
+            qrs._filename = filename
             qrs._author = User.objects.get(pk=request.user.pk)
-            qrs._choropleth = data_tup[0]
-            # qrs.choropleth.save(data_tup[1])
+            qrs._choropleth = global_map._repr_html_()
             qrs.save()
 
-
-        # with open(qrs.filename, 'w') as f:
-        #     new_file = File(f)
-        #     new_file.write(qrs.choro_html)
-            # f.write(qrs.choro_html)
-
-        # with open(qrs.filename, 'rb') as f:
-        #     qrs.choropleth.save(data_tup[1], ContentFile(f))
-
-        # qrs.choropleth.save(ContentFile(data_tup[0]))
-
-        # file_data = qrs.choro_html.encode()
-        # f = io.BytesIO(file_data)
-        # f_type = type(data_tup[0].get_root().render())
-        # nf_type = type(new_file)
-        # filename_type = type(qrs.filename)
-
-
-        # qrs.choropleth.save(name=qrs.filename, content=ContentFile(qrs.choro_html.encode()))
-        # print(f'type(choro_html.get_root() = {type(data_tup[0].get_root())}')
-        # qrs.choropleth.save(name=qrs.filename, content=ContentFile(data_tup[0].get_root().render().encode()))
-        # qrs.choropleth.save(name=str(qrs.filename), content=data_tup[0].get_root().render())
-        # qrs.save()
-        # s3_path = qrs.choropleth.url
-        # logger.debug(f'qrs.choropleth.url => {qrs.choropleth.url}')
-        # qrs._filepath = s3_path
-        # qrs.save()
-        # QueryResultSet.objects.filter(pk=query_set.pk).update(_choropleth=data_tup[0], _choro_html=data_tup[1], _filename=data_tup[2], _filepath=CHORO_MAP_ROOT + data_tup[2], _author=request.user.pk)
         return redirect('view_query', query_set.pk)
 
 
@@ -152,7 +119,6 @@ def view_query(request, query_result_set_pk):
         'choro_html': qrs.choro_html,
         'filename': qrs.filename
     })
-
 
 
 @login_required()
@@ -187,6 +153,7 @@ def delete_query(request, query_pk):
     QueryResultSet.objects.filter(pk=query_pk).delete()
     messages.info(request, "Query Successfully Deleted")
     return redirect('new_query')
+
 
 @login_required()
 def view_user(request, member_pk):
@@ -226,7 +193,6 @@ def view_user(request, member_pk):
         raise Http404
 
 
-
 @login_required()
 def new_post(request):
     if request.method == 'GET':
@@ -258,6 +224,7 @@ def new_post(request):
                 raise Http404
     else:
         raise Http404
+
 
 @login_required()
 def update_post(request, post_pk):
@@ -322,6 +289,7 @@ def lang_a2_to_name(source):
     except LookupError:
         return source.language
 
+
 def country_a2_to_name(source):
     try:
         name = pycountry.countries.lookup(source.country).name
@@ -374,13 +342,16 @@ def delete_comment(request, comment_pk):
     messages.info(request, 'Failed to Delete Comment')
     return redirect(request, last_url)
 
+
 #TODO def password_reset(request)
+
 
 def view_choro(request, query_pk):
     qrs = QueryResultSet.objects.get(pk=query_pk)
     return render(request, 'general/view_choro.html', {
         'query': qrs
     })
+
 
 @login_required()
 def view_test_page(request):

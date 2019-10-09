@@ -4,6 +4,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+
 class GeoDataManager:
 
     def __init__(self, req_data=None, json_data=None, result_dict=None):
@@ -17,6 +18,7 @@ class GeoDataManager:
         self.check_geo_data()
         self.json_to_file()
         self.initialize_result_dict()
+
 
     def check_geo_data(self):
         if self.json_data is None or self.req_data is None:
@@ -32,17 +34,21 @@ class GeoDataManager:
             logger.exception(e)
             return False
 
+
     def initialize_result_dict(self):
         self.result_dict = dict.fromkeys([k['id'] for k in json.load(open(self.filename))['features']], 0)
 
+
     def add_result(self, a3_code):
         self.result_dict[a3_code] +=1
+
 
     def fix_cyprus_country_code(self):
         for key in self.json_data:
             if self.json_data[key] == '-99':
                 self.json_data[key] = 'CYP'
         return True
+
 
     def json_to_file(self) -> bool:
         with open(self.filename, 'w') as outfile:

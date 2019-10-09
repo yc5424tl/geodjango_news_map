@@ -10,7 +10,6 @@
 {% endblock %}
 
 
-
 {% block content %}
     <div class="container" id="view-query-parent-container">
         <div class="row">
@@ -39,13 +38,9 @@
                         </tr>
                     </table>
                 </div>
-
                 {% if user.pk == query_author.id %}
-
                     {% if query.archived is False %}
-
                         <div class="post-query-container">
-
                             <form method="post" action="{% url 'new_post' %}">
                                 {% csrf_token %}
                                 <div class="input-group view-query" id="view-query-form-header">
@@ -77,14 +72,9 @@
                                 <input type="hidden" name="user_pk" value="{{ user.pk }}">
                                 <input type="hidden" name="query_pk" value="{{ query.pk }}">
                             </form>
-
                         </div>
                     {% endif %}
-
-
-
                     {% if query.archived is True %}
-
                         <form method="post" action="{% url 'update_post' post.pk %}">
                             {% csrf_token %}
                             <div class="input-group">
@@ -103,22 +93,18 @@
                             <input type="hidden" name="user_pk" value="{{ user.pk }}">
                             <input type="hidden" name="query_pk" value="{{ query.pk }}">
                         </form>
-
                         <form method="post" action="{% url 'delete_post' post.pk %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger">Delete Post</button>
                             <sub>* Query will also be deleted</sub>
                         </form>
-
                     {% endif %}
-
                 {% endif %}
             </div>
             <div class="col-8 view-query-articles-container">
                 <div class="row" id="view-query-iframe-row">
                     <div class="col-12" id="view-query-iframe-col">
                         <div class="embed-responsive-16by9" id="view-query-iframe-div">
-{#                            <iframe class="embed-responsive-item" id="view-query-iframe" src="{% url 'view_choro' query.pk %}"></iframe>#}
                             {{ choro_map|safe }}
                         </div>
                     </div>
@@ -141,7 +127,8 @@
                                         <div class="col-7 view-query-article-txt-container">
                                              <h4 class="view-query-article-title title-center">{{ article.title }}</h4>
                                              <h6 class="title-center view-query-article-subtitle-container">
-                                                 <sub class="view-query-article-subtitle title-center">By <span class="article-author">{{ article.author }}</span> {{ article.date_published|date:"DATETIME_FORMAT"}}
+                                                 <sub class="view-query-article-subtitle title-center">
+                                                     By<span class="article-author">{{ article.author }}</span> {{ article.date_published|date:"DATETIME_FORMAT"}}
                                                     <a class="view-query-article-link title-center" href="{{ article.article_url }}">Link</a>
                                                 </sub>
                                              </h6>
