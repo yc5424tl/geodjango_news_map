@@ -33,7 +33,8 @@ class QueryResultSet(models.Model):
     query_types = ( ('headlines', 'Headlines'), ('all', 'All') )
     _argument = models.CharField(max_length=500)
     # _choropleth = models.FileField(upload_to='news_mapper_web/html/', null=False, blank=False, default=None, max_length=500)
-    _choropleth = models.FileField(storage=MediaStorage(), null=False, blank=False, default=None)
+    # _choropleth = models.FileField(storage=MediaStorage(), null=False, blank=False, default=None)
+    _choropleth = models.TextField(max_length=2000000, blank=True)
     _choro_html = models.TextField(max_length=200000, blank=True)
     _data = models.CharField(max_length=200000, blank=True)
     _date_created = models.DateField(auto_now_add=True)
@@ -48,8 +49,12 @@ class QueryResultSet(models.Model):
     _archived = models.BooleanField(default=False)
 
     @property
-    def choropleth(self):
+    def choropleth(self) -> str:
         return self._choropleth
+
+    @choropleth.setter
+    def choropleth(self, new_choro: str) -> None:
+        self._choropleth = new_choro
 
     @property
     def choro_html(self):

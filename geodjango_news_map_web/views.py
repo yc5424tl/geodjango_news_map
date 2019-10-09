@@ -103,19 +103,27 @@ def new_query(request):
         qrs._choro_html = data_tup[0].get_root().render()
         qrs._filename = data_tup[1]
         qrs._author = User.objects.get(pk=request.user.pk)
+        qrs._choropleth = data_tup[0]._rep_html_()
         qrs.save()
+
+
         with open(qrs.filename, 'w') as f:
             new_file = File(f)
             new_file.write(qrs.choro_html)
             # f.write(qrs.choro_html)
+
         # with open(qrs.filename, 'rb') as f:
         #     qrs.choropleth.save(data_tup[1], ContentFile(f))
+
         # qrs.choropleth.save(ContentFile(data_tup[0]))
+
         # file_data = qrs.choro_html.encode()
         # f = io.BytesIO(file_data)
         f_type = type(data_tup[0].get_root().render())
         nf_type = type(new_file)
         filename_type = type(qrs.filename)
+
+
         # qrs.choropleth.save(name=qrs.filename, content=ContentFile(qrs.choro_html.encode()))
         # print(f'type(choro_html.get_root() = {type(data_tup[0].get_root())}')
         # qrs.choropleth.save(name=qrs.filename, content=ContentFile(data_tup[0].get_root().render().encode()))
