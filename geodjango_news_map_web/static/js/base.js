@@ -9,11 +9,11 @@ setLayout = function() {
     let nav_img = $('#nav-img');
 
     if ($( window ).width() < 1562) {
-        top_img_div.show();
-        top_img_inner_div.show();
-        top_nav_img.show();
-        nav_ctr.hide();
-        nav_img.hide();
+        top_img_div.css('display', true);
+        top_img_inner_div.css('display', true);
+        top_nav_img.css('display', true);
+        nav_ctr.css('display', false);
+        nav_img.css('display', false);
         if (nav_left.hasClass('col-4')) {
             nav_left.removeClass('col-4').addClass('col');
             nav_right.removeClass('col-4').addClass('col');
@@ -21,11 +21,11 @@ setLayout = function() {
     }
 
     else if ($( window ).width() > 1561) {
-        top_img_div.hide();
-        top_img_inner_div.hide();
-        top_nav_img.hide();
-        nav_ctr.show();
-        nav_img.show();
+        top_img_div.css('display', false);
+        top_img_inner_div.css('display', false);
+        top_nav_img.css('display', false);
+        nav_ctr.css('display', true);
+        nav_img.css('display', true);
         if (nav_left.hasClass('col')) {
             nav_left.removeClass('col').addClass('col-4');
             nav_right.removeClass('col').addClass('col-4');
