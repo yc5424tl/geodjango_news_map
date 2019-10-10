@@ -208,6 +208,7 @@ td, tr {
 #top-nav-img {
     left: calc(50% - 198px);
     z-index: 500;
+    position: absolute;
 }
 
 nav {
@@ -219,7 +220,8 @@ nav {
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
-    height:24vh;
+    /*height:24vh;*/
+    height: 588px;
     font-size: 24pt;
     font-family: 'Flamenco', cursive;
     background-size: 100% auto;
