@@ -128,7 +128,7 @@
                 let nav_right = $('#nav-rgt');
                 let nav_img = $('#nav-img');
 
-                if (window.width() < 1562) {
+                if ($( window ).width() < 1562) {
                     top_img_div.show();
                     nav_ctr.hide();
                     nav_img.hide();
@@ -138,7 +138,7 @@
                     }
                 }
 
-                else if (window.width() > 1561) {
+                else if ($( window ).width() > 1561) {
                     top_img_div.hide();
                     nav_ctr.show();
                     nav_img.show();
@@ -149,8 +149,8 @@
                 }
             };
 
-            $(window).on('resize', setLayout());
-            $(document).on('load', setLayout());
+            $( window ).on('resize', setLayout());
+            $( document ).on('load', setLayout());
         </script>
 
     </body>
