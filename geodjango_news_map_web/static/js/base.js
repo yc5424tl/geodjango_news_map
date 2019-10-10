@@ -1,6 +1,8 @@
 // $('').addClass('');
 setLayout = function() {
     let top_img_div = $('#top-nav-img-div');
+    let top_img_inner_div = $('#top-nav-img-inner-div');
+    let top_nav_img = $('#top-nav-img');
     let nav_left = $('#nav-lft');
     let nav_ctr = $('#nav-ctr');
     let nav_right = $('#nav-rgt');
@@ -8,6 +10,8 @@ setLayout = function() {
 
     if ($( window ).width() < 1562) {
         top_img_div.show();
+        top_img_inner_div.show();
+        top_nav_img.show();
         nav_ctr.hide();
         nav_img.hide();
         if (nav_left.hasClass('col-4')) {
@@ -18,6 +22,8 @@ setLayout = function() {
 
     else if ($( window ).width() > 1561) {
         top_img_div.hide();
+        top_img_inner_div.hide();
+        top_nav_img.hide();
         nav_ctr.show();
         nav_img.show();
         if (nav_left.hasClass('col')) {
