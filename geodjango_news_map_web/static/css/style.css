@@ -234,6 +234,7 @@ nav {
 .nav-item, .nav-link, .navbar-brand, .nav-link:link, .nav-item:link {
     color: var(--main-bg-color);
     transition: 0.4s;
+    z-index: 499;
 }
 
 .nav-link {
