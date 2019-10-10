@@ -194,7 +194,9 @@ td, tr {
  *    ╚═╝  ╚═══╝╚═╝  ╚═╝  ╚═══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
  *
  */
-
+.row.abs-row {
+    position: absolute;
+}
 #md-nav-img-div {
     width: 100%;
     min-width: 100%;
