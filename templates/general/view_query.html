@@ -162,10 +162,10 @@
     </script>
 
     <script>
-    jQuery(function(){
-        jQuery('form').submit(function(e) {
-            jQuery('textarea').val(jQuery('#pre-textarea').html() );
+        jQuery(function(){
+            jQuery('form').submit(() => {
+                jQuery('textarea').val(jQuery('#pre-textarea').html() );
+            });
         });
-    });
     </script>
 {% endblock %}
