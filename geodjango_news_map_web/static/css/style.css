@@ -207,7 +207,7 @@ td, tr {
 }
 
 #top-nav-img {
-    top: 0;
+    top: 8vh;
     margin-top: 0;
     padding-top: 0;
     left: calc(50% - 263px);
@@ -275,14 +275,14 @@ nav {
 
 #nav-img {
     position: absolute;
-    top: -12vh;
+    top: 12vh;
     /*left: calc((50% - 263px) + .18075em);*/
     left: calc(50% - 263px);
     /*zoom: 133%;*/
     z-index: 500;
 }
 
-.col-4.base-nav-link-container {
+.col-4.base-nav-link-container, .col.base-nav-link-container {
     background-color: rgba(0, 0, 0, 0.6);
     margin: 0;
     padding: 0;
