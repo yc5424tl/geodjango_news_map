@@ -194,6 +194,11 @@ td, tr {
  *    ╚═╝  ╚═══╝╚═╝  ╚═╝  ╚═══╝  ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
  *
  */
+
+#md-nav-nav-row, #md-nav-col-div, #md-nav-div {
+    background-color: transparent;
+}
+
 .row.abs-row {
     position: absolute;
 }
