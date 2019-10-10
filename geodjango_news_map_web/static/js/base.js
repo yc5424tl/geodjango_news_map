@@ -15,8 +15,10 @@ setLayout = function() {
     let nav_ctr = $('#nav-ctr');
     let nav_right = $('#nav-rgt');
     let nav_img = $('#nav-img');
+    let nav = $('nav');
 
     if ($(window).width() < 1562) {
+        nav.css('height', '24vh');
         top_img_div.css('display', 'initial');
         top_img_inner_div.css('display', 'initial');
         top_nav_img.css('display', 'initial');
@@ -30,6 +32,7 @@ setLayout = function() {
     }
 
     else if ($(window).width() > 1561) {
+        nav.css('height', '30vh');
         top_img_div.css('display', 'none');
         top_img_inner_div.css('display', 'none');
         top_nav_img.css('display', 'none');
