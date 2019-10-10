@@ -23,8 +23,9 @@ setLayout = function() {
         nav_ctr.css('display', 'none');
         nav_img.css('display', 'none');
         if (nav_left.hasClass('col-4')) {
-            nav_left.removeClass('col-4').addClass('col');
-            nav_right.removeClass('col-4').addClass('col');
+            nav_left.removeClass('col-4').addClass('col-auto');
+            nav_right.removeClass('col-4').addClass('col-auto');
+            nar_ctr.removeClass('col').addClass('col-0');
         }
     }
 
@@ -34,9 +35,10 @@ setLayout = function() {
         top_nav_img.css('display', 'none');
         nav_ctr.css('display', 'initial');
         nav_img.css('display', 'initial');
-        if (nav_left.hasClass('col')) {
-            nav_left.removeClass('col').addClass('col-4');
-            nav_right.removeClass('col').addClass('col-4');
+        if (nav_left.hasClass('col-auto')) {
+            nav_left.removeClass('col-auto').addClass('col-4');
+            nav_right.removeClass('col-auto').addClass('col-4');
+            nav_ctr.removeClass('col-0').addClass('col-4');
         }
     }
 };
