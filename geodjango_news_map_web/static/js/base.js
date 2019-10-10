@@ -34,5 +34,5 @@ setLayout = function() {
     }
 };
 
-$(window).on('resize', setLayout());
-$(document).on('load', setLayout());
+$(window).on('resize', setLayout);
+$(document).on('load', setLayout);
