@@ -47,12 +47,27 @@
     <body>
         <div id='main' class="container-fluid">
             <nav class="navbar navbar-expand-sm">
-                <div class="row" id="top-nav-img-div">
-                    <div class="col-12" id="top-nav-img-inner-div">
-                        <img id="top-nav-img" alt="Map the News Logo" src="{% static 'img/mtn_4.png' %}">
+                <div class="row" id="md-nav-div">
+                    <div class="col-12" id="md-nav-img-div">
+                        <img id="md-nav-img" alt="Map the News Logo" src="{% static 'img/mtn_4.png' %}">
+                    </div>
+                    <div class="col-12">
+                        <ul class="nav justify-content-around">
+                            <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'new_query' %}">Map the News</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'view_public_posts' %}">View Posts</a></li>
+                            <li class="nav-item"><a class="nav-link" href="{% url 'view_sources' %}">News Sources</a></li>
+                            {% if user.is_authenticated %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'view_user' user.pk %}">Profile</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                            {% else %}
+                                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                                <li class="nav-item"><a class="nav-link" href="{% url 'register_user' %}">Register</a></li>
+                            {% endif %}
+                        </ul>
                     </div>
                 </div>
-                <div class="row nav-row">
+                <div class="row nav-row" id="lg-nav-div">
                     <img id="nav-img" alt="Map the News Logo" src="{% static 'img/mtn_4.png' %}">
 {#                    <div id="nav-img-div"></div>#}
                     <div class="collapse navbar-collapse col-12" id="navbar-content">
