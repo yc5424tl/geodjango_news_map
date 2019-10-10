@@ -4,7 +4,6 @@
 {% block title %}Home - {{ block.super }}{% endblock %}
 
 {% block content %}
-
     <div class="container">
         {% if user.is_authenticated %}
             <div class="jumbotron">
@@ -16,5 +15,4 @@
             </div>
         {% endif %}
     </div>
-
 {% endblock %}

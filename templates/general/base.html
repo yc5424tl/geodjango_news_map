@@ -28,7 +28,7 @@
                 // add a zero in front of numbers<10
                 m=checkTime(m);
                 s=checkTime(s);
-                document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+                document.getElementById('txt').innerHTML=" | "+h+":"+m+":"+s;
                 t=setTimeout(function(){startTime()},500);
                 }
 
@@ -47,20 +47,23 @@
     <body>
         <div id='main' class="container-fluid">
             <nav class="navbar navbar-expand-md ">
+                <div class="row" id="top-nav-img-div">
+                    <img id="top-nav-img" alt="Map the News Logo" src="{% static 'img/mtn_4.png' %}">
+                </div>
                 <div class="row nav-row" style="position:relative">
                     <img id="nav-img" alt="Map the News Logo" src="{% static 'img/mtn_4.png' %}">
-                    <div id="nav-img-div"></div>
+{#                    <div id="nav-img-div"></div>#}
                     <div class="collapse navbar-collapse col-12" id="navbar-content">
-                        <div class="row nav-link-row">
-                            <div class="col-4 base-nav-link-container">
+                        <div class="row nav-link-row d-flex">
+                            <div class="col-4 base-nav-link-container" id="nav-lft">
                                 <ul class="nav justify-content-center">
                                     <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
                                     <li class="nav-item"><a class="nav-link" href="{% url 'new_query' %}">Map the News</a></li>
                                     <li class="nav-item"><a class="nav-link" href="{% url 'view_public_posts' %}">View Posts</a></li>
                                 </ul>
                             </div>
-                            <div class="col-4 base-nav-link-container"></div>
-                            <div class="col-4 base-nav-link-container">
+                            <div class="col-4 base-nav-link-container" id="nav-ctr"></div>
+                            <div class="col-4 base-nav-link-container" id="nav-rgt">
                                 <ul class="nav justify-content-center">
                                     <li class="nav-item"><a class="nav-link" href="{% url 'view_sources' %}">News Sources</a></li>
                                     {% if user.is_authenticated %}
@@ -100,6 +103,7 @@
                     <span class="text-muted">Jacob Boline 2018 | </span>
                     <a href="#">this.github</a>
                     <span class="text-muted"> | Powered By <a href="https://www.newsapi.org">NewsAPI</a></span>
+                    <span class="text-muted" id="txt"></span>
                 </div>
             </footer>
 
@@ -108,6 +112,7 @@
                 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
                 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
                 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+                <script src="{% static 'js/base.js' %}">
             {% endblock %}
 
             {% block footer-scripts %}{% endblock %}

@@ -1,9 +1,6 @@
-
 {% extends 'general/base.html' %}
 
-{% block scripts %}
-    {{ block.super }}
-{% endblock %}
+{% block title %}{{ member.username }}'s Profile - {{ block.super }}{% endblock %}
 
 {% block content %}
     <div class="container">

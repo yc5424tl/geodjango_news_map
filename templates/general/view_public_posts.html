@@ -1,9 +1,6 @@
-
 {% extends 'general/base.html' %}
 
 {% block title %}All Posts - {{ block.super }}{% endblock %}
-
-{% block scripts %} {{ block.super }} {% endblock %}
 
 {% block content %}
     {% for post in posts %}
@@ -15,7 +12,8 @@
                     </h3>
                     <h6 class="view-posts-card-subtitle-container text-muted">
                         <sub class="view-posts-card-subtitle">
-                            By <a class="card-link view-posts-card-subtitle-link" href={% url 'view_user' post.author.pk %}>{{ post.author.username }}</a>
+                            By
+                            <a class="card-link view-posts-card-subtitle-link" href={% url 'view_user' post.author.pk %}>{{ post.author.username }}</a>
                             {{ post.date_published }} {{ post.comments.all.count }} Comments
                         </sub>
                     </h6>
