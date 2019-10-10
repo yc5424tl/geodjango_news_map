@@ -18,7 +18,7 @@ setLayout = function() {
         }
     }
 
-    if (window.width() > 1561) {
+    else if (window.width() > 1561) {
         top_img_div.hide();
         nav_ctr.show();
         nav_img.show();
@@ -29,5 +29,5 @@ setLayout = function() {
     }
 };
 
-$(window).onresize(setLayout);
-$(document).onLoad(setLayout);
+$(window).on('resize', setLayout());
+$(document).on('load', setLayout());
