@@ -11,10 +11,11 @@ setLayout = function() {
     if (window.width() < 1562) {
         top_img_div.show();
         nav_ctr.hide();
+        nav_img.css('top', 0);
         nav_img.hide();
         if (nav_left.hasClass('col-4')) {
-            nav_left.removeClass('col-4').addClass('col');
             nav_right.removeClass('col-4').addClass('col');
+            nav_left.removeClass('col-4').addClass('col');
         }
     }
 
@@ -22,9 +23,13 @@ setLayout = function() {
         top_img_div.hide();
         nav_ctr.show();
         nav_img.show();
+        if (nav_img.css('top').equals(0)) {
+            nav_img.css('top', '-12vh');
+        }
         if (nav_left.hasClass('col')) {
-            nav_left.removeClass('col').addClass('col-4');
             nav_right.removeClass('col').addClass('col-4');
+            nav_left.removeClass('col').addClass('col-4');
+
         }
     }
 };
