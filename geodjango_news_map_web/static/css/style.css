@@ -200,12 +200,16 @@ td, tr {
     min-width: 100%;
     margin-left: 0;
     margin-right: 0;
+    margin-top: 0;
     padding: 0;
     background-color: transparent;
     text-align: center;
 }
 
 #top-nav-img {
+    top: 0;
+    margin-top: 0;
+    padding-top: 0;
     left: calc(50% - 198px);
     z-index: 500;
     position: absolute;
@@ -221,7 +225,7 @@ nav {
     padding-left: 0;
     padding-right: 0;
     /*height:24vh;*/
-    height: 588px;
+    height: 375px;
     font-size: 24pt;
     font-family: 'Flamenco', cursive;
     background-size: 100% auto;
