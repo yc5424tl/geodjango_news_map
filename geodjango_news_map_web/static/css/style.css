@@ -195,7 +195,7 @@ td, tr {
  *
  */
 
-#top-nav-img-div {
+#md-nav-img-div {
     width: 100%;
     min-width: 100%;
     margin-left: 0;
@@ -206,7 +206,7 @@ td, tr {
     text-align: center;
 }
 
-#top-nav-img {
+#md-nav-img {
     top: 2vh;
     margin-top: 0;
     padding-top: 0;
@@ -274,7 +274,7 @@ nav {
     font-size: 12pt;
 }
 
-#nav-img {
+#lg-nav-img {
     position: absolute;
     top: 2vh;
     /*left: calc((50% - 263px) + .18075em);*/

@@ -52,11 +52,6 @@ setLayout = function() {
     }
 };
 
-
-
-
-
-
 // setLayout = function() {
 //
 //     let top_img_div = $('#top-nav-img-div');
