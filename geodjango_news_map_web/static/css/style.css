@@ -196,7 +196,7 @@ td, tr {
  */
 
 #top-nav-img-div {
-    width: available;
+    width: 100%;
     min-width: 100%;
     margin-left: 0;
     margin-right: 0;
@@ -224,8 +224,8 @@ nav {
     margin-right: 0;
     padding-left: 0;
     padding-right: 0;
-    /*height:24vh;*/
-    height: 588px;
+    height:24vh;
+    /*height: 588px;*/
     font-size: 24pt;
     font-family: 'Flamenco', cursive;
     background-size: 100% auto;
@@ -278,7 +278,7 @@ nav {
     top: -12vh;
     /*left: calc((50% - 263px) + .18075em);*/
     left: calc(50% - 263px);
-    zoom: 133%;
+    /*zoom: 133%;*/
     z-index: 500;
 }
 
