@@ -1,0 +1,35 @@
+/***
+ *    ███╗   ██╗███████╗██╗    ██╗     ██████╗ ██████╗ ███╗   ███╗███╗   ███╗███████╗███╗   ██╗████████╗
+ *    ████╗  ██║██╔════╝██║    ██║    ██╔════╝██╔═══██╗████╗ ████║████╗ ████║██╔════╝████╗  ██║╚══██╔══╝
+ *    ██╔██╗ ██║█████╗  ██║ █╗ ██║    ██║     ██║   ██║██╔████╔██║██╔████╔██║█████╗  ██╔██╗ ██║   ██║
+ *    ██║╚██╗██║██╔══╝  ██║███╗██║    ██║     ██║   ██║██║╚██╔╝██║██║╚██╔╝██║██╔══╝  ██║╚██╗██║   ██║
+ *    ██║ ╚████║███████╗╚███╔███╔╝    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║ ╚═╝ ██║███████╗██║ ╚████║   ██║
+ *    ╚═╝  ╚═══╝╚══════╝ ╚══╝╚══╝      ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝
+ *
+ */
+.new-comment-container {
+    background-color: var(--main-bg-color);
+    border-radius: 5pt;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    min-width: 400px;
+    padding-top: 1.5em;
+    text-align: center;
+    width: 66%;
+}
+
+.new-comment-btn {
+    background-color: var(--main-color);
+    border: 1pt solid var(--main-bg-color);
+    color: var(--main-bg-color);
+    margin: 1em 0;
+}
+
+.new-comment-btn:hover,
+.new-comment-btn:focus {
+    background-color: var(--main-bg-color);
+    border: 1pt solid var(--main-color);
+    color: var(--main-color);
+    transition: 0.5s;
+}

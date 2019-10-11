@@ -1,0 +1,113 @@
+/***
+ *    ██╗   ██╗██╗███████╗██╗    ██╗    ██╗   ██╗███████╗███████╗██████╗
+ *    ██║   ██║██║██╔════╝██║    ██║    ██║   ██║██╔════╝██╔════╝██╔══██╗
+ *    ██║   ██║██║█████╗  ██║ █╗ ██║    ██║   ██║███████╗█████╗  ██████╔╝
+ *    ╚██╗ ██╔╝██║██╔══╝  ██║███╗██║    ██║   ██║╚════██║██╔══╝  ██╔══██╗
+ *     ╚████╔╝ ██║███████╗╚███╔███╔╝    ╚██████╔╝███████║███████╗██║  ██║
+ *      ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝      ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝
+ *
+ */
+#user-recent-comments,
+#user-recent-posts,
+#user-recent-queries {
+    margin-bottom: 3em;
+}
+
+#view-user-history {
+    border-left: 2pt solid var(--main-color)
+}
+
+#view-user-banner {
+    margin-top: 1em;
+}
+
+#view-user-lower {
+    padding-bottom: 2em;
+}
+
+#view-user-latest-post-hr {
+    background-color: var(--main-color);
+    height: 3px;
+}
+
+button.btn-inactive {
+    background-color: darkgrey;
+    color: dimgrey;
+    margin-left: 1em;
+}
+
+.view-user-last-post-comment-div {
+    margin: 1em;
+    background-color: var(--main-accent-2);
+    border-radius: 5pt;
+    padding: 1em;
+}
+
+.view-user-last-post-comment-hr {
+    height: 2px;
+    background-color: var(--main-color);
+}
+
+.view-user-last-post-comment-div > blockquote {
+    color: var(--main-bg-color);
+}
+
+#view-user-last-post-div {
+    background-color: rgba(66,75,84, 0.3);
+    padding: 1em;
+    border-radius: 5pt;
+}
+
+
+#view-user-last-post-comments-div {
+    margin: 2em;
+    /*display: none;*/
+}
+
+#view-user-view-last-post-btn,
+#view-user-view-last-comments-btn {
+    background-color: var(--main-color);
+    border: 1pt solid var(--main-color);
+    color: var(--main-bg-color);
+}
+
+#view-user-view-last-comments-btn {
+    margin-left: 1em;
+}
+
+#view-user-view-last-post-btn:hover,
+#view-user-view-last-comments-btn:hover,
+#view-user-view-last-post-btn:focus,
+#view-user-view-last-comments-btn:focus {
+    background-color: rgba(66,75,84, 0.5);
+    color: var(--main-bg-color);
+    transition: 0.4s;
+}
+
+#view-user-last-post-comments-crud-div {
+    background-color: transparent;
+}
+
+#view-user-history,
+#view-user-latest-post,
+#view-user-lower {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+#view-user-banner,
+#view-user-upper,
+#view-post-upper {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+/***
+ *    ███████╗███╗   ██╗██████╗     ██╗   ██╗██╗███████╗██╗    ██╗    ██╗   ██╗███████╗███████╗██████╗
+ *    ██╔════╝████╗  ██║██╔══██╗    ██║   ██║██║██╔════╝██║    ██║    ██║   ██║██╔════╝██╔════╝██╔══██╗
+ *    █████╗  ██╔██╗ ██║██║  ██║    ██║   ██║██║█████╗  ██║ █╗ ██║    ██║   ██║███████╗█████╗  ██████╔╝
+ *    ██╔══╝  ██║╚██╗██║██║  ██║    ╚██╗ ██╔╝██║██╔══╝  ██║███╗██║    ██║   ██║╚════██║██╔══╝  ██╔══██╗
+ *    ███████╗██║ ╚████║██████╔╝     ╚████╔╝ ██║███████╗╚███╔███╔╝    ╚██████╔╝███████║███████╗██║  ██║
+ *    ╚══════╝╚═╝  ╚═══╝╚═════╝       ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝      ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝
+ *
+ */

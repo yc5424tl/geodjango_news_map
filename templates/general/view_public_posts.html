@@ -1,6 +1,12 @@
 {% extends 'general/base.html' %}
-
+{% load staticfiles %}
+{% load static %}
 {% block title %}All Posts - {{ block.super }}{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/view_public_post.css' %}">
+{% endblock %}
 
 {% block content %}
     {% for post in posts %}

@@ -1,6 +1,12 @@
 {% extends 'general/base.html' %}
-
+{% load staticfiles %}
+{% load static %}
 {% block title %}New Comment - {{ block.super }}{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/new_comment.css' %}">
+{% endblock %}
 
 {% block content %}
     <div class="new-comment-container">

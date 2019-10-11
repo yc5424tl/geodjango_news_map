@@ -29,7 +29,7 @@
                 m=checkTime(m);
                 s=checkTime(s);
                 document.getElementById('txt').innerHTML=" | "+h+":"+m+":"+s;
-                t=setTimeout(function(){startTime()},500);
+                setTimeout(function(){startTime()},500);
                 }
 
                 function checkTime(i) {
@@ -47,22 +47,25 @@
     <body>
         <div id='main' class="container-fluid">
             <nav class="navbar navbar-expand-md">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#md-nav-div" aria-controls="navbarSupportedContent" aria-expanded="true" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+
                 <div class="row collapse navbar-collapse" id="md-nav-div">
                     <div class="col-12" id="md-nav-col-div">
                         <div class="row abs-row" id="md-nav-img-div">
                             <img id="md-nav-img" alt="Map the News Logo" src="{% static 'img/mtn_4.png' %}">
                         </div>
                         <div class="row" id="md-nav-nav-row">
-                            <ul class="nav justify-content-center d-flex flex-column col-auto">
+                            <ul class="nav  d-flex flex-column col-auto" id="md-nav-left-ul">
                                 <li class="nav-item"><a class="nav-link" href="{% url 'index' %}">Home</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{% url 'new_query' %}">Map the News</a></li>
                                 <li class="nav-item"><a class="nav-link" href="{% url 'view_public_posts' %}">View Posts</a></li>
                             </ul>
                             <div class="col"></div>
-                            <ul class="nav justify-content-center d-flex flex-column col-auto pull-right">
+                            <ul class="nav d-flex flex-column col-auto pull-right" id="md-nav-right-ul">
                                 <li class="nav-item"><a class="nav-link" href="{% url 'view_sources' %}">News Sources</a></li>
                                 {% if user.is_authenticated %}
                                     <li class="nav-item"><a class="nav-link" href="{% url 'view_user' user.pk %}">Profile</a></li>
@@ -74,12 +77,12 @@
                             </ul>
                         </div>
                     </div>
-
                 </div>
+
+
                 <div class="row nav-row" id="lg-nav-div">
                     <img id="lg-nav-img" alt="Map the News Logo" src="{% static 'img/mtn_4.png' %}">
-{#                    <div id="nav-img-div"></div>#}
-                    <div class="collapse navbar-collapse col-12" id="navbar-content">
+                    <div class="col-12" id="navbar-content-lg">
                         <div class="row nav-link-row">
                             <div class="col base-nav-link-container" id="nav-lft">
                                 <ul class="nav justify-content-center">

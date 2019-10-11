@@ -1,6 +1,14 @@
+
 {% extends 'general/base.html' %}
+{% load static %}
+{% load staticfiles %}
 
 {% block title %}{{ member.username }}'s Profile - {{ block.super }}{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/view_user.css' %}">
+{% endblock %}
 
 {% block content %}
     <div class="container">

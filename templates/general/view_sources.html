@@ -1,6 +1,12 @@
 {% extends 'general/base.html' %}
-
+{% load staticfiles %}
+{% load static %}
 {% block title %}News Sources - {{ block.super }}{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/view_sources.css' %}">
+{% endblock %}
 
 {% block content %}
     <div class="container">
