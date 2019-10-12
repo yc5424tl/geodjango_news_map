@@ -244,10 +244,12 @@ td, tr {
 
 #md-nav-left-ul {
     justify-content: left;
+    text-align: left;
 }
 
 #md-nav-right-ul {
     justify-content: right;
+    text-align: right;
 }
 
 #md-nav-div,
