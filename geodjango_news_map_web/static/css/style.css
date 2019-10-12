@@ -23,18 +23,17 @@ none {
 /*font-family: 'Merriweather', serif;*/
 /*font-family: 'Rokkitt', serif;*/
 
-    #84DCCF
-    #ED254E
-    #00131E
-    #CDEDF6
-    #312F2F
-
-    #e88d67
-    #f4a259
-    #bc8da0
-    #48a9a6
-    #bc4b51
-    #f0c808
+                     #84DCCF
+                     #ED254E
+                     #00131E
+                     #CDEDF6
+                     #312F2F
+                     #e88d67
+                     #f4a259
+                     #bc8da0
+                     #48a9a6
+                     #bc4b51
+                     #f0c808
 }
 
 :root {
@@ -52,6 +51,10 @@ none {
     --aux-accent-5: #84DCCF;
 }
 
+
+
+
+/*-------------GLOBAL--------------------*/
 * {
     margin: 0;
     font-family: 'Josefin Sans', sans-serif;
@@ -82,11 +85,6 @@ footer {
     display: block;
 }
 
-.messages {
-    color: var(--main-bg-color);
-    font-size: 12pt;
-}
-
 .container {
     width: 100%;
     max-width: 100%;
@@ -102,6 +100,12 @@ footer {
     width: 100%;
     min-height: 100%;
     position: relative;
+}
+
+/*==========MESSAGES============*/
+.messages {
+    color: var(--main-bg-color);
+    font-size: 12pt;
 }
 
 #messages-container {
@@ -147,10 +151,7 @@ div.jumbotron {
     color: var(--main-color);
 }
 
-.comment-footer {
-    padding-top: 1em;
-    color: var(--main-accent-1);
-}
+
 
 .article-image-iframe {
     width: 500px;
@@ -159,6 +160,15 @@ div.jumbotron {
 
 #content-div {
     padding: 1em 1em 20px 1em;
+}
+
+
+
+/*=================FOOTER===================*/
+
+.comment-footer {
+    padding-top: 1em;
+    color: var(--main-accent-1);
 }
 
 footer {
@@ -200,7 +210,9 @@ td, tr {
  */
 
 /*================MEDIUM NAV===========================*/
-#md-nav-nav-row, #md-nav-col-div, #md-nav-div {
+#md-nav-nav-row,
+#md-nav-col-div,
+#md-nav-div {
     background-color: transparent;
 }
 

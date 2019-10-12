@@ -21,7 +21,7 @@ setLayout = function() {
     // let nav = $('nav');
 
     if ($(window).width() > 1561) {
-        lg_nav_div.css('display', 'initial');
+        lg_nav_div.css('display', 'flex');
         md_nav_div.css('display', 'none');
         // // nav.css('height', '30vh');
         // md_nav_div.css('display', 'none');
@@ -38,7 +38,7 @@ setLayout = function() {
 
     if ($(window).width() < 1562) {
         lg_nav_div.css('display', 'none');
-        md_nav_div.css('display', 'initial');
+        md_nav_div.css('display', 'flex');
         // nav.css('height', '24vh');
         // md_nav_div.css('display', 'initial');
         // md_nav_img_div.css('display', 'initial');

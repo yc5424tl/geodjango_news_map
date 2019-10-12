@@ -1,11 +1,15 @@
+
 {% extends 'general/base.html' %}
+
 {% load staticfiles %}
 {% load static %}
+
 {% block title %}Query Results - {{ block.super }}{% endblock %}
 
 {% block styles %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/view_query.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cards.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -63,8 +67,12 @@
                                         <input type="radio" class="form-check-input" id="public-save-false" name="save_radio" value="True">
                                     </div>
                                     <div class="btn-group-sm float-right">
-                                        <a href="#"><button type="submit" class="btn btn-link btn-sm" id="view-query-save-btn">SAVE</button></a>
-                                        <a href={% url 'delete_query' query.pk %}><button class="btn btn-link btn-sm" role="link" id="view-query-del-btn">DELETE</button></a>
+                                        <a href="#">
+                                            <button type="submit" class="btn btn-link btn-sm" id="view-query-save-btn">SAVE</button>
+                                        </a>
+                                        <a href={% url 'delete_query' query.pk %}>
+                                            <button class="btn btn-link btn-sm" role="link" id="view-query-del-btn">DELETE</button>
+                                        </a>
                                     </div>
                                 </div>
                                 <input type="hidden" name="user_pk" value="{{ user.pk }}">
@@ -126,8 +134,10 @@
                                              <h4 class="view-query-article-title title-center">{{ article.title }}</h4>
                                              <h6 class="title-center view-query-article-subtitle-container">
                                                  <sub class="view-query-article-subtitle title-center">
-                                                     By<span class="article-author">{{ article.author }}</span> {{ article.date_published|date:"DATETIME_FORMAT"}}
-                                                    <a class="view-query-article-link title-center" href="{{ article.article_url }}">Link</a>
+                                                     By
+                                                     <span class="article-author">{{ article.author }}</span>
+                                                     {{ article.date_published|date:"DATETIME_FORMAT"}}
+                                                     <a class="view-query-article-link title-center" href="{{ article.article_url }}">Link</a>
                                                 </sub>
                                              </h6>
                                             <p class="view-query-article-body">{{ article.description }}</p>
@@ -150,8 +160,11 @@
     </div>
 {% endblock %}
 
+
 {% block scripts %}
+    {#----------------------------------------------------------------------#}
     {{ block.super }}
+    {#-----------------------------------------------------------------#}
     <script>
         function htmlToTemplate(html) {
             let template = document.getElementById('template');
@@ -166,7 +179,7 @@
         $(document).ready(function() {
             htmlToTemplate( {{ query.choro_html|safe }}
     </script>
-
+    {#----------------------------------------------------------------------#}
     <script>
         jQuery(function(){
             jQuery('form').submit(() => {
@@ -174,4 +187,5 @@
             });
         });
     </script>
+    {#----------------------------------------------------------------------#}
 {% endblock %}
