@@ -2,9 +2,13 @@
 
 $(document).ready(function() {
     setLayout();
-    $(window).resize(function () {
+    $(window).resize(function() {
         setLayout();
     })
+});
+
+$(window).resize(function() {
+    setLayout();
 });
 
 setLayout = function() {
@@ -26,6 +30,7 @@ setLayout = function() {
     // let nav = $('nav');
 
     if ($(window).width() > 1561) {
+        alert('Width > 1561');
         lg_nav_div.css('display', 'flex');
         lg_nav_content.css('display', 'block');
         lg_nav_img.css('display', 'block');
@@ -46,6 +51,7 @@ setLayout = function() {
     }
 
     if ($(window).width() < 1562) {
+        alert('Width < 1562');
         lg_nav_div.css('display', 'none');
         lg_nav_img.css('display', 'none');
         lg_nav_content.css('display', 'none');
@@ -67,7 +73,9 @@ setLayout = function() {
     }
 
     if ($(window).width() < 1200) {
+        alert('Width < 1200');
         md_nav_img_div.css('display', 'none');
+        md_nav_img.css('display', 'none');
     }
 
 };
