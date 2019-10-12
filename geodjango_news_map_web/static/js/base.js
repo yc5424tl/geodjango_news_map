@@ -1,15 +1,7 @@
 // $('').addClass('');
 
-$(document).ready(function() {
-    setLayout();
-    $(window).resize(function() {
-        setLayout();
-    })
-});
-
-$(window).resize(function() {
-    setLayout();
-});
+$(document).ready(setLayout);
+$(window).resize(setLayout);
 
 setLayout = function() {
     let md_nav_div = $('#md-nav-div');
