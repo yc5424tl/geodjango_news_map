@@ -220,6 +220,10 @@ td, tr {
     transition: 0.5s;
 }
 
+.navbar-toggler-icon {
+    color: var(--main-bg-color);
+}
+
 
 @media (min-width: 1200px) {
 
