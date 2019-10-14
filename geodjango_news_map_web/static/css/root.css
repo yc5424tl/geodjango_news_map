@@ -145,6 +145,9 @@ td, tr {
     position: absolute;
     width: 100%;
     display: block;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
 }
 
 #nav-left,
@@ -187,6 +190,8 @@ td, tr {
         display: block;
         position: absolute;
         z-index: 500;
+        width: 100%;
+        height: auto;
     }
     #logo-lg,
     #logo-md {
@@ -210,6 +215,8 @@ td, tr {
         display: block;
         position: absolute;
         z-index: 500;
+        width: 100%;
+        height: auto;
     }
     #logo-xl,
     #logo-md {
@@ -236,6 +243,8 @@ td, tr {
         display: block;
         position: absolute;
         z-index: 500;
+        width: 100%;
+        height: auto;
     }
     #logo-xl,
     #logo-lg {
