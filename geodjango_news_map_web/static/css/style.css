@@ -296,9 +296,7 @@ nav {
     z-index: 499;
 }
 
-.nav-link {
-    border: 1pt solid transparent;
-}
+
 
 .nav {
     /*width: 100%;*/
@@ -311,6 +309,10 @@ nav {
     margin: 0;
     padding-left: 0;
     padding-right: 0;
+}
+
+.nav-link {
+    border: 1pt solid transparent;
 }
 
 .nav-link:hover, .nav-link:focus {
