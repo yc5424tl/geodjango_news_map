@@ -186,6 +186,7 @@ td, tr {
     #logo-xl {
         display: block;
         position: absolute;
+        z-index: 500;
     }
     #logo-lg,
     #logo-md {
@@ -199,6 +200,7 @@ td, tr {
     #nav-left,
     #nav-right {
         float: none;
+        width: 100%;
     }
 }
 
@@ -207,6 +209,7 @@ td, tr {
     #logo-lg {
         display: block;
         position: absolute;
+        z-index: 500;
     }
     #logo-xl,
     #logo-md {
@@ -219,11 +222,11 @@ td, tr {
     }
     #nav-left {
         float: left;
-        margin: auto;
+        text-align: left;
     }
     #nav-right {
         float: right;
-        margin: auto;
+        text-align: right;
     }
 }
 
@@ -232,6 +235,7 @@ td, tr {
     #logo-md {
         display: block;
         position: absolute;
+        z-index: 500;
     }
     #logo-xl,
     #logo-lg {
@@ -244,11 +248,9 @@ td, tr {
     }
     #nav-left {
         float: left;
-        margin: auto;
     }
     #nav-right {
         float: right;
-        margin: auto;
     }
 }
 
