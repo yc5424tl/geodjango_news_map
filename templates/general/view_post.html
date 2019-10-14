@@ -12,7 +12,7 @@
 
 {% block content%}
     <div class="row" id="view-post-upper">
-        <div class="col-6">
+        <div class="col-lg-6 col-sm-12">
             <div class="view-post-post">
                 <h3 class="lt-header" id="view-post-post-hdr">{{ post.title }}</h3>
                 <small class="view-post-post-detail">
@@ -29,7 +29,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6 col-sm-12">
             <div id="view-post-iframe-div">
 {#                <iframe id="view-post-iframe" src="{% url 'view_choro' post.query.pk %}"></iframe>#}
                 {{ query.choropleth|safe }}

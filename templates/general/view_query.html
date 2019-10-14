@@ -14,8 +14,9 @@
 
 {% block content %}
     <div class="container" id="view-query-parent-container">
+
         <div class="row">
-            <div class="col-4">
+            <div class="col-sm-12 col-lg-4">
                 <h1 class="title-center" id="view-query-details-title">Query Details</h1>
                 <div id="adjacent-target">
                     <table id="view-query-table">
@@ -107,7 +108,7 @@
                     {% endif %}
                 {% endif %}
             </div>
-            <div class="col-8 view-query-articles-container">
+            <div class="col-sm-12 col-lg-8 view-query-articles-container">
                 <div class="row" id="view-query-iframe-row">
                     <div class="col-12" id="view-query-iframe-col">
                         <div class="embed-responsive-16by9" id="view-query-iframe-div">
@@ -117,8 +118,9 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
-            <div class="col-2"></div>
+            <div class="col-lg-2 col-sm-1"></div>
             <div class="col view-query-articles">
                 <div class="card" id="view-query-card">
                     <div class="card-header view-query-card-header-container">
@@ -155,7 +157,7 @@
                     </ul>
                 </div>
             </div>
-            <div class="col-2"></div>
+            <div class="col-lg-2 col-sm-1"></div>
         </div>
     </div>
 {% endblock %}
