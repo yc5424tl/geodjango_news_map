@@ -1,3 +1,20 @@
+
+:root {
+    --main-bg-color: #D4D4D4; /*212,212,212*/
+    --main-color: #424B54;    /* rgb(66,75,84) */
+    --main-accent-1: #A1A499;
+    --main-accent-2: #896A67;
+    /*--main-link-color: #6EA8DD;*/
+    --main-link-color: #4A91D3;
+    --main-link-hover: #ED254E;
+    --aux-accent-1: #ba324f;
+    --aux-accent-2: #a8dadc;
+    --aux-accent-3: #bc4b51; /*188,75,81*/
+    --aux-accent-4: #f0c808;
+    --aux-accent-5: #84DCCF;
+}
+
+
 * {
     margin: 0;
     font-family: 'Josefin Sans', sans-serif;
@@ -15,6 +32,11 @@ body {
     background-color: var(--main-color);
     font-size: 1.2em;
 }
+
+#main {
+    background-color: var(--main-color);
+    padding: 0;
+ }
 
 footer {
     width: 100%;
@@ -89,8 +111,6 @@ div.jumbotron {
     color: var(--main-color);
 }
 
-
-
 .article-image-iframe {
     width: 500px;
     height: 500px;
@@ -121,7 +141,7 @@ footer {
 
 td, tr {
     font-size: 18pt;
-    width: auto; ;
+    width: auto;
     text-align: center;
 }
 
@@ -146,8 +166,8 @@ td, tr {
     width: 100%;
     display: block;
     align-content: center;
-    justify-content: center;
     text-align: center;
+    background-color: transparent;
 }
 
 #nav-left,
@@ -187,11 +207,12 @@ td, tr {
 
 @media (min-width: 1200px) {
     #logo-xl {
-        display: block;
+        display: inline;
         position: absolute;
         z-index: 500;
         width: 100%;
         height: auto;
+        left: calc(50% - 200px);
     }
     #logo-lg,
     #logo-md {
@@ -202,21 +223,26 @@ td, tr {
         min-height: 250px;
         font-size: 24pt;
     }
+    #logo-container {
+        height: 250px;
+    }
     #nav-left,
     #nav-right {
         float: none;
-        width: 100%;
+        width: 50%;
+        align-content: space-evenly;
     }
 }
 
 
 @media (min-width: 992px) and (max-width: 1199px) {
     #logo-lg {
-        display: block;
+        display: inline;
         position: absolute;
         z-index: 500;
         width: 100%;
         height: auto;
+        left: calc(50% - 165px);
     }
     #logo-xl,
     #logo-md {
@@ -227,24 +253,30 @@ td, tr {
         min-height: 225px;
         font-size: 24pt;
     }
+    #logo-container {
+        height: 225px;
+    }
     #nav-left {
         float: left;
         text-align: left;
+        justify-content: left;
     }
     #nav-right {
         float: right;
         text-align: right;
+        justify-content:  right;
     }
 }
 
 
 @media (min-width: 768px) and (max-width: 991px) {
     #logo-md {
-        display: block;
+        display: inline;
         position: absolute;
         z-index: 500;
         width: 100%;
         height: auto;
+        left: calc(50% - 128px)
     }
     #logo-xl,
     #logo-lg {
@@ -255,11 +287,18 @@ td, tr {
         min-height: 200px;
         font-size: 22pt;
     }
+    #logo-container {
+        height: 200px;
+    }
     #nav-left {
         float: left;
+        justify-content: left;
+        text-align: left;
     }
     #nav-right {
         float: right;
+        justify-content: right;
+        text-align: right;
     }
 }
 

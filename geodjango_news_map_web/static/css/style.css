@@ -163,7 +163,6 @@ div.jumbotron {
 }
 
 
-
 /*=================FOOTER===================*/
 
 .comment-footer {
@@ -185,7 +184,7 @@ footer {
 
 td, tr {
     font-size: 18pt;
-    width: auto; ;
+    width: auto;
     text-align: center;
 }
 
