@@ -210,9 +210,8 @@ td, tr {
         display: inline;
         position: absolute;
         z-index: 500;
-        width: 100%;
-        height: auto;
         left: calc(50% - 200px);
+        top: 0;
     }
     #logo-lg,
     #logo-md {
@@ -240,8 +239,6 @@ td, tr {
         display: inline;
         position: absolute;
         z-index: 500;
-        width: 100%;
-        height: auto;
         left: calc(50% - 165px);
     }
     #logo-xl,
@@ -262,6 +259,7 @@ td, tr {
         justify-content: left;
     }
     #nav-right {
+        right: 0;
         float: right;
         text-align: right;
         justify-content:  right;
@@ -274,8 +272,6 @@ td, tr {
         display: inline;
         position: absolute;
         z-index: 500;
-        width: 100%;
-        height: auto;
         left: calc(50% - 128px)
     }
     #logo-xl,
@@ -296,6 +292,7 @@ td, tr {
         text-align: left;
     }
     #nav-right {
+        right: 0;
         float: right;
         justify-content: right;
         text-align: right;
