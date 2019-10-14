@@ -194,6 +194,10 @@ td, tr {
     background-size: 100% auto;
 }
 
+#nav-collapse {
+    bottom: 10px;
+}
+
 .nav-link {
     border: 1pt solid transparent;
     margin: auto;
