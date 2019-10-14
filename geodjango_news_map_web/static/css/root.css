@@ -85,9 +85,12 @@ li a {
     transition: 0.4s;
 }
 
-a:hover, * > a:hover,
-a:focus, * > a:focus,
-li a:hover, li a:focus {
+a:hover,
+* > a:hover,
+a:focus,
+* > a:focus,
+li a:hover,
+li a:focus {
     color: var(--main-link-hover);
     transition: 0.3s;
 }
@@ -107,7 +110,8 @@ div.jumbotron {
     border-collapse: collapse;
 }
 
-.row * button, .row * {
+.row * button,
+.row * {
     color: var(--main-color);
 }
 
@@ -194,18 +198,25 @@ td, tr {
     border: 1pt solid transparent;
 }
 
-.nav-item, .nav-link, .navbar-brand, .nav-link:link, .nav-item:link {
+.nav-item,
+.nav-link,
+.navbar-brand,
+.nav-link:link,
+.nav-item:link {
     color: var(--main-bg-color);
     transition: 0.4s;
     /*z-index: 499;*/
 }
 
-.nav-link:hover, .nav-link:focus {
+.nav-link:hover,
+.nav-link:focus {
     color: var(--main-link-hover);
     transition: 0.5s;
 }
 
+
 @media (min-width: 1200px) {
+
     #logo-xl {
         display: inline;
         position: absolute;
@@ -224,17 +235,23 @@ td, tr {
     }
     #logo-container {
         height: 250px;
+        padding-left: 0;
+        padding-right: 0;
     }
     #nav-left,
     #nav-right {
         float: none;
         width: 50%;
+        min-width: 50%;
+        margin-left: 0;
+        margin-right: 0;
         align-content: space-evenly;
     }
 }
 
 
 @media (min-width: 992px) and (max-width: 1199px) {
+
     #logo-lg {
         display: inline;
         position: absolute;
@@ -259,6 +276,7 @@ td, tr {
         justify-content: left;
     }
     #nav-right {
+        margin-left: auto;
         right: 0;
         float: right;
         text-align: right;
@@ -268,6 +286,7 @@ td, tr {
 
 
 @media (min-width: 768px) and (max-width: 991px) {
+
     #logo-md {
         display: inline;
         position: absolute;
@@ -292,14 +311,13 @@ td, tr {
         text-align: left;
     }
     #nav-right {
+        margin-left: auto;
         right: 0;
         float: right;
         justify-content: right;
         text-align: right;
     }
 }
-
-
 
 ::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.4);
