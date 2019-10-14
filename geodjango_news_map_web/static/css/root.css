@@ -197,6 +197,7 @@ td, tr {
 
 #nav-collapse {
     margin-top: auto;
+    padding-right: 16px;
 }
 
 .nav-link {
