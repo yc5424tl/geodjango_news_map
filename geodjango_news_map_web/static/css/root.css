@@ -200,6 +200,11 @@ td, tr {
     padding-right: 16px;
 }
 
+.navbar-toggler-icon,
+.navbar-toggler {
+    color: var(--main-bg-color);
+}
+
 .nav-link {
     border: 1pt solid transparent;
     margin: auto;
@@ -219,10 +224,6 @@ td, tr {
 .nav-link:focus {
     color: var(--main-link-hover);
     transition: 0.5s;
-}
-
-.navbar-toggler-icon {
-    color: var(--main-bg-color);
 }
 
 
@@ -299,10 +300,9 @@ td, tr {
     #nav-left,
     #nav-right {
         float: none;
-        width: 50%;
-        min-width: 50%;
-        margin-left: 0;
-        margin-right: 0;
+        max-width: 49%;
+        margin-left: auto;
+        margin-right: auto;
         align-content: space-evenly;
         text-align: justify-all;
     }
@@ -337,10 +337,10 @@ td, tr {
     }
     #nav-right {
         margin-left: auto;
-        right: 0;
-        float: right;
+        /*right: 0;*/
+        /*float: right;*/
         justify-content: right;
-        text-align: right;
+        /*text-align: right;*/
         width: 200px;
     }
 }
