@@ -178,6 +178,7 @@ td, tr {
 #nav-right {
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 8pt;
+    border-collapse: collapse;
 }
 
 #navbar {
@@ -217,7 +218,6 @@ td, tr {
 .nav-item:link {
     color: var(--main-bg-color);
     transition: 0.4s;
-    /*z-index: 499;*/
 }
 
 .nav-link:hover,
@@ -260,6 +260,14 @@ td, tr {
         align-content: space-evenly;
         text-align: justify-all;
     }
+    #nav-left {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    #nav-right {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
 }
 
 
@@ -283,20 +291,6 @@ td, tr {
     #logo-container {
         height: 225px;
     }
-    /*#nav-left {*/
-    /*    float: left;*/
-    /*    text-align: left;*/
-    /*    justify-content: left;*/
-    /*    min-width: 250px;*/
-    /*}*/
-    /*#nav-right {*/
-    /*    margin-left: auto;*/
-    /*    right: 0;*/
-    /*    float: right;*/
-    /*    text-align: right;*/
-    /*    justify-content:  right;*/
-    /*    min-width: 250px;*/
-    /*}*/
     #nav-left,
     #nav-right {
         float: none;
@@ -305,6 +299,14 @@ td, tr {
         margin-right: auto;
         align-content: space-evenly;
         text-align: justify-all;
+    }
+    #nav-left {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+    #nav-right {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
     }
 }
 
@@ -334,14 +336,15 @@ td, tr {
         justify-content: left;
         text-align: left;
         width: 200px;
+        border-radius: 8pt;
     }
     #nav-right {
         margin-left: auto;
-        /*right: 0;*/
-        /*float: right;*/
+        float: right;
         justify-content: right;
-        /*text-align: right;*/
+        text-align: right;
         width: 200px;
+        border-radius: 8pt;
     }
 }
 
