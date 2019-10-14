@@ -277,19 +277,29 @@ td, tr {
     #logo-container {
         height: 225px;
     }
-    #nav-left {
-        float: left;
-        text-align: left;
-        justify-content: left;
-        min-width: 250px;
-    }
+    /*#nav-left {*/
+    /*    float: left;*/
+    /*    text-align: left;*/
+    /*    justify-content: left;*/
+    /*    min-width: 250px;*/
+    /*}*/
+    /*#nav-right {*/
+    /*    margin-left: auto;*/
+    /*    right: 0;*/
+    /*    float: right;*/
+    /*    text-align: right;*/
+    /*    justify-content:  right;*/
+    /*    min-width: 250px;*/
+    /*}*/
+    #nav-left,
     #nav-right {
-        margin-left: auto;
-        right: 0;
-        float: right;
-        text-align: right;
-        justify-content:  right;
-        min-width: 250px;
+        float: none;
+        width: 50%;
+        min-width: 50%;
+        margin-left: 0;
+        margin-right: 0;
+        align-content: space-evenly;
+        text-align: justify-all;
     }
 }
 
