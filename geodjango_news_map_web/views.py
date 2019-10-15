@@ -261,7 +261,7 @@ def view_post(request, post_pk):
     else:
         post = Post.objects.get(pk=post_pk)
         qrs = post.query
-        articles = post.query.articles
+        articles = post.query.articles.all()
         if post.author.id == request.user.id:
             edit_post_form = EditPostForm(instance=Post) #Pre-populate form with the post's current field values
             return render(request, 'general/view_post.html', {'post': post, 'edit_post_form': edit_post_form, 'query': qrs, 'articles': articles})
