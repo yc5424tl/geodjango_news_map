@@ -11,6 +11,53 @@
 {% endblock %}
 
 {% block content %}
+
+    <div class="accordion">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h5 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#byCountry">
+                        Sources By Country
+                    </button>
+                </h5>
+            </div>
+            <div id="byCountry" class="collapse" data-parent="#accordion">
+                <div class="card-body">
+                    {% regroup sources|dictsort:'country' by country as sources_by_country %}
+                    <ul>
+                        {% for country in sources_by_country %}
+                            <li>{{ country.grouper }}
+                                <ul>
+                                    {% for source in country.list %}
+                                        <li>
+                                            <a href="{{ source.url }}">{{ source.name }}</a>
+                                            <sub>{{ source.category|capfirst }} - {{ source.full_lang }}</sub>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <div class="container">
         <div class="row" id="view-src-row">
             <div class="col sources" id="sources-left">
