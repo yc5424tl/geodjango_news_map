@@ -261,12 +261,12 @@ td, tr {
         text-align: justify-all;
     }
     #nav-left {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
+        border-top-right-radius: initial;
+        border-bottom-right-radius: initial;
     }
     #nav-right {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        border-top-left-radius: initial;
+        border-bottom-left-radius: initial;
     }
 }
 
@@ -315,12 +315,12 @@ td, tr {
         text-align: justify-all;
     }
     #nav-left {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0;
+        border-top-right-radius: initial;
+        border-bottom-right-radius: initial;
     }
     #nav-right {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
+        border-top-left-radius: initial;
+        border-bottom-left-radius: initial;
     }
 }
 
@@ -339,15 +339,6 @@ td, tr {
     }
     #navbar {
         height: 200px;
-        min-height: 200px;
-        font-size: 22pt;
-    }
-    #logo-container {
-        height: 200px;
-    }
-    #nav-left {
-        float: left;
-        justify-content: left;
         text-align: left;
         width: 200px;
         border-radius: 8pt;
@@ -358,7 +349,12 @@ td, tr {
         justify-content: right;
         text-align: right;
         width: 200px;
-        border-radius: 8pt;
+        border-top-left-radius: 8pt;
+        border-bottom-left-radius: 8pt;
+    }
+    #nav-left {
+        border-top-right-radius: 8pt;
+        border-bottom-left-radius: 8pt;
     }
 }
 

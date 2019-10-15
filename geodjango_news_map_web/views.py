@@ -257,15 +257,16 @@ def view_post(request, post_pk):
             messages.info(request, 'Post Details Updated')
         else:
             messages.error(request, form.errors)
-        return redirect('post_details', post_pk=post_pk)
+        return redirect('   post_details', post_pk=post_pk)
     else:
         post = Post.objects.get(pk=post_pk)
         qrs = post.query
+        articles = post.query.articles
         if post.author.id == request.user.id:
             edit_post_form = EditPostForm(instance=Post) #Pre-populate form with the post's current field values
-            return render(request, 'general/view_post.html', {'post': post, 'edit_post_form': edit_post_form, 'query': qrs})
+            return render(request, 'general/view_post.html', {'post': post, 'edit_post_form': edit_post_form, 'query': qrs, 'articles': articles})
         else:
-            return render(request, 'general/view_post.html', {'post': post, 'query': qrs})
+            return render(request, 'general/view_post.html', {'post': post, 'query': qrs, 'articles': articles})
 
 
 def view_sources(request):
