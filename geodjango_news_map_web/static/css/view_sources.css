@@ -29,6 +29,41 @@
 #sources-center {
     background-color: rgba(0,0,0,0.1);
 }
+
+@media (min-width: 1200px) {
+    #view-src-col-container {
+        display: block;
+    }
+    #accordion {
+        display: none;
+    }
+}
+
+@media (max-width: 1199px) {
+    #view-src-col-container {
+        display: none;
+    }
+    #accordion {
+        display: block;
+    }
+}
+
+
+.src-card {
+    background-color: rgba(0,0,0,0.1);
+}
+
+.src-card > .card-header {
+    background-color: var(--main-color);
+    color: var(--main-bg-color);
+    font-weight: 700;
+    font-variant-caps: all-small-caps;
+}
+
+.src-card-body {
+    background-color: rgba(0,0,0,0.5);
+}
+
 /***
  *    ███████╗███╗   ██╗██████╗     ██╗   ██╗██╗███████╗██╗    ██╗    ███████╗ ██████╗ ██╗   ██╗██████╗  ██████╗███████╗███████╗
  *    ██╔════╝████╗  ██║██╔══██╗    ██║   ██║██║██╔════╝██║    ██║    ██╔════╝██╔═══██╗██║   ██║██╔══██╗██╔════╝██╔════╝██╔════╝
