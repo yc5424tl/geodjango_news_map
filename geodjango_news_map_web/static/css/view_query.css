@@ -8,7 +8,7 @@
  *
  */
 
-.col-8.view-query-articles-container > .row > div.col-12 {
+.col-8.view-query-iframe-container > .row > div.col-12 {
     padding-left: 0;
     padding-right: 0;
     margin: 1em;
@@ -68,7 +68,7 @@ a.view-query-article-link.title-center:hover {
     transition: 0.5s;
 }
 
-.view-query-articles-container {
+.view-query-iframe-container {
     height: 100%;
     padding: 0;
     margin: 0;
