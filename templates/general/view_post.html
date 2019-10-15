@@ -48,8 +48,8 @@
                                 {% if article %}
                                     <li class="view-post-li">
                                         <div class="row view-post-article">
-                                            <div class="col-1" id="view-post-articles-left-buffer"></div>
-                                            <div class="col-7 view-post-article-txt-container">
+                                            <div class="col-lg-1 col-sm-0" id="view-post-articles-left-buffer"></div>
+                                            <div class="col-lg-7 col-sm-12 view-post-article-txt-container">
                                                  <h4 class="view-post-article-title title-center">{{ article.title }}</h4>
                                                  <h6 class="title-center view-post-article-subtitle-container">
                                                      <sub class="view-post-article-subtitle title-center">
@@ -61,10 +61,10 @@
                                                  </h6>
                                                 <p class="view-post-article-body">{{ article.description }}</p>
                                             </div>
-                                            <div class="col-3 view-post-article-img-container">
+                                            <div class="col-lg-3 col-sm-12 view-post-article-img-container">
                                                 <img class="view-post-article-img " src="{{ article.image_url }}" alt="{{ article.description }}">
                                             </div>
-                                            <div class="col-1" id="view-post-articles-right-buffer"></div>
+                                            <div class="col-lg-1 col-sm-0" id="view-post-articles-right-buffer"></div>
                                         </div>
                                     </li>
                                 {% endif %}

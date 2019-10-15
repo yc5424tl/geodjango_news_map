@@ -292,14 +292,47 @@ a.view-post-article-link.title-center:hover {
     transition: 0.4s;
 }
 
+
+
+/*.view-post-article-img {*/
+/*    max-width: 300px;*/
+/*    max-height: 200px;*/
+/*    width: auto;*/
+/*    height: auto;*/
+/*    margin-left: auto;*/
+/*    margin-right: auto;*/
+/*    border-radius: 10pt;*/
+/*}*/
+
+.view-post-article-img-container {
+    padding: 10px;
+}
+
 .view-post-article-img {
-    max-width: 300px;
-    max-height: 200px;
-    width: auto;
+    width: 100%;
     height: auto;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: 10pt;
+}
+
+@media (min-width: 992px) {
+    .view-post-article-img {
+        max-width: 300px;
+        max-height: 200px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .view-post-article-img {
+        max-width: 666px;
+        max-height: 444px;
+    }
+}
+
+@media (max-width: 575px) {
+    .view-post-article-img {
+        max-width: 525px;
+        max-height: 350px;
+    }
 }
 
 .view-post-article-title {
