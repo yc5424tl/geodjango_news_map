@@ -1,9 +1,10 @@
 {% extends 'general/root.html' %}
-{#{% extends 'general/base.html' %}#}
 {% load static %}
 {% load staticfiles %}
 
-{% block title %}{{ member.username }}'s Profile - {{ block.super }}{% endblock %}
+{% block title %}
+    {{ member.username }}'s Profile - {{ block.super }}
+{% endblock %}
 
 {% block styles %}
     {{ block.super }}

@@ -14,15 +14,15 @@
 {% block content %}
     <div id="accordion">
         <div class="row">
-            <div class="col-1"></div>
+            <div class="col-1 src-pad-col"></div>
             <div class="col">
                 <div class="card src-card">
                     <div class="card-header" id="headingOne">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#byCountry">
+                        <h1 class="mb-0">
+                            <button class="btn btn-link accordion-btn" data-toggle="collapse" data-target="#byCountry">
                                 Sources By Country
                             </button>
-                        </h5>
+                        </h1>
                     </div>
                     <div id="byCountry" class="collapse" data-parent="#accordion">
                         <div class="card-body src-card-body">
@@ -46,11 +46,11 @@
                 </div>
                 <div class="card src-card">
                     <div class="card-header" id="headingTwo">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#byCategory">
+                        <h1 class="mb-0">
+                            <button class="btn btn-link src-card-btn" data-toggle="collapse" data-target="#byCategory">
                                 Sources By Category
                             </button>
-                        </h5>
+                        </h1>
                     </div>
                     <div id="byCategory" class="collapse" data-parent="#accordion">
                         <div class="card-body src-card-body">
@@ -74,13 +74,13 @@
                 </div>
                 <div class="card src-card">
                     <div class="card-header" id="headingThree">
-                        <h5 class="mb-0">
-                            <button class="btn btn-link" data-toggle="collapse" data-target="#byLanguage">
+                        <h1 class="mb-0">
+                            <button class="btn btn-link src-card-btn" data-toggle="collapse" data-target="#byLanguage">
                                 Sources By Language
                             </button>
-                        </h5>
+                        </h1>
                     </div>
-                    <div id="byCountry" class="collapse" data-parent="#accordion">
+                    <div id="byLanguage" class="collapse" data-parent="#accordion">
                         <div class="card-body src-card-body">
                             {% regroup sources|dictsort:'full_lang' by full_lang as sources_by_language %}
                                 <ul>
@@ -101,7 +101,7 @@
                         </div>
                     </div>
                 </div>
-            <div class="col-1"></div>
+            <div class="col-1 src-pad-col"></div>
         </div>
     </div>
 
