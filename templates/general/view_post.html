@@ -1,8 +1,10 @@
-{#{% extends 'general/base.html' %}#}
 {% extends 'general/root.html' %}
 {% load staticfiles %}
 {% load static %}
-{% block title %}View Post - {{ block.super }}{% endblock %}
+
+{% block title %}
+    View Post - {{ block.super }}
+{% endblock %}
 
 {% block styles %}
     {{ block.super }}
@@ -23,16 +25,19 @@
                 <blockquote id="view-post-post-body"><pre>{{ post.body }}</pre></blockquote>
                 {% if user.pk == post.author.id %}
                     <div class="btn-group-sm float-right">
-                        <a href="{% url 'update_post' post.pk %}"><button class="btn btn-link" id="view-post-upd-post-btn">EDIT</button></a>
-                        <a href="{% url 'delete_post' post.pk %}"><button class="btn btn-link" id="view-post-del-post-btn">DELETE</button></a>
+                        <a href="{% url 'update_post' post.pk %}">
+                            <button class="btn btn-link" id="view-post-upd-post-btn">EDIT</button>
+                        </a>
+                        <a href="{% url 'delete_post' post.pk %}">
+                            <button class="btn btn-link" id="view-post-del-post-btn">DELETE</button>
+                        </a>
                     </div>
                 {% endif %}
             </div>
         </div>
         <div class="col-lg-6 col-sm-12">
             <div id="view-post-iframe-div">
-{#                <iframe id="view-post-iframe" src="{% url 'view_choro' post.query.pk %}"></iframe>#}
-                {{ query.choropleth|safe }}
+                {{ query.choropleth|safe }}  {#<iframe id="view-post-iframe" src="{% url 'view_choro' post.query.pk %}"></iframe>#}
             </div>
         </div>
         <div class="row">
@@ -88,8 +93,12 @@
                         <small class="view-post-comment-footer">
                             Comment by <a href="{% url 'view_user' comment.author.pk %}">You</a> - {{ comment.date_published }}
                             <span class="btn-group pull-right">
-                                <a role="button" class="btn pull-right" href="{% url 'update_comment' comment.pk %}"><button class="btn btn-link" id="view-post-upd-comment-btn">EDIT</button></a>
-                                <a role="button" class="btn pull-right" href="{% url 'delete_comment' comment.pk %}"><button class="btn btn-link" id="view-post-del-comment-btn">DELETE</button></a>
+                                <a role="button" class="btn pull-right" href="{% url 'update_comment' comment.pk %}">
+                                    <button class="btn btn-link" id="view-post-upd-comment-btn">EDIT</button>
+                                </a>
+                                <a role="button" class="btn pull-right" href="{% url 'delete_comment' comment.pk %}">
+                                    <button class="btn btn-link" id="view-post-del-comment-btn">DELETE</button>
+                                </a>
                             </span>
                         </small>
                     {% else %}

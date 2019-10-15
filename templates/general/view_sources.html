@@ -1,9 +1,10 @@
-{#{% extends 'general/base.html' %}#}
 {% extends 'general/root.html' %}
 {% load staticfiles %}
 {% load static %}
 
-{% block title %} News Sources - {{ block.super }} {% endblock %}
+{% block title %}
+    News Sources - {{ block.super }}
+{% endblock %}
 
 {% block styles %}
     {{ block.super }}
@@ -11,8 +12,7 @@
 {% endblock %}
 
 {% block content %}
-
-    <div class="accordion">
+    <div id="accordion">
         <div class="row">
             <div class="col-1"></div>
             <div class="col">
@@ -104,19 +104,6 @@
             <div class="col-1"></div>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     <div class="container" id="view-src-col-container">
         <div class="row" id="view-src-row">

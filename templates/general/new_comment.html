@@ -1,8 +1,10 @@
-{#{% extends 'general/base.html' %}#}
 {% extends 'general/root.html' %}
 {% load staticfiles %}
 {% load static %}
-{% block title %}New Comment - {{ block.super }}{% endblock %}
+
+{% block title %}
+    New Comment - {{ block.super }}
+{% endblock %}
 
 {% block styles %}
     {{ block.super }}

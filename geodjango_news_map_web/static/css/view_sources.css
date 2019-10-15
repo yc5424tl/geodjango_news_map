@@ -51,6 +51,7 @@
 
 .src-card {
     background-color: rgba(0,0,0,0.1);
+    color: var(--main-bg-color);
 }
 
 .src-card > .card-header {
@@ -58,10 +59,16 @@
     color: var(--main-bg-color);
     font-weight: 700;
     font-variant-caps: all-small-caps;
+    font-size: 22px;
+    text-align: center;
 }
 
 .src-card-body {
     background-color: rgba(0,0,0,0.5);
+}
+
+.src-card-body > ul {
+    list-style: none;
 }
 
 /***

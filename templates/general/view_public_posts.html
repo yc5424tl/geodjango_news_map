@@ -1,8 +1,10 @@
-{#{% extends 'general/base.html' %}#}
 {% extends 'general/root.html' %}
 {% load staticfiles %}
 {% load static %}
-{% block title %}All Posts - {{ block.super }}{% endblock %}
+
+{% block title %}
+    All Posts - {{ block.super }}
+{% endblock %}
 
 {% block styles %}
     {{ block.super }}
@@ -33,16 +35,16 @@
                             <ul class="list-group list-group-flush" id="view-posts-post-list">
                             {% for comment in post.comments.all %}
                                 {% if forloop.counter0 < 3 %}
-                                        <li class="list-group-item view-posts-list-item">
-                                            <p class="view-posts-comment-body">"{{ comment.body|truncatechars:500 }}"
+                                    <li class="list-group-item view-posts-list-item">
+                                        <p class="view-posts-comment-body">"{{ comment.body|truncatechars:500 }}"
                                             <br>
                                             <sub class="view-posts-comment-detail">Comment by
                                                 <a class="view-posts-comment-link"  href="{% url 'view_user' comment.author.pk %}">{{ comment.author.username }}</a>
                                                 <span>{{ comment.date_published }}</span>
                                                 <a class="view-posts-comment-link" href="{% url 'view_comment' comment.pk %}">View Comment</a>
                                             </sub>
-                                            </p>
-                                        </li>
+                                        </p>
+                                    </li>
                                 {% endif %}
                             {% endfor %}
                             </ul>

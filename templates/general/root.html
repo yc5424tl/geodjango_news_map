@@ -13,7 +13,6 @@
                   integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
                   crossorigin="anonymous">
             <link href="https://fonts.googleapis.com/css?family=Flamenco|Josefin+Sans|Rye|Zilla+Slab+Highlight" rel="stylesheet">
-{#            <link rel="stylesheet" href="{% static 'css/style.css' %}">#}
             <link rel="stylesheet" href="{% static 'css/root.css' %}">
         {% endblock %}
 
@@ -24,12 +23,15 @@
     </head>
 
     <body>
+
         <div class="justify-content-center" id="logo-container">
             <img src="{% static 'img/mtn_400x172-crop.png' %}" alt="logo" id="logo-xl">
             <img src="{% static 'img/mtn_330-66x142-crop.png' %}" alt="logo" id="logo-lg">
             <img src="{% static 'img/mtn_256x110-crop.png' %}" alt="logo" id="logo-md">
         </div>
+
         <div id="main" class="container-fluid">
+
             <nav class="navbar navbar-expand-md px-0" id="navbar">
                 <a class="navbar-brand" href="#"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-collapse">
@@ -53,8 +55,8 @@
                     </nav>
                 </div>
             </nav>
-            {% if messages %}
 
+            {% if messages %}
                 <div class="row" id="messages-container">
                     <div class="col-3"></div>
                     <div class="col text-center">
@@ -67,10 +69,12 @@
                     <div class="col-3"></div>
                 </div>
             {% endif %}
+
             <div id="content-div">
                 {% block content %}
                 {% endblock %}
             </div>
+
             <footer class="footer">
                 <div class="container" id="footer-div">
                     <span class="text-muted">Jacob Boline 2018 | </span>
@@ -79,6 +83,7 @@
                     <span class="text-muted" id="txt"></span>
                 </div>
             </footer>
+
         </div>
 
         {% block scripts %}
@@ -88,10 +93,8 @@
         {% endblock %}
 
         {% block footer-scripts %}
-{#            <script src="{% static 'js/base.js' %}"></script>#}
             <script src="{% static 'js/root.js' %}"></script>
         {% endblock %}
-
 
     </body>
 </html>
