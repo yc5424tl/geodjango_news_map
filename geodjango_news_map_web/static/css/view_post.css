@@ -127,6 +127,7 @@
 
 .view-post-comment {
     background-color: rgba(32, 36, 40, 0.8);
+    color: var(--main-bg-color);
     padding: 2em;
     text-align: justify;
     text-wrap: normal;
@@ -332,19 +333,30 @@ a.view-post-article-link.title-center:hover {
         max-width: 300px;
         max-height: 200px;
     }
+    .view-post-article-img-container {
+        text-align: initial;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
     .view-post-article-img {
-        max-width: 666px;
-        max-height: 444px;
+        width: available;
+        height: auto;
+    }
+    .view-post-article-img-container {
+        width: 100%;
+        text-align: center;
     }
 }
 
 @media (max-width: 575px) {
     .view-post-article-img {
-        max-width: 525px;
-        max-height: 350px;
+        width: available;
+        height: auto;
+    }
+    .view-post-article-img-container {
+        width: 100%;
+        text-align: center;
     }
 }
 
