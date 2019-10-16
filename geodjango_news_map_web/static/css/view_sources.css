@@ -14,7 +14,7 @@
     text-align: center;
     padding-top: 1em;
     border-radius: 5pt;
-    background-color: rgba(0,0,0,0.1);
+    background-color: var(--transp-bg);
     z-index: 999;
 }
 
@@ -27,7 +27,7 @@
 }
 
 #sources-center {
-    background-color: rgba(0,0,0,0.1);
+    background-color: var(--transp-bg);
 }
 
 @media (min-width: 1200px) {
@@ -50,18 +50,18 @@
 
 
 .src-card {
-    background-color: rgba(0,0,0,0.1);
+    background-color: var(--transp-bg);
     color: var(--main-bg-color);
 }
 
 .src-card > .card-header {
-    background-color: rgba(0,0,0,0.7);
+    background-color: var(--transp-bg);
     color: var(--main-bg-color);
     font-weight: 700;
     font-variant-caps: all-small-caps;
     font-size: 22px;
     text-align: center;
-    border: 1pt solid rgba(0,0,0,0.7);
+    border: 1pt solid var(--transp-bg);
 }
 
 .src-card-body {
@@ -70,6 +70,7 @@
 
 .src-card-body > ul {
     list-style: none;
+    justify-self: stretch;
 }
 
 .btn.btn-link.accordion-btn {
@@ -84,9 +85,26 @@
 }
 
 .src-pad-col {
-    background-color: rgba(0,0,0,0.1);
+    background-color: var(--transp-bg);
     padding: 0;
     margin: 0;
+}
+#src-accordion-wrapper {
+    padding: 2em;
+    background-color: var(--main-bg-color);
+}
+
+#middle-src-card {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.src-header {
+    font-size: 18pt;
+    font-weight: 800;
+    text-decoration-line: underline;
+    margin-top: 2em;
+    margin-bottom: 0.5em;
 }
 
 /***

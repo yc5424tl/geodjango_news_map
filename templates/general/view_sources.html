@@ -15,7 +15,7 @@
     <div id="accordion">
         <div class="row">
             <div class="col-1 src-pad-col"></div>
-            <div class="col">
+            <div class="col" id="src-accordion-wrapper">
                 <div class="card src-card">
                     <div class="card-header" id="headingOne">
                         <h1 class="mb-0">
@@ -29,7 +29,8 @@
                             {% regroup sources|dictsort:'country' by country as sources_by_country %}
                             <ul>
                                 {% for country in sources_by_country %}
-                                    <li>{{ country.grouper }}
+                                    <li>
+                                        <span class="src-header">{{ country.grouper }}</span>
                                         <ul>
                                             {% for source in country.list %}
                                                 <li>
@@ -44,7 +45,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card src-card">
+                <div class="card src-card" id="middle-src-card">
                     <div class="card-header" id="headingTwo">
                         <h1 class="mb-0">
                             <button class="btn btn-link accordion-btn" data-toggle="collapse" data-target="#byCategory">
@@ -57,7 +58,7 @@
                             {% regroup sources|dictsort:'category' by category as sources_by_category %}
                             <ul>
                                 {% for category in sources_by_category %}
-                                    <li>{{ category.grouper|capfirst }}
+                                    <li><span class="src-header">{{ category.grouper|capfirst }}</span>
                                         <ul>
                                             {% for source in category.list %}
                                                 <li>
@@ -85,7 +86,8 @@
                             {% regroup sources|dictsort:'full_lang' by full_lang as sources_by_language %}
                                 <ul>
                                     {% for full_lang in sources_by_language %}
-                                        <li>{{ full_lang.grouper }}
+                                        <li>
+                                            <span class="src-header">{{ full_lang.grouper }}</span>
                                             <ul>
                                                 {% for source in full_lang.list %}
                                                     <li>
@@ -112,7 +114,8 @@
                 {% regroup sources|dictsort:'country' by country as sources_by_country %}
                 <ul>
                     {% for country in sources_by_country %}
-                        <li>{{ country.grouper }}
+                        <li>
+                            <span class="src-header">{{ country.grouper }}</span>
                             <ul>
                                 {% for source in country.list %}
                                     <li>
@@ -130,7 +133,8 @@
                 {% regroup sources|dictsort:'category' by category as sources_by_category %}
                 <ul>
                     {% for category in sources_by_category %}
-                        <li>{{ category.grouper|capfirst }}
+                        <li>
+                            <span class="src-header">{{ category.grouper|capfirst }}</span>
                             <ul>
                                 {% for source in category.list %}
                                     <li>
@@ -148,7 +152,8 @@
                 {% regroup sources|dictsort:'full_lang' by full_lang as sources_by_language %}
                 <ul>
                     {% for full_lang in sources_by_language %}
-                        <li>{{ full_lang.grouper }}
+                        <li>
+                            <span class="src-header">{{ full_lang.grouper }}</span>
                             <ul>
                                 {% for source in full_lang.list %}
                                     <li>

@@ -4,6 +4,7 @@
     --main-color: #424B54;    /* rgb(66,75,84) */
     --main-accent-1: #A1A499;
     --main-accent-2: #896A67;
+    --transp-bg: rgba(0,0,0,0.1);
     /*--main-link-color: #6EA8DD;*/
     --main-link-color: #4A91D3;
     --main-link-hover: #ED254E;
