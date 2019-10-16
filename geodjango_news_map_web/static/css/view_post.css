@@ -403,7 +403,7 @@ a.view-post-article-link.title-center:hover,
 
 
 .view-post-li {
-    padding: 1em;
+    padding: 0;
     height: 100%;
     border-top: solid 1pt var(--transp-bg-7);
     border-bottom: solid 1pt var(--transp-bg-7);
@@ -432,7 +432,7 @@ a.view-post-article-link.title-center:hover,
 
 .article-author {
     color: #bc4b51;
-    background-color: transparent;
+    background-color: var(--transp-bg-7);
 }
 
 .post-query-container > form > button {
