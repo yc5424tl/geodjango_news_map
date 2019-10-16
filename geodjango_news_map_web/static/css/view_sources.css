@@ -62,7 +62,7 @@
     background-color: transparent;
 }
 
-.src-card-body > ul {
+.src-card-body ul {
     list-style: none;
     justify-self: stretch;
 }
@@ -75,7 +75,7 @@
 
 .btn.btn-link.accordion-btn:hover,
 .btn.btn-link.accordion-btn:focus {
-    color: var(--aux-accent-1);
+    color: var(--transp-bg-7);
     text-decoration-line: none;
     transition: 0.5s;
 }
@@ -97,7 +97,7 @@
 }
 
 .src-header {
-    font-size: 18pt;
+    font-size: 14pt;
     font-weight: 800;
     margin-top: 20px;
     margin-bottom: 10px;
