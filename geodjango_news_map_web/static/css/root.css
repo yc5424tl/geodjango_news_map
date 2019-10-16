@@ -299,7 +299,7 @@ td, tr {
     #nav-left,
     #nav-right {
         float: none;
-        max-width: 50%;
+        max-width: 49%;
         margin-left: auto;
         margin-right: auto;
         align-content: space-evenly;
