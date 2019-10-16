@@ -72,9 +72,19 @@
     list-style: none;
 }
 
-.accordion-btn {
+.btn.btn-link.accordion-btn {
     font-size: 22pt;
     color: var(--main-bg-color);
+}
+
+.btn.btn-link.accordion-btn:hover,
+.btn.btn-link.accordion-btn:focus {
+    color: var(--aux-accent-1);
+    text-decoration-line: none;
+}
+
+.src-pad-col {
+    background-color:
 }
 
 /***
