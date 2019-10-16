@@ -27,7 +27,7 @@
                     <div id="byCountry" class="collapse" data-parent="#accordion">
                         <div class="card-body src-card-body">
                             {% regroup sources|dictsort:'country' by country as sources_by_country %}
-                            <ul>
+                            <ul class="src-ul">
                                 {% for country in sources_by_country %}
                                     <li class="src-li">
                                         <span class="src-header">{{ country.grouper }}</span>
@@ -56,7 +56,7 @@
                     <div id="byCategory" class="collapse" data-parent="#accordion">
                         <div class="card-body src-card-body">
                             {% regroup sources|dictsort:'category' by category as sources_by_category %}
-                            <ul>
+                            <ul class="src-ul">
                                 {% for category in sources_by_category %}
                                     <li class="src-li">
                                         <span class="src-header">{{ category.grouper|capfirst }}</span>
@@ -85,7 +85,7 @@
                     <div id="byLanguage" class="collapse" data-parent="#accordion">
                         <div class="card-body src-card-body">
                             {% regroup sources|dictsort:'full_lang' by full_lang as sources_by_language %}
-                                <ul>
+                                <ul class="src-ul">
                                     {% for full_lang in sources_by_language %}
                                         <li class="src-li">
                                             <span class="src-header">{{ full_lang.grouper }}</span>
@@ -113,7 +113,7 @@
             <div class="col sources" id="sources-left">
                 <h2 class="view-sources-cat-head">Sources by Country</h2>
                 {% regroup sources|dictsort:'country' by country as sources_by_country %}
-                <ul>
+                <ul class="src-ul">
                     {% for country in sources_by_country %}
                         <li class="src-li">
                             <span class="src-header">{{ country.grouper }}</span>
@@ -132,7 +132,7 @@
             <div class="col sources" id="sources-center">
                 <h2 class="view-sources-cat-head">Sources by Category</h2>
                 {% regroup sources|dictsort:'category' by category as sources_by_category %}
-                <ul>
+                <ul class="src-ul">
                     {% for category in sources_by_category %}
                         <li class="src-li">
                             <span class="src-header">{{ category.grouper|capfirst }}</span>
@@ -151,7 +151,7 @@
             <div class="col sources">
                 <h2 class="view-sources-cat-head">Sources by Language</h2>
                 {% regroup sources|dictsort:'full_lang' by full_lang as sources_by_language %}
-                <ul>
+                <ul class="src-ul">
                     {% for full_lang in sources_by_language %}
                         <li class="src-li">
                             <span class="src-header">{{ full_lang.grouper }}</span>

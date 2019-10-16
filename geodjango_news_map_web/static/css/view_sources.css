@@ -22,21 +22,24 @@
 /*    padding-left: 2em;*/
 /*}*/
 
+.src-ul {
+    text-align: center;
+}
+
 .src-li {
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
+    display: inline-block;
+    text-align: left;
 }
 
 .sources > ul, .sources > ul > li {
-    text-align: left;
+    text-align: center;
 }
 
 #sources-center {
     background-color: var(--transp-bg-1);
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1200px) and (orientation: landscape) or (min-width:1200px) and (orientation: portrait) {
     #view-src-col-container {
         display: block;
     }
@@ -45,7 +48,7 @@
     }
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1199px) and (orientation: landscape) or (max-width:1199px) and (orientation: portrait) {
     #view-src-col-container {
         display: none;
     }
