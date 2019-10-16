@@ -451,7 +451,9 @@ a.view-post-article-link.title-center:hover,
  *    ╚══════╝╚═╝  ╚═══╝╚═════╝       ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝     ╚═╝      ╚═════╝ ╚══════╝   ╚═╝
  */
 
-
+#view-post-card,
+.col.view-post-articles,
+#view-post-articles-list,
 .view-post-li,
 .row.view-post-article,
 .col-xl-1.col-sm-0.view-post-articles-left-buffer,
