@@ -337,7 +337,7 @@ a.view-post-article-link.title-center:hover,
 
 .view-post-article-img-sm,
 .view-post-article-img-xl {
-    width: 100%;
+    width: available;
     height: auto;
     border-radius: 10pt;
 }
