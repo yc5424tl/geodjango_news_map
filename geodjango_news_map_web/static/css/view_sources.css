@@ -14,7 +14,7 @@
     text-align: center;
     padding-top: 1em;
     border-radius: 5pt;
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.7);
     z-index: 999;
 }
 
@@ -27,7 +27,7 @@
 }
 
 #sources-center {
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.7);
 }
 
 @media (min-width: 1200px) {
@@ -50,18 +50,18 @@
 
 
 .src-card {
-    background-color: rgba(0,0,0,0.1);
+    background-color: rgba(0,0,0,0.7);
     color: var(--main-bg-color);
 }
 
 .src-card > .card-header {
-    background-color: var(--main-color);
+    background-color: rgba(0,0,0,0.7);
     color: var(--main-bg-color);
     font-weight: 700;
     font-variant-caps: all-small-caps;
     font-size: 22px;
     text-align: center;
-    border: 1pt solid var(--main-color);
+    border: 1pt solid rgba(0,0,0,0.7);
 }
 
 .src-card-body {
@@ -84,7 +84,7 @@
 }
 
 .src-pad-col {
-    background-color:
+    background-color: rgba(0,0,0,0.7);
 }
 
 /***
