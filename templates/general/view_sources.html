@@ -29,7 +29,7 @@
                             {% regroup sources|dictsort:'country' by country as sources_by_country %}
                             <ul>
                                 {% for country in sources_by_country %}
-                                    <li>
+                                    <li class="src-li">
                                         <span class="src-header">{{ country.grouper }}</span>
                                         <ul>
                                             {% for source in country.list %}
@@ -58,7 +58,7 @@
                             {% regroup sources|dictsort:'category' by category as sources_by_category %}
                             <ul>
                                 {% for category in sources_by_category %}
-                                    <li>
+                                    <li class="src-li">
                                         <span class="src-header">{{ category.grouper|capfirst }}</span>
                                         <ul>
                                             {% for source in category.list %}
@@ -87,7 +87,7 @@
                             {% regroup sources|dictsort:'full_lang' by full_lang as sources_by_language %}
                                 <ul>
                                     {% for full_lang in sources_by_language %}
-                                        <li>
+                                        <li class="src-li">
                                             <span class="src-header">{{ full_lang.grouper }}</span>
                                             <ul>
                                                 {% for source in full_lang.list %}
@@ -115,7 +115,7 @@
                 {% regroup sources|dictsort:'country' by country as sources_by_country %}
                 <ul>
                     {% for country in sources_by_country %}
-                        <li>
+                        <li class="src-li">
                             <span class="src-header">{{ country.grouper }}</span>
                             <ul>
                                 {% for source in country.list %}
@@ -134,7 +134,7 @@
                 {% regroup sources|dictsort:'category' by category as sources_by_category %}
                 <ul>
                     {% for category in sources_by_category %}
-                        <li>
+                        <li class="src-li">
                             <span class="src-header">{{ category.grouper|capfirst }}</span>
                             <ul>
                                 {% for source in category.list %}
@@ -153,7 +153,7 @@
                 {% regroup sources|dictsort:'full_lang' by full_lang as sources_by_language %}
                 <ul>
                     {% for full_lang in sources_by_language %}
-                        <li>
+                        <li class="src-li">
                             <span class="src-header">{{ full_lang.grouper }}</span>
                             <ul>
                                 {% for source in full_lang.list %}

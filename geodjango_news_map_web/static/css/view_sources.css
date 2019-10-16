@@ -18,8 +18,14 @@
     z-index: 999;
 }
 
-.sources > ul {
-    padding-left: 2em;
+/*.sources > ul {*/
+/*    padding-left: 2em;*/
+/*}*/
+
+.src-li {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
 }
 
 .sources > ul, .sources > ul > li {
