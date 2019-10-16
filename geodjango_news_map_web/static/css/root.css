@@ -299,9 +299,12 @@ td, tr {
     #nav-left,
     #nav-right {
         float: none;
-        max-width: 49%;
-        margin-left: auto;
-        margin-right: auto;
+        width: 50%;
+        min-width: 50%;
+        margin-left: 0;
+        margin-right: 0;
+        padding-left: 0;
+        padding-right: 0;
         align-content: space-evenly;
         text-align: justify-all;
     }
