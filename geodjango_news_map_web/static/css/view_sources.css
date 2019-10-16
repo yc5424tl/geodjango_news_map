@@ -14,7 +14,7 @@
     text-align: center;
     padding-top: 1em;
     border-radius: 5pt;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.1);
     z-index: 999;
 }
 
@@ -27,7 +27,7 @@
 }
 
 #sources-center {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.1);
 }
 
 @media (min-width: 1200px) {
@@ -50,7 +50,7 @@
 
 
 .src-card {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.1);
     color: var(--main-bg-color);
 }
 
@@ -84,7 +84,9 @@
 }
 
 .src-pad-col {
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.1);
+    padding: 0;
+    margin: 0;
 }
 
 /***
