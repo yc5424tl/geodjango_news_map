@@ -236,6 +236,7 @@ a.view-post-article-link.title-center:hover,
 .img-link {
     color: var(--main-link-hover);
     transition: 0.5s;
+    text-decoration-line: none;
 }
 
 .view-post-article {
@@ -261,7 +262,7 @@ a.view-post-article-link.title-center:hover,
     border-radius: 5pt;
     margin: 0;
     padding: 0;
-    border:none;
+    border: none;
 }
 
 .view-post-card-header,
@@ -449,3 +450,19 @@ a.view-post-article-link.title-center:hover,
  *    ███████╗██║ ╚████║██████╔╝     ╚████╔╝ ██║███████╗╚███╔███╔╝    ██║     ╚██████╔╝███████║   ██║
  *    ╚══════╝╚═╝  ╚═══╝╚═════╝       ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝     ╚═╝      ╚═════╝ ╚══════╝   ╚═╝
  */
+
+
+.view-post-li,
+.row.view-post-article,
+.col-xl-1.col-sm-0.view-post-articles-left-buffer,
+.col-xl-7.col-sm-12.view-post-article-txt-container,
+.img-link,
+.title-center.view-post-article-subtitle-container,
+.view-post-article-subtitle.title-center,
+.article-author,
+.view-post-article-body,
+.col-3.view-post-article-img-container,
+.col-xl-1.col-sm-0.view-post-articles-right-buffer {
+    background-color: var(--transp-bg-7);
+    color: var(--main-bg-color);
+}
