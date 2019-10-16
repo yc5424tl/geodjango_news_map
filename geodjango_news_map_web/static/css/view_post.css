@@ -247,7 +247,7 @@ a.view-post-article-link.title-center:hover {
     background-color: var(--main-color);
     color: var(--main-bg-color);
     border-radius: 5pt;
-    padding: 0.5em;
+    padding: 0;
     margin-top: 2em;
     margin-bottom: 2em;
 }
@@ -298,6 +298,11 @@ a.view-post-article-link.title-center:hover {
 
 .view-post-li:first-child {
     border-top: none;
+}
+
+.view-post-li {
+    margin-bottom: 10px;
+    margin-top: 10px;
 }
 
 .view-post-article-link:link {

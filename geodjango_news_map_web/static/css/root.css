@@ -316,6 +316,9 @@ td, tr {
         border-top-left-radius: initial;
         border-bottom-left-radius: initial;
     }
+    .nav-link {
+        font-size: 18pt;
+    }
 }
 
 
@@ -349,6 +352,9 @@ td, tr {
         border-bottom-left-radius: 8pt;
     }
     #nav-left {
+        width: 200px;
+        max-width: 200px;
+        min-width: 200px;
         border-top-right-radius: 8pt;
         border-bottom-left-radius: 8pt;
     }
