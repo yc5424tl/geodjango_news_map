@@ -404,7 +404,7 @@ a.view-post-article-link.title-center:hover,
 
 .view-post-li {
     padding: 0;
-    height: 100%;
+    height: auto;
     border-top: solid 1pt var(--transp-bg-7);
     border-bottom: solid 1pt var(--transp-bg-7);
     border-left: 1pt solid var(--transp-bg-7);

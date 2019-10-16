@@ -37,9 +37,9 @@
 
 #sources-center {
     background-color: var(--transp-bg-1);
-}
+}k
 
-@media (min-width: 1200px) and (orientation: landscape) or (min-width:1200px) and (orientation: portrait) {
+@media (min-width: 1200px) {
     #view-src-col-container {
         display: block;
     }
@@ -48,7 +48,7 @@
     }
 }
 
-@media (max-width: 1199px) and (orientation: landscape) or (max-width:1199px) and (orientation: portrait) {
+@media (max-width: 1199px) {
     #view-src-col-container {
         display: none;
     }
