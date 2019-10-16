@@ -14,7 +14,7 @@
     text-align: center;
     padding-top: 1em;
     border-radius: 5pt;
-    background-color: var(--transp-bg);
+    background-color: var(--transp-bg-1);
     z-index: 999;
 }
 
@@ -27,7 +27,7 @@
 }
 
 #sources-center {
-    background-color: var(--transp-bg);
+    background-color: var(--transp-bg-1);
 }
 
 @media (min-width: 1200px) {
@@ -50,18 +50,18 @@
 
 
 .src-card {
-    background-color: var(--transp-bg);
+    background-color: var(--transp-bg-1);
     color: var(--main-bg-color);
 }
 
 .src-card > .card-header {
-    background-color: var(--transp-bg);
+    background-color: var(--transp-bg-1);
     color: var(--main-bg-color);
     font-weight: 700;
     font-variant-caps: all-small-caps;
     font-size: 22px;
     text-align: center;
-    border: 1pt solid var(--transp-bg);
+    border: 1pt solid var(--transp-bg-1);
 }
 
 .src-card-body {
@@ -75,7 +75,7 @@
 
 .btn.btn-link.accordion-btn {
     font-size: 22pt;
-    color: var(--main-bg-color);
+    color: var(--transp-bg-7);
 }
 
 .btn.btn-link.accordion-btn:hover,
@@ -85,7 +85,7 @@
 }
 
 .src-pad-col {
-    background-color: var(--transp-bg);
+    background-color: var(--transp-bg-1);
     padding: 0;
     margin: 0;
 }

@@ -58,7 +58,8 @@
                             {% regroup sources|dictsort:'category' by category as sources_by_category %}
                             <ul>
                                 {% for category in sources_by_category %}
-                                    <li><span class="src-header">{{ category.grouper|capfirst }}</span>
+                                    <li>
+                                        <span class="src-header">{{ category.grouper|capfirst }}</span>
                                         <ul>
                                             {% for source in category.list %}
                                                 <li>
