@@ -38,7 +38,7 @@ class GeoMapManager:
                           data=world_df,
                           columns=['id', 'article_count'],
                           key_on='feature.id',
-                          fill_color='PuBuGn',
+                          fill_color='Dark2',
                           bins=[float(x) for x in threshold_scale],  # https://github.com/python-visualization/folium/issues/1130
                           fill_opacity=0.7,
                           line_opacity=0.2).add_to(global_map)
