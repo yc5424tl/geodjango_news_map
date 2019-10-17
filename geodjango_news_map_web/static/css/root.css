@@ -341,6 +341,7 @@ td, tr {
         border-radius: 8pt;
     }
     #nav-right {
+        display: inline-block;
         margin-left: auto;
         float: right;
         justify-content: right;
@@ -350,8 +351,10 @@ td, tr {
         min-width: 200px;
         border-top-left-radius: 8pt;
         border-bottom-left-radius: 8pt;
+        margin-right: 16;
     }
     #nav-left {
+        display: inline-block;
         width: 200px;
         max-width: 200px;
         min-width: 200px;
