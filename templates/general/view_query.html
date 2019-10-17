@@ -133,7 +133,8 @@
                                     <div class="row view-query-article">
                                         <div class="col-1" id="view-query-articles-left-buffer"></div>
                                         <div class="col-7 view-query-article-txt-container">
-                                             <h4 class="view-query-article-title title-center">{{ article.title }}</h4>
+                                            <h4 class="view-query-article-title title-center">{{ article.title }}</h4>
+                                            <img class="view-query-article-img-sm" src="{{ article.image_url }}" alt="{{ article.description }}">
                                              <h6 class="title-center view-query-article-subtitle-container">
                                                  <sub class="view-query-article-subtitle title-center">
                                                      By
@@ -145,7 +146,7 @@
                                             <p class="view-query-article-body">{{ article.description }}</p>
                                         </div>
                                         <div class="col-3 view-query-article-img-container">
-                                            <img class="view-query-article-img " src="{{ article.image_url }}" alt="{{ article.description }}">
+                                            <img class="view-query-article-img-xl " src="{{ article.image_url }}" alt="{{ article.description }}">
                                         </div>
                                         <div class="col-1" id="view-query-articles-right-buffer"></div>
                                     </div>
