@@ -33,7 +33,7 @@
 }
 
 .sources > ul, .sources > ul > li {
-    text-align: center;
+    /*text-align: center;*/
 }
 
 #sources-center {
