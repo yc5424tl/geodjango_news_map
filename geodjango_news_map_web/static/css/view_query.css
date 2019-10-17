@@ -370,6 +370,7 @@ textarea.form-control.view-query {
     .col-3.view-query-article-img-xl {
         display: inline-block;
         width: 100%;
+        max-width: 300px;
         height: auto;
         border-radius: 10pt;
         text-align: center;
