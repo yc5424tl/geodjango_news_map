@@ -196,6 +196,8 @@ small.view-post-comment-footer {
 .col-xl-7.col-sm-12.view-post-article-txt-container {
     background-color: var(--transp-bg-7);
     color: var(--main-bg-color);
+    padding-left: 0;
+    padding-right: 0;
 }
 
 .view-post-article-title.title-center {
@@ -224,14 +226,18 @@ small.view-post-comment-footer {
     align-content: start;
     background-color: var(--transp-bg-7);
     color: var(--main-bg-color);
-    margin-top: 0.5em;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
 }
 
 .view-post-article-body {
-    margin-top: 1em;
-    background-color: var(--transp-bg-4);
-    color: var(--main-accent-1);
-    padding: 1em;
+    background-color: var(--main-accent-1);
+    color: var(--transp-bg-7);
+    padding: 2em 1em 1em 1em;
+    margin-top: 0;
+    margin-bottom: 0;
     border-radius: 5pt;
 }
 
@@ -345,7 +351,6 @@ a.view-post-article-link.title-center:hover,
     .col-3.view-post-article-img-container {
         display: block;
         text-align: center;
-        border-radius: 10pt;
     }
     .view-post-article-img-xl {
         border-radius: 10pt;
