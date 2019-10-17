@@ -8,15 +8,9 @@
  *
  */
 
-.view-post-comment {
-    background-color: var(--main-color);
-    border-radius: 5pt;
-    color: var(--main-bg-color);
-    margin: 1em;
-    padding: 1em;
-}
+
 .view-post-post {
-    background-color: var(--transp-bg-7);
+    background-color: rgb(0,0,0);
     border: 3pt solid var(--main-bg-color);
     border-radius: 5pt;
     color: var(--main-bg-color);
@@ -24,12 +18,14 @@
     overflow-y: auto;
     padding: 2em;
 }
+
 .view-post-post-detail {
     margin-bottom: 1em;
     margin-left: 0;
     margin-top: 0;
     padding-top: 0;
 }
+
 .view-post-author-link:link {
     color: var(--main-color);
     transition: 0.4s;
@@ -112,41 +108,7 @@
     top: 0;
     width: 100%;
 }
-.view-post-comment {
-    background-color: rgba(32, 36, 40, 0.8);
-    color: var(--main-bg-color);
-    padding: 2em;
-    text-align: justify;
-    text-wrap: normal;
-}
-#view-post-comments-header {
-    margin: 1em;
-    text-align: center;
-}
-#view-post-comments-container {
-    background-color: var(--main-bg-color);
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    text-align: center;
-}
-.view-post-comment-body,
-.view-post-comment-footer {
-    color: var(--main-bg-color);
-}
-.view-post-comment-footer > a:link,
-.view-post-comment-footer > a {
-    color: var(--main-link-color);
-    transition: 0.4s;
-}
-.view-post-comment-footer > a:hover,
-.view-post-comment-footer > a:focus {
-    color: var(--main-link-hover);
-    transition: 0.5s;
-    text-decoration-line: none;
-}
-small.view-post-comment-footer {
-    margin-left: 1em;
-}
+
 .view-post-comment-body > pre,
 #view-post-post-body > pre {
     color: var(--main-bg-color);
@@ -218,19 +180,21 @@ small.view-post-comment-footer {
 }
 
 .view-post-li {
-    padding: 0;
+    padding-bottom: 20px;
+    padding-top: 10px;
     height: auto;
-    border-top: solid 1pt var(--transp-bg-7);
-    border-bottom: solid 1pt var(--transp-bg-7);
+    border-top: solid 1pt var(--transp-bg-4);
+    border-bottom: solid 1pt var(--transp-bg-4);
     border-left: 1pt solid var(--transp-bg-7);
     color: var(--main-bg-color);
     background-color: var(--transp-bg-7);
     border-right: 1pt solid var(--transp-bg-7);
-    margin: 10px 0;
+    margin: 0;
     list-style: none;
+    border-collapse: collapse;
 }
 .view-post-li * {
-    background-color: var(--transp-bg-7);
+    background-color: transparent;
     color: var(--main-bg-color);
 }
 .view-post-li:last-of-type {
@@ -320,7 +284,7 @@ small.view-post-comment-footer {
 }
 
 .col-3.view-post-article-img-container {
-    background-color: var(--transp-bg-7);
+    background-color: transparent;
     color: var(--main-bg-color);
     padding: 10px;
 }
@@ -359,6 +323,54 @@ small.view-post-comment-footer {
         height: auto;
         border-radius: 10pt;
     }
+}
+
+
+
+/*===============================  COMMENTS =============================================*/
+
+.view-post-comment {
+    background-color: rgba(32, 36, 40, 0.8);
+    color: var(--main-bg-color);
+    padding: 2em;
+    text-align: justify;
+    text-wrap: normal;
+}
+#view-post-comments-header {
+    margin: 1em;
+    text-align: center;
+}
+#view-post-comments-container {
+    background-color: var(--main-bg-color);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    text-align: center;
+}
+.view-post-comment-body,
+.view-post-comment-footer {
+    color: var(--main-bg-color);
+}
+.view-post-comment-footer > a:link,
+.view-post-comment-footer > a {
+    color: var(--main-link-color);
+    transition: 0.4s;
+}
+.view-post-comment-footer > a:hover,
+.view-post-comment-footer > a:focus {
+    color: var(--main-link-hover);
+    transition: 0.5s;
+    text-decoration-line: none;
+}
+small.view-post-comment-footer {
+    margin-left: 1em;
+}
+
+.view-post-comment {
+    background-color: var(--main-color);
+    border-radius: 5pt;
+    color: var(--main-bg-color);
+    margin: 1em;
+    padding: 1em;
 }
 
 

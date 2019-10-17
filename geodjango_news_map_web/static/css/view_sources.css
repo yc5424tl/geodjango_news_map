@@ -18,12 +18,10 @@
     z-index: 999;
 }
 
-/*.sources > ul {*/
-/*    padding-left: 2em;*/
-/*}*/
+
 
 .src-ul {
-    text-align: center;
+    align-content: normal;
 }
 
 .src-li {
