@@ -192,7 +192,7 @@ td, tr {
     font-family: 'Flamenco', cursive;
     background-size: 100% auto;
 }
-g1zmo
+
 #nav-collapse {
     margin-top: auto;
     padding-right: 16px;
@@ -314,6 +314,10 @@ g1zmo
     }
     .nav-link {
         font-size: 18pt;
+        color: var(--main-bg-color);
+        transition: 0.4s;
+        border: 1pt solid transparent;
+        margin: auto;
     }
 }
 
