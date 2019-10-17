@@ -16,7 +16,7 @@
     padding: 1em;
 }
 .view-post-post {
-    background-color: var(--transp-bg-4);
+    background-color: var(--transp-bg-7);
     border: 3pt solid var(--main-bg-color);
     border-radius: 5pt;
     color: var(--main-bg-color);
@@ -47,7 +47,7 @@
 .view-post-post-link,
 #view-post-post-hdr,
 #view-post-post-body {
-    background-color: rgba(0, 0, 0, 0);
+    background-color: var(--transp-bg-7);
     transition: 0.4s;
 }
 #view-post-add-comment-btn:hover,
@@ -248,7 +248,7 @@ a.view-post-article-link.title-center:hover,
 
 .title-center.view-post-card-header,
 .card-header.view-post-card-header-container {
-    background-color: var(--transp-bg-4);
+    background-color: var(--transp-bg-7);
     color: var(--main-bg-color);
     text-align: center;
 }
