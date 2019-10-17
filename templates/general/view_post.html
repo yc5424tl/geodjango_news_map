@@ -55,14 +55,14 @@
                                         <div class="row view-post-article">
                                             <div class="col-xl-1 col-sm-0 view-post-articles-left-buffer"></div>
                                             <div class="col-xl-7 col-sm-12 view-post-article-txt-container">
-                                                <a href="{{ article.image_url }}" class="img-link"><h4 class="view-post-article-title title-center">{{ article.title }}</h4></a>
+                                                <a href="{{ article.image_url }}" class="img-link">
+                                                    <h4 class="view-post-article-title title-center">{{ article.title }}</h4>
+                                                </a>
                                                  <img class="view-post-article-img-sm" src="{{ article.image_url }}" alt="article.description }}">
                                                  <h6 class="title-center view-post-article-subtitle-container">
                                                      <sub class="view-post-article-subtitle title-center">
-                                                         By
-                                                         <span class="article-author">{{ article.author }}</span>
+                                                         By<span class="article-author">{{ article.author }}</span>
                                                          {{ article.date_published|date:"DATETIME_FORMAT"}}
-{#                                                         <a class="view-post-article-link title-center" href="{{ article.article_url }}">Link</a>#}
                                                     </sub>
                                                  </h6>
                                                 <p class="view-post-article-body">{{ article.description }}</p>
@@ -104,7 +104,9 @@
                         </small>
                     {% else %}
                         <small class="view-post-comment-footer">
-                            Comment by <a href="{% url 'view_user' comment.author.pk %}">{{ comment.author.first_name }}</a> - {{ comment.date_published }}
+                            Comment by
+                            <a href="{% url 'view_user' comment.author.pk %}">{{ comment.author.first_name }}</a>
+                            - {{ comment.date_published }}
                         </small>
                     {% endif %}
                 </div>

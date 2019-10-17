@@ -15,7 +15,7 @@
     border: solid 3pt var(--transp-bg-7);
 }
 
- #view-query-articles-list {
+ #articles-list {
      max-height: calc(100vh - 150px);
      overflow-y: scroll;
      -webkit-overflow-scrolling: touch;
@@ -27,7 +27,7 @@
      height: 100%;
  }
 
-.view-query-article-title.title-center {
+.article-title.title-center {
     padding-bottom: 0;
     margin-bottom: 0;
     overflow-x: hidden;
@@ -36,7 +36,7 @@
     border-top-left-radius: 5pt;
 }
 
-.view-query-article-subtitle {
+.article-subtitle {
     padding-top: 0;
     margin-top: 0;
     margin-left: 0;
@@ -45,14 +45,14 @@
     font-size: 10pt;
 }
 
-.view-query-article-subtitle-container {
+.article-subtitle-container {
     text-align: left;
     align-content: start;
     background-color: var(--transp-bg-7);
     margin-top: 0.5em;
 }
 
-.view-query-article-body {
+.article-body {
     margin-top: 1em;
     background-color: var(--transp-bg-7);
     color: var(--main-accent-1);
@@ -85,12 +85,12 @@ a.view-query-article-link.title-center:hover {
     width: 100%;
 }
 
-.view-query-article {
+.article-details {
     height: 100%;
     background-color: var(--transp-bg-7);
 }
 
-.col.view-query-articles {
+#articles-container {
     background-color: var(--transp-bg-7);
     border-radius: 5pt;
     padding: 0.5em;
@@ -98,7 +98,7 @@ a.view-query-article-link.title-center:hover {
     margin-bottom: 2em;
 }
 
-.card#view-query-card {
+#articles-card {
     height: calc(100vh - 60px);
     max-height: calc(100vh - 60px);
     background-color: var(--transp-bg-7);
@@ -108,8 +108,8 @@ a.view-query-article-link.title-center:hover {
     border:none;
 }
 
-.view-query-card-header,
-.view-query-card-header-container {
+#card-header,
+#card-header-container {
     background-color: transparent;
     color: var(--main-bg-color);
     text-align: center;
@@ -117,13 +117,13 @@ a.view-query-article-link.title-center:hover {
 
 .view-query-article-img-container,
 .view-query-article-txt-container,
-.view-query-article-title,
-.view-query-article-subtitle {
+.article-title,
+.article-subtitle {
     background-color: var(--transp-bg-7);
     color: var(--main-bg-color);
 }
 
-.card-header.view-query-card-header-container {
+.card-header.card-header-container {
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
     border-top: 1pt solid rgba(212,212,212, 0.1);
@@ -133,7 +133,7 @@ a.view-query-article-link.title-center:hover {
     background-color: rgba(212,212,212, 0.1);
 }
 
-.view-query-li:first-child {
+.article-li:first-child {
     border-top: none;
 }
 
@@ -148,7 +148,7 @@ a.view-query-article-link.title-center:hover {
     margin: 0;
 }
 
-.view-query-article-img {
+.article-img-xl {
     max-width: 300px;
     height: auto;
     width: auto;
@@ -157,12 +157,12 @@ a.view-query-article-link.title-center:hover {
     border-radius: 10pt;
 }
 
-.view-query-article-title {
+.article-title {
     font-weight: 800;
     font-size: 18pt;
 }
 
-.view-query-li {
+.article-li {
     padding: 1em;
     height: 100%;
     border-top: solid 1pt var(--main-bg-color);
@@ -173,7 +173,7 @@ a.view-query-article-link.title-center:hover {
     list-style: none;
 }
 
-.view-query-li:last-of-type {
+.article-li:last-of-type {
     border-bottom: none;
 }
 
@@ -192,8 +192,8 @@ a.view-query-article-link.title-center:hover {
     border: 1pt solid var(--transp-bg-7);
 }
 
-#view-query-articles-left-buffer,
-#view-query-articles-right-buffer{
+.left-buffer,
+.right-buffer{
     background-color: var(--transp-bg-7);
 }
 
@@ -361,10 +361,10 @@ textarea.form-control.view-query {
 }
 
 @media (min-width: 1200px) {
-    .view-query-article-img-sm {
+    .article-img-sm {
         display: none;
     }
-    .col-3.view-query-article-img-xl {
+    .article-img-xl-container {
         display: block;
         width: 100%;
         max-width: 300px;
@@ -375,14 +375,14 @@ textarea.form-control.view-query {
 }
 
 @media (max-width: 1199px) and (min-width: 500px) {
-    .view-query-article-img-sm {
+    .article-img-sm {
         display: block;
         text-align: center;
         border-radius: 10pt;
         width: 100%;
         height: auto;
     }
-    .col-3.view-query-article-img-xl {
+    .article-img-xl-container {
         display: none;
     }
 }

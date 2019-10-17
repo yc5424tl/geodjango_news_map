@@ -164,12 +164,12 @@ small.view-post-comment-footer {
      border-left: 1pt solid var(--transp-bg-7);
      border-right: 1pt solid var(--transp-bg-7);
      border-top: 1pt solid var(--transp-bg-7);
-     background-color: var(--transp-bg-7);
-     margin-bottom: 0;
+     background-color: black;
+     margin: 0;
      height: 100%;
  }
 .col-xl-7.col-sm-12.view-post-article-txt-container {
-    background-color: var(--transp-bg-7);
+    background-color: black;
     color: var(--main-bg-color);
     padding-left: 0;
     padding-right: 0;
