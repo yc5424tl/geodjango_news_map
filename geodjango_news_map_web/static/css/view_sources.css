@@ -29,6 +29,7 @@
 .src-li {
     display: inline-block;
     text-align: left;
+    justify-content: left;
 }
 
 .sources > ul, .sources > ul > li {
