@@ -299,6 +299,7 @@
     .col-3.view-post-article-img-container {
         display: block;
         text-align: center;
+        background-color: rgb(0,0,0);
     }
     .view-post-article-img-xl {
         border-radius: 10pt;
@@ -322,6 +323,7 @@
         width: 100%;
         height: auto;
         border-radius: 10pt;
+        background-color: rgb(0,0,0);
     }
 }
 
