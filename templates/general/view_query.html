@@ -16,7 +16,7 @@
     <div class="container" id="view-query-parent-container">
 
         <div class="row">
-            <div class="col-sm-12 col-lg-4">
+            <div class="col-sm-12 col-xl-4">
                 <h1 class="title-center" id="view-query-details-title">Query Details</h1>
                 <div id="adjacent-target">
                     <table id="view-query-table">
@@ -35,7 +35,6 @@
                             <td class="view-query-details-row-title">Date: </td>
                             <td class="view-query-details-row-data">{{ query.date_created_readable }}</td>
                         </tr>
-                        display: noen;
                         <tr class="view-query-tr">
                             <td class="view-query-details-row-title">Archived: </td>
                             <td class="view-query-details-row-data">{{ query.archived }}</td>
@@ -109,7 +108,7 @@
                     {% endif %}
                 {% endif %}
             </div>
-            <div class="col-sm-12 col-lg-8 view-query-iframe-container">
+            <div class="col-sm-12 col-xl-8 view-query-iframe-container">
                 <div class="row" id="view-query-iframe-row">
                     <div class="col-12" id="view-query-iframe-col">
                         <div class="embed-responsive-16by9" id="view-query-iframe-div">
@@ -164,50 +163,6 @@
             </div>
             <div class="col-sm-0 col-lg-1"></div>
         </div>
-
-
-
-{#        <div class="row">#}
-{#            <div class="col-lg-2 col-sm-1"></div>#}
-{#            <div class="col view-query-articles">#}
-{#                <div class="card" id="view-query-card">#}
-{#                    <div class="card-header view-query-card-header-container">#}
-{#                        <h1 class="title-center view-query-card-header">Articles from Query</h1>#}
-{#                    </div>#}
-{#                    <ul class="list-group" id="view-query-articles-list">#}
-{#                        {% for article in articles %}#}
-{#                            {% if article %}#}
-{#                                <li class="view-query-li">#}
-{#                                    <div class="row view-query-article">#}
-{#                                        <div class="col-1" id="view-query-articles-left-buffer"></div>#}
-{#                                        <div class="col-7 view-query-article-txt-container">#}
-{#                                            <h4 class="view-query-article-title title-center">{{ article.title }}</h4>#}
-{#                                            <img class="view-query-article-img-sm" src="{{ article.image_url }}" alt="{{ article.description }}">#}
-{#                                            <h6 class="title-center view-query-article-subtitle-container">#}
-{#                                                <sub class="view-query-article-subtitle title-center">#}
-{#                                                    By#}
-{#                                                    <span class="article-author">{{ article.author }}</span>#}
-{#                                                    {{ article.date_published|date:"DATETIME_FORMAT"}}#}
-{#                                                    <a class="view-query-article-link title-center" href="{{ article.article_url }}">Link</a>#}
-{#                                                </sub>#}
-{#                                            </h6>#}
-{#                                            <p class="view-query-article-body">{{ article.description }}</p>#}
-{#                                        </div>#}
-{#                                        <div class="col-3 view-query-article-img-container">#}
-{#                                            <img class="view-query-article-img-xl" src="{{ article.image_url }}" alt="{{ article.description }}">#}
-{#                                        </div>#}
-{#                                        <div class="col-1" id="view-query-articles-right-buffer"></div>#}
-{#                                    </div>#}
-{#                                </li>#}
-{#                            {% endif %}#}
-{#                        {% empty %}#}
-{#                            <p class="list-group-item">No Articles Found for Query</p>#}
-{#                        {% endfor %}#}
-{#                    </ul>#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="col-lg-2 col-sm-1"></div>#}
-{#        </div>#}
     </div>
 {% endblock %}
 
