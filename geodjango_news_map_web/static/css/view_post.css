@@ -161,7 +161,11 @@
     background-color: var(--transp-bg-7);
 }
 
-
+#articles-wrapper {
+    background-color: black;
+    border-radius: 8pt;
+    padding: 0;
+}
 #view-post-articles-list {
      max-height: calc(100vh - 150px);
      overflow-y: scroll;
