@@ -76,7 +76,13 @@
 
 /*=======================================ARTICLES=============================================*/
 
-#articles-container {
+#articles-wrapper {
+    background-color: rgb(0,0,0);
+    border-radius: 8pt;
+    padding: 0;
+}
+
+#articles-col {
     background-color: var(--transp-bg-7);
     color: var(--main-bg-color);
     border-radius: 5pt;
@@ -97,7 +103,7 @@
 }
 
 #card-header,
-#card-header-container {
+#card-header-wrapper{
     background-color: var(--transp-bg-7);
     color: var(--main-bg-color);
     text-align: center;
@@ -121,7 +127,7 @@
      border-left: 1pt solid var(--transp-bg-7);
      border-right: 1pt solid var(--transp-bg-7);
      border-top: 1pt solid var(--transp-bg-7);
-     background-color: black;
+     background-color: rgb(0,0,0);
      margin-bottom: 0;
      height: 100%;
  }
@@ -137,18 +143,20 @@
     border-bottom: solid 1pt var(--transp-bg-4);
     border-left: 1pt solid var(--transp-bg-7);
     color: var(--main-bg-color);
-    background-color: var(--transp-bg-7);
+    background-color: rgb(0,0,0);
     border-right: 1pt solid var(--transp-bg-7);
-    margin: 10px 0;
+    margin: 0 0 20px 0;
     list-style: none;
+    border-collapse: collapse;
 }
 
 .article-li * {
-    background-color: black;
+    background-color: rgb(0,0,0);
     color: var(--main-bg-color);
 }
 .article-li:last-of-type {
     border-bottom: none;
+    margin: 0;
 }
 
 .article-row {
@@ -222,8 +230,8 @@
 }
 
 .article-body {
-    background-color: var(--transp-bg-7);
-    color: var(--main-accent-1);
+    background-color: var(--main-accent-1);
+    color: var(--transp-bg-7);
     padding: 2em 1em 1em 1em;
     margin-top: 0;
     margin-bottom: 0;
@@ -248,10 +256,6 @@
     }
     .article-img-xl-container {
         display: block;
-        /*width: 100%;*/
-        /*max-width: 300px;*/
-        /*height: auto;*/
-        /*border-radius: 10pt;*/
         text-align: center;
         background-color: rgb(0,0,0);
     }
@@ -264,7 +268,7 @@
     }
 }
 
-@media (max-width: 1199px) {
+@media (min-width: 768px) and (max-width: 1199px) {
     .article-img-sm {
         display: block;
         text-align: center;
@@ -274,14 +278,24 @@
         background-color: rgb(0,0,0);
     }
     .article-img-xl-container,
-    .article-img-xl-container {
+    .article-img-xl {
         display: none;
         text-align: center;
     }
 }
 
+@media (max-width: 767px) {
+    .article-img-sm,
+    .article-img-xl-container,
+    .article-img-xl{
+        display: none;
+    }
+}
 
-/*====================================================++FORM========================================================*/
+
+
+/*================================================FORM=================================================*/
+
 .form-check-label {
     margin-right: 0.5em;
 }
@@ -323,7 +337,7 @@ textarea.form-control.view-query {
     overflow: scroll;
     font-size:12pt;
     background-color: rgb(0,0,0);
-    color: var(--transp-bg-1);
+    color: var(--main-accent-2);
     border-radius: 0;
     border: 2pt solid var(--transp-bg-7);
     padding-top: 0;
@@ -345,8 +359,8 @@ textarea.form-control.view-query {
 }
 
 input.form-control.view-query::placeholder {
-    color: var(--transp-bg-1);
-    opacity: 1;
+    color: var(--main-bg-color);
+    opacity: 1.0;
 }
 
 #view-query-save-btn,
@@ -370,8 +384,8 @@ input.form-control.view-query::placeholder {
 
 
 
-
 /*==========================================IFRAME===========================================================*/
+
 .view-query-iframe-container {
     height: 100%;
     padding: 0;
@@ -398,7 +412,6 @@ input.form-control.view-query::placeholder {
 
 #view-query-iframe-div {
     overflow: hidden;
-    /*padding-top: 56.25%;*/
     position: relative;
 }
 
@@ -410,40 +423,6 @@ input.form-control.view-query::placeholder {
     height: 100%;
     border: 3pt solid var(--transp-bg-7);
 }
-
-
-
-
-
-
-
-/*#view-query-post-options {*/
-/*    display: inline;*/
-/*    margin: --main-bg-color0;*/
-/*}*/
-
-/*a.view-query-article-link.title-center:focus,*/
-/*a.view-query-article-link.title-center:hover {*/
-/*    color: var(--main-link-hover);*/
-/*    transition: 0.5s;*/
-/*}*/
---main-bg-color
-/*.view-query-container {*/
-/*    width: 100%;*/
-/*    margin: 1em;*/
-/*    padding: 0;*/
-/*    background-color: var(--main-bg-color);*/
-/*}*/
-
-/*#view-query-container {*/
-/*    background-color: var(--transp-bg-7);*/
-/*}*/
-
-/*.view-query-article-link:link {*/
-/*    background-color: var(--transp-bg-7);*/
-/*    color: var(--main-link-color);*/
-/*    transition: 0.4s;*/
-/*}*/
 
 
 /***
