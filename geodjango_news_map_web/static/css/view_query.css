@@ -379,7 +379,7 @@ input.form-control.view-query::placeholder {
 /*==========================================IFRAME===========================================================*/
 
 .view-query-iframe-container {
-    height: 100%;
+    height: auto;
     width: 100%;
     padding: 0;
     margin: 1em 0 0 0;
@@ -388,16 +388,12 @@ input.form-control.view-query::placeholder {
 
 #view-query-iframe-row {
     width: 100%;
-    position: relative;
 }
 
 #view-query-iframe-col {
     width: 100%;
     margin: 1em;
     padding: 0;
-    top: 50%;
-    left: 50%;
-    position: absolute;
 }
 
 #view-query-iframe-div {
