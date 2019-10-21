@@ -342,7 +342,7 @@ textarea.form-control.view-query {
     overflow: scroll;
     font-size:12pt;
     background-color: rgb(0,0,0);
-    color: var(--aux-accent-5);
+    color: var(--aux-accent-6);
     border: 2pt solid var(--main-bg-color);
     padding-top: 0;
     margin-top: 0;

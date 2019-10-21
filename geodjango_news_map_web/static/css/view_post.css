@@ -28,7 +28,7 @@
 }
 
 #author-link:link {
-    color: var(--aux-accent-5);
+    color: var(--aux-accent-6);
     transition: 0.4s;
 }
 
@@ -40,7 +40,7 @@
 
 #post-body,
 #post-detail > span {
-    color: var(--aux-accent-5);
+    color: var(--aux-accent-6);
 }
 
 #post-detail,
@@ -51,7 +51,7 @@
 }
 
 #post-header {
-    color: var(--aux-accent-5);
+    color: var(--aux-accent-6);
 }
 
 
@@ -207,8 +207,8 @@
     padding-bottom: 20px;
     padding-top: 10px;
     height: auto;
-    border-top: solid 1pt var(--transp-bg-4);
-    border-bottom: solid 1pt var(--transp-bg-4);
+    border-top: 1pt solid var(--aux-accent-3)
+    border-bottom: 1pt solid var(--aux-accent-3);
     border-left: 1pt solid var(--transp-bg-7);
     color: var(--main-bg-color);
     background-color: var(--transp-bg-7);

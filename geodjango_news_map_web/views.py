@@ -217,6 +217,8 @@ def new_post(request):
                     qrs = QueryResultSet.objects.get(pk=qrs_pk)
                     post = Post(_title=title, _public=public, _body=body, _query=qrs, _author=author)
                     post.save()
+                    qrs.archived = True
+                    qrs.save()
                     return redirect('view_post', post.pk)
                 else:
                     print('Errors = ' + form.errors) # TODO apply useful logic
