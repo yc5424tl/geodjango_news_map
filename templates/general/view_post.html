@@ -9,71 +9,72 @@
 {% block styles %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/view_post.css' %}">
-    <link rel="stylesheet" href="{% static 'css/cards.css' %}">
+{#    <link rel="stylesheet" href="{% static 'css/cards.css' %}">#}
 {% endblock %}
 
 {% block content%}
     <div class="row" id="view-post-upper">
-        <div class="col-lg-6 col-sm-12">
-            <div class="view-post-post">
-                <h3 class="lt-header" id="view-post-post-hdr">{{ post.title }}</h3>
-                <small class="view-post-post-detail">
+        <div class="col-lg-6 col-sm-12 bg-div">
+            <div id="post">
+                <h3 class="lt-header" id="post-header">{{ post.title }}</h3>
+                <small id="post-detail">
                     <span>By</span>
-                    <a class="view-post-author-link" href="{% url 'view_user' post.author.pk %}">{{ post.author.first_name }}</a>
+                    <a id="author-link" href="{% url 'view_user' post.author.pk %}">{{ post.author.first_name }}</a>
                     <span>{{ post.date_published }}</span>
                 </small>
-                <blockquote id="view-post-post-body"><pre>{{ post.body }}</pre></blockquote>
+                <blockquote id="post-body">
+                    <pre>{{ post.body }}</pre>
+                </blockquote>
                 {% if user.pk == post.author.id %}
                     <div class="btn-group-sm float-right">
                         <a href="{% url 'update_post' post.pk %}">
-                            <button class="btn btn-link" id="view-post-upd-post-btn">EDIT</button>
+                            <button class="btn btn-link" id="upd-post-btn">EDIT</button>
                         </a>
                         <a href="{% url 'delete_post' post.pk %}">
-                            <button class="btn btn-link" id="view-post-del-post-btn">DELETE</button>
+                            <button class="btn btn-link" id="del-post-btn">DELETE</button>
                         </a>
                     </div>
                 {% endif %}
             </div>
         </div>
-        <div class="col-lg-6 col-sm-12">
-            <div id="view-post-iframe-div">
+        <div class="col-lg-6 col-sm-12 bg-div">
+            <div id="iframe-div">
                 {{ query.choropleth|safe }}  {#<iframe id="view-post-iframe" src="{% url 'view_choro' post.query.pk %}"></iframe>#}
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-0 col-lg-1"></div>
-            <div class="col-sm-12 col-lg-10" id="articles-wrapper">
-                <div class="col view-post-articles">
-                    <div class="card" id="view-post-card">
-                        <div class="card-header view-post-card-header-container">
-                            <h1 class="title-center view-post-card-header">Articles from Query</h1>
-                        </div>
-                        <ul class="list-group" id="view-post-articles-list">
+            <div class="col-sm-0 col-lg-1 bg-div"></div>
+            <div class="col-sm-12 col-lg-10 bg-div" id="articles-wrapper">
+                <div class="col" id="articles-col">
+                    <div class="card" id="articles-card">
+                        <div class="card-header title-center">Mapped Articles</div>
+                        <ul class="list-group" id="articles-list">
                             {% for article in articles %}
                                 {% if article %}
-                                    <li class="view-post-li">
-                                        <div class="row view-post-article">
-                                            <div class="col-xl-1 col-sm-0 view-post-articles-left-buffer"></div>
-                                            <div class="col-xl-7 col-sm-12 view-post-article-txt-container">
+                                    <li class="article-li">
+                                        <div class="row article">
+                                            <div class="col-xl-1 col-sm-0 articles-left-buffer"></div>
+                                            <div class="col-xl-7 col-sm-12 article-txt-container">
                                                 <a href="{{ article.article_url }}" class="img-link">
-                                                    <h4 class="view-post-article-title title-center">{{ article.title }}</h4>
+                                                    <h4 class="article-title title-center">{{ article.title }}</h4>
                                                 </a>
-                                                 <img class="view-post-article-img-sm" src="{{ article.image_url }}" alt="article.description }}">
-                                                 <h6 class="title-center view-post-article-subtitle-container">
-                                                     <sub class="view-post-article-subtitle title-center">
+                                                 <img class="article-img-sm" src="{{ article.image_url }}" alt="article.description }}">
+                                                 <h6 class="title-center article-subtitle-container">
+                                                     <sub class="article-subtitle title-center">
                                                          By<span class="article-author">{{ article.author }}</span>
                                                          {{ article.date_published|date:"DATETIME_FORMAT"}}
                                                     </sub>
                                                  </h6>
-                                                <p class="view-post-article-body">{{ article.description }}</p>
+                                                <p class="article-body">{{ article.description }}</p>
                                             </div>
-                                            <div class="col-3 view-post-article-img-container">
-                                                <img class="view-post-article-img-xl" src="{{ article.image_url }}" alt="{{ article.description }}">
+                                            <div class="col-3 article-img-container">
+                                                <img class="article-img-xl" src="{{ article.image_url }}" alt="{{ article.description }}">
                                             </div>
-                                            <div class="col-xl-1 col-sm-0 view-post-articles-right-buffer"></div>
+                                            <div class="col-xl-1 col-sm-0 articles-right-buffer"></div>
                                         </div>
                                     </li>
                                 {% endif %}
+
                             {% empty %}
                                 <p class="list-group-item">No Articles Found for Query</p>
                             {% endfor %}
@@ -81,29 +82,31 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-0 col-lg-1"></div>
+            <div class="col-sm-0 col-lg-1 bg-div"></div>
         </div>
     </div>
-    <div class="row" id="view-post-comments-container">
-        <div class="col-12">
-             <h3 id="view-post-comments-header">Comments</h3>
+    <div class="row" id="comments-container">
+        <div class="col-12 bg-div">
+             <h3 id="comments-header">Comments</h3>
             {% for comment in post.comments.all %}
-                <div class="view-post-comment">
-                    <blockquote class="view-post-comment-body"><pre>{{ comment.body }}</pre></blockquote>
+                <div class="comment">
+                    <blockquote class="comment-body">
+                        <pre>{{ comment.body }}</pre>
+                    </blockquote>
                     {% if comment.author.pk == user.pk %}
-                        <small class="view-post-comment-footer">
+                        <small class="comment-footer">
                             Comment by <a href="{% url 'view_user' comment.author.pk %}">You</a> - {{ comment.date_published }}
                             <span class="btn-group pull-right">
                                 <a role="button" class="btn pull-right" href="{% url 'update_comment' comment.pk %}">
-                                    <button class="btn btn-link" id="view-post-upd-comment-btn">EDIT</button>
+                                    <button class="btn btn-link upd-comment-btn">EDIT</button>
                                 </a>
                                 <a role="button" class="btn pull-right" href="{% url 'delete_comment' comment.pk %}">
-                                    <button class="btn btn-link" id="view-post-del-comment-btn">DELETE</button>
+                                    <button class="btn btn-link del-comment-btn">DELETE</button>
                                 </a>
                             </span>
                         </small>
                     {% else %}
-                        <small class="view-post-comment-footer">
+                        <small class="comment-footer">
                             Comment by
                             <a href="{% url 'view_user' comment.author.pk %}">{{ comment.author.first_name }}</a>
                             - {{ comment.date_published }}
@@ -114,7 +117,7 @@
                 <p>No Comments Yet</p>
             {% endfor %}
             <a href="{% url 'new_comment' post.pk %}">
-                <button id="view-post-add-comment-btn" class="btn btn-default">Add Comment</button>
+                <button id="add-comment-btn" class="btn btn-default">Add Comment</button>
             </a>
         </div>
     </div>
