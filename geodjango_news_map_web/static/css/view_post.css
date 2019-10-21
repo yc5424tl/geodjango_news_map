@@ -8,9 +8,7 @@
  *
  */
 
-.bg-div {
-    background-color: var(--transp-bg-7);
-}
+
 
 #post {
     background-color: rgb(0,0,0);
@@ -30,7 +28,7 @@
 }
 
 #author-link:link {
-    color: var(--main-color);
+    color: var(--aux-accent-5);
     transition: 0.4s;
 }
 
@@ -42,7 +40,7 @@
 
 #post-body,
 #post-detail > span {
-    color: var(--main-bg-color);
+    color: var(--aux-accent-5);
 }
 
 #post-detail,
@@ -52,22 +50,26 @@
     transition: 0.4s;
 }
 
+#post-header {
+    color: var(--aux-accent-5);
+}
+
 
 
 
 
 #add-comment-btn:hover,
 #add-comment-btn:focus {
-    background-color: var(--main-bg-color);
-    border: 1pt solid var(--main-color);
-    color: var(--main-color);
+    background-color: var(--transp-bg-7);
+    border: 1pt solid var(--aux-accent-1);
+    color: var(--aux-accent-1);
     transition: 0.5s;
 }
 
 #add-comment-btn  {
-    background-color: var(--main-color);
-    border: 1pt solid var(--main-bg-color);
-    color: var(--main-bg-color);
+    background-color: var(--transp-bg-7);
+    border: 1pt solid var(--aux-accent-3);
+    color: var(--aux-accent-3);
     margin: 1em 0;
 }
 
@@ -94,7 +96,7 @@
 
 #upd-post-btn,
 #del-post-btn {
-    border: 1pt solid var(--main-color);
+    border: 1pt solid var(--aux-accent-3);
     margin: auto 1em 2em 1em;
     transition: 0.4s;
 }
@@ -103,7 +105,7 @@
 #del-post-btn:hover,
 #upd-post-btn:focus,
 #del-post-btn:focus {
-    background-color: var(--main-color);
+    background-color: var(--aux-accent-1);
     color: var(--main-bg-color);
     text-decoration-line: none;
     transition: 0.5s;

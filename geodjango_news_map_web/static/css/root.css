@@ -32,7 +32,7 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background-color: var(--main-color);
+    background-color: var(--transp-bg-4);
     font-size: 1.2em;
 }
 
@@ -46,6 +46,10 @@ footer {
     height: 60px;
     line-height: 60px;
     display: block;
+}
+
+.bg-div {
+    background-color: var(--transp-bg-7);
 }
 
 .container {
@@ -99,23 +103,23 @@ li a:focus {
 }
 
 div.jumbotron {
-    color: var(--main-color);
-    background-color: var(--main-accent-1);
+    color: var(--aux-accent-5);
+    background-color: var(--transp-bg-1);
 }
 
 .row {
     width: 100%;
     padding: 0;
     margin: 0;
-    background-color: var(--main-bg-color);
+    background-color: var(--transp-bg-4);
     border-radius: 5pt;
-    color: var(--main-color);
+    color: var(--main-bg-color);
     border-collapse: collapse;
 }
 
 .row * button,
 .row * {
-    color: var(--main-color);
+    color: var(--main-bg-color);
 }
 
 .article-image-iframe {
