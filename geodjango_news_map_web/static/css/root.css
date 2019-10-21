@@ -33,7 +33,7 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background-color: var(--transp-bg-4);
+    background-color: var(--transp-bg-7);
     font-size: 1.2em;
 }
 
@@ -72,7 +72,7 @@ footer {
 
 /*==========MESSAGES============*/
 .messages {
-    color: var(--main-bg-color);
+    color: var(--aux-accent-4);
     font-size: 12pt;
 }
 

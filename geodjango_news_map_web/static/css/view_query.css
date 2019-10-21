@@ -413,7 +413,7 @@ input.form-control.view-query::placeholder {
 #view-query-iframe-div {
     overflow: hidden;
     position: relative;
-    border: 3pt solid var(--transp-bg-7);
+    border: 2pt solid var(--main-bg-color);
     border-radius: 5pt;
 }
 

@@ -12,7 +12,7 @@
 
 #post {
     background-color: rgb(0,0,0);
-    border: 3pt solid var(--main-bg-color);
+    border: 2pt solid var(--main-bg-color);
     border-radius: 5pt;
     color: var(--main-bg-color);
     margin: 1em;
@@ -52,6 +52,8 @@
 
 #post-header {
     color: var(--aux-accent-6);
+    border-bottom: 1pt solid var(--aux-accent-3);
+    margin-bottom: 1em;
 }
 
 
@@ -61,14 +63,14 @@
 #add-comment-btn:hover,
 #add-comment-btn:focus {
     background-color: var(--transp-bg-7);
-    border: 1pt solid var(--aux-accent-1);
+    border: 2pt solid var(--aux-accent-1);
     color: var(--aux-accent-1);
     transition: 0.5s;
 }
 
 #add-comment-btn  {
     background-color: var(--transp-bg-7);
-    border: 1pt solid var(--aux-accent-3);
+    border: 2pt solid var(--aux-accent-3);
     color: var(--aux-accent-3);
     margin: 1em 0;
 }
@@ -96,7 +98,7 @@
 
 #upd-post-btn,
 #del-post-btn {
-    border: 1pt solid var(--aux-accent-3);
+    border: 2pt solid var(--aux-accent-3);
     margin: auto 1em 2em 1em;
     transition: 0.4s;
 }
@@ -207,7 +209,7 @@
     padding-bottom: 20px;
     padding-top: 10px;
     height: auto;
-    border-top: 1pt solid var(--aux-accent-3)
+    border-top: 1pt solid var(--aux-accent-3);
     border-bottom: 1pt solid var(--aux-accent-3);
     border-left: 1pt solid var(--transp-bg-7);
     color: var(--main-bg-color);
@@ -263,7 +265,7 @@
     padding-bottom: 0;
     margin-bottom: 0;
     overflow-x: hidden;
-    color: var(--main-bg-color);
+    color: var(--aux-accent-6);
     background-color: var(--transp-bg-7);
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
