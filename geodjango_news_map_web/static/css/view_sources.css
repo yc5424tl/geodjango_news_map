@@ -7,36 +7,7 @@
  *      ╚═══╝  ╚═╝╚══════╝ ╚══╝╚══╝     ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝  ╚═╝ ╚═════╝╚══════╝╚══════╝
  *
  */
-.sources {
-    margin: 2em 0.5em 2em;
-    padding-left: 0;
-    padding-right: 0;
-    text-align: center;
-    padding-top: 1em;
-    border-radius: 5pt;
-    background-color: var(--transp-bg-1);
-    z-index: 999;
-}
 
-
-
-.src-ul {
-    align-content: normal;
-}
-
-.src-li {
-    display: inline-block;
-    text-align: left;
-    justify-content: left;
-}
-
-.sources > ul, .sources > ul > li {
-    /*text-align: center;*/
-}
-
-#sources-center {
-    background-color: var(--transp-bg-1);
-}
 
 @media (min-width: 1200px) {
     #view-src-col-container {
@@ -56,6 +27,24 @@
     }
 }
 
+
+
+
+
+/*======================== ACCORDION ===============================*/
+
+.src-pad-col {
+    background-color: var(--transp-bg-1);
+    padding: 0;
+    margin: 0;
+}
+
+#src-accordion-wrapper {
+    padding: 2em;
+    background-color: var(--main-bg-color);
+    margin: 2em;
+}
+
 .src-card {
     background-color: var(--transp-bg-1);
 }
@@ -64,15 +53,6 @@
     background-color: var(--transp-bg-1);
     text-align: center;
     border: 1pt solid var(--transp-bg-1);
-}
-
-.src-card-body {
-    background-color: transparent;
-}
-
-.src-card-body ul {
-    list-style: none;
-    justify-self: stretch;
 }
 
 .btn.btn-link.accordion-btn {
@@ -88,20 +68,43 @@
     transition: 0.5s;
 }
 
-.src-pad-col {
+.src-card-body {
+    background-color: transparent;
+}
+
+.src-card-body ul {
+    list-style: none;
+    justify-self: stretch;
+}
+
+.src-ul {
+    align-content: normal;
+}
+
+.src-li {
+    display: inline-block;
+    text-align: left;
+    justify-content: left;
+}
+/*>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
+
+
+
+
+
+
+
+/*============================= COLUMNS =============================*/
+
+.sources {
+    margin: 2em 0.5em 2em;
+    padding-left: 5%;
+    padding-right: 0;
+    text-align: left;
+    padding-top: 1em;
+    border-radius: 5pt;
     background-color: var(--transp-bg-1);
-    padding: 0;
-    margin: 0;
-}
-
-#src-accordion-wrapper {
-    padding: 2em;
-    background-color: var(--main-bg-color);
-}
-
-#middle-src-card {
-    margin-top: 1em;
-    margin-bottom: 1em;
+    z-index: 999;
 }
 
 .src-header {
@@ -110,6 +113,21 @@
     margin-top: 20px;
     margin-bottom: 10px;
 }
+
+#middle-src-card {
+    margin-top: 1em;
+    margin-bottom: 1em;
+}
+
+.sources > ul, .sources > ul > li {
+    /*text-align: center;*/
+}
+
+#sources-center {
+    background-color: var(--transp-bg-1);
+}
+
+
 
 /***
  *    ███████╗███╗   ██╗██████╗     ██╗   ██╗██╗███████╗██╗    ██╗    ███████╗ ██████╗ ██╗   ██╗██████╗  ██████╗███████╗███████╗
