@@ -9,12 +9,12 @@
  *
  */
 .card {
-    background-color: var(--main-bg-color);
+    background-color: var(--main-light);
 }
 
 .card * {
-    background-color: var(--main-bg-color);
-    color: var(--main-color);
+    background-color: var(--main-light);
+    color: var(--main-grey);
 }
 
 .card-header h1 {

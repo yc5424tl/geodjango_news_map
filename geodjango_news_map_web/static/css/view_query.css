@@ -12,8 +12,13 @@
     padding-right: 0;
 }
 
-#view-query-details-title {
-    text-align: center;
+/*#view-query-details-title {*/
+/*    text-align: center;*/
+/*}*/
+
+#view-query-table {
+    padding: 1em;
+    background-color: var(--transp-bg-1);
 }
 
 th {
@@ -21,7 +26,7 @@ th {
 }
 
 .view-query-tr {
-    border: 1pt solid var(--transp-bg-7);
+    border: 1pt solid var(--main-light);
 }
 .view-query-tr:last-child {
     border-bottom-left-radius: 5px;
@@ -32,22 +37,22 @@ th {
     text-align: justify;
     padding-right: 1em;
     padding-left: 0.5em;
-    border-right: 1pt solid var(--transp-bg-7);
+    border-right: 1pt solid var(--main-light);
 }
 
 .view-query-details-row-data {
     padding-left: 1em;
     width: 100%;
-    border-right: 1pt-solid var(--transp-bg-7);
+    border-right: 1pt-solid var(--main-light);
 }
 
 .post-query-container {
     margin-top: 5vh;
-    background-color: rgb(0,0,0);
+    background-color: var(--main-dark);
 }
 
 .port-query-container > form {
-    background-color: rgb(0,0,0);
+    background-color: var(--main-dark);;
 }
 
 .post-query-container > form > button {
@@ -59,7 +64,7 @@ th {
     border-top-left-radius: 5pt;
     margin-bottom: 0;
     padding-bottom: 0;
-    background-color: rgb(0,0,0);
+    background-color: var(--main-dark);
 }
 
 #new-post-span-container {
@@ -69,7 +74,7 @@ th {
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 1em;
-    background-color: rgb(0,0,0);
+    background-color: var(--main-dark);;
 }
 
 #new-post-span {
@@ -77,8 +82,8 @@ th {
     border-top-left-radius: 5pt;
     width: 100%;
     text-align: center;
-    background-color: rgb(0,0,0);
-    color: var(--main-bg-color);
+    background-color: var(--main-dark);;
+    color: var(--main-light);
     font-size: 16pt;
     margin-left: 0;
     margin-right: 0;
@@ -90,14 +95,14 @@ th {
 /*=======================================ARTICLES=============================================*/
 
 #articles-wrapper {
-    background-color: rgb(0,0,0);
+    background-color: var(--main-dark);;
     border-radius: 8pt;
     padding: 0;
 }
 
 #articles-col {
-    background-color: rgb(0,0,0);
-    color: var(--main-bg-color);
+    background-color: var(--main-dark);;
+    color: var(--main-light);
     border-radius: 5pt;
     padding: 0;
     margin-top: 2em;
@@ -107,8 +112,8 @@ th {
 #articles-card {
     height: calc(100vh - 60px);
     max-height: calc(100vh - 60px);
-    background-color: rgb(0,0,0);
-    color: var(--main-bg-color);
+    background-color: var(--main-dark);
+    color: var(--main-light);
     border-radius: 5pt;
     margin: 0;
     padding: 0;
@@ -117,8 +122,8 @@ th {
 
 #card-header,
 #card-header-wrapper{
-    background-color: rgb(0,0,0);
-    color: var(--main-bg-color);
+    background-color: var(--main-dark);;
+    color: var(--main-light);
     text-align: center;
 }
 
@@ -135,7 +140,7 @@ th {
      max-height: calc(100vh - 150px);
      overflow-y: scroll;
      -webkit-overflow-scrolling: touch;
-     border-bottom: 1pt solid var(--main-bg-color);
+     border-bottom: 1pt solid var(--main-light);
      border-left: 1pt solid var(--transp-bg-7);
      border-right: 1pt solid var(--transp-bg-7);
      border-top: 1pt solid var(--transp-bg-7);
@@ -154,7 +159,7 @@ th {
     border-top: solid 1pt var(--transp-bg-4);
     border-bottom: solid 1pt var(--transp-bg-4);
     border-left: 1pt solid var(--transp-bg-7);
-    color: var(--main-bg-color);
+    color: var(--main-light);
     background-color: var(--transp-bg-7);
     border-right: 1pt solid var(--transp-bg-7);
     margin: 0 0 20px 0;
@@ -164,7 +169,7 @@ th {
 
 .article-li * {
     background-color: var(--transp-bg-7);
-    color: var(--main-bg-color);
+    color: var(--main-light);
 }
 .article-li:last-of-type {
     border-bottom: none;
@@ -174,7 +179,7 @@ th {
 .article-row {
     height: 100%;
     background-color: var(--transp-bg-7);
-    color: var(--main-bg-color);
+    color: var(--main-light);
 }
 
 .left-buffer,
@@ -187,12 +192,12 @@ th {
     padding-left: 0;
     padding-right: 0;
     background-color: var(--transp-bg-7);
-    color: var(--main-bg-color);
+    color: var(--main-light);
 }
 
 .article-details-container > * {
     background-color: var(--transp-bg-7);
-    color: var(--main-bg-color);
+    color: var(--main-light);
 }
 
 .img-link {
@@ -208,7 +213,7 @@ th {
     padding-bottom: 0;
     margin-bottom: 0;
     background-color: var(--transp-bg-7);
-    color: var(--main-bg-color);
+    color: var(--main-light);
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
     overflow-x: hidden;
@@ -218,7 +223,7 @@ th {
     text-align: left;
     align-content: start;
     background-color: var(--transp-bg-7);
-    color: var(--main-bg-color);
+    color: var(--main-light);
     margin-top: 0;
     margin-bottom: 0;
     padding-top: 8px;
@@ -227,7 +232,7 @@ th {
 
 .article-subtitle {
     background-color: var(--transp-bg-7);
-    color: var(--main-bg-color);
+    color: var(--main-light);
     padding-top: 0;
     margin-top: 0;
     margin-left: 0;
@@ -252,7 +257,7 @@ th {
 
 .article-img-xl-container {
     background-color: var(--transp-bg-7);
-    color: var(--main-bg-color);
+    color: var(--main-light);
     padding: 10px;
 }
 
@@ -270,14 +275,14 @@ th {
     .article-img-xl-container {
         display: block;
         text-align: center;
-        background-color: rgb(0,0,0);
+        background-color: var(--main-dark);
     }
     .article-img-xl {
         border-radius: 10pt;
         width: 100%;
         height: auto;
         display: inline-block;
-        background-color: rgb(0,0,0);
+        background-color: var(--main-dark);
     }
 }
 
@@ -289,7 +294,7 @@ th {
         border-radius: 10pt;
         width: 100%;
         height: auto;
-        background-color: rgb(0,0,0);
+        background-color: var(--main-dark);
     }
     .article-img-xl-container,
     .article-img-xl {
@@ -308,7 +313,7 @@ th {
 #view-query-form-input-title {
     padding: 1em;
     margin-bottom: 0;
-    border: 3pt 3pt 3pt 2pt solid var(--main-bg-color);
+    border: 3pt 3pt 3pt 2pt solid var(--main-light);
     border-collapse: collapse;
     color: var(--aux-accent-3);
 }
@@ -318,7 +323,7 @@ th {
     padding: 0;
     border-collapse: collapse;
     border-radius: 5pt 5pt 0 0;
-    border: 1pt 2.5pt 1pt 2.5pt solid var(--main-bg-color);
+    border: 1pt 2.5pt 1pt 2.5pt solid var(--main-light);
     height: 19.5em;
 }
 
@@ -331,8 +336,8 @@ textarea.form-control.view-query {
 }
 
 .form-control.view-query {
-    background-color: rgb(0,0,0);
-    color: var(--main-bg-color);
+    background-color: var(--main-dark);
+    color: var(--main-light);
 }
 
 #pre-textarea {
@@ -341,9 +346,9 @@ textarea.form-control.view-query {
     text-overflow: ellipsis;
     overflow: scroll;
     font-size:12pt;
-    background-color: rgb(0,0,0);
+    background-color: var(--main-dark);
     color: var(--aux-accent-6);
-    border: 2pt solid var(--main-bg-color);
+    border: 2pt solid var(--main-light);
     padding-top: 0;
     margin-top: 0;
     top: 0;
@@ -351,7 +356,7 @@ textarea.form-control.view-query {
 
 #view-query-form-controls {
     padding-top: 15px;
-    border: 3pt 3pt 3pt 2pt solid var(--main-bg-color);
+    border: 3pt 3pt 3pt 2pt solid var(--main-light);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     border-collapse: collapse;
@@ -363,14 +368,14 @@ textarea.form-control.view-query {
 }
 
 input.form-control.view-query::placeholder {
-    color: var(--main-bg-color);
+    color: var(--main-light);
     opacity: 1.0;
 }
 
 #view-query-save-btn,
 #view-query-del-btn {
-    border: 2pt solid var(--main-bg-color);
-    color: var(--main-bg-color);
+    border: 2pt solid var(--main-light);
+    color: var(--main-light);
     font-weight: 600;
     margin: 1em;
 }
@@ -380,8 +385,8 @@ input.form-control.view-query::placeholder {
 #view-query-save-btn:focus,
 #view-query-del-btn:focus {
     background-color: var(--aux-accent-3);
-    color: var(--main-bg-color);
-    border: 2pt solid var(--main-bg-color);
+    color: var(--main-light);
+    border: 2pt solid var(--main-light);
     text-decoration-line: none;
     transition: 0.5s;
 }
@@ -413,7 +418,7 @@ input.form-control.view-query::placeholder {
 #view-query-iframe-div {
     overflow: hidden;
     position: relative;
-    border: 2pt solid var(--main-bg-color);
+    border: 2pt solid var(--main-light);
     border-radius: 5pt;
 }
 

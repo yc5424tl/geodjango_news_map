@@ -44,9 +44,9 @@
 
 .btn.view-comment-upd-btn,
 .btn.view-comment-del-btn{
-    background-color: var(--main-color);
-    color: var(--main-bg-color);
-    border: 1pt solid var(--main-bg-color);
+    background-color: var(--main-grey);
+    color: var(--main-light);
+    border: 1pt solid var(--main-light);
     margin: 1em 0;
 }
 
@@ -54,9 +54,9 @@
 .btn.view-comment-upd-btn:hover,
 .btn.view-comment-del-btn:focus,
 .btn.view-comment-upd-btn:focus {
-    border: 1pt solid var(--main-color);
-    color: var(--main-color);
-    background-color: var(--main-bg-color);
+    border: 1pt solid var(--main-grey);
+    color: var(--main-grey);
+    background-color: var(--main-light);
     transition: 0.5s;
 }
 
@@ -67,7 +67,7 @@
 
 .view-comment-container {
     text-align: center;
-    background-color: var(--main-bg-color);
+    background-color: var(--main-light);
     width: 66%;
     min-width: 400px;
     margin-left: auto;

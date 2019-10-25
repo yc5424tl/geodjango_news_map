@@ -37,8 +37,8 @@ none {
 }
 
 :root {
-    --main-bg-color: #D4D4D4; /*212,212,212*/
-    --main-color: #424B54;    /* rgb(66,75,84) */
+    --main-light: #D4D4D4; /*212,212,212*/
+    --main-grey: #424B54;    /* rgb(66,75,84) */
     --main-accent-1: #A1A499;
     --main-accent-2: #896A67;
     /*--main-link-color: #6EA8DD;*/
@@ -69,12 +69,12 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
-    background-color: var(--main-color);
+    background-color: var(--main-grey);
     font-size: 1.2em;
 }
 
 #main {
-    background-color: var(--main-color);
+    background-color: var(--main-grey);
     padding: 0;
  }
 
@@ -104,7 +104,7 @@ footer {
 
 /*==========MESSAGES============*/
 .messages {
-    color: var(--main-bg-color);
+    color: var(--main-light);
     font-size: 12pt;
 }
 
@@ -133,7 +133,7 @@ li a:hover, li a:focus {
 }
 
 div.jumbotron {
-    color: var(--main-color);
+    color: var(--main-grey);
     background-color: var(--main-accent-1);
 }
 
@@ -141,14 +141,14 @@ div.jumbotron {
     width: 100%;
     padding: 0;
     margin: 0;
-    background-color: var(--main-bg-color);
+    background-color: var(--main-light);
     border-radius: 5pt;
-    color: var(--main-color);
+    color: var(--main-grey);
     border-collapse: collapse;
 }
 
 .row * button, .row * {
-    color: var(--main-color);
+    color: var(--main-grey);
 }
 
 
@@ -276,7 +276,7 @@ td, tr {
 
 nav {
     background-image: url('../img/news-bg-paper-rack.jpg');
-    color: var(--main-color);
+    color: var(--main-grey);
     min-width: 100%;
     width: 100%;
     margin-left: 0;
@@ -290,7 +290,7 @@ nav {
 }
 
 .nav-item, .nav-link, .navbar-brand, .nav-link:link, .nav-item:link {
-    color: var(--main-bg-color);
+    color: var(--main-light);
     transition: 0.4s;
     z-index: 499;
 }
@@ -398,19 +398,19 @@ nav {
 
 ::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0.4);
-    box-shadow: inset 0 0 5px var(--main-color);
+    box-shadow: inset 0 0 5px var(--main-grey);
     border-radius: 0;
 }
 
 ::-webkit-scrollbar {
-    background-color: var(--main-color);
+    background-color: var(--main-grey);
     border-collapse: collapse;
     width: auto;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--main-color);
-    box-shadow: inset 0 0 8px var(--main-bg-color);
+    background-color: var(--main-grey);
+    box-shadow: inset 0 0 8px var(--main-light);
     border-radius: 2pt;
 }
 /*==========================================================*/
