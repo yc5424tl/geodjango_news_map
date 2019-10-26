@@ -44,7 +44,7 @@
                 {% if user.pk == query_author.id %}
                     {% if query.archived is False %}
                         <div class="post-query-container">
-                            <form method="post" action="{% url 'new_post' %}">
+                            <form method="post" action="{% url 'new_post' %}" id="new-post-form">
                                 {% csrf_token %}
                                 <div class="input-group view-query" id="view-query-form-header">
                                     <div class="input-group-prepend view-query" id="new-post-span-container">
@@ -56,7 +56,7 @@
                                     <label class="input-group-prepend view-query" id="textarea-label">
                                         <textarea class="form-control view-query" id="new-post-textarea" aria-label="Post Body" name="_body" rows="11"><</textarea>
                                     </label>
-                                    <div id="pre-textarea" contenteditable style="border:solid 1px black; padding: 1em; width: 100%; min-height: 2em;"></div>
+                                    <div id="pre-textarea" contenteditable></div>
                                 </div>
                                 <div class="input-group view-query" id="view-query-form-controls">
                                     <div class="form-check form-check-inline">

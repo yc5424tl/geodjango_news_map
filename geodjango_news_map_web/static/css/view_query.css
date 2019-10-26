@@ -17,12 +17,15 @@
 /*}*/
 
 #view-query-table {
+    margin-top: 1em;
     padding: 1em;
     background-color: var(--transp-bg-1);
 }
 
 th {
     column-span: 2;
+    text-align: center;
+    border: 1pt solid var(--main-light);
 }
 
 .view-query-tr {
@@ -306,6 +309,11 @@ th {
 
 /*================================================FORM=================================================*/
 
+#new-post-form {
+    border: 1pt solid var(--main-light);
+    border-radius: 5pt;
+}
+
 .form-check-label {
     margin-right: 0.5em;
 }
@@ -342,14 +350,15 @@ textarea.form-control.view-query {
 
 #pre-textarea {
     min-height: 100%;
+    width: 100%;
+    padding: 1em;
     height: 18.9em;
     text-overflow: ellipsis;
     overflow: scroll;
-    font-size:12pt;
+    font-size: 12pt;
     background-color: var(--main-dark);
     color: var(--aux-accent-6);
     border: 2pt solid var(--main-light);
-    padding-top: 0;
     margin-top: 0;
     top: 0;
 }
@@ -405,21 +414,29 @@ input.form-control.view-query::placeholder {
 }
 
 #view-query-iframe-row {
+    height: auto;
     width: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 #view-query-iframe-col {
+    height: auto;
     width: 100%;
-    margin: 1em;
+    margin: 0;
     padding: 0;
     align-content: center;
 }
 
 #view-query-iframe-div {
     overflow: hidden;
-    position: relative;
+    /*position: relative;*/
     border: 2pt solid var(--main-light);
     border-radius: 5pt;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
 }
 
 /*#view-query-iframe {*/
