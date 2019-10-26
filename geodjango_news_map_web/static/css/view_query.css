@@ -101,14 +101,14 @@ th {
     background-color: var(--main-dark);;
     border-radius: 8pt;
     padding: 0;
+    margin-top: 2em;
 }
 
 #articles-col {
     background-color: var(--main-dark);;
     color: var(--main-light);
     border-radius: 5pt;
-    padding: 0;
-    margin-top: 2em;
+    padding: 2em 0 0 0;
     margin-bottom: 2em;
 }
 
@@ -147,7 +147,7 @@ th {
      border-left: 1pt solid var(--transp-bg-7);
      border-right: 1pt solid var(--transp-bg-7);
      border-top: 1pt solid var(--transp-bg-7);
-     background-color: var(--transp-bg-7);
+     background-color: var(--transp-bg-4);
      margin-bottom: 0;
      height: 100%;
  }
@@ -163,7 +163,7 @@ th {
     border-bottom: solid 1pt var(--transp-bg-4);
     border-left: 1pt solid var(--transp-bg-7);
     color: var(--main-light);
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
     border-right: 1pt solid var(--transp-bg-7);
     margin: 0 0 20px 0;
     list-style: none;
@@ -171,7 +171,7 @@ th {
 }
 
 .article-li * {
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
     color: var(--main-light);
 }
 .article-li:last-of-type {
@@ -181,25 +181,25 @@ th {
 
 .article-row {
     height: 100%;
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
     color: var(--main-light);
 }
 
 .left-buffer,
 .right-buffer {
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
     margin: 0;
 }
 
 .article-details-container {
     padding-left: 0;
     padding-right: 0;
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
     color: var(--main-light);
 }
 
 .article-details-container > * {
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
     color: var(--main-light);
 }
 
@@ -215,7 +215,7 @@ th {
     margin-top: 10px;
     padding-bottom: 0;
     margin-bottom: 0;
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
     color: var(--main-light);
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
@@ -225,7 +225,7 @@ th {
 .article-subtitle-container {
     text-align: left;
     align-content: start;
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
     color: var(--main-light);
     margin-top: 0;
     margin-bottom: 0;
@@ -234,7 +234,7 @@ th {
 }
 
 .article-subtitle {
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
     color: var(--main-light);
     padding-top: 0;
     margin-top: 0;
@@ -246,12 +246,12 @@ th {
 
 .article-author {
     color: #bc4b51;
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
 }
 
 .article-body {
-    background-color: var(--transp-bg-7);
-    color: var(--aux-accent-4);
+    background-color: var(--transp-bg-1);
+    color: var(--aux-accent-5);
     padding: 2em 1em 1em 1em;
     margin-top: 0;
     margin-bottom: 0;
@@ -259,7 +259,7 @@ th {
 }
 
 .article-img-xl-container {
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
     color: var(--main-light);
     padding: 10px;
 }
@@ -268,7 +268,7 @@ th {
     max-width: 300px;
     width: 100%;
     border-radius: 10pt;
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-1);
 }
 
 @media (min-width: 1200px) {
@@ -278,14 +278,14 @@ th {
     .article-img-xl-container {
         display: block;
         text-align: center;
-        background-color: var(--main-dark);
+        background-color: var(--transp-bg-1);
     }
     .article-img-xl {
         border-radius: 10pt;
         width: 100%;
         height: auto;
         display: inline-block;
-        background-color: var(--main-dark);
+        background-color: var(--transp-bg-1);
     }
 }
 
@@ -297,7 +297,7 @@ th {
         border-radius: 10pt;
         width: 100%;
         height: auto;
-        background-color: var(--main-dark);
+        background-color: var(--transp-bg-1);
     }
     .article-img-xl-container,
     .article-img-xl {
@@ -310,8 +310,9 @@ th {
 /*================================================FORM=================================================*/
 
 #new-post-form {
-    border: 1pt solid var(--main-light);
+    border: 2pt solid var(--main-light);
     border-radius: 5pt;
+    border-collapse: collapse
 }
 
 .form-check-label {
@@ -393,7 +394,7 @@ input.form-control.view-query::placeholder {
 #view-query-del-btn:hover,
 #view-query-save-btn:focus,
 #view-query-del-btn:focus {
-    background-color: var(--aux-accent-3);
+    background-color: var(--aux-accent-6);
     color: var(--main-light);
     border: 2pt solid var(--main-light);
     text-decoration-line: none;
@@ -409,7 +410,7 @@ input.form-control.view-query::placeholder {
     height: auto;
     width: 100%;
     padding: 0;
-    margin: 1em 0 0 0;
+    margin: 0;
     display: flex;
 }
 
