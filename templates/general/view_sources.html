@@ -35,7 +35,7 @@
                                             {% for source in country.list %}
                                                 <li>
                                                     <a href="{{ source.url }}">{{ source.name }}</a>
-                                                    <span>{{ source.category|capfirst }} - {{ source.full_lang }}</span>
+                                                    <span class="src-details">{{ source.category|capfirst }} - {{ source.full_lang }}</span>
                                                 </li>
                                             {% endfor %}
                                         </ul>
@@ -64,7 +64,7 @@
                                             {% for source in category.list %}
                                                 <li>
                                                     <a href="{{ source.url }}">{{ source.name }}</a>
-                                                    <span>{{ source.country }} - {{ source.full_lang }}</span>
+                                                    <span class="src-details">{{ source.country }} - {{ source.full_lang }}</span>
                                                 </li>
                                             {% endfor %}
                                         </ul>
@@ -93,7 +93,7 @@
                                                 {% for source in full_lang.list %}
                                                     <li>
                                                         <a href="{{ source.url }}">{{ source.name }}</a>
-                                                        <span>{{ source.country }} - {{ source.category|capfirst }}</span>
+                                                        <span class="src-details">{{ source.country }} - {{ source.category|capfirst }}</span>
                                                     </li>
                                                 {% endfor %}
                                             </ul>
@@ -121,7 +121,7 @@
                                 {% for source in country.list %}
                                     <li>
                                         <a href="{{ source.url }}">{{ source.name }}</a>
-                                        <span>{{ source.category|capfirst }} - {{ source.full_lang }}</span>
+                                        <span class="src-details">{{ source.category|capfirst }} - {{ source.full_lang }}</span>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -140,7 +140,7 @@
                                 {% for source in category.list %}
                                     <li>
                                         <a href="{{ source.url }}">{{ source.name }}</a>
-                                        <span>{{ source.country }} - {{ source.full_lang }}</span>
+                                        <span class="src-details">{{ source.country }} - {{ source.full_lang }}</span>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -159,7 +159,7 @@
                                 {% for source in full_lang.list %}
                                     <li>
                                         <a href="{{ source.url }}">{{ source.name }}</a>
-                                        <span>{{ source.country }} - {{ source.category|capfirst }}</span>
+                                        <span class="src-details">{{ source.country }} - {{ source.category|capfirst }}</span>
                                     </li>
                                 {% endfor %}
                             </ul>

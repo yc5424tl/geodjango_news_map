@@ -27,6 +27,9 @@
     }
 }
 
+.src-details {
+    color: var(--main-accent-1);
+}
 
 
 
@@ -96,6 +99,11 @@
 
 /*============================= COLUMNS =============================*/
 
+
+.view-sources-cat-head {
+
+}
+
 .sources {
     margin: 2em 0.5em 2em;
     padding-left: 5%;
@@ -112,6 +120,7 @@
     font-weight: 800;
     margin-top: 20px;
     margin-bottom: 10px;
+    color: var(--aux-accent-3);
 }
 
 #middle-src-card {

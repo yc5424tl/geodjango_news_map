@@ -42,19 +42,26 @@
     border-top-left-radius: 0;
 }
 
-.col-6.new-query-body-ctr,
+
+
+#new-query-body-ctr,
 #new-query-title-ctr {
     background-color: rgba(0,0,0,0.2);
+
 }
 
 #new-query-title-ctr {
     margin-bottom: 0;
     padding: 1em;
+    border-top-right-radius: 5pt;
+    border-top-left-radius: 5pt;
 }
 
-.col-6.new-query-body-ctr {
+#new-query-body-ctr {
     margin-top: 0;
     padding-bottom: 2em;
+    border-bottom-right-radius: 5pt;
+    border-bottom-left-radius: 5pt;
 }
 
 .new-query-div.lower {
@@ -64,9 +71,14 @@
 
 #new-query-form > input[select] {
     width: 100%;
+    color: var(--transp-bg-7);
 }
 #id__argument {
     max-width: 100%;
+}
+
+button {
+    color: var(--transp-bg-7);
 }
 /***
  *    ███████╗███╗   ██╗██████╗     ███╗   ██╗███████╗██╗    ██╗     ██████╗ ██╗   ██╗███████╗██████╗ ██╗   ██╗
