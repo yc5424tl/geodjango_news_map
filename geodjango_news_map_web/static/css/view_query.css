@@ -108,7 +108,7 @@ th {
     background-color: var(--main-dark);;
     color: var(--main-light);
     border-radius: 5pt;
-    padding: 2em 0 0 0;
+    padding: 0;
     margin-bottom: 2em;
 }
 
@@ -123,7 +123,12 @@ th {
     border: none;
 }
 
-#card-header,
+#card-header {
+    color: var(--main-light);
+    text-align: center;
+    background-color: transparent;
+}
+
 #card-header-wrapper{
     background-color: var(--main-dark);;
     color: var(--main-light);
@@ -158,20 +163,22 @@ th {
 
 .article-li {
     padding: 0;
+    width: 100%;
     height: auto;
     border-top: solid 1pt var(--transp-bg-4);
     border-bottom: solid 1pt var(--transp-bg-4);
-    border-left: 1pt solid var(--transp-bg-7);
+    /*border-left: 1pt solid var(--transp-bg-7);*/
     color: var(--main-light);
-    background-color: var(--transp-bg-1);
-    border-right: 1pt solid var(--transp-bg-7);
+    background-color: transparent;
+    /*border-right: 1pt solid var(--transp-bg-7);*/
     margin: 0 0 20px 0;
     list-style: none;
     border-collapse: collapse;
 }
 
 .article-li * {
-    background-color: var(--transp-bg-1);
+    /*background-color: var(--transp-bg-1);*/
+    background-color: transparent;
     color: var(--main-light);
 }
 .article-li:last-of-type {
@@ -199,7 +206,7 @@ th {
 }
 
 .article-details-container > * {
-    background-color: var(--transp-bg-1);
+    background-color: transparent;
     color: var(--main-light);
 }
 
@@ -207,6 +214,7 @@ th {
     color: var(--main-link-hover);
     transition: 0.5s;
     text-decoration-line: none;
+    background-color: transparent;
 }
 
 .article-title {
@@ -215,7 +223,7 @@ th {
     margin-top: 10px;
     padding-bottom: 0;
     margin-bottom: 0;
-    background-color: var(--transp-bg-1);
+    background-color: transparent;
     color: var(--main-light);
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
@@ -225,7 +233,7 @@ th {
 .article-subtitle-container {
     text-align: left;
     align-content: start;
-    background-color: var(--transp-bg-1);
+    background-color: transparent;
     color: var(--main-light);
     margin-top: 0;
     margin-bottom: 0;
@@ -234,7 +242,7 @@ th {
 }
 
 .article-subtitle {
-    background-color: var(--transp-bg-1);
+    background-color: transparent;
     color: var(--main-light);
     padding-top: 0;
     margin-top: 0;
@@ -246,11 +254,11 @@ th {
 
 .article-author {
     color: #bc4b51;
-    background-color: var(--transp-bg-1);
+    background-color: transparent;
 }
 
 .article-body {
-    background-color: var(--transp-bg-1);
+    background-color: transparent;
     color: var(--aux-accent-5);
     padding: 2em 1em 1em 1em;
     margin-top: 0;
@@ -268,7 +276,7 @@ th {
     max-width: 300px;
     width: 100%;
     border-radius: 10pt;
-    background-color: var(--transp-bg-1);
+    background-color: transparent;
 }
 
 @media (min-width: 1200px) {
@@ -285,7 +293,7 @@ th {
         width: 100%;
         height: auto;
         display: inline-block;
-        background-color: var(--transp-bg-1);
+        background-color: transparent;
     }
 }
 
@@ -313,6 +321,15 @@ th {
     border: 2pt solid var(--main-light);
     border-radius: 5pt;
     border-collapse: collapse
+}
+
+#new-post-span-container {
+    margin: 0;
+}
+
+#new-post-span {
+    border: 2pt solid var(--main-light);
+    border-collapse: collapse;
 }
 
 .form-check-label {
