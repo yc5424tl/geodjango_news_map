@@ -183,6 +183,7 @@ td, tr {
 #nav-right {
     background-color: rgba(0, 0, 0, 0.6);
     border-radius: 8pt;
+    z-index: 499;
 }
 
 #navbar {
@@ -208,6 +209,7 @@ td, tr {
 .navbar-toggler-icon,
 .navbar-toggler {
     background-color: var(--main-light);
+    color: var(--transp-bg-7);
 }
 
 .nav-link {

@@ -328,7 +328,7 @@ th {
 }
 
 #new-post-span {
-    border: 2pt solid var(--main-light);
+    border: 3pt solid var(--main-light);
     border-collapse: collapse;
 }
 
@@ -349,7 +349,7 @@ th {
     padding: 0;
     border-collapse: collapse;
     border-radius: 5pt 5pt 0 0;
-    border: 1pt 2.5pt 1pt 2.5pt solid var(--main-light);
+    border: 3pt 2.5pt 3pt 2.5pt solid var(--main-light);
     height: 19.5em;
 }
 

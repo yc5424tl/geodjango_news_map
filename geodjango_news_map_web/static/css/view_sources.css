@@ -120,7 +120,7 @@
     font-weight: 800;
     margin-top: 20px;
     margin-bottom: 10px;
-    color: var(--aux-accent-3);
+    color: var(--main-link-hover);
 }
 
 #middle-src-card {
