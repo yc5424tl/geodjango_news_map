@@ -205,6 +205,7 @@ td, tr {
     margin-top: auto;
     padding-right: 16px;
     flex-wrap: nowrap;
+    white-space: nowrap;
 }
 
 .navbar-toggler-icon,
@@ -261,22 +262,26 @@ td, tr {
     #nav-left,
     #nav-right {
         float: none;
-        width: 50%;
-        min-width: 49%;
         margin-left: 0;
         margin-right: 0;
         padding-left: 0;
         padding-right: 0;
         align-content: space-evenly;
         text-align: justify-all;
+        flex-grow: 1;
     }
     #nav-left {
         border-top-right-radius: initial;
         border-bottom-right-radius: initial;
+        margin-right: auto;
     }
     #nav-right {
         border-top-left-radius: initial;
         border-bottom-left-radius: initial;
+    }
+
+    #nav-collapse {
+        display: flex;
     }
 }
 
@@ -305,14 +310,13 @@ td, tr {
     #nav-left,
     #nav-right {
         float: none;
-        width: 50%;
-        min-width: 49%;
         margin-left: 0;
         margin-right: 0;
         padding-left: 0;
         padding-right: 0;
         align-content: space-evenly;
         text-align: justify-all;
+        flex-grow: 1;
     }
     #nav-left {
         border-top-right-radius: initial;
@@ -328,6 +332,10 @@ td, tr {
         transition: 0.4s;
         border: 1pt solid transparent;
         margin: auto;
+    }
+
+    #nav-collapse {
+        display: flex;
     }
 }
 
@@ -351,9 +359,9 @@ td, tr {
         border-radius: 5pt;
     }
     #nav-right {
-        display: inline-block;
-        margin-left: auto;
-        float: right;
+        /*display: inline-block;*/
+        /*margin-left: auto;*/
+        /*float: right;*/
         justify-content: right;
         text-align: right;
         width: 200px;
@@ -361,17 +369,21 @@ td, tr {
         min-width: 200px;
         border-top-left-radius: 5pt;
         border-bottom-left-radius: 5pt;
-        border-collapse: collapse;
         /*margin-right: 16px;*/
     }
     #nav-left {
-        display: inline-block;
+        /*float: left;*/
+        /*display: inline-block;*/
         width: 200px;
         max-width: 200px;
         min-width: 200px;
         border-top-right-radius: 5pt;
         border-bottom-left-radius: 5pt;
-        border-collapse: collapse;
+    }
+
+    #nav-collapse {
+        display: flex;
+        justify-content: space-between;
     }
 }
 
