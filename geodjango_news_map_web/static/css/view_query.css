@@ -21,10 +21,12 @@
 th {
     text-align: center;
     border: 1pt solid var(--main-light);
+    border-collapse: collapse;
 }
 
 .view-query-tr {
     border: 1pt solid var(--main-light);
+    border-collapse: collapse;
 }
 .view-query-tr:last-child {
     border-bottom-left-radius: 5px;
@@ -36,12 +38,13 @@ th {
     padding-right: 1em;
     padding-left: 0.5em;
     border-right: 1pt solid var(--main-light);
+    border-collapse: collapse;
 }
 
 .view-query-details-row-data {
     padding-left: 1em;
     width: 100%;
-    border-right: 1pt-solid var(--main-light);
+    border-right: 1pt solid var(--main-light);
 }
 
 .post-query-container {
@@ -60,6 +63,7 @@ th {
 #view-query-form-header {
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
+    border-collapse: collapse;
     margin-bottom: 0;
     padding-bottom: 0;
     background-color: var(--main-dark);
@@ -72,7 +76,8 @@ th {
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 1em;
-    background-color: var(--main-dark);;
+    background-color: var(--main-dark);
+    border-collapse: collapse;
 }
 
 #new-post-span {
@@ -86,6 +91,7 @@ th {
     margin-left: 0;
     margin-right: 0;
     min-width: 100%;
+    border-collapse; collapse;
 }
 
 
@@ -94,6 +100,7 @@ th {
 #articles-wrapper {
     background-color: var(--main-dark);;
     border-radius: 5pt;
+    border-collapse: collapse;
     padding: 0;
     margin-top: 2em;
 }
@@ -102,6 +109,7 @@ th {
     background-color: var(--main-dark);;
     color: var(--main-light);
     border-radius: 5pt;
+    border-collapse: collapse;
     padding: 0;
     margin-bottom: 2em;
 }
@@ -136,6 +144,7 @@ th {
     border-right: 1pt solid var(--transp-bg-7);
     border-left: 1pt solid var(--transp-bg-7);
     border-bottom: none;
+    border-collapse: collapse;
 }
 
  #articles-list {
@@ -147,6 +156,7 @@ th {
      border-right: 1pt solid var(--transp-bg-7);
      border-top: 1pt solid var(--transp-bg-7);
      background-color: var(--transp-bg-4);
+     border-collapse: collapse;
      margin-bottom: 0;
      height: 100%;
  }
@@ -221,6 +231,7 @@ th {
     color: var(--main-light);
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
+    border-collapse: collapse;
     overflow-x: hidden;
 }
 
@@ -263,6 +274,7 @@ th {
     margin-top: 0;
     margin-bottom: 0;
     border-radius: 5pt;
+    border-collapse: collapse;
 }
 
 .article-img-xl-container {
@@ -274,7 +286,8 @@ th {
 .article-img-xl {
     max-width: 300px;
     width: 100%;
-    border-radius: 10pt;
+    border-radius: 5pt;
+    border-collapse: collapse;
     background-color: transparent;
 }
 
@@ -288,7 +301,8 @@ th {
         background-color: var(--transp-bg-1);
     }
     .article-img-xl {
-        border-radius: 10pt;
+        border-radius: 5pt;
+        border-collapse: collapse;
         width: 100%;
         height: auto;
         display: inline-block;
@@ -300,7 +314,8 @@ th {
     .article-img-sm {
         display: block;
         text-align: center;
-        border-radius: 10pt;
+        border-radius: 5pt;
+        border-collapse: collapse;
         width: 100%;
         height: auto;
         background-color: var(--transp-bg-1);
@@ -319,7 +334,7 @@ th {
 /*================================================FORM=================================================*/
 
 #new-post-form {
-    border: 2pt solid var(--main-light);
+    border: 1pt solid var(--main-light);
     border-radius: 5pt;
     border-collapse: collapse
 }
@@ -329,7 +344,7 @@ th {
 }
 
 #new-post-span {
-    border: 3pt solid var(--main-light);
+    border: 1pt solid var(--main-light);
     border-collapse: collapse;
 }
 
@@ -340,7 +355,7 @@ th {
 #view-query-form-input-title {
     padding: 1em;
     margin-bottom: 0;
-    border: 3pt 3pt 3pt 2pt solid var(--main-light);
+    border: 1pt solid var(--main-light);
     border-collapse: collapse;
     color: var(--aux-accent-3);
 }
@@ -350,7 +365,7 @@ th {
     padding: 0;
     border-collapse: collapse;
     border-radius: 5pt 5pt 0 0;
-    border: 3pt 2.5pt 3pt 2.5pt solid var(--main-light);
+    border: 1pt solid var(--main-light);
     height: 19.5em;
 }
 
@@ -377,14 +392,15 @@ textarea.form-control.view-query {
     font-size: 12pt;
     background-color: var(--main-dark);
     color: var(--aux-accent-6);
-    border: 2pt solid var(--main-light);
+    border: 1pt solid var(--main-light);
+    border-collapse: collapse;
     margin-top: 0;
     top: 0;
 }
 
 #view-query-form-controls {
     padding-top: 15px;
-    border: 3pt 3pt 3pt 2pt solid var(--main-light);
+    border: 1pt solid var(--main-light);
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     border-collapse: collapse;
@@ -450,8 +466,9 @@ input.form-control.view-query::placeholder {
     border-radius: 5pt;
     width: 100%;
     height: auto;
-    padding: 1em;
-    margin: 4em 0 0 0;
+    padding: 0;
+    margin: 0;
+    top: 2em;
 }
 
 /***
