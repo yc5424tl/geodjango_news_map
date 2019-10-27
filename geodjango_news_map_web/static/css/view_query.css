@@ -303,6 +303,9 @@ th {
     .article-img-xl {
         display: none;
     }
+    .article-title {
+        color: var(--main-light)
+    }
 }
 
 
