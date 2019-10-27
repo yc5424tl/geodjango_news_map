@@ -359,7 +359,7 @@ td, tr {
         border-radius: 5pt;
     }
     #nav-right {
-        /*display: inline-block;*/
+        display: inline-block;
         /*margin-left: auto;*/
         /*float: right;*/
         justify-content: right;
@@ -373,7 +373,7 @@ td, tr {
     }
     #nav-left {
         /*float: left;*/
-        /*display: inline-block;*/
+        display: inline-block;
         width: 200px;
         max-width: 200px;
         min-width: 200px;
