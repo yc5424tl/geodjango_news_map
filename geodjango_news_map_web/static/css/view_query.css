@@ -53,7 +53,7 @@ th {
 }
 
 .port-query-container > form {
-    background-color: var(--main-dark);;
+    background-color: var(--main-dark);
 }
 
 .post-query-container > form > button {
@@ -85,20 +85,20 @@ th {
     border-top-left-radius: 5pt;
     width: 100%;
     text-align: center;
-    background-color: var(--main-dark);;
+    background-color: var(--main-dark);
     color: var(--main-light);
     font-size: 16pt;
     margin-left: 0;
     margin-right: 0;
     min-width: 100%;
-    border-collapse; collapse;
+    border-collapse: collapse;
 }
 
 
 /*=======================================ARTICLES=============================================*/
 
 #articles-wrapper {
-    background-color: var(--main-dark);;
+    background-color: var(--main-dark);
     border-radius: 5pt;
     border-collapse: collapse;
     padding: 0;
@@ -106,7 +106,7 @@ th {
 }
 
 #articles-col {
-    background-color: var(--main-dark);;
+    background-color: var(--main-dark);
     color: var(--main-light);
     border-radius: 5pt;
     border-collapse: collapse;
@@ -132,7 +132,7 @@ th {
 }
 
 #card-header-wrapper{
-    background-color: var(--main-dark);;
+    background-color: var(--main-dark);
     color: var(--main-light);
     text-align: center;
 }
@@ -221,7 +221,7 @@ th {
 
 .article-title.title-center,
 .article-title.title-center:link,
-.article-title.title-center:visited{
+.article-title.title-center:visited {
     font-weight: 800;
     font-size: 18pt;
     margin-top: 10px;

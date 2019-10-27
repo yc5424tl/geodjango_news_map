@@ -347,7 +347,7 @@ td, tr {
     #navbar {
         height: 225px;
         text-align: left;
-        border-radius: 8pt;
+        border-radius: 5pt;
     }
     #nav-right {
         display: inline-block;
@@ -358,17 +358,17 @@ td, tr {
         width: 200px;
         max-width: 200px;
         min-width: 200px;
-        border-top-left-radius: 8pt;
-        border-bottom-left-radius: 8pt;
-        margin-right: 16;
+        border-top-left-radius: 5pt;
+        border-bottom-left-radius: 5pt;
+        margin-right: 16px;
     }
     #nav-left {
         display: inline-block;
         width: 200px;
         max-width: 200px;
         min-width: 200px;
-        border-top-right-radius: 8pt;
-        border-bottom-left-radius: 8pt;
+        border-top-right-radius: 5pt;
+        border-bottom-left-radius: 5pt;
     }
 }
 
