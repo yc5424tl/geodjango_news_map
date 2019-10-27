@@ -281,7 +281,7 @@ td, tr {
     }
 
     #nav-collapse {
-        display: flex;
+        display: inline-flex;
     }
 }
 
@@ -335,7 +335,7 @@ td, tr {
     }
 
     #nav-collapse {
-        display: flex;
+        display: inline-flex;
     }
 }
 
@@ -382,7 +382,7 @@ td, tr {
     }
 
     #nav-collapse {
-        display: flex;
+        display: inline-flex;
         justify-content: space-between;
     }
 }
