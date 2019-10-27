@@ -469,6 +469,8 @@ input.form-control.view-query::placeholder {
     padding: 0;
     margin: 0;
     top: 2em;
+    position: relative;
+    overflow: hidden;
 }
 
 /***
