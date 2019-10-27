@@ -262,7 +262,7 @@ td, tr {
     #nav-right {
         float: none;
         width: 50%;
-        min-width: 50%;
+        min-width: 49%;
         margin-left: 0;
         margin-right: 0;
         padding-left: 0;
@@ -306,7 +306,7 @@ td, tr {
     #nav-right {
         float: none;
         width: 50%;
-        min-width: 50%;
+        min-width: 49%;
         margin-left: 0;
         margin-right: 0;
         padding-left: 0;
@@ -361,7 +361,8 @@ td, tr {
         min-width: 200px;
         border-top-left-radius: 5pt;
         border-bottom-left-radius: 5pt;
-        margin-right: 16px;
+        border-collapse: collapse;
+        /*margin-right: 16px;*/
     }
     #nav-left {
         display: inline-block;
@@ -370,6 +371,7 @@ td, tr {
         min-width: 200px;
         border-top-right-radius: 5pt;
         border-bottom-left-radius: 5pt;
+        border-collapse: collapse;
     }
 }
 
