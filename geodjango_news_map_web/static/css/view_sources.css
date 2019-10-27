@@ -17,8 +17,8 @@
         display: none;
     }
     .src-details {
-    color: var(--main-accent-1);
-}
+        color: var(--main-accent-1);
+    }
 }
 
 @media (max-width: 1199px) {
@@ -28,9 +28,9 @@
     #accordion {
         display: block;
     }
-        .src-details {
-    color: var(--transp-bg-7);
-}
+    .src-details {
+        color: var(--transp-bg-7);
+    }
 }
 
 

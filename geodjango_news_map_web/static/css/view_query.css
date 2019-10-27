@@ -325,7 +325,7 @@ th {
         display: none;
     }
     .article-title {
-        color: var(--main-light)
+        color: var(--main-light);
     }
 }
 
@@ -336,7 +336,7 @@ th {
 #new-post-form {
     border: 1pt solid var(--main-light);
     border-radius: 5pt;
-    border-collapse: collapse
+    border-collapse: collapse;
 }
 
 #new-post-span-container {

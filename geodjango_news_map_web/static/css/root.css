@@ -182,7 +182,7 @@ td, tr {
 #nav-left,
 #nav-right {
     background-color: rgba(0, 0, 0, 0.6);
-    border-radius: 8pt;
+    border-radius: 5pt;
     z-index: 499;
 }
 
@@ -204,6 +204,7 @@ td, tr {
 #nav-collapse {
     margin-top: auto;
     padding-right: 16px;
+    flex-wrap: nowrap;
 }
 
 .navbar-toggler-icon,
