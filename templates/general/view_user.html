@@ -60,7 +60,10 @@
                             {% for comment in last_post.comments.all %}
                                 {% if comment %}
                                     <div class="view-user-last-post-comment-div">
-                                        <h3>Comment by <a href="{% url 'view_user' comment.author.id %}">{{ comment.author }}</a> - {{ comment.date_published }}</h3>
+                                        <h3>Comment by
+                                            <a href="{% url 'view_user' comment.author.id %}">{{ comment.author }}</a>
+                                            - {{ comment.date_published }}
+                                        </h3>
                                         <hr class="view-user-last-post-comment-hr">
                                         <blockquote>{{ comment.body }}</blockquote>
                                         {% if user.pk == comment.author.id %}

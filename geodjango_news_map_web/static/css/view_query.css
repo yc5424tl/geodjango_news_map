@@ -418,20 +418,18 @@ input.form-control.view-query::placeholder {
 .view-query-iframe-container {
     height: auto;
     width: 100%;
-    padding: 0;
+    padding: 1em;
     margin: 0;
     display: flex;
 }
 
 #view-query-iframe-row {
-    height: auto;
     width: 100%;
     margin: 0;
     padding: 0;
 }
 
 #view-query-iframe-col {
-    height: auto;
     width: 100%;
     margin: 0;
     padding: 0;
