@@ -507,7 +507,7 @@ input.form-control.view-query::placeholder {
 /*    overflow: hidden;*/
 /*}*/
 #view-query-iframe-container {
-    height: auto;
+    /*height: auto;*/
     width: 100%;
     padding: 0;
     margin: 1em 0 0 0;
@@ -519,10 +519,9 @@ input.form-control.view-query::placeholder {
 #view-query-iframe-div {
     overflow: hidden;
     position: relative;
-    width: 100%;
-    height: auto;
-    padding: 0;
-    margin: 0;
+    /*width: 100%;*/
+    /*padding: 0;*/
+    /*margin: 0;*/
 
 }
 
@@ -530,9 +529,9 @@ input.form-control.view-query::placeholder {
   /*  position: absolute;
     top: 0;
     left: 0;*/
-    width: 100%;
-    height: 100%;
-    border: 0;
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*border: 0;*/
 }
 
 /***
