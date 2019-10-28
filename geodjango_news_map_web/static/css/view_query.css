@@ -50,7 +50,7 @@ th {
     border-right: 1pt solid var(--main-light);
 }
 
-.post-query-container {
+#post-query-container {
     margin-top: 2em;
     background-color: var(--main-dark);
 }
@@ -426,6 +426,7 @@ textarea.form-control.view-query {
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
     border-collapse: collapse;
+    align-content: space-evenly;
 }
 
 #view-query-form-controls > .form-check.form-check-inline {
@@ -498,7 +499,7 @@ input.form-control.view-query::placeholder {
 /*}*/
 #view-query-iframe-container {
     height: auto;
-    width: 100%;
+    width: calc(100% - 1em);]
     padding: 0;
     margin: 1em 1em 0 0;
     border: 2pt solid var(--main-light);
