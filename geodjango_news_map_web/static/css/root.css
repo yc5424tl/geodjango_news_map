@@ -122,7 +122,7 @@ div.jumbotron {
 .row * button,
 .row * {
     color: var(--main-light);
-    background-color: var(--main-dark);
+    /*background-color: var(--main-dark);*/
 }
 
 .article-image-iframe {
