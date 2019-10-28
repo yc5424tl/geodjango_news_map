@@ -480,11 +480,16 @@ input.form-control.view-query::placeholder {
     border: 2pt solid var(--main-light);
     border-radius: 5pt;
     display: flex;
+    align-content: center;
 }
 
 #view-query-iframe-div {
     overflow: hidden;
     position: relative;
+    width: 100%;
+    height: auto;
+    padding: 0;
+    margin: 0;
 }
 
 /***
