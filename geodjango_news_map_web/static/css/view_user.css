@@ -19,6 +19,11 @@
     margin-top: 1em;
 }
 
+hr {
+    background-color: var(--main-light);
+    height: 2px;
+}
+
 #view-user-lower {
     padding-bottom: 2em;
 }
