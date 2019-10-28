@@ -135,9 +135,12 @@ th {
 }
 
 #card-header-wrapper{
-    background-color: var(--main-dark);
-    color: var(--main-light);
+    background-color: var(--transp-bg-4);
+    color: var(--transp-bg-4);
+    border: 2pt solid var(--main-light);
+    text-shadow: 0 0 5px #FFF, 0 0 10px #FFF, 0 0 15px #FFF, 0 0 20px #BEFFF6, 0 0 30px #BEFFF6, 0 0 40px #BEFFF6, 0 0 55px #BEFFF6, 0 0 75px #BEFFF6, 2px 2px 2px rgba(190,255,246, 0);
     text-align: center;
+    font-weight: 800;
 }
 
 #card-header-wrapper {
@@ -359,6 +362,7 @@ th {
 #new-post-span {
     border: 1pt solid var(--main-light);
     border-collapse: collapse;
+    background-color: var(--transp-bg-4);
     margin: 0;
     width: 100%;
     display: block;
@@ -374,6 +378,7 @@ th {
     border: 1pt solid var(--main-light);
     border-collapse: collapse;
     color: var(--aux-accent-3);
+    background-color: var(--transp-bg-4);
     display: block;
 }
 
@@ -428,6 +433,10 @@ textarea.form-control.view-query {
     margin: 1em;
 }
 
+.btn-grp-sm.float-right {
+    align-content: space-evenly;
+}
+
 input.form-control.view-query::placeholder {
     color: var(--main-accent-2);
     opacity: 1.0;
@@ -439,6 +448,8 @@ input.form-control.view-query::placeholder {
     color: var(--main-light);
     font-weight: 600;
     margin: 1em;
+    flex-basis: 0;
+    flex-flow: nowrap row;
 }
 
 #view-query-save-btn:hover,
@@ -488,10 +499,8 @@ input.form-control.view-query::placeholder {
 #view-query-iframe-container {
     height: auto;
     width: 100%;
-    padding-top: 0;
-    padding-bottom: 0;
-    padding-left: 0;
-    margin: 1em 0 0 0;
+    padding: 0;
+    margin: 1em 1em 0 0;
     border: 2pt solid var(--main-light);
     border-radius: 5pt;
     display: flex;
