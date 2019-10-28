@@ -444,33 +444,47 @@ input.form-control.view-query::placeholder {
 
 /*==========================================IFRAME===========================================================*/
 
-.view-query-iframe-container {
+/*.view-query-iframe-container {*/
+/*    height: auto;*/
+/*    width: 100%;*/
+/*    padding: 1em;*/
+/*    margin: 0;*/
+/*    display: flex;*/
+/*}*/
+
+/*#view-query-iframe-row {*/
+/*    width: 100%;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
+/*#view-query-iframe-col {*/
+/*    width: 100%;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*    align-content: center;*/
+/*}*/
+
+/*#view-query-iframe-div {*/
+/*    border: 2pt solid var(--main-light);*/
+/*    border-radius: 5pt;*/
+/*    top: 2em;*/
+/*    position: relative;*/
+/*    overflow: hidden;*/
+/*}*/
+#view-query-iframe-container {
     height: auto;
     width: 100%;
-    padding: 1em;
+    padding: 0;
     margin: 0;
+    border: 2pt solid var(--main-light);
+    border-radius: 5pt;
     display: flex;
 }
 
-#view-query-iframe-row {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-}
-
-#view-query-iframe-col {
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    align-content: center;
-}
-
 #view-query-iframe-div {
-    border: 2pt solid var(--main-light);
-    border-radius: 5pt;
-    top: 2em;
-    position: relative;
     overflow: hidden;
+    position: relative;
 }
 
 /***
