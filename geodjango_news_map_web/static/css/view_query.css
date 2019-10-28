@@ -162,6 +162,7 @@ th {
      border-collapse: collapse;
      margin-bottom: 0;
      height: 100%;
+     width: 100%;
  }
 
 .article-li:first-child {
@@ -235,7 +236,7 @@ th {
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
     border-collapse: collapse;
-    overflow-x: auto;
+    overflow-x: hidden;
 }
 
 .article-title.title-center:hover,
@@ -449,15 +450,12 @@ input.form-control.view-query::placeholder {
     padding: 1em;
     margin: 0;
     display: flex;
-    position: relative;
-    overflow: hidden;
 }
 
 #view-query-iframe-row {
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden;
 }
 
 #view-query-iframe-col {
@@ -465,17 +463,11 @@ input.form-control.view-query::placeholder {
     margin: 0;
     padding: 0;
     align-content: center;
-    overflow: hidden;
 }
 
 #view-query-iframe-div {
     border: 2pt solid var(--main-light);
     border-radius: 5pt;
-    width: 100%;
-    /*height: auto;*/
-    height: calc(100% - 3em);
-    padding: 0;
-    margin: 0;
     top: 2em;
     position: relative;
     overflow: hidden;
