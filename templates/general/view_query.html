@@ -41,18 +41,18 @@
                 </div>
                 {% if user.pk == query_author.id %}
                     {% if query.archived is False %}
-                        <div class="post-query-container">
+                        <div id="post-query-container">
                             <form method="post" action="{% url 'new_post' %}" id="new-post-form">
                                 {% csrf_token %}
                                 <div class="input-group view-query" id="view-query-form-header">
-                                    <div class="input-group-prepend view-query" id="new-post-span-container">
+{#                                    <div class="input-group-prepend view-query" id="new-post-span-container">#}
                                         <p class="input-group-text title-center text-center" id="new-post-span">Post Your Query</p>
-                                    </div>
+{#                                    </div>#}
                                     <input type="text" id="view-query-form-input-title" class="form-control view-query" placeholder="Enter Title Here" aria-label="Post Title" name="_title">
                                 </div>
                                 <div class="input-group view-query" id="view-query-form-textarea-container">
                                     <label class="input-group-prepend view-query" id="textarea-label">
-                                        <textarea class="form-control view-query" id="new-post-textarea" aria-label="Post Body" name="_body" rows="11"><</textarea>
+                                        <textarea class="form-control view-query" id="new-post-textarea" aria-label="Post Body" name="_body" rows="11"></textarea>
                                     </label>
                                     <div id="pre-textarea" contenteditable></div>
                                 </div>

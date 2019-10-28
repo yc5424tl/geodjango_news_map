@@ -114,7 +114,7 @@ th {
     border-radius: 5pt;
     border-collapse: collapse;
     padding: 0;
-    margin-bottom: 2em;
+    margin-bottom: 0;
 }
 
 #articles-card {
@@ -154,10 +154,7 @@ th {
      max-height: calc(100vh - 150px);
      overflow-y: scroll;
      -webkit-overflow-scrolling: touch;
-     border-bottom: 1pt solid var(--main-light);
-     border-left: 1pt solid var(--transp-bg-7);
-     border-right: 1pt solid var(--transp-bg-7);
-     border-top: 1pt solid var(--transp-bg-7);
+     border: 1pt solid var(--main-light);
      background-color: var(--transp-bg-4);
      border-collapse: collapse;
      margin-bottom: 0;
@@ -314,7 +311,7 @@ th {
     }
 }
 
-@media (max-width: 1199px) {
+@media (min-width: 769px) and (max-width: 1199px) {
     .article-img-sm {
         display: block;
         text-align: center;
@@ -333,9 +330,21 @@ th {
     }
 }
 
+@media (max-width: 768px) {
+    .article-img-sm,
+    .article-img-xl,
+    .article-img-xl-container {
+        display: none;
+    }
+}
+
 
 
 /*================================================FORM=================================================*/
+
+#post-query-container {
+    background-color: var(--transp-bg-1);
+}
 
 #new-post-form {
     border: 1pt solid var(--main-light);
@@ -343,13 +352,16 @@ th {
     border-collapse: collapse;
 }
 
-#new-post-span-container {
-    margin: 0;
-}
+/*#new-post-span-container {*/
+/*    margin: 0;*/
+/*}*/
 
 #new-post-span {
     border: 1pt solid var(--main-light);
     border-collapse: collapse;
+    margin: 0;
+    width: 100%;
+    display: block;
 }
 
 .form-check-label {
@@ -362,13 +374,14 @@ th {
     border: 1pt solid var(--main-light);
     border-collapse: collapse;
     color: var(--aux-accent-3);
+    display: block;
 }
 
 #view-query-form-textarea-container {
     margin-top: 0;
     padding: 0;
     border-collapse: collapse;
-    border-radius: 5pt 5pt 0 0;
+    border-radius: 0;
     border: 1pt solid var(--main-light);
     height: 19.5em;
 }
@@ -382,7 +395,7 @@ textarea.form-control.view-query {
 }
 
 .form-control.view-query {
-    background-color: var(--main-dark);
+    background-color: transparent;
     color: var(--main-light);
 }
 
@@ -394,7 +407,7 @@ textarea.form-control.view-query {
     text-overflow: ellipsis;
     overflow: scroll;
     font-size: 12pt;
-    background-color: var(--main-dark);
+    background-color: transparent;
     color: var(--aux-accent-6);
     border: 1pt solid var(--main-light);
     border-collapse: collapse;
@@ -416,7 +429,7 @@ textarea.form-control.view-query {
 }
 
 input.form-control.view-query::placeholder {
-    color: var(--main-light);
+    color: var(--main-accent-2);
     opacity: 1.0;
 }
 
@@ -432,7 +445,7 @@ input.form-control.view-query::placeholder {
 #view-query-del-btn:hover,
 #view-query-save-btn:focus,
 #view-query-del-btn:focus {
-    background-color: var(--aux-accent-6);
+    background-color: var(--aux-accent-3);
     color: var(--main-light);
     border: 2pt solid var(--main-light);
     text-decoration-line: none;
@@ -475,8 +488,10 @@ input.form-control.view-query::placeholder {
 #view-query-iframe-container {
     height: auto;
     width: 100%;
-    padding: 0;
-    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin: 1em 0 0 0;
     border: 2pt solid var(--main-light);
     border-radius: 5pt;
     display: flex;
@@ -486,8 +501,8 @@ input.form-control.view-query::placeholder {
 #view-query-iframe-div {
     overflow: hidden;
     position: relative;
-    width: 100%;
-    height: auto;
+    width: auto;
+    height: 100%;
     padding: 0;
     margin: 0;
 }
