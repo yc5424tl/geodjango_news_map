@@ -40,7 +40,7 @@ body {
 }
 
 #main {
-    background-color: var(--main-grey);
+    background-color: var(--transp-bg-4);
     padding: 0;
  }
 
@@ -117,12 +117,12 @@ div.jumbotron {
     background-color: var(--transp-bg-4);
     border-radius: 5pt;
     color: var(--main-light);
-    border-collapse: collapse;
 }
 
 .row * button,
 .row * {
     color: var(--main-light);
+    background-color: var(--main-dark);
 }
 
 .article-image-iframe {
@@ -204,15 +204,20 @@ td, tr {
 #nav-collapse {
     margin-top: auto;
     padding-right: 16px;
+    padding-left: 16px;
     flex-wrap: nowrap;
     white-space: nowrap;
+    margin-left: 0;
+    margin-right: 0;
 }
 
-.navbar-toggler-icon,
-.navbar-toggler {
+.navbar-toggler-icon {
     background-color: var(--main-light);
-    color: var(--transp-bg-7);
 }
+.navbar-toggler {
+    background-color: var(--transp-bg-7);
+}
+
 
 .nav-link {
     border: 1pt solid transparent;
@@ -269,11 +274,11 @@ td, tr {
         align-content: space-evenly;
         text-align: justify-all;
         flex-grow: 1;
+        flex-basis: 0;
     }
     #nav-left {
         border-top-right-radius: initial;
         border-bottom-right-radius: initial;
-        margin-right: auto;
     }
     #nav-right {
         border-top-left-radius: initial;
@@ -318,6 +323,7 @@ td, tr {
         align-content: space-evenly;
         text-align: justify-all;
         flex-grow: 1;
+        flex-basis: 0;
     }
     #nav-left {
         border-top-right-radius: initial;
