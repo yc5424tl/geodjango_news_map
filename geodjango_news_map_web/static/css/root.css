@@ -281,7 +281,7 @@ td, tr {
     }
 
     #nav-collapse {
-        display: flex;
+        display: inline-flex;
         flex-wrap: nowrap;
     }
 }
@@ -336,7 +336,7 @@ td, tr {
     }
 
     #nav-collapse {
-        display: flex;
+        display: inline-flex;
         flex-wrap: nowrap;
     }
 }
@@ -361,7 +361,7 @@ td, tr {
         border-radius: 5pt;
     }
     #nav-right {
-        display: inline-block;
+        flex-flow: column;
         margin-left: auto;
         /*float: right;*/
         justify-content: right;
@@ -375,8 +375,8 @@ td, tr {
     }
     #nav-left {
         /*float: left;*/
+        flex-flow: column;
         margin-right: auto;
-        display: inline-block;
         width: 200px;
         max-width: 200px;
         min-width: 200px;
@@ -385,7 +385,7 @@ td, tr {
     }
 
     #nav-collapse {
-        display: flex;
+        display: inline-flex;
         justify-content: space-between;
         flex-wrap: nowrap;
     }
