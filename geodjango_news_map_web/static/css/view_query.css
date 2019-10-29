@@ -443,9 +443,9 @@ textarea.form-control.view-query {
     margin: 1em;
 }
 
-.btn-grp-sm.float-right {
-    align-content: space-evenly;
-}
+/*.btn-grp-sm.float-right {*/
+/*    align-content: space-evenly;*/
+/*}*/
 
 input.form-control.view-query::placeholder {
     color: var(--main-accent-2);
@@ -519,7 +519,7 @@ input.form-control.view-query::placeholder {
 #view-query-iframe-div {
     overflow: hidden;
     position: relative;
-    padding-top: 56.25%;
+    /*padding-top: 56.25%;*/
     /*width: 100%;*/
     /*padding: 0;*/
     /*margin: 0;*/
@@ -531,12 +531,12 @@ input.form-control.view-query::placeholder {
     top: 0;
     left: 0;*/
     /*width: 100%;*/
-    border: 0;
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
+    /*border: 0;*/
+    /*height: 100%;*/
+    /*left: 0;*/
+    /*position: absolute;*/
+    /*top: 0;*/
+    /*width: 100%;*/
     /*border: 0;*/
 }
 
