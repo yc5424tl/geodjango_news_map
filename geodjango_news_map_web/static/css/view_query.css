@@ -175,7 +175,8 @@ th {
      max-height: calc(100vh - 150px);
      overflow-y: scroll;
      -webkit-overflow-scrolling: touch;
-     border: 1pt solid var(--main-light);
+     border-left: 1pt solid var(--main-dark);
+     border-right: 1pt solid var(--main-dark);
      background-color: transparent;
      /*background-color: var(--transp-bg-4);*/
      border-collapse: collapse;
