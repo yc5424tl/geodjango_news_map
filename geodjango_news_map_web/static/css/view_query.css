@@ -429,7 +429,7 @@ textarea.form-control.view-query {
     color: var(--main-light);
 }
 
-[contenteditable=True]:empty:before {
+[contenteditable=true]:empty:before {
     content: attr(placeholder);
     display: block;
 }
