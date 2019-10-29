@@ -71,6 +71,7 @@ th {
     margin-bottom: 0;
     padding-bottom: 0;
     /*background-color: var(--transp-bg-4);*/
+    background-color: transparent;
 }
 
 #new-post-span-container {
@@ -81,6 +82,7 @@ th {
     margin-right: 0;
     margin-bottom: 1em;
     /*background-color: var(--transp-bg-4);*/
+    background-color: transparent;
     border-collapse: collapse;
 }
 
@@ -90,6 +92,7 @@ th {
     width: 100%;
     text-align: center;
     /*background-color: var(--transp-bg-4);*/
+    background-color: transparent;
     color: var(--main-light);
     font-size: 16pt;
     margin-left: 0;
@@ -379,10 +382,15 @@ th {
     border-collapse: collapse;
 }
 
+#view-query-form-header {
+    background-color: transparent;
+}
+
 #new-post-span {
     border: 1pt solid var(--main-light);
     border-collapse: collapse;
     /*background-color: var(--transp-bg-4);*/
+    background-color: transparent;
     margin: 0;
     width: 100%;
     display: block;
@@ -399,6 +407,7 @@ th {
     border-collapse: collapse;
     color: var(--aux-accent-3);
     /*background-color: var(--transp-bg-4);*/
+    background-color: transparent;
     display: block;
 }
 
@@ -430,7 +439,8 @@ textarea.form-control.view-query {
     overflow: scroll;
     font-size: 12pt;
     /*background-color: transparent;*/
-    color: var(--aux-accent-6);
+    /*color: var(--aux-accent-6);*/
+    color: var(--main-grey);
     border: 1pt solid var(--main-light);
     border-collapse: collapse;
     margin-top: 0;
