@@ -132,7 +132,7 @@ div.jumbotron {
 }
 
 #content-div {
-
+    bottom: 30px;
     padding: 1em 1em 60px 1em;
 }
 
@@ -396,6 +396,15 @@ td, tr {
         display: inline-flex;
         justify-content: space-between;
         flex-wrap: nowrap;
+    }
+}
+
+@media (min-width: 1px) and (max-width: 767px) {
+    #logo-container,
+    #logo-xl,
+    #logo-lg,
+    #logo-md {
+        display: none;
     }
 }
 

@@ -113,7 +113,7 @@ th {
 }
 
 #articles-col {
-    /*background-color: transparent;*/
+    background-color: transparent;
     color: var(--main-light);
     border-radius: 5pt;
     border-collapse: collapse;
@@ -125,6 +125,7 @@ th {
     height: calc(100vh - 60px);
     max-height: calc(100vh - 60px);
     /*background-color: var(--main-grey);*/
+    background-color: transparent;
     color: var(--main-light);
     border-radius: 5pt;
     margin: 0;
@@ -132,16 +133,17 @@ th {
     border: none;
 }
 
-#card-header {
+#card-hdr {
     color: var(--main-light);
     text-align: center;
-    /*background-color: transparent;*/
+    background-color: transparent;
 }
 
 #card-header-wrapper{
     /*background-color: var(--transp-bg-4);*/
+    background-color: transparent;
     color: var(--transp-bg-7);
-    border: none;
+    border: 0;
     text-shadow:
             0 0 5px #FFF,
             0 0 10px #FFF,
@@ -150,8 +152,9 @@ th {
             0 0 30px #BEFFF6,
             0 0 40px #BEFFF6,
             0 0 55px #BEFFF6,
-            0 0 75px #BEFFF6,
-            2px 2px 2px rgba(190,255,246, 0);
+            0 0 75px #BFFFF6,
+            /*2px 2px 2px rgba(190,255,246, 0.1);*/
+            2px 2px 2px var(--transp-bg-7);
     text-align: center;
     font-weight: 800;
 }
@@ -171,6 +174,7 @@ th {
      overflow-y: scroll;
      -webkit-overflow-scrolling: touch;
      border: 1pt solid var(--transp-bg-4);
+     background-color: transparent;
      /*background-color: var(--transp-bg-4);*/
      border-collapse: collapse;
      margin-bottom: 0;
@@ -196,7 +200,7 @@ th {
 }
 
 .article-li * {
-    /*background-color: transparent;*/
+    background-color: transparent;
     color: var(--main-light);
 }
 .article-li:last-of-type {
@@ -207,23 +211,27 @@ th {
 .article-row {
     height: 100%;
     /*background-color: var(--transp-bg-4);*/
+    background-color: var(--transp-bg-1);
     color: var(--main-light);
 }
 
 .left-buffer,
 .right-buffer {
     /*background-color: var(--transp-bg-4);*/
+    background-color: transparent;
     margin: 0;
 }
 
 .article-details-container {
     padding-left: 0;
     padding-right: 0;
+    background-color: transparent;
     /*background-color: var(--transp-bg-4);*/
     color: var(--main-light);
 }
 
 .article-details-container > * {
+    background-color: transparent;
     /*background-color: transparent;*/
     color: var(--main-light);
 }
@@ -236,6 +244,7 @@ th {
     margin-top: 10px;
     padding-bottom: 0;
     margin-bottom: 0;
+    background-color: transparent;
     /*background-color: transparent;*/
     color: var(--main-light);
     border-top-right-radius: 5pt;
@@ -252,6 +261,7 @@ th {
 .article-subtitle-container {
     text-align: left;
     align-content: start;
+    background-color: transparent;
     /*background-color: transparent;*/
     color: var(--main-light);
     margin-top: 0;
@@ -261,6 +271,7 @@ th {
 }
 
 .article-subtitle {
+    background-color: transparent;
     /*background-color: transparent;*/
     color: var(--main-light);
     padding-top: 0;
@@ -273,10 +284,12 @@ th {
 
 .article-author {
     color: #bc4b51;
+    background-color: transparent;
     /*background-color: transparent;*/
 }
 
 .article-body {
+    background-color: transparent;
     /*background-color: transparent;*/
     color: var(--aux-accent-5);
     padding: 2em 1em 1em 1em;
@@ -287,6 +300,7 @@ th {
 }
 
 .article-img-xl-container {
+    background-color: transparent;
     /*background-color: var(--transp-bg-4);*/
     color: var(--main-light);
     padding: 10px;
@@ -297,6 +311,7 @@ th {
     width: 100%;
     border-radius: 5pt;
     border-collapse: collapse;
+    background-color: transparent;
     /*background-color: transparent;*/
 }
 
@@ -307,6 +322,7 @@ th {
     .article-img-xl-container {
         display: block;
         text-align: center;
+        background-color: transparent;
         /*background-color: var(--transp-bg-4);*/
     }
     .article-img-xl {
@@ -315,6 +331,7 @@ th {
         width: 100%;
         height: auto;
         display: inline-block;
+        background-color: transparent;
         /*background-color: transparent;*/
     }
 }
@@ -327,6 +344,7 @@ th {
         border-collapse: collapse;
         width: 100%;
         height: auto;
+        background-color: transparent;
         /*background-color: var(--transp-bg-4);*/
     }
     .article-img-xl-container,
@@ -334,11 +352,12 @@ th {
         display: none;
     }
     .article-title {
+        background-color: transparent;
         color: var(--main-light);
     }
 }
 
-@media (max-width: 768px) {
+@media (min-width: 1px) and (max-width: 768px) {
     .article-img-sm,
     .article-img-xl,
     .article-img-xl-container {
