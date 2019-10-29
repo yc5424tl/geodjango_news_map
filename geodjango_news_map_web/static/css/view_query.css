@@ -145,7 +145,7 @@ th {
 #card-header-wrapper{
     /*background-color: var(--transp-bg-4);*/
     background-color: transparent;
-    color: var(--transp-bg-7);
+    color: rgb(0,0,0);
     border: 0;
     text-shadow:
             0 0 5px #FFF,
@@ -153,13 +153,13 @@ th {
             0 0 15px #FFF,
             0 0 20px #BEFFF6,
             0 0 30px #BEFFF6,
-            0 0 40px #BEFFF6,
-            0 0 55px #BEFFF6,
-            0 0 75px #BFFFF6,
+            0 0 40px #8BCCC3,
+            0 0 55px #72B3AA,
+            0 0 75px #FFF,
             /*2px 2px 2px rgba(190,255,246, 0.1);*/
             2px 2px 2px var(--transp-bg-7);
     text-align: center;
-    font-weight: 800;
+    font-weight: 900;
 }
 
 #card-header-wrapper {
@@ -249,7 +249,7 @@ th {
     margin-bottom: 0;
     background-color: transparent;
     /*background-color: transparent;*/
-    color: var(--main-light);
+    color: var(--main-link-color);
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
     border-collapse: collapse;
@@ -286,7 +286,7 @@ th {
 }
 
 .article-author {
-    color: #bc4b51;
+    color: var(--aux-accent-3);
     background-color: transparent;
     /*background-color: transparent;*/
 }
@@ -294,7 +294,7 @@ th {
 .article-body {
     background-color: transparent;
     /*background-color: transparent;*/
-    color: var(--aux-accent-5);
+    color: var(--main-light);
     padding: 2em 1em 1em 1em;
     margin-top: 0;
     margin-bottom: 0;
