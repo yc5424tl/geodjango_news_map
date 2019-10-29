@@ -429,6 +429,11 @@ textarea.form-control.view-query {
     color: var(--main-light);
 }
 
+[contenteditable=True]:empty:before {
+    content: attr(placeholder);
+    display: block;
+}
+
 #pre-textarea {
     min-height: 100%;
     width: 100%;
