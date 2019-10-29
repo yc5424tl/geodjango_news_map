@@ -145,7 +145,7 @@ th {
 }
 
 #card-header-wrapper{
-    /*background-color: var(--transp-bg-4);*/
+    font-size: xx-large;
     background-color: transparent;
     color: rgb(0,0,0);
     text-shadow:
@@ -175,7 +175,7 @@ th {
      max-height: calc(100vh - 150px);
      overflow-y: scroll;
      -webkit-overflow-scrolling: touch;
-     border: 1pt solid var(--transp-bg-4);
+     border: 1pt solid var(--main-light);
      background-color: transparent;
      /*background-color: var(--transp-bg-4);*/
      border-collapse: collapse;
