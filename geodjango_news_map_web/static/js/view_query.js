@@ -3,7 +3,7 @@ $(document).ready(() => {
     let preTextarea = $('#pre-textarea');
     preTextarea.on({
         'focus': () => {
-            if ($(this).textContent.toLowerCase().replace(`<br>`, "").trim().match('share your thoughts!')) {
+            if ($(this).textContent.toLowerCase().replace(`<br>`, "").trim().match('Share Your Thoughts!')) {
                 $(this).textContent = "";
                 $(this).css('color', '#35e8d6');
             }
