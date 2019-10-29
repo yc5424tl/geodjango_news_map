@@ -18,7 +18,7 @@
 #view-query-table {
     margin-top: 1em;
     padding: 1em;
-    background-color: var(--transp-bg-1);
+    background-color: var(--transp-bg-4);
 }
 
 th {
@@ -52,11 +52,11 @@ th {
 
 #post-query-container {
     margin-top: 2em;
-    background-color: var(--main-dark);
+    background-color: var(--transp-bg-4);
 }
 
 .port-query-container > form {
-    background-color: var(--main-dark);
+    background-color: var(--transp-bg-4);
 }
 
 .post-query-container > form > button {
@@ -69,7 +69,7 @@ th {
     border-collapse: collapse;
     margin-bottom: 0;
     padding-bottom: 0;
-    background-color: var(--main-dark);
+    background-color: var(--transp-bg-4);
 }
 
 #new-post-span-container {
@@ -79,7 +79,7 @@ th {
     margin-left: 0;
     margin-right: 0;
     margin-bottom: 1em;
-    background-color: var(--main-dark);
+    background-color: var(--transp-bg-4);
     border-collapse: collapse;
 }
 
@@ -88,7 +88,7 @@ th {
     border-top-left-radius: 5pt;
     width: 100%;
     text-align: center;
-    background-color: var(--main-dark);
+    background-color: var(--transp-bg-4);
     color: var(--main-light);
     font-size: 16pt;
     margin-left: 0;
@@ -101,7 +101,7 @@ th {
 /*=======================================ARTICLES=============================================*/
 
 #articles-wrapper {
-    background-color: var(--main-dark);
+    background-color: var(--transp-bg-4);
     border-radius: 5pt;
     padding: 0;
     margin-top: 2em;
@@ -134,7 +134,7 @@ th {
 }
 
 #card-header-wrapper{
-    background-color: var(--transp-bg-7);
+    background-color: var(--transp-bg-4);
     color: var(--transp-bg-7);
     border: none;
     text-shadow:
@@ -154,9 +154,9 @@ th {
 #card-header-wrapper {
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
-    border-top: 1pt solid var(--transp-bg-7);
-    border-right: 1pt solid var(--transp-bg-7);
-    border-left: 1pt solid var(--transp-bg-7);
+    border-top: 1pt solid var(--transp-bg-4);
+    border-right: 1pt solid var(--transp-bg-4);
+    border-left: 1pt solid var(--transp-bg-4);
     border-bottom: none;
     border-collapse: collapse;
 }
@@ -165,7 +165,7 @@ th {
      max-height: calc(100vh - 150px);
      overflow-y: scroll;
      -webkit-overflow-scrolling: touch;
-     border: 1pt solid var(--main-light);
+     border: 1pt solid var(--transp-bg-4);
      background-color: var(--transp-bg-4);
      border-collapse: collapse;
      margin-bottom: 0;
@@ -201,20 +201,20 @@ th {
 
 .article-row {
     height: 100%;
-    background-color: var(--transp-bg-1);
+    background-color: var(--transp-bg-4);
     color: var(--main-light);
 }
 
 .left-buffer,
 .right-buffer {
-    background-color: var(--transp-bg-1);
+    background-color: var(--transp-bg-4);
     margin: 0;
 }
 
 .article-details-container {
     padding-left: 0;
     padding-right: 0;
-    background-color: var(--transp-bg-1);
+    background-color: var(--transp-bg-4);
     color: var(--main-light);
 }
 
@@ -282,7 +282,7 @@ th {
 }
 
 .article-img-xl-container {
-    background-color: var(--transp-bg-1);
+    background-color: var(--transp-bg-4);
     color: var(--main-light);
     padding: 10px;
 }
@@ -302,7 +302,7 @@ th {
     .article-img-xl-container {
         display: block;
         text-align: center;
-        background-color: var(--transp-bg-1);
+        background-color: var(--transp-bg-4);
     }
     .article-img-xl {
         border-radius: 5pt;
@@ -322,7 +322,7 @@ th {
         border-collapse: collapse;
         width: 100%;
         height: auto;
-        background-color: var(--transp-bg-1);
+        background-color: var(--transp-bg-4);
     }
     .article-img-xl-container,
     .article-img-xl {
@@ -346,7 +346,7 @@ th {
 /*================================================FORM=================================================*/
 
 #post-query-container {
-    background-color: var(--transp-bg-1);
+    background-color: var(--transp-bg-4);
 }
 
 #new-post-form {
