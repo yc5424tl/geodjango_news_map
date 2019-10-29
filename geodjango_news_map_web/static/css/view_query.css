@@ -146,7 +146,6 @@ th {
     /*background-color: var(--transp-bg-4);*/
     background-color: transparent;
     color: rgb(0,0,0);
-    border: 0;
     text-shadow:
             0 0 5px #FFF,
             0 0 10px #FFF,
@@ -160,15 +159,13 @@ th {
             2px 2px 2px var(--transp-bg-7);
     text-align: center;
     font-weight: 900;
-}
-
-#card-header-wrapper {
     border-top-right-radius: 5pt;
     border-top-left-radius: 5pt;
-    border-top: 1pt solid var(--transp-bg-4);
-    border-right: 1pt solid var(--transp-bg-4);
-    border-left: 1pt solid var(--transp-bg-4);
-    border-bottom: none;
+    /*border-top: 1pt solid var(--transp-bg-4);*/
+    /*border-right: 1pt solid var(--transp-bg-4);*/
+    /*border-left: 1pt solid var(--transp-bg-4);*/
+    /*border-bottom: none;*/
+    border: 0;
     border-collapse: collapse;
 }
 
