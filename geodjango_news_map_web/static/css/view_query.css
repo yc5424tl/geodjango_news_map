@@ -140,6 +140,8 @@ th {
     color: var(--main-light);
     text-align: center;
     background-color: transparent;
+    padding-top: 3em;
+    padding-bottom: 1.5em;
 }
 
 #card-header-wrapper{
