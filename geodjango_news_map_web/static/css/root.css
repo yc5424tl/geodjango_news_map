@@ -44,14 +44,6 @@ body {
     padding: 0;
  }
 
-footer {
-    width: 100%;
-    height: 30px;
-    line-height: 1.5625;
-    /*line-height: 60px;*/
-    display: block;
-}
-
 .bg-div {
     background-color: var(--transp-bg-7);
 }
@@ -132,7 +124,7 @@ div.jumbotron {
 }
 
 #content-div {
-    margin-bottom: 30px;
+    margin-bottom: 0;
     padding: 1em 1em 60px 1em;
 }
 
@@ -144,11 +136,15 @@ div.jumbotron {
 }
 
 footer {
+    line-height: 1.5625;
+    display: block;
     width: 100%;
     text-align: center;
     bottom: 0;
     position: absolute;
     height: 60px;
+    align-content: center;
+    padding-bottom: 20px;
 }
 
 #footer-div {
