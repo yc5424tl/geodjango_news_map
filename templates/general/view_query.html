@@ -116,7 +116,7 @@
 {#                </div>#}
 {#            </div>#}
             <div class="col-sm-12 col-xl-8" id="view-query-iframe-container">
-                <div class="embed-responsive embed-responsive-16by9" id="view-query-iframe-div">
+                <div class="embed-responsive-16by9" id="view-query-iframe-div">
                     {{ choro_map|safe }}
                 </div>
             </div>
@@ -140,7 +140,7 @@
                                                 <a href="{{ article.article_url }}" class="img-link">
                                                     <h4 class="article-title title-center">{{ article.title }}</h4>
                                                 </a>
-                                                 <img class="article-img-sm" src="{{ article.image_url }}" alt="article.description }}">
+                                                 <img class="article-img-sm" src="{{ article.image_url }}" alt="{{ article.description }}">
                                                  <h6 class="title-center article-subtitle-container">
                                                      <sub class="article-subtitle title-center">
                                                          By <span class="article-author"> {{ article.author }}</span>
