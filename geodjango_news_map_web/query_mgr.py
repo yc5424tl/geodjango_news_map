@@ -56,7 +56,7 @@ class Query:
 
     def execute_query(self):
         response = requests.get(self.endpoint)
-        print(f'response == {response.json()}')
+        logger.log(level=logging.INFO, msg=f'response == {response.json()}')
         article_count = response.json()['totalResults']
         article_data = response.json()['articles']
 
@@ -65,20 +65,20 @@ class Query:
             if pages > 100:
                 pages = 5
             for p in range(2, pages):
-                print(f'Requesting Page # {p}')
+                logger.log(level=logging.INFO, msg=f'Requesting Page # {p}')
                 try:
                     page = requests.get(f'{self.endpoint}&page={p}')
-                    print(f'Before adding to article_data, len = {len(article_data)}')
+                    logger.log(level=logging.INFO, msg=f'Before adding to article_data, len = {len(article_data)}')
                     article_data += page.json()['articles']
-                    print(f'Before adding to article_data, len = {len(article_data)}')
+                    logger.log(level=logging.INFO, msg=f'Before adding to article_data, len = {len(article_data)}')
 
                 except requests.exceptions.RequestException as rE:
-                    print(f'RequestException while getting article_data @ page # {p}')
-                    logger.exception(rE)
+                    logger.log(level=logging.INFO, msg=f'RequestException while getting article_data @ page # {p}')
+                    logger.log(level=logging.ERROR, msg=logger.exception(rE))
                     continue
                 except builtins.KeyError as kE:
-                    print(f'KeyErrorException while getting article_data on {p}')
-                    logger.exception(kE)
+                    logger.log(level=logging.INFO, msg=f'KeyErrorException while getting article_data on {p}')
+                    logger.log(level=logging.ERROR, msg=logger.exception(kE))
                     continue
 
         return article_data

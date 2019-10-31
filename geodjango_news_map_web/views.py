@@ -360,3 +360,7 @@ def view_choro(request, query_pk):
 def view_test_page(request):
     return render(request, 'general/test_choro.html')
 
+
+@login_required()
+def get_sources_by_country(request):
+    new_sources = constructor.build_sources_by_country()

@@ -139,14 +139,15 @@ class QueryResultSet(models.Model):
 
 
 class Source(models.Model):
-    source_categories = (('business', 'Business'),
+    source_categories = (
+        ('business', 'Business'),
         ('entertainment', 'Entertainment'),
         ('general', 'General'),
         ('health', 'Health'),
         ('science', 'Science'),
         ('sports', 'Sports'),
         ('technology', 'Technology'))
-    _api_id = models.CharField(max_length=300)
+    _api_id = models.CharField(max_length=300, null=True)
     _category = models.CharField(max_length=300, choices=source_categories)
     _country = models.CharField(max_length=200)
     _country_alpha_code = models.CharField(max_length=3)
