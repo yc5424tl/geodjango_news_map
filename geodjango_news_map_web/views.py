@@ -361,8 +361,10 @@ def delete_comment(request, comment_pk):
 # @csrf_exempt
 # @permission_required('geodjango_news_map.add_source', 'geodjango_news_map.change_source')
 def import_sources(request):
+
     if request.method == 'POST':
         logger.log(level=logging.DEBUG, msg='POST request received')
+
         if request.user.is_authenticated:
             payload_dict = json.loads(request.POST.get('data'))
             logger.log(level=logging.INFO, msg=f'JSON DATA FROM POST ->\n\n {payload_dict}')
@@ -401,13 +403,15 @@ def import_sources(request):
                         new_source.save()
                         new_count += 1
                 logger.log(level=logging.INFO, msg=f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
-                return HttpResponse(status=201)
+                return HttpResponse(status=200)
 
             except ValueError:
                 logger.log(level=logging.INFO, msg=f'POST request to import sources failed to have sources as a data key.')
-                return HttpResponse(status=200)
+                return HttpResponse(status=204)
         else:
             return HttpResponse(status=401)
+    else:
+        return HttpResponse(status=405)
 
 
 #TODO def password_reset(request)
