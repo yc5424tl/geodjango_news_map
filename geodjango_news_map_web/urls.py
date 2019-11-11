@@ -1,4 +1,5 @@
 from django.conf.urls import url
+
 from . import views
 
 urlpatterns = [
@@ -25,7 +26,7 @@ urlpatterns = [
     url(r'^sources/import/$', views.import_sources, name='import_sources'),
     url(r'^sources/$', views.view_sources, name='view_sources'),
     url(r'^choro/view/(?P<query_pk>\d+)$', views.view_choro, name="view_choro"),
-    url(r'^test_page/$', views.view_test_page, name='view_test_page'),
+    # url(r'^test_page/$', views.view_test_page, name='view_test_page'),
 ]
 
 # ----- Generated urls from import django.contrib.auth.views in project.urls -----
