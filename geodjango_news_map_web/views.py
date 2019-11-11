@@ -5,7 +5,7 @@ from logging import Logger
 import pycountry
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
@@ -360,7 +360,7 @@ def delete_comment(request, comment_pk):
     return redirect(request, last_url)
 
 @csrf_exempt
-@permission_required('geodjango_news_map.add_source', 'geodjango_news_map.change_source')
+# @permission_required('geodjango_news_map.add_source', 'geodjango_news_map.change_source')
 def import_sources(request):
     if request.method == 'POST':
         if request.user.is_authenticated:

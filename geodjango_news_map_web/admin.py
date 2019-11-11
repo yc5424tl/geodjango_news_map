@@ -1,5 +1,6 @@
-from django.contrib.gis.admin import OSMGeoAdmin
 from django.contrib.gis import admin
+from django.contrib.gis.admin import OSMGeoAdmin
+
 from .models import Source, Post, QueryResultSet, Article, Comment, Category
 
 
@@ -21,7 +22,7 @@ class CommentAdmin(OSMGeoAdmin):
 
 @admin.register(Source)
 class SourceAdmin(OSMGeoAdmin):
-    list_display = ('_country', '_language', '_name', '_url', '_categories')
+    list_display = ('_country', '_language', '_name', '_url')
 
 @admin.register(Category)
 class CategoryAdmin(OSMGeoAdmin):
