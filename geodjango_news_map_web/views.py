@@ -12,7 +12,6 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, Http404
-from django.views.decorators.csrf import csrf_exempt
 
 from .constructor import Constructor
 from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, NewCommentForm
@@ -106,7 +105,7 @@ def new_query(request):
             qrs._choro_html = global_map.get_root().render()
             qrs._filename = filename
             qrs._author = User.objects.get(pk=request.user.pk)
-            qrs._choropleth = global_map._repr_html_()
+            qrs._choropleth = globalLOGIN_URL_map._repr_html_()
             qrs.save()
 
         return redirect('view_query', query_set.pk)
@@ -359,10 +358,11 @@ def delete_comment(request, comment_pk):
     messages.info(request, 'Failed to Delete Comment')
     return redirect(request, last_url)
 
-@csrf_exempt
+# @csrf_exempt
 # @permission_required('geodjango_news_map.add_source', 'geodjango_news_map.change_source')
 def import_sources(request):
     if request.method == 'POST':
+        logger.log(level=logging.DEBUG, msg='POST request received')
         if request.user.is_authenticated:
             payload_dict = json.loads(request.POST.get('data'))
             logger.log(level=logging.INFO, msg=f'JSON DATA FROM POST ->\n\n {payload_dict}')
