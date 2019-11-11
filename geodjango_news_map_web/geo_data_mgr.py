@@ -31,7 +31,7 @@ class GeoDataManager:
             self.json_data = self.req_data.json()
             return True
         except requests.exceptions.RequestException as e:
-            logger.exception(e)
+            logger.log(level=logging.ERROR, msg=f'Error fetching mapping json: {e}')
             return False
 
 

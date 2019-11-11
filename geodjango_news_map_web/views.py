@@ -1,20 +1,24 @@
+import json
+import logging
 from logging import Logger
 
 import pycountry
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import transaction
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, Http404
+from django.views.decorators.csrf import csrf_exempt
 
 from .constructor import Constructor
 from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, NewCommentForm
 from .geo_data_mgr import GeoDataManager
 from .geo_map_mgr import GeoMapManager
-from .models import QueryResultSet, Source, Post, Comment
+from .models import QueryResultSet, Source, Post, Comment, Category
 from .query_mgr import Query
 
 logger = Logger(__name__)
@@ -81,10 +85,10 @@ def new_query(request):
         geo_data_mgr.verify_geo_data()
         constructor.get_sources()
 
-        query_mgr = Query(argument=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
+        query_mgr = Query(arg=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
         query_mgr.get_endpoint()
         article_data = query_mgr.execute_query()
-        query_set = QueryResultSet.objects.create(_query_type=query_mgr.focus, _argument=query_mgr.argument, _data=article_data, _author=request.user)
+        query_set = QueryResultSet.objects.create(_query_type=query_mgr.focus, _argument=query_mgr.arg, _data=article_data, _author=request.user)
         query_set.save()
 
         article_list = constructor.build_article_data(article_data, query_set)
@@ -92,7 +96,7 @@ def new_query(request):
             code = geo_map_mgr.map_source(source_country=article.source_country)
             geo_data_mgr.add_result(code)
 
-        data_tup = geo_map_mgr.build_choropleth(query_mgr.argument, query_mgr.focus, geo_data_mgr)
+        data_tup = geo_map_mgr.build_choropleth(query_mgr.arg, query_mgr.focus, geo_data_mgr)
         if data_tup is None:
             return redirect('index', messages='build choropleth returned None')
         else:
@@ -259,7 +263,7 @@ def view_post(request, post_pk):
             messages.info(request, 'Post Details Updated')
         else:
             messages.error(request, form.errors)
-        return redirect('   post_details', post_pk=post_pk)
+        return redirect('post_details', post_pk=post_pk)
     else:
         post = Post.objects.get(pk=post_pk)
         qrs = post.query
@@ -272,17 +276,27 @@ def view_post(request, post_pk):
 
 
 def view_sources(request):
+
     constructor.get_sources()
+
     source_dict_list = [{
-        '''country''': country_a2_to_name(source),
-        '''country_a2''': source.country,
-        '''name''': source.name,
-        '''language''': str(source.language),
-        '''full_lang''': lang_a2_to_name(source),
-        '''category''': str(source.category),
-        '''url''': str(source.url)}
+        'country':     source.country,
+        'name':        source.name,
+        'language':    source.language,
+        'categories': [category.name for category in source.categories],
+        'url':         source.url}
     for source in Source.objects.all()]
-    return render(request, 'general/view_sources.html', {'sources': source_dict_list})
+
+    category_dict_list = [{
+        category.name: [{
+           'country': source.country,
+           'name': source.name,
+           'language': source.language,
+           'url': source.url
+        } for source in category.source_set]
+    } for category in Category.objects.all()]
+
+    return render(request, 'general/view_sources.html', {'sources': source_dict_list, 'categories': category_dict_list})
 
 
 def lang_a2_to_name(source):
@@ -344,6 +358,56 @@ def delete_comment(request, comment_pk):
     last_url = request.POST['redirect_url']
     messages.info(request, 'Failed to Delete Comment')
     return redirect(request, last_url)
+
+@csrf_exempt
+@permission_required('geodjango_news_map.add_source', 'geodjango_news_map.change_source')
+def import_sources(request):
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            payload_dict = json.loads(request.POST.get('data'))
+            logger.log(level=logging.INFO, msg=f'JSON DATA FROM POST ->\n\n {payload_dict}')
+
+            try:
+                updated_count = 0
+                new_count = 0
+                source_data = payload_dict['sources']
+                for source in source_data:
+
+                    try: # Check db for Source
+                        record = Source.objects.get(_name=source['name'])
+
+                        for cat in source['categories']: # Source exists in DB
+                            try: # Verify categories in DB
+                                category = Category.objects.get(name=cat)
+                            except ValueError: # Not in DB, create and add.
+                                category = Category(name=cat)
+                                category.save()
+                            if category not in record.categories: # Category exists but not yet for Source
+                                record.categories.append(category)
+                        updated_count += 1
+
+                    except Source.DoesNotExist:
+                        new_source = Source.objects.create(
+                                            _name=source['name'],
+                                            _country=source['country'],
+                                            _language=source['language'],
+                                            _url=source['url'] if source['url'] else None)
+                        for cat in source['categories']:
+                            try:
+                                category = Category.objects.get(name=cat)
+                                new_source.categories.add(category)
+                            except ValueError:
+                                new_source.categories_set.create(name=cat)
+                        new_source.save()
+                        new_count += 1
+                logger.log(level=logging.INFO, msg=f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
+                return HttpResponse(status=201)
+
+            except ValueError:
+                logger.log(level=logging.INFO, msg=f'POST request to import sources failed to have sources as a data key.')
+
+        elif request.user.is_authenticated is False:
+            return HttpResponse(status=401)
 
 
 #TODO def password_reset(request)

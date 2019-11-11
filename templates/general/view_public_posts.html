@@ -21,8 +21,7 @@
                     </h3>
                     <h6 class="view-posts-card-subtitle-container text-muted">
                         <sub class="view-posts-card-subtitle">
-                            By
-                            <a class="card-link view-posts-card-subtitle-link" href={% url 'view_user' post.author.pk %}>{{ post.author.username }}</a>
+                            By <a class="card-link view-posts-card-subtitle-link" href={% url 'view_user' post.author.pk %}>{{ post.author.username }}</a>
                             {{ post.date_published }} {{ post.comments.all.count }} Comments
                         </sub>
                     </h6>

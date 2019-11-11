@@ -4,12 +4,11 @@ import numpy as np
 import pandas as pd
 import pycountry
 import os
-
-from logging import Logger
+import logging
 from datetime import datetime
 from geodjango_news_map.settings import BASE_DIR
 
-logger = Logger(__name__)
+logger = logging.getLogger(__name__)
 
 SETTINGS_DIR = os.path.dirname(__file__)
 PROJECT_ROOT = os.path.abspath(os.path.dirname(SETTINGS_DIR))
@@ -76,7 +75,7 @@ class GeoMapManager:
             threshold_scale = [0, 1, 2, 5, 10, articles_per_country.values.max()]
 
         else:
-            logger.error('threshold-scale not being set in choropleth by articles_per_country.max')
+            logger.log(level=logging.ERROR, msg='threshold-scale not being set in choropleth by articles_per_country.max')
             threshold_scale = [0, 1, 2, 3, 4, 5]
 
         return threshold_scale
@@ -90,5 +89,5 @@ class GeoMapManager:
                 file.write(choro_html)
                 return True
         except FileNotFoundError as e:
-            logger.exception(f'{e} while writing map to file')
+            logger.log(level=logging.ERROR, msg=f'Error writing choropleth HTML to file: {e}')
             return False

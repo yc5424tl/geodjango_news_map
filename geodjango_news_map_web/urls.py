@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^accounts/register/$', views.register_user, name='register_user'),
     url(r'^accounts/view/(?P<member_pk>\d+)$', views.view_user, name='view_user'),
 
-
+    url(r'^sources/import/$', views.import_sources, name='import_sources'),
     url(r'^sources/$', views.view_sources, name='view_sources'),
     url(r'^choro/view/(?P<query_pk>\d+)$', views.view_choro, name="view_choro"),
     url(r'^test_page/$', views.view_test_page, name='view_test_page'),
