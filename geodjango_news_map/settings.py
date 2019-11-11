@@ -11,6 +11,7 @@
 
 
 import os
+
 import dj_database_url
 import django_heroku
 import dotenv
@@ -172,7 +173,7 @@ GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 if 'ON_HEROKU' in os.environ:
     ALLOWED_HOSTS = []
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    DEBUG = False
+    DEBUG = True
     # Activate Django-Heroku
     django_heroku.settings(locals())
 
