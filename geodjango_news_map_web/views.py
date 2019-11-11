@@ -83,7 +83,7 @@ def new_query(request):
 
     elif request.method == 'POST':
         geo_data_mgr.verify_geo_data()
-        constructor.get_sources()
+        # constructor.get_sources()
 
         query_mgr = Query(arg=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
         query_mgr.get_endpoint()
@@ -277,7 +277,7 @@ def view_post(request, post_pk):
 
 def view_sources(request):
 
-    constructor.get_sources()
+    # constructor.get_sources()
 
     source_dict_list = [{
         'country':     source.country,
@@ -420,11 +420,7 @@ def view_choro(request, query_pk):
     })
 
 
-@login_required()
-def view_test_page(request):
-    return render(request, 'general/test_choro.html')
 
-
-@login_required()
-def get_sources_by_country(request):
-    new_sources = constructor.build_sources_by_country()
+# @login_required()
+# def get_sources_by_country(request):
+#     new_sources = constructor.build_sources_by_country()

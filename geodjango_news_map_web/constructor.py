@@ -1,13 +1,10 @@
-import builtins
-import json
+import logging
 import os
 from datetime import datetime
-from logging import INFO, ERROR
-import logging
-import requests
+
 from dateutil.parser import parse
 
-from .models import Article, QueryResultSet, Source, Category
+from .models import Article, QueryResultSet, Source
 
 api_key = os.environ.get('NEWS_API_KEY_2')
 
@@ -97,63 +94,50 @@ class Constructor:
             return False
 
 
-
-    def get_sources(self):
-        try:
-            db_has_sources = Source.objects.get(pk=1)
-            logger.log(level=INFO, msg='past db_has_sources')
-            return bool(db_has_sources)
-        except (UnicodeDecodeError, FileNotFoundError, Source.DoesNotExist, TypeError):
-            try:
-                with open('./geodjango_news_map_web/static/js/sources.json') as sources:
-                    source_list = json.load(sources)
-                    logger.log(level=INFO, msg='loaded sources to source_list in constructor')
-                    logger.log(level=INFO, msg=f'type(source_list) = {type(source_list)}')
-                    logger.log(level=INFO, msg=f'source_list.keys = {source_list.keys()}')
-                    logger.log(level=INFO, msg=f'source_list[sources] type = {type(source_list["sources"])}')
-                    logger.log(level=INFO, msg=f'source_list[sources] = {source_list["sources"]}')
-                    for source_data in source_list['sources']:
-                        try:
-                            logger.log(level=INFO, msg=f"id = {source_data['id']}")
-                            logger.log(level=INFO, msg=f"name = {source_data['name']}")
-                            logger.log(level=INFO, msg=f"description = {source_data['description']}")
-                            logger.log(level=INFO, msg=f"url = {source_data['url']}")
-                            logger.log(level=INFO, msg=f"category = {source_data['category']}")
-                            logger.log(level=INFO, msg="language = {source_data['language']}")
-                            logger.log(level=INFO, msg="country = {source_data['country']}")
-                            # new_source = Source(_api_id=source_data['id'],
-                            #                     _name = source_data['name'],
-                            #                     _description=source_data['description'],
-                            #                     _url = source_data['url'],
-                            #                     _category = source_data['category'],
-                            #                     _language = source_data['language'],
-                            #                     _country = source_data['country'])
-                            new_source = Source(_name = source_data['name'],
-                                                _language = source_data['language'],
-                                                _country = source_data['country'],
-                                                _categories = [source_data['category']])
-                            new_source.save()
-                        except TypeError:
-                            logger.error(f'{TypeError} while constructing new Source')
-            except (FileNotFoundError, UnicodeDecodeError):
-                # logger.log(level=INFO, msg='final attempt, calling self.build_sources()')
-                # top_source_dict = self.build_top_sources
-                # logger.log(level=INFO, msg=f'sources = {top_source_dict}')
-                # country_source_dict = self.build_sources_by_country
-                # meta_dict = dict(country_source_dict, **top_source_dict)
-                # self.record_sources(top_source_dict)
-                # self.record_sources(country_source_dict)
-                return True
+    # @staticmethod
+    # def get_sources(self):
+    #     try:
+    #         db_has_sources = Source.objects.get(pk=1)
+    #         return bool(db_has_sources)
+    #     except (UnicodeDecodeError, FileNotFoundError, Source.DoesNotExist, TypeError):
+    #         try:
+    #             with open('./geodjango_news_map_web/static/js/sources_expanded_1.json') as sources:
+    #                 source_list = json.load(sources)
+    #                 for source_data in source_list['sources']:
+    #                     try:
+    #                         categories = []
+    #                         for category in source_data['category']:
+    #                             try:
+    #                                 cat = Category.objects.get(category)
+    #                             except ValueError:
+    #                                 cat = Category(name=category)
+    #                                 cat.save()
+    #                             categories.append(cat)
+    #                         new_source = Source(_name = source_data['name'],
+    #                                             _language = source_data['language'],
+    #                                             _country = source_data['country'],
+    #                                             _categories = categories)
+    #                         new_source.save()
+    #                     except TypeError:
+    #                         logger.error(f'{TypeError} while constructing new Source')
+    #         except (FileNotFoundError, UnicodeDecodeError):
+    #             logger.log(level=INFO, msg='final attempt, calling self.build_sources()')
+    #             # top_source_dict = self.build_top_sources
+    #             # logger.log(level=INFO, msg=f'sources = {top_source_dict}')
+    #             # country_source_dict = self.build_sources_by_country
+    #             # meta_dict = dict(country_source_dict, **top_source_dict)
+    #             # self.record_sources(top_source_dict)
+    #             # self.record_sources(country_source_dict)
+    #             return True
 
 
-    def filter_source(self, source_data):
-        try:
-            new_source = self.new_source(source_data)
-            if new_source:
-                new_source.save()
-        except TypeError:
-            logger.log(level=INFO, msg=f'TypeError while building_sources with {source_data}')
-            logger.error(f'{TypeError} while building new Source')
+    # def filter_source(self, source_data):
+    #     try:
+    #         new_source = self.new_source(source_data)
+    #         if new_source:
+    #             new_source.save()
+    #     except TypeError:
+    #         logger.log(level=INFO, msg=f'TypeError while building_sources with {source_data}')
 
 
     # def build_top_sources(self):
@@ -258,8 +242,8 @@ class Constructor:
     #                 continue
     #         source_list = list(filter(self.filter_source, data))
     #         return (source for source in source_list)
-    #
-    #
+
+
     # @staticmethod
     # def record_sources(source_json):
     #     try:
@@ -274,40 +258,40 @@ class Constructor:
 
 
 
-    def new_source(self, data: dict):
-
-        categories = []
-
-        if 'categories' in data.keys():
-            for cat in data['categories']:
-                try:
-                    category = Category.objects.get(_name=cat)
-                except ValueError:
-                    category = Category(_name=cat)
-                    category.save()
-                categories.append(category)
-
-        if 'category' in data.keys():
-            try:
-                cat = Category.objects.get(_name=data['category'])
-            except ValueError:
-                cat = Category(_name=data['category'])
-            cat.save()
-            categories.append(cat)
-
-        try:
-            name = self.verify_str(data['name'])
-        except UnicodeDecodeError:
-            name = self.verify_str(data['id']) if 'id' in data.keys() else None
-
-        url = data['url'] if 'url' in data.keys() else None
-
-        if name:
-            return Source(_categories  = categories,
-                          _country     = data['country'],
-                          _language    = data['language'],
-                          _name        = name,
-                          _url         = url)
-        else:
-            logger.log(level=logging.DEBUG, msg=f'Name/ID unavailable from Source data:\n{data}')
-            return False
+    # def new_source(self, data: dict):
+    #
+    #     categories = []
+    #
+    #     if 'categories' in data.keys():
+    #         for cat in data['categories']:
+    #             try:
+    #                 category = Category.objects.get(_name=cat)
+    #             except ValueError:
+    #                 category = Category(_name=cat)
+    #                 category.save()
+    #             categories.append(category)
+    #
+    #     if 'category' in data.keys():
+    #         try:
+    #             cat = Category.objects.get(_name=data['category'])
+    #         except ValueError:
+    #             cat = Category(_name=data['category'])
+    #         cat.save()
+    #         categories.append(cat)
+    #
+    #     try:
+    #         name = self.verify_str(data['name'])
+    #     except UnicodeDecodeError:
+    #         name = self.verify_str(data['id']) if 'id' in data.keys() else None
+    #
+    #     url = data['url'] if 'url' in data.keys() else None
+    #
+    #     if name:
+    #         return Source(_categories  = categories,
+    #                       _country     = data['country'],
+    #                       _language    = data['language'],
+    #                       _name        = name,
+    #                       _url         = url)
+    #     else:
+    #         logger.log(level=logging.DEBUG, msg=f'Name/ID unavailable from Source data:\n{data}')
+    #         return False
