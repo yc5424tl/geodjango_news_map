@@ -365,53 +365,59 @@ def import_sources(request):
     if request.method == 'POST':
         logger.log(level=logging.DEBUG, msg='POST request received')
 
-        if request.user.is_authenticated:
-            payload_dict = json.loads(request.POST.get('data'))
-            logger.log(level=logging.INFO, msg=f'JSON DATA FROM POST ->\n\n {payload_dict}')
+        # if request.user.is_authenticated:
+        #     payload_dict = json.loads(request.POST.get('data'))
+        #     logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {payload_dict}')
+        payload_dict = json.loads(request.POST.get('data'))
+        logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {payload_dict}')
+        try:
+            updated_count = 0
+            new_count = 0
+            source_data = payload_dict['sources']
+            for source in source_data:
 
-            try:
-                updated_count = 0
-                new_count = 0
-                source_data = payload_dict['sources']
-                for source in source_data:
+                try: # Check db for Source
+                    record = Source.objects.get(_name=source['name'])
 
-                    try: # Check db for Source
-                        record = Source.objects.get(_name=source['name'])
+                    for cat in source['categories']: # Source exists in DB
+                        try: # Verify categories in DB
+                            category = Category.objects.get(name=cat)
+                        except ValueError: # Not in DB, create and add.
+                            category = Category(name=cat)
+                            category.save()
+                        if category not in record.categories: # Category exists but not yet for Source
+                            record.categories.append(category)
+                    updated_count += 1
+                    logger.log(level=logging.INFO, msg=f'UPDATED COUNT == {updated_count}')
 
-                        for cat in source['categories']: # Source exists in DB
-                            try: # Verify categories in DB
-                                category = Category.objects.get(name=cat)
-                            except ValueError: # Not in DB, create and add.
-                                category = Category(name=cat)
-                                category.save()
-                            if category not in record.categories: # Category exists but not yet for Source
-                                record.categories.append(category)
-                        updated_count += 1
+                except Source.DoesNotExist:
+                    new_source = Source.objects.create(
+                                        _name=source['name'],
+                                        _country=source['country'],
+                                        _language=source['language'],
+                                        _url=source['url'] if source['url'] else None)
+                    for cat in source['categories']:
+                        try:
+                            category = Category.objects.get(name=cat)
+                            new_source.categories.add(category)
+                        except ValueError:
+                            new_source.categories_set.create(name=cat)
+                    new_source.save()
+                    new_count += 1
+                    logger.log(level=logging.INFO, msg=f'NEW COUNT == {new_count}')
+            logger.log(level=logging.INFO, msg=f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
+            return HttpResponse(status=200)
 
-                    except Source.DoesNotExist:
-                        new_source = Source.objects.create(
-                                            _name=source['name'],
-                                            _country=source['country'],
-                                            _language=source['language'],
-                                            _url=source['url'] if source['url'] else None)
-                        for cat in source['categories']:
-                            try:
-                                category = Category.objects.get(name=cat)
-                                new_source.categories.add(category)
-                            except ValueError:
-                                new_source.categories_set.create(name=cat)
-                        new_source.save()
-                        new_count += 1
-                logger.log(level=logging.INFO, msg=f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
-                return HttpResponse(status=200)
-
-            except ValueError:
-                logger.log(level=logging.INFO, msg=f'POST request to import sources failed to have sources as a data key.')
-                return HttpResponse(status=204)
-        else:
-            return HttpResponse(status=401)
+        except ValueError:
+            logger.log(level=logging.INFO, msg=f'POST request to import sources failed to have sources as a data key.')
+            return HttpResponse(status=204)
     else:
-        return HttpResponse(status=405)
+        logger.log(level=logging.INFO, msg=f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
+        return HttpResponse(status=401)
+    # else:
+    #     logger.log(level=logging.INFO, msg=f'SUCCESS IMPORTING SOURCES!  *<8^)-><3')
+    #
+    #     return HttpResponse(status=405)
 
 
 #TODO def password_reset(request)
