@@ -105,7 +105,7 @@ def new_query(request):
             qrs._choro_html = global_map.get_root().render()
             qrs._filename = filename
             qrs._author = User.objects.get(pk=request.user.pk)
-            qrs._choropleth = globalLOGIN_URL_map._repr_html_()
+            qrs._choropleth = global_map._repr_html_()
             qrs.save()
 
         return redirect('view_query', query_set.pk)
@@ -405,8 +405,8 @@ def import_sources(request):
 
             except ValueError:
                 logger.log(level=logging.INFO, msg=f'POST request to import sources failed to have sources as a data key.')
-
-        elif request.user.is_authenticated is False:
+                return HttpResponse(status=200)
+        else:
             return HttpResponse(status=401)
 
 
