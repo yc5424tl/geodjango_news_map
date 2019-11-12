@@ -377,22 +377,22 @@ def import_sources(request):
         payload_unicode = request.body.decode('utf-8')
         try:
             payload_body = json.loads(payload_unicode)
-            print(f'type(payload_unicode) == {type(payload_unicode)}, type(paylaod_body) == {type(payload_body)}')
+            logger.log(level=logging.INFO, msg=f'type(payload_unicode) == {type(payload_unicode)}, type(paylaod_body) == {type(payload_body)}')
             if isinstance(payload_unicode, dict):
-                print(payload_unicode.keys())
+                logger.log(level=logging.INFO, msg=payload_unicode.keys())
             if isinstance(payload_body, dict):
-                print(payload_body.keys())
-            payload_2 = json.loads(request.POST.get('data'))
+                logger.log(level=logging.INFO, msg=payload_body.keys())
+            # payload_2 = json.loads(request.POST.get('data'))
         except:
             pass
 
         # logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {json_payload}')
-        logger.log(level=logging.DEBUG, msg=f'type(payload_2) == {type(payload_2)} == {payload_2}')
+        # logger.log(level=logging.DEBUG, msg=f'type(payload_2) == {type(payload_2)} == {payload_2}')
         # logger.log(level=logging.DEBUG, msg=f'type(payload_3) == {type(payload_3)} == {payload_3}')
         try:
             updated_count = 0
             new_count = 0
-            source_data = payload_2['sources']
+            source_data = json.loads(payload_unicode['sources'])
             for source in source_data:
 
                 try: # Check db for Source
