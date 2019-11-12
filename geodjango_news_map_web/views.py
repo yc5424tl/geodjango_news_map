@@ -1,5 +1,6 @@
 import json
 import logging
+import sys
 from logging import Logger
 
 import pycountry
@@ -365,9 +366,9 @@ def delete_comment(request, comment_pk):
 # @ensure_csrf_cookie
 @csrf_exempt
 def import_sources(request):
-    logger.log(level=logging.INFO, msg=f"Inside import_sources endpoint")
+    sys.stdout.write(f"Inside import_sources endpoint")
     if request.method == 'POST':
-        logger.log(level=logging.DEBUG, msg='POST request received')
+        sys.stdout.write('POST request received')
 
         # if request.user.is_authenticated:
         #     payload_dict = json.loads(request.POST.get('data'))
@@ -376,19 +377,19 @@ def import_sources(request):
 
         # payload_3 = json.loads(request.body.decode("utf-8"))
         payload_unicode = request.body.decode('utf-8')
-        logger.log(level=logging.INFO, msg=f"Payload_unicode == {payload_unicode}\n Type == {type(payload_unicode)}" )
+        sys.stdout.write(f"Payload_unicode == {payload_unicode}\n Type == {type(payload_unicode)}" )
         try:
-            logger.log(level=logging.INFO, msg=f"Before try payload_body = json.loads(payload_unicode")
+            sys.stdout.write(f"Before try payload_body = json.loads(payload_unicode")
             payload_body = json.loads(payload_unicode)
-            logger.log(level=logging.INFO, msg=f"After try payload_body...")
-            logger.log(level=logging.INFO, msg=f'type(payload_unicode) == {type(payload_unicode)}, type(paylaod_body) == {type(payload_body)}')
+            sys.stdout.write(f"After try payload_body...")
+            sys.stdout.write(f'type(payload_unicode) == {type(payload_unicode)}, type(paylaod_body) == {type(payload_body)}')
             if isinstance(payload_unicode, dict):
-                logger.log(level=logging.INFO, msg=payload_unicode.keys())
+                sys.stdout.write(payload_unicode.keys())
             if isinstance(payload_body, dict):
-                logger.log(level=logging.INFO, msg=payload_body.keys())
+                sys.stdout.write(payload_body.keys())
             # payload_2 = json.loads(request.POST.get('data'))
         except:
-            logger.log(level=logging.INFO, msg=f"In except of try payload_body = json.loads(payload_unicode")
+            sys.stdout.write(f"In except of try payload_body = json.loads(payload_unicode")
             pass
 
         # logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {json_payload}')
@@ -412,7 +413,7 @@ def import_sources(request):
                         if category not in record.categories: # Category exists but not yet for Source
                             record.categories.append(category)
                     updated_count += 1
-                    logger.log(level=logging.INFO, msg=f'UPDATED COUNT == {updated_count}')
+                    sys.stdout.write(f'UPDATED COUNT == {updated_count}')
 
                 except Source.DoesNotExist:
                     new_source = Source.objects.create(
@@ -428,15 +429,15 @@ def import_sources(request):
                             new_source.categories_set.create(name=cat)
                     new_source.save()
                     new_count += 1
-                    logger.log(level=logging.INFO, msg=f'NEW COUNT == {new_count}')
-            logger.log(level=logging.INFO, msg=f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
+                    sys.stdout.write(f'NEW COUNT == {new_count}')
+            sys.stdout.write(f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
             return HttpResponse(status=200)
 
         except ValueError:
-            logger.log(level=logging.INFO, msg=f'POST request to import sources failed to have sources as a data key.')
+            sys.stdout.write(f'POST request to import sources failed to have sources as a data key.')
             return HttpResponse(status=204)
     else:
-        logger.log(level=logging.INFO, msg=f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
+        sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
         return HttpResponse(status=401)
     # else:
     #     logger.log(level=logging.INFO, msg=f'SUCCESS IMPORTING SOURCES!  *<8^)-><3')
