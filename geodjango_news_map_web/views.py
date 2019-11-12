@@ -371,12 +371,14 @@ def import_sources(request):
         # if request.user.is_authenticated:
         #     payload_dict = json.loads(request.POST.get('data'))
         #     logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {payload_dict}')
-        payload_dict = json.loads(request.POST.get('data'))
-        logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {payload_dict}')
+        # payload_dict = json.loads(request.POST.get('data'))
+        json_payload = json.loads(request.body.decode("utf-8"))
+        logger.log(level=logging.INFO, msg=f'type(json_payload) == {type(json_payload)}')
+        # logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {json_payload}')
         try:
             updated_count = 0
             new_count = 0
-            source_data = payload_dict['sources']
+            source_data = json_payload['sources']
             for source in source_data:
 
                 try: # Check db for Source
