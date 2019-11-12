@@ -373,12 +373,12 @@ def import_sources(request):
         #     logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {payload_dict}')
         # payload_dict = json.loads(request.POST.get('data'))
 
-        payload_3 = json.loads(request.body.decode("utf-8"))
+        # payload_3 = json.loads(request.body.decode("utf-8"))
         payload_2 = json.loads(request.POST.get('data'))
         logger.log(level=logging.INFO, msg=f'type(json_payload) == {type(payload_2(2))}')
         # logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {json_payload}')
         logger.log(level=logging.DEBUG, msg=f'type(payload_2) == {type(payload_2)} == {payload_2}')
-        logger.log(level=logging.DEBUG, msg=f'type(payload_3) == {type(payload_3)} == {payload_3}')
+        # logger.log(level=logging.DEBUG, msg=f'type(payload_3) == {type(payload_3)} == {payload_3}')
         try:
             updated_count = 0
             new_count = 0
