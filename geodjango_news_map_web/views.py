@@ -372,13 +372,18 @@ def import_sources(request):
         #     payload_dict = json.loads(request.POST.get('data'))
         #     logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {payload_dict}')
         # payload_dict = json.loads(request.POST.get('data'))
-        json_payload = json.loads(request.body.decode("utf-8"))
-        logger.log(level=logging.INFO, msg=f'type(json_payload) == {type(json_payload)}')
+        payload_1 = request.get_json()
+        payload_3 = json.loads(request.body.decode("utf-8"))
+        payload_2 = json.loads(request.POST.get('data'))
+        logger.log(level=logging.INFO, msg=f'type(json_payload) == {type(payload_2(2))}')
         # logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {json_payload}')
+        logger.log(level=logging.DEBUG, msg=f'type(payload_1) == {type(payload_1)} == {payload_1}')
+        logger.log(level=logging.DEBUG, msg=f'type(payload_2) == {type(payload_2)} == {payload_2}')
+        logger.log(level=logging.DEBUG, msg=f'type(payload_3) == {type(payload_3)} == {payload_3}')
         try:
             updated_count = 0
             new_count = 0
-            source_data = json_payload['sources']
+            source_data = payload_2['sources']
             for source in source_data:
 
                 try: # Check db for Source
