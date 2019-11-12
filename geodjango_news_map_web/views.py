@@ -374,8 +374,18 @@ def import_sources(request):
         # payload_dict = json.loads(request.POST.get('data'))
 
         # payload_3 = json.loads(request.body.decode("utf-8"))
-        payload_2 = json.loads(request.POST.get('data'))
-        logger.log(level=logging.INFO, msg=f'type(json_payload) == {type(payload_2(2))}')
+        payload_unicode = request.body.decode('utf-8')
+        try:
+            payload_body = json.loads(payload_unicode)
+            print(f'type(payload_unicode) == {type(payload_unicode)}, type(paylaod_body) == {type(payload_body)}')
+            if isinstance(payload_unicode, dict):
+                print(payload_unicode.keys())
+            if isinstance(payload_body, dict):
+                print(payload_body.keys())
+            payload_2 = json.loads(request.POST.get('data'))
+        except:
+            pass
+
         # logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {json_payload}')
         logger.log(level=logging.DEBUG, msg=f'type(payload_2) == {type(payload_2)} == {payload_2}')
         # logger.log(level=logging.DEBUG, msg=f'type(payload_3) == {type(payload_3)} == {payload_3}')
