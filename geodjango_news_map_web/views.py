@@ -21,6 +21,7 @@ from .geo_map_mgr import GeoMapManager
 from .models import QueryResultSet, Source, Post, Comment, Category
 from .query_mgr import Query
 
+logging.basicConfig(filename='news_map.log', level=logging.INFO)
 logger = Logger(__name__)
 
 constructor = Constructor()
@@ -364,7 +365,7 @@ def delete_comment(request, comment_pk):
 # @ensure_csrf_cookie
 @csrf_exempt
 def import_sources(request):
-
+    logger.log(level=logging.INFO, msg=f"Inside import_sources endpoint")
     if request.method == 'POST':
         logger.log(level=logging.DEBUG, msg='POST request received')
 
@@ -375,8 +376,11 @@ def import_sources(request):
 
         # payload_3 = json.loads(request.body.decode("utf-8"))
         payload_unicode = request.body.decode('utf-8')
+        logger.log(level=logging.INFO, msg=f"Payload_unicode == {payload_unicode}\n Type == {type(payload_unicode)}" )
         try:
+            logger.log(level=logging.INFO, msg=f"Before try payload_body = json.loads(payload_unicode")
             payload_body = json.loads(payload_unicode)
+            logger.log(level=logging.INFO, msg=f"After try payload_body...")
             logger.log(level=logging.INFO, msg=f'type(payload_unicode) == {type(payload_unicode)}, type(paylaod_body) == {type(payload_body)}')
             if isinstance(payload_unicode, dict):
                 logger.log(level=logging.INFO, msg=payload_unicode.keys())
@@ -384,6 +388,7 @@ def import_sources(request):
                 logger.log(level=logging.INFO, msg=payload_body.keys())
             # payload_2 = json.loads(request.POST.get('data'))
         except:
+            logger.log(level=logging.INFO, msg=f"In except of try payload_body = json.loads(payload_unicode")
             pass
 
         # logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {json_payload}')
