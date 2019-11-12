@@ -12,6 +12,7 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, Http404
+from django.views.decorators.csrf import csrf_exempt
 
 from .constructor import Constructor
 from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, NewCommentForm
@@ -360,6 +361,8 @@ def delete_comment(request, comment_pk):
 
 # @csrf_exempt
 # @permission_required('geodjango_news_map.add_source', 'geodjango_news_map.change_source')
+# @ensure_csrf_cookie
+@csrf_exempt
 def import_sources(request):
 
     if request.method == 'POST':
