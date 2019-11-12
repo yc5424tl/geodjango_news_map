@@ -392,7 +392,7 @@ def import_sources(request):
         try:
             updated_count = 0
             new_count = 0
-            source_data = json.loads(payload_unicode['sources'])
+            source_data = json.loads(payload_unicode)['sources']
             for source in source_data:
 
                 try: # Check db for Source
