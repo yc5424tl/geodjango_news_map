@@ -368,81 +368,73 @@ def delete_comment(request, comment_pk):
 def import_sources(request):
     sys.stdout.write(f"Inside import_sources endpoint")
     if request.method == 'POST':
-        sys.stdout.write('POST request received')
 
-        # if request.user.is_authenticated:
-        #     payload_dict = json.loads(request.POST.get('data'))
-        #     logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {payload_dict}')
-        # payload_dict = json.loads(request.POST.get('data'))
-
-        # payload_3 = json.loads(request.body.decode("utf-8"))
-        payload_unicode = request.body.decode('utf-8')
-        sys.stdout.write(f"Payload_unicode == {payload_unicode}\n Type == {type(payload_unicode)}" )
         try:
-            sys.stdout.write(f"Before try payload_body = json.loads(payload_unicode")
-            payload_body = json.loads(payload_unicode)
-            sys.stdout.write(f"After try payload_body...")
-            sys.stdout.write(f'type(payload_unicode) == {type(payload_unicode)}, type(paylaod_body) == {type(payload_body)}')
-            if isinstance(payload_unicode, dict):
-                sys.stdout.write(payload_unicode.keys())
-            if isinstance(payload_body, dict):
-                sys.stdout.write(payload_body.keys())
-            # payload_2 = json.loads(request.POST.get('data'))
+           payload = request.json()
+           sys.stdout(f'type(payload) == {type(payload)} === \n{payload}')
+           if isinstance(payload, dict):
+               sys.stdout(f'KEYS FOR PAYLOAD:\n\n{payload.keys}')
+           else:
+               sys.stdout('NOT A DICTIONARY')
+
+           try:
+               updated_count = 0
+               new_count = 0
+               source_data = json.loads(payload)['sources']
+               for source in source_data:
+
+                   try:  # Check db for Source
+                       record = Source.objects.get(_name=source['name'])
+
+                       for cat in source['categories']:  # Source exists in DB
+                           try:  # Verify categories in DB
+                               category = Category.objects.get(name=cat)
+                           except ValueError:  # Not in DB, create and add.
+                               category = Category(name=cat)
+                               category.save()
+                           if category not in record.categories:  # Category exists but not yet for Source
+                               record.categories.append(category)
+                       updated_count += 1
+                       sys.stdout.write(f'UPDATED COUNT == {updated_count}')
+
+                   except Source.DoesNotExist:
+                       new_source = Source.objects.create(
+                           _name=source['name'],
+                           _country=source['country'],
+                           _language=source['language'],
+                           _url=source['url'] if source['url'] else None)
+                       for cat in source['categories']:
+                           try:
+                               category = Category.objects.get(name=cat)
+                               new_source.categories.add(category)
+                           except ValueError:
+                               new_source.categories_set.create(name=cat)
+                       new_source.save()
+                       new_count += 1
+                       sys.stdout.write(f'NEW COUNT == {new_count}')
+               sys.stdout.write(f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
+               return HttpResponse(status=200)
+
+           except ValueError:
+               sys.stdout.write(f'POST request to import sources failed to have sources as a data key.')
+               return HttpResponse(status=204)
+
         except:
-            sys.stdout.write(f"In except of try payload_body = json.loads(payload_unicode")
+            sys.stdout.write(f"In except of try payload=request.json()")
             pass
+    else:
+         sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
+         return HttpResponse(status=401)
+        # else:
+        #     logger.log(level=logging.INFO, msg=f'SUCCESS IMPORTING SOURCES!  *<8^)-><3')
+        #
+        #     return HttpResponse(status=405)
+
 
         # logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {json_payload}')
         # logger.log(level=logging.DEBUG, msg=f'type(payload_2) == {type(payload_2)} == {payload_2}')
         # logger.log(level=logging.DEBUG, msg=f'type(payload_3) == {type(payload_3)} == {payload_3}')
-        try:
-            updated_count = 0
-            new_count = 0
-            source_data = json.loads(payload_unicode)['sources']
-            for source in source_data:
 
-                try: # Check db for Source
-                    record = Source.objects.get(_name=source['name'])
-
-                    for cat in source['categories']: # Source exists in DB
-                        try: # Verify categories in DB
-                            category = Category.objects.get(name=cat)
-                        except ValueError: # Not in DB, create and add.
-                            category = Category(name=cat)
-                            category.save()
-                        if category not in record.categories: # Category exists but not yet for Source
-                            record.categories.append(category)
-                    updated_count += 1
-                    sys.stdout.write(f'UPDATED COUNT == {updated_count}')
-
-                except Source.DoesNotExist:
-                    new_source = Source.objects.create(
-                                        _name=source['name'],
-                                        _country=source['country'],
-                                        _language=source['language'],
-                                        _url=source['url'] if source['url'] else None)
-                    for cat in source['categories']:
-                        try:
-                            category = Category.objects.get(name=cat)
-                            new_source.categories.add(category)
-                        except ValueError:
-                            new_source.categories_set.create(name=cat)
-                    new_source.save()
-                    new_count += 1
-                    sys.stdout.write(f'NEW COUNT == {new_count}')
-            sys.stdout.write(f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
-            return HttpResponse(status=200)
-
-        except ValueError:
-            sys.stdout.write(f'POST request to import sources failed to have sources as a data key.')
-            return HttpResponse(status=204)
-    else:
-        sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
-        return HttpResponse(status=401)
-    # else:
-    #     logger.log(level=logging.INFO, msg=f'SUCCESS IMPORTING SOURCES!  *<8^)-><3')
-    #
-    #     return HttpResponse(status=405)
 
 
 #TODO def password_reset(request)
