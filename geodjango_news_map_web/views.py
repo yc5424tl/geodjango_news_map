@@ -372,25 +372,24 @@ def import_sources(request):
         try:
            payload = json.loads(request.body)
            sys.stdout.write(f'type(payload) == {type(payload)} === \n===========================================\n\nPAYLOAD\n{payload}\n\n============================================')
-           if isinstance(payload, dict):
-               sys.stdout.write(f'KEYS FOR PAYLOAD:\n\n{payload.keys}')
-           else:
-               sys.stdout.write('NOT A DICTIONARY')
+           # if isinstance(payload, dict):
+           #     sys.stdout.write(f'KEYS FOR PAYLOAD:\n\n{payload.keys}')
+           # else:
+           #     sys.stdout.write('NOT A DICTIONARY')
 
            try:
                updated_count = 0
                new_count = 0
                # source_data = json.loads(payload)['sources']
                source_data = payload['sources']
+               sys.stdout.write(f'SOURCE_DATA == {source_data}')
                for source in source_data:
-
                    try:  # Check db for Source
                        record = Source.objects.get(_name=source['name'])
-
                        for cat in source['categories']:  # Source exists in DB
                            try:  # Verify categories in DB
                                category = Category.objects.get(name=cat)
-                           except ValueError:  # Not in DB, create and add.
+                           except Category.DoesNotExist:  # Not in DB, create and add.
                                category = Category(name=cat)
                                category.save()
                            if category not in record.categories:  # Category exists but not yet for Source
@@ -404,13 +403,13 @@ def import_sources(request):
                            _country=source['country'],
                            _language=source['language'],
                            _url=source['url'] if source['url'] else None)
+                       new_source.save()
                        for cat in source['categories']:
                            try:
                                category = Category.objects.get(name=cat)
                                new_source.categories.add(category)
-                           except ValueError:
+                           except Category.DoesNotExist:
                                new_source.categories_set.create(name=cat)
-                       new_source.save()
                        new_count += 1
                        sys.stdout.write(f'NEW COUNT == {new_count}')
                sys.stdout.write(f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
