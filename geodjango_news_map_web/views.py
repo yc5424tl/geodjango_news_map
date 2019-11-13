@@ -1,3 +1,4 @@
+import json
 import logging
 import sys
 from logging import Logger
@@ -369,12 +370,12 @@ def import_sources(request):
     if request.method == 'POST':
 
         try:
-           payload = request.json()
-           sys.stdout(f'type(payload) == {type(payload)} === \n===========================================\n\nPAYLOAD\n{payload}\n\n============================================')
+           payload = json.loads(request.body)
+           sys.stdout.write(f'type(payload) == {type(payload)} === \n===========================================\n\nPAYLOAD\n{payload}\n\n============================================')
            if isinstance(payload, dict):
-               sys.stdout(f'KEYS FOR PAYLOAD:\n\n{payload.keys}')
+               sys.stdout.write(f'KEYS FOR PAYLOAD:\n\n{payload.keys}')
            else:
-               sys.stdout('NOT A DICTIONARY')
+               sys.stdout.write('NOT A DICTIONARY')
 
            try:
                updated_count = 0
