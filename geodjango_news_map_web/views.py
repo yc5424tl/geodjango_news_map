@@ -371,7 +371,7 @@ def import_sources(request):
 
         try:
            payload = json.loads(request.body)
-           sys.stdout.write(f'type(payload) == {type(payload)} === \n===========================================\n\nPAYLOAD\n{payload}\n\n============================================')
+           sys.stdout.write(f'type(payload) == {type(payload)} === \n===============PAYLOAD==================\n\n\n{payload}\n\n============================================')
            # if isinstance(payload, dict):
            #     sys.stdout.write(f'KEYS FOR PAYLOAD:\n\n{payload.keys}')
            # else:
@@ -388,28 +388,43 @@ def import_sources(request):
                        record = Source.objects.get(_name=source['name'])
                        for cat in source['categories']:  # Source exists in DB
                            try:  # Verify categories in DB
-                               category = Category.objects.get(name=cat)
+                               category = Category.objects.get(_name=cat)
+                               sys.stdout.write(f'CATEGORY {category.name} EXISTS IN DB <checking cats for existing source>')
                            except Category.DoesNotExist:  # Not in DB, create and add.
-                               category = Category(name=cat)
+                               sys.stdout.write('IN EXCEPT: CATEGORY>DOESNOTEXIST inner cat in source[categories]')
+                               category = Category(_name=cat)
+                               category.save()
+                           except ValueError:
+                               sys.stdout.write('IN EXCEPT: VALUEERROR inner cat in source[categories]')
+                               category = Category(_name=cat)
                                category.save()
                            if category not in record.categories:  # Category exists but not yet for Source
+                               sys.stdout.write(f'ADDING CATEGORY <{category.name}> TO SOURCE {source.name}')
                                record.categories.append(category)
+                               record.save()
                        updated_count += 1
                        sys.stdout.write(f'UPDATED COUNT == {updated_count}')
 
-                   except Source.DoesNotExist:
+                   except (Source.DoesNotExist, ValueError):
+                       sys.stdout.write('IN EXCEPT OF <for source in source data>')
                        new_source = Source.objects.create(
                            _name=source['name'],
                            _country=source['country'],
                            _language=source['language'],
                            _url=source['url'] if source['url'] else None)
                        new_source.save()
+                       sys.stdout.write('CREATING NEW SOURCE <about to iterate for cat in source[categories]')
                        for cat in source['categories']:
+                           sys.stdout.write(f'IN LOOP <for cat in source[categories]> WITH CAT=={cat}')
                            try:
-                               category = Category.objects.get(name=cat)
+                               sys.stdout.write('CATEGORY EXISTS....ADDING TO NEW_SOURCE')
+                               category = Category.objects.get(_name=cat)
                                new_source.categories.add(category)
-                           except Category.DoesNotExist:
-                               new_source.categories_set.create(name=cat)
+                               sys.stdout.write('CATEGORY ADDED TO NEW SOURCE')
+                           except (ValueError, Category.DoesNotExist) as e:
+                               sys.stdout.write(f'IN EXCEPT FOR <cat in source_categories> (aka category not exists in db) for NEW source --\nEXCEPTION: {e}')
+                               new_source.categories_set.create(_name=cat)
+                               sys.stdout.write('CATEGORY CREATED IN DB AND ADDED TO NEW_SOURCE')
                        new_count += 1
                        sys.stdout.write(f'NEW COUNT == {new_count}')
                sys.stdout.write(f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')

@@ -1,10 +1,10 @@
 import os
+from datetime import datetime
 from typing import NoReturn
+
+import pycountry
 from django.conf import settings
 from django.db import models
-from datetime import datetime
-import pycountry
-
 
 BASE_DIR         = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_DIR     = os.path.dirname(__file__)
@@ -148,6 +148,10 @@ class QueryResultSet(models.Model):
 
 class Category(models.Model):
     _name = models.CharField(max_length=50)
+
+    @property
+    def name(self) -> str:
+        return self._name
 
 # class Source(models.Model):
 #     source_categories = (
