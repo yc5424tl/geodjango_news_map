@@ -420,6 +420,7 @@ def import_sources(request):
                                sys.stdout.write('CATEGORY EXISTS....ADDING TO NEW_SOURCE')
                                category = Category.objects.get(_name=cat)
                                new_source.categories.add(category)
+                               new_source.save()
                                sys.stdout.write('CATEGORY ADDED TO NEW SOURCE')
                            except (ValueError, Category.DoesNotExist) as e:
                                sys.stdout.write(f'IN EXCEPT FOR <cat in source_categories> (aka category not exists in db) for NEW source --\nEXCEPTION: {e}')
@@ -435,7 +436,7 @@ def import_sources(request):
                return HttpResponse(status=204)
 
         except:
-            sys.stdout.write(f"In except of try payload=request.json()")
+            sys.stdout.write(f"In except of try payload=json.loads(request.body)")
             return HttpResponse(status=204)
     else:
          sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
