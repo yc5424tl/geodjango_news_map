@@ -177,7 +177,7 @@ class Source(models.Model):
     _name = models.CharField(max_length=500)
     _country = models.CharField(max_length=3)
     _language = models.CharField(max_length=100)
-    _categories = models.ManyToManyField(Category)
+    _categories = models.ManyToManyField(Category)    # TODO add ", related_name='sources'"  after "Category"
     _url = models.URLField(null=True, blank=True, max_length=150)
 
     def __str__(self) -> str:

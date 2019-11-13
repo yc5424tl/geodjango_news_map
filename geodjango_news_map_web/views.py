@@ -9,6 +9,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import transaction
 from django.http import HttpResponse
@@ -368,81 +369,83 @@ def delete_comment(request, comment_pk):
 def import_sources(request):
     sys.stdout.write(f"Inside import_sources endpoint")
     if request.method == 'POST':
-
         try:
-           payload = json.loads(request.body)
-           sys.stdout.write(f'type(payload) == {type(payload)} === \n===============PAYLOAD==================\n\n\n{payload}\n\n============================================')
-           # if isinstance(payload, dict):
-           #     sys.stdout.write(f'KEYS FOR PAYLOAD:\n\n{payload.keys}')
-           # else:
-           #     sys.stdout.write('NOT A DICTIONARY')
+            payload = json.loads(request.body)
+            sys.stdout.write(f'type(payload) == {type(payload)} === \n===============PAYLOAD==================\n\n\n{payload}\n\n============================================')
+            # if isinstance(payload, dict):
+            #     sys.stdout.write(f'KEYS FOR PAYLOAD:\n\n{payload.keys}')
+            # else:
+            #     sys.stdout.write('NOT A DICTIONARY')
 
-           try:
-               updated_count = 0
-               new_count = 0
-               # source_data = json.loads(payload)['sources']
-               source_data = payload['sources']
-               sys.stdout.write(f'SOURCE_DATA == {source_data}')
-               for source in source_data:
-                   try:  # Check db for Source
-                       record = Source.objects.get(_name=source['name'])
-                       for cat in source['categories']:  # Source exists in DB
-                           try:  # Verify categories in DB
-                               category = Category.objects.get(_name=cat)
-                               sys.stdout.write(f'CATEGORY {category.name} EXISTS IN DB <checking cats for existing source>')
-                           except Category.DoesNotExist:  # Not in DB, create and add.
-                               sys.stdout.write('IN EXCEPT: CATEGORY>DOESNOTEXIST inner cat in source[categories]')
-                               category = Category.objects.create(_name=cat)
-                           except ValueError:
-                               sys.stdout.write('IN EXCEPT: VALUEERROR inner cat in source[categories]')
-                               category = Category.objects.create(_name=cat)
-                           sys.stdout.write('PREPEARING TO CHECK FOR CATEGORY IN SOURCE')
-                           sys.stdout.write(f'CATEGORY: {category.name}')
-                           # sys.stdout.write(f'SOURCE.CATEGORIES: {[category.name for category in record.categories]}')
-                           source_categories = record.categories.all()
-                           if category not in source_categories: # Category exists but not yet for Source
-                               sys.stdout.write(f'ADDING CATEGORY <{category.name}> TO SOURCE {source.name}')
-                               record.categories.append(category)
-                               record.save()
-                       updated_count += 1
-                       sys.stdout.write(f'UPDATED COUNT == {updated_count}')
+            try:
+                updated_count = 0
+                new_count = 0
+                # source_data = json.loads(payload)['sources']
+                source_data = payload['sources']
+                sys.stdout.write(f'SOURCE_DAT0A == {source_data}')
+                for source in source_data:
+                    try:  # Check db for Source
+                        record = Source.objects.get(_name=source['name'])
+                        for cat in source['categories']:  # Source exists in DB
+                            # try:  # Verify categories in DB
+                            category_tuple = Category.objects.get_or_create(_name=cat)
+                            category = category_tuple[0]
+                            sys.stdout.write(f'\nCATEGORY {category.name} EXISTS IN DB <checking cats for existing source>\n')
+                            # except Category.DoesNotExist:  # Not in DB, create and add.
+                            #     sys.stdout.write('\nIN EXCEPT: CATEGORY>DOESNOTEXIST inner cat in source[categories]\n')
+                            #     category = Category.objects.create(_name=cat)
+                            # except ValueError:
+                            #     sys.stdout.write('\nIN EXCEPT: VALUEERROR inner cat in source[categories]\n')
+                            #     category = Category.objects.create(_name=cat)
+                            sys.stdout.write('\nPREPEARING TO CHECK FOR CATEGORY IN SOURCE\n')
+                            sys.stdout.write(f'\nCATEGORY: {category.name}\n')
+                            # sys.stdout.write(f'SOURCE.CATEGORIES: {[category.name for category in record.categories]}'
+                            try:
+                                has_category = record.categories.get(_name=category.name)
+                            except (ValueError, ObjectDoesNotExist):
+                                record.categories.add(category)
+                                record.save()
+                            except BaseException as e:
+                                sys.stdout.write(f'\n CATCH-ALL EXCEPTION on has_category=record.categories.get(_name=category.name)\n{e}')
+                                pass
+                        updated_count += 1
+                        sys.stdout.write(f'\nUPDATED COUNT == {updated_count}\n')
 
-                   except (Source.DoesNotExist, ValueError):
-                       sys.stdout.write('IN EXCEPT OF <for source in source data>')
-                       new_source = Source.objects.create(
-                           _name=source['name'],
-                           _country=source['country'],
-                           _language=source['language'],
-                           _url=source['url'] if source['url'] else None)
-                       new_source.save()
-                       sys.stdout.write('CREATING NEW SOURCE <about to iterate for cat in source[categories]')
-                       for cat in source['categories']:
-                           sys.stdout.write(f'IN LOOP <for cat in source[categories]> WITH CAT=={cat}')
-                           try:
-                               sys.stdout.write('CATEGORY EXISTS....ADDING TO NEW_SOURCE')
-                               category = Category.objects.get(_name=cat)
-                               new_source.categories.add(category)
-                               new_source.save()
-                               sys.stdout.write('CATEGORY ADDED TO NEW SOURCE')
-                           except (ValueError, Category.DoesNotExist) as e:
-                               sys.stdout.write(f'IN EXCEPT FOR <cat in source_categories> (aka category not exists in db) for NEW source --\nEXCEPTION: {e}')
-                               new_source.categories_set.create(_name=cat)
-                               sys.stdout.write('CATEGORY CREATED IN DB AND ADDED TO NEW_SOURCE')
-                       new_count += 1
-                       sys.stdout.write(f'NEW COUNT == {new_count}')
-               sys.stdout.write(f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
-               return HttpResponse(status=200)
+                    except (Source.DoesNotExist, ValueError):
+                        sys.stdout.write('\nSOURCE NOT EXISTS - CREATING --- IN EXCEPT OF <for source in source data>\n')
+                        new_source = Source.objects.create(
+                            _name=source['name'],
+                            _country=source['country'],
+                            _language=source['language'],
+                            _url=source['url'] if source['url'] else None)
+                        new_source.save()
+                        sys.stdout.write('\nCREATING NEW SOURCE <about to iterate for cat in source[categories]\n')
+                        for cat in source['categories']:
+                            sys.stdout.write(f'IN LOOP <for cat in source[categories]> WITH CAT=={cat}')
+                            try:
+                                sys.stdout.write('CATEGORY EXISTS....ADDING TO NEW_SOURCE')
+                                category = Category.objects.get(_name=cat)
+                                new_source.categories.add(category)
+                                new_source.save()
+                                sys.stdout.write('CATEGORY ADDED TO NEW SOURCE')
+                            except (ValueError, Category.DoesNotExist) as e:
+                                sys.stdout.write(f'IN EXCEPT FOR <cat in source_categories> (aka category not exists in db) for NEW source --\nEXCEPTION: {e}')
+                                new_source.categories_set.create(_name=cat)
+                                sys.stdout.write('CATEGORY CREATED IN DB AND ADDED TO NEW_SOURCE')
+                        new_count += 1
+                        sys.stdout.write(f'NEW COUNT == {new_count}')
+                sys.stdout.write(f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
+                return HttpResponse(status=200)
 
-           except ValueError:
-               sys.stdout.write(f'POST request to import sources failed to have sources as a data key.')
-               return HttpResponse(status=204)
-
+            except ValueError:
+                sys.stdout.write(f'POST request to import sources failed to have sources as a data key.')
+                return HttpResponse(status=204)
         except:
             sys.stdout.write(f"In except of try payload=json.loads(request.body)")
             return HttpResponse(status=204)
     else:
-         sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
-         return HttpResponse(status=401)
+        sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
+        return HttpResponse(status=401)
         # else:
         #     logger.log(level=logging.INFO, msg=f'SUCCESS IMPORTING SOURCES!  *<8^)-><3')
         #
@@ -452,7 +455,6 @@ def import_sources(request):
         # logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {json_payload}')
         # logger.log(level=logging.DEBUG, msg=f'type(payload_2) == {type(payload_2)} == {payload_2}')
         # logger.log(level=logging.DEBUG, msg=f'type(payload_3) == {type(payload_3)} == {payload_3}')
-
 
 
 #TODO def password_reset(request)
