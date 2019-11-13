@@ -392,12 +392,13 @@ def import_sources(request):
                                sys.stdout.write(f'CATEGORY {category.name} EXISTS IN DB <checking cats for existing source>')
                            except Category.DoesNotExist:  # Not in DB, create and add.
                                sys.stdout.write('IN EXCEPT: CATEGORY>DOESNOTEXIST inner cat in source[categories]')
-                               category = Category(_name=cat)
-                               category.save()
+                               category = Category.objects.create(_name=cat)
                            except ValueError:
                                sys.stdout.write('IN EXCEPT: VALUEERROR inner cat in source[categories]')
-                               category = Category(_name=cat)
-                               category.save()
+                               category = Category.objects.create(_name=cat)
+                           sys.stdout.write('PREPEARING TO CHECK FOR CATEGORY IN SOURCE')
+                           sys.stdout.write(f'CATEGORY: {category.name}')
+                           sys.stdout.write(f'SOURCE.CATEGORIES: {[category.name for category in record.categories]}')
                            if category not in record.categories:  # Category exists but not yet for Source
                                sys.stdout.write(f'ADDING CATEGORY <{category.name}> TO SOURCE {source.name}')
                                record.categories.append(category)
