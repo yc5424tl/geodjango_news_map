@@ -1,4 +1,3 @@
-import json
 import logging
 import sys
 from logging import Logger
@@ -371,7 +370,7 @@ def import_sources(request):
 
         try:
            payload = request.json()
-           sys.stdout(f'type(payload) == {type(payload)} === \n{payload}')
+           sys.stdout(f'type(payload) == {type(payload)} === \n===========================================\n\nPAYLOAD\n{payload}\n\n============================================')
            if isinstance(payload, dict):
                sys.stdout(f'KEYS FOR PAYLOAD:\n\n{payload.keys}')
            else:
@@ -380,7 +379,8 @@ def import_sources(request):
            try:
                updated_count = 0
                new_count = 0
-               source_data = json.loads(payload)['sources']
+               # source_data = json.loads(payload)['sources']
+               source_data = payload['sources']
                for source in source_data:
 
                    try:  # Check db for Source
@@ -421,7 +421,7 @@ def import_sources(request):
 
         except:
             sys.stdout.write(f"In except of try payload=request.json()")
-            pass
+            return HttpResponse(status=204)
     else:
          sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
          return HttpResponse(status=401)
