@@ -38,6 +38,7 @@ def index(request):
         return render(request, 'general/index.html', {'form': form})
 
 
+
 def register_user(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -52,6 +53,7 @@ def register_user(request):
     if request.method == 'GET':
         form = CustomUserCreationForm()
         return render(request, 'general/new_user.html', {'form': form})
+
 
 
 def login_user(request):
@@ -73,9 +75,11 @@ def login_user(request):
         return render(request, 'general/login_user.html', {'form': form})
 
 
+
 def logout_user(request):
     if request.user.is_authenticated:
         messages.info(request, 'Logout Successful', extra_tags='alert')
+
 
 
 @login_required()
@@ -86,8 +90,6 @@ def new_query(request):
 
     elif request.method == 'POST':
         geo_data_mgr.verify_geo_data()
-        # constructor.get_sources()
-
         query_mgr = Query(arg=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
         query_mgr.get_endpoint()
         article_data = query_mgr.execute_query()
@@ -115,6 +117,7 @@ def new_query(request):
         return redirect('view_query', query_set.pk)
 
 
+
 @login_required()
 def view_query(request, query_result_set_pk):
     qrs = get_object_or_404(QueryResultSet, pk=query_result_set_pk)
@@ -126,6 +129,7 @@ def view_query(request, query_result_set_pk):
         'choro_html': qrs.choro_html,
         'filename': qrs.filename
     })
+
 
 
 @login_required()
@@ -160,6 +164,7 @@ def delete_query(request, query_pk):
     QueryResultSet.objects.filter(pk=query_pk).delete()
     messages.info(request, "Query Successfully Deleted")
     return redirect('new_query')
+
 
 
 @login_required()
@@ -240,6 +245,7 @@ def update_post(request, post_pk):
     return render(request, 'general/update_post.html')
 
 
+
 @login_required()
 def update_comment(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
@@ -254,6 +260,7 @@ def update_comment(request, comment_pk):
         else:
             messages.error(request, form.errors)
         return redirect('view_comment', comment_pk=comment_pk)
+
 
 
 @login_required()
@@ -278,9 +285,8 @@ def view_post(request, post_pk):
             return render(request, 'general/view_post.html', {'post': post, 'query': qrs, 'articles': articles})
 
 
-def view_sources(request):
 
-    # constructor.get_sources()
+def view_sources(request):
 
     source_dict_list = [{
         'country':     source.country,
@@ -302,6 +308,7 @@ def view_sources(request):
     return render(request, 'general/view_sources.html', {'sources': source_dict_list, 'categories': category_dict_list})
 
 
+
 def lang_a2_to_name(source):
     try:
         name = pycountry.languages.lookup(source.language).name
@@ -310,12 +317,14 @@ def lang_a2_to_name(source):
         return source.language
 
 
+
 def country_a2_to_name(source):
     try:
         name = pycountry.countries.lookup(source.country).name
         return name
     except LookupError:
         return source.country
+
 
 
 @login_required()
@@ -328,6 +337,7 @@ def delete_post(request):
         return redirect('index')
     else:
         messages.error(request, 'Action Not Authorized')
+
 
 
 @login_required()
@@ -345,6 +355,7 @@ def new_comment(request, post_pk):
         return redirect('view_comment', c.pk)
 
 
+
 @login_required()
 def view_comment(request, comment_pk):
     try:
@@ -352,6 +363,7 @@ def view_comment(request, comment_pk):
         return render(request, 'general/view_comment.html', {'comment': comment})
     except Comment.DoesNotExist:
         raise Http404
+
 
 
 @login_required()
@@ -362,93 +374,35 @@ def delete_comment(request, comment_pk):
     messages.info(request, 'Failed to Delete Comment')
     return redirect(request, last_url)
 
-# @csrf_exempt
-# @permission_required('geodjango_news_map.add_source', 'geodjango_news_map.change_source')
-# @ensure_csrf_cookie
+
+
 @csrf_exempt
 def import_sources(request):
     if request.method == 'POST':
         payload = json.loads(request.body)
-        sys.stdout.write(f'type(payload) == {type(payload)} === \n===============PAYLOAD==================\n\n\n{payload}\n\n============================================')
         try:
-            updated_count = 0
-            new_count = 0
             source_data = payload['sources']
-            sys.stdout.write(f'SOURCE_DATA == {source_data}')
             for data in source_data:
-                # try:  # Check db for Source
                 source, s_created = Source.objects.get_or_create(_name=data['name'], defaults={'_country': data['country'], '_language': data['language'], '_url': data['url'] if data['url'] else None})
-                update_counted = False
                 for cat_name in data['categories']:  # Source exists in DB
-                    # try:  # Verify categories in DB
                     category, c_created = Category.objects.get_or_create(_name=cat_name)
-                    # sys.stdout.write(f'\nCATEGORY {category.name} EXISTS IN DB <checking cats for existing source>\n')
-                    # except Category.DoesNotExist:  # Not in DB, create and add.
-                    #     sys.stdout.write('\nIN EXCEPT: CATEGORY>DOESNOTEXIST inner cat in source[categories]\n')
-                    #     category = Category.objects.create(_name=cat)
-                    # except ValueError:
-                    #     sys.stdout.write('\nIN EXCEPT: VALUEERROR inner cat in source[categories]\n')
-                    #     category = Category.objects.create(_name=cat)
-                    # sys.stdout.write('\nPREPEARING TO CHECK FOR CATEGORY IN SOURCE\n')
-                    # sys.stdout.write(f'\nCATEGORY: {category.name}\n')
-                    # sys.stdout.write(f'SOURCE.CATEGORIES: {[category.name for category in record.categories]}'
                     try:
                         source.categories.get(_name=category.name)
                     except ObjectDoesNotExist:
                         source.categories.add(category)
-                        if not s_created and not update_counted:
-                            updated_count +=1
-                            update_counted = True
                         source.save()
                     except BaseException as e:
                         sys.stdout.write(f'\n CATCH-ALL EXCEPTION on has_category=record.categories.get(_name=category.name)\n{e}')
                         pass
-                if s_created:
-                    new_count+=1
-            sys.stdout.write(f'\nUPDATED COUNT == {updated_count}\nNEW COUNT == {new_count}')
-
-            #     except (Source.DoesNotExist, ValueError):
-            #         sys.stdout.write('\nSOURCE NOT EXISTS - CREATING --- IN EXCEPT OF <for source in source data>\n')
-            #         new_source = Source.objects.create(
-            #             _name=data['name'],
-            #             _country=data['country'],
-            #             _language=data['language'],
-            #             _url=data['url'] if data['url'] else None)
-            #         new_source.save()
-            #         sys.stdout.write('\nCREATING NEW SOURCE <about to iterate for cat in source[categories]\n')
-            #         for cat in data['categories']:
-            #             sys.stdout.write(f'IN LOOP <for cat in source[categories]> WITH CAT=={cat}')
-            #             try:
-            #                 sys.stdout.write('CATEGORY EXISTS....ADDING TO NEW_SOURCE')
-            #                 category = Category.objects.get(_name=cat)
-            #                 new_source.categories.add(category)
-            #                 new_source.save()
-            #                 sys.stdout.write('CATEGORY ADDED TO NEW SOURCE')
-            #             except (ValueError, Category.DoesNotExist) as e:
-            #                 sys.stdout.write(f'IN EXCEPT FOR <cat in source_categories> (aka category not exists in db) for NEW source --\nEXCEPTION: {e}')
-            #                 new_source.categories_set.create(_name=cat)
-            #                 sys.stdout.write('CATEGORY CREATED IN DB AND ADDED TO NEW_SOURCE')
-            #         new_count += 1
-            #         sys.stdout.write(f'NEW COUNT == {new_count}')
-            # sys.stdout.write(f'Finished importing source data. \nUpdated: {updated_count}\nNew: {new_count}')
-            # return HttpResponse(status=200)
+            return HttpResponse(status=200)
 
         except (ValueError, BaseException) as e:
             sys.stdout.write(f'POST data has no key "sources". ERROR: {e}')
             return HttpResponse(status=204)
-
+    # return HttpResponse(status=200)
     else:
         sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
         return HttpResponse(status=401)
-        # else:
-        #     logger.log(level=logging.INFO, msg=f'SUCCESS IMPORTING SOURCES!  *<8^)-><3')
-        #
-        #     return HttpResponse(status=405)
-
-
-        # logger.log(level=logging.INFO, msg=f'USER IS AUTHENTICATED\n\nJSON DATA FROM POST ->\n\n {json_payload}')
-        # logger.log(level=logging.DEBUG, msg=f'type(payload_2) == {type(payload_2)} == {payload_2}')
-        # logger.log(level=logging.DEBUG, msg=f'type(payload_3) == {type(payload_3)} == {payload_3}')
 
 
 #TODO def password_reset(request)
@@ -459,9 +413,3 @@ def view_choro(request, query_pk):
     return render(request, 'general/view_choro.html', {
         'query': qrs
     })
-
-
-
-# @login_required()
-# def get_sources_by_country(request):
-#     new_sources = constructor.build_sources_by_country()

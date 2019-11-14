@@ -162,9 +162,6 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['*', '67.220.22.82']
-# CSRF_COOKIE_SECURE = True
-# CSRF_COOKIE_HTTPONLY = True
-# SESSION_COOKIE_SECURE = True
 
 
 LOGIN_URL = 'login'
@@ -179,6 +176,5 @@ if 'ON_HEROKU' in os.environ:
     ALLOWED_HOSTS = []
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
     DEBUG = True
-    # Activate Django-Heroku
-    django_heroku.settings(locals())
+    django_heroku.settings(locals()) # Activate Django-Heroku
 

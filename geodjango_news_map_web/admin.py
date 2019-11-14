@@ -23,6 +23,7 @@ class CommentAdmin(OSMGeoAdmin):
 @admin.register(Source)
 class SourceAdmin(OSMGeoAdmin):
     list_display = ('_country', '_language', '_name', '_url')
+    modifiable = ('_country', '_url', '_language')
 
 @admin.register(Category)
 class CategoryAdmin(OSMGeoAdmin):
