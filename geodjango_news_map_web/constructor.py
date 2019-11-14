@@ -10,6 +10,8 @@ api_key = os.environ.get('NEWS_API_KEY_2')
 
 logger = logging.getLogger(__name__)
 
+
+
 class Constructor:
 
     def new_article(self, response_data, query_set: QueryResultSet):

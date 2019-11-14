@@ -1,6 +1,7 @@
-import requests
 import json
 import logging
+
+import requests
 
 logger = logging.getLogger(__name__)
 
@@ -54,4 +55,3 @@ class GeoDataManager:
         with open(self.filename, 'w') as outfile:
             json.dump(self.json_data, outfile)
             return True
-

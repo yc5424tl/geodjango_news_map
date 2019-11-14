@@ -1,11 +1,13 @@
+import logging
+import os
+from datetime import datetime
+
 import folium
 import geopandas as gp
 import numpy as np
 import pandas as pd
 import pycountry
-import os
-import logging
-from datetime import datetime
+
 from geodjango_news_map.settings import BASE_DIR
 
 logger = logging.getLogger(__name__)

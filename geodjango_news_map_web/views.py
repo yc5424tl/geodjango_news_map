@@ -31,6 +31,7 @@ geo_data_mgr = GeoDataManager()
 geo_map_mgr = GeoMapManager()
 
 
+
 @transaction.atomic
 def index(request):
     if request.method == 'GET':
@@ -171,14 +172,17 @@ def delete_query(request, query_pk):
 def view_user(request, member_pk):
     try:
         member = User.objects.get(pk=member_pk)
+
         try:
             last_post = member.posts.order_by('-id')[0]
         except IndexError:
             last_post = None
+
         try:
             recent_posts = member.posts.order_by('-id')[1:5]
         except IndexError:
             recent_posts = None
+
         try:
             recent_comments = None
             has_comments = member.comments.all()[0]
@@ -186,6 +190,7 @@ def view_user(request, member_pk):
                 recent_comments = member.comments.all()[0:5]
         except IndexError:
             recent_comments = None
+
         try:
             recent_queries = None
             has_queries = member.queries.all()[0]

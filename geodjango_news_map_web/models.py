@@ -9,7 +9,6 @@ from django.db import models
 BASE_DIR         = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_DIR     = os.path.dirname(__file__)
 PROJECT_ROOT     = os.path.abspath(os.path.dirname(SETTINGS_DIR))
-# CHORO_MAP_ROOT   = os.path.join(PROJECT_ROOT, 'geodjango_news_map_web/media/query_html_result/')
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'geodjango_news_map_web/static'),]
 
 
@@ -22,22 +21,23 @@ class QueryManager(models.Manager):
                      choropleth      :str=None,
                      choro_html      :str=None,
                      data            :str=None,
-                     date_range_end  : datetime.date=None,
-                     date_range_start: datetime.date=None,
+                     date_range_end  :datetime.date=None,
+                     date_range_start:datetime.date=None,
                      public          :bool=False):
-        news_query = self.create(
-            _argument=arg,
-            _author=author,
-            _choropleth=choropleth,
-            _choro_html=choro_html,
-            _data=data,
-            _date_created=date_created,
-            _date_range_end=date_range_end,
-            _date_range_start=date_range_start,
-            _filename=self.filename,
-            _public=public,
-            _query_type=query_type)
-        return news_query
+                news_query = self.create(
+                    _argument         =arg,
+                    _author           =author,
+                    _choropleth       =choropleth,
+                    _choro_html       =choro_html,
+                    _data             =data,
+                    _date_created     =date_created,
+                    _date_range_end   =date_range_end,
+                    _date_range_start =date_range_start,
+                    _filename         =self.filename,
+                    _public           =public,
+                    _query_type       =query_type)
+                return news_query
+
 
 
 class QueryResultSet(models.Model):
@@ -114,8 +114,8 @@ class QueryResultSet(models.Model):
         self._date_last_modified = new_date
 
     def __str__(self):
-        details = f'Argument: {self._argument}\nQuery Type: {self._query_type}\nAuthor: {self._author}\nArchived: {self._archived}\n' \
-                  f'Public: {self._public}\nData[:500]: {self._data[:500]}\nChoroHTML: {self._choro_html[:500]}'
+        details = f'Argument: {self._argument}\n Query Type: {self._query_type}\n Author: {self._author}\n Archived: {self._archived}\n' \
+                  f'Public: {self._public}\n Data[:500]: {self._data[:500]}\n ChoroHTML: {self._choro_html[:500]}'
         if self._filename:
             details = f'{details}\nFilename = {self._filename}'
         return details
@@ -146,6 +146,8 @@ class QueryResultSet(models.Model):
         else:
             raise TypeError('Property "archived" must be type bool.')
 
+
+
 class Category(models.Model):
     _name = models.CharField(max_length=50)
 
@@ -153,32 +155,14 @@ class Category(models.Model):
     def name(self) -> str:
         return self._name
 
-# class Source(models.Model):
-#     source_categories = (
-#         ('business'     , 'Business'),
-#         ('entertainment', 'Entertainment'),
-#         ('general'      , 'General'),
-#         ('health'       , 'Health'),
-#         ('science'      , 'Science'),
-#         ('sports'       , 'Sports'),
-#         ('technology'   , 'Technology'),
-#         (None           , None)
-#     )
-#     _api_id             = models.CharField(max_length=300, null=True, blank=True)
-#     _category           = models.CharField(max_length=300, choices=source_categories, null=True, blank=True)
-#     _country            = models.CharField(max_length=200)
-#     _country_alpha_code = models.CharField(max_length=3)
-#     _description        = models.CharField(max_length=2000, null=True, blank=True)
-#     _language           = models.CharField(max_length=500)
-#     _name               = models.CharField(max_length=500)
-#     _url                = models.URLField(max_length=1000, null=True, blank=True)
+
 
 class Source(models.Model):
-    _name = models.CharField(max_length=500)
-    _country = models.CharField(max_length=3)
-    _language = models.CharField(max_length=100)
-    _categories = models.ManyToManyField(Category)    # TODO add ", related_name='sources'"  after "Category"
-    _url = models.URLField(null=True, blank=True, max_length=150)
+    _name       = models.CharField(max_length=500)
+    _country    = models.CharField(max_length=3)
+    _language   = models.CharField(max_length=100)
+    _categories = models.ManyToManyField(Category, related_name='sources')
+    _url        = models.URLField(null=True, blank=True, max_length=150)
 
     def __str__(self) -> str:
         return f'{self._name}, {self._country}, {self._country}'
@@ -218,6 +202,7 @@ class Source(models.Model):
     @property
     def url(self) -> str:
         return self._url
+
 
 
 class Article(models.Model):
@@ -270,6 +255,7 @@ class Article(models.Model):
         return self._title
 
 
+
 class Post(models.Model):
     _title          = models.CharField(max_length=300, default='', null=True, blank=True)
     _body           = models.CharField(max_length=50000, default='', null=True, blank=True)
@@ -312,6 +298,7 @@ class Post(models.Model):
             qrs_pk = self._query.pk
             qrs = QueryResultSet.objects.get(pk=qrs_pk)
             return qrs.choropleth if qrs.choropleth else None
+
 
 
 class Comment(models.Model):

@@ -33,7 +33,9 @@ class Query:
 
 
     def get_endpoint(self):
+
         valid_date_range = self.validate_date_range() if self.from_date and self.to_date else False
+
         if valid_date_range:
             if self.focus == 'all':
                 pass
@@ -41,6 +43,7 @@ class Query:
                 pass
             else:
                 return False
+
         elif not valid_date_range:
             if self.focus == 'all':
                 self.endpoint = f'https://newsapi.org/v2/everything?q={self.arg}&apiKey={api_key}'
@@ -48,10 +51,11 @@ class Query:
                 self.endpoint = f'https://newsapi.org/v2/top-headlines?q={self.arg}&apiKey={api_key}'
             else:
                 return False
+
         else:
             return False
-        return True
 
+        return True
 
 
     def execute_query(self):
