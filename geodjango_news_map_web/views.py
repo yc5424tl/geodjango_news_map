@@ -1,9 +1,11 @@
 import json
 import logging
+import os
 import sys
 from logging import Logger
 
 import pycountry
+import requests
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
@@ -399,14 +401,17 @@ def import_sources(request):
                     except BaseException as e:
                         sys.stdout.write(f'\n CATCH-ALL EXCEPTION on has_category=record.categories.get(_name=category.name)\n{e}')
                         pass
+            requests.get(os.getenv('STAY_ALIVE_URL'))
             return HttpResponse(status=200)
 
         except (ValueError, BaseException) as e:
             sys.stdout.write(f'POST data has no key "sources". ERROR: {e}')
+            requests.get(os.getenv('STAY_ALIVE_URL'))
             return HttpResponse(status=204)
     # return HttpResponse(status=200)
     else:
         sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
+        requests.get(os.getenv('STAY_ALIVE_URL'))
         return HttpResponse(status=401)
 
 
