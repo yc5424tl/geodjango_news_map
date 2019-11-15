@@ -5,7 +5,7 @@ from .models import Source, Post, QueryResultSet, Article, Comment, Category
 
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = (('_title','_author'), ('_date_published', '_source'), '_query')
+    list_display = ('_title','_author', '_date_published', '_source', '_query')
 
 @admin.register(QueryResultSet)
 class QueryResultSetAdmin(admin.ModelAdmin):
@@ -33,4 +33,4 @@ class SourceAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ('_name',)
+    list_display = '_name'
