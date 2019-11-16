@@ -28,6 +28,7 @@ class SourceAdmin(admin.ModelAdmin):
     list_display = ( '_name', '_country', '_language', '_url')
     list_editable = ('_country', '_language', '_url')
     list_filter = ('_country', '_language')
+    list_display_links = ['_name']
 
 
 
