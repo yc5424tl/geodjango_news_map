@@ -30,7 +30,7 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
 
@@ -176,6 +176,6 @@ GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 if 'ON_HEROKU' in os.environ:
     ALLOWED_HOSTS = []
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    DEBUG = False
+    DEBUG = True
     django_heroku.settings(locals()) # Activate Django-Heroku
 
