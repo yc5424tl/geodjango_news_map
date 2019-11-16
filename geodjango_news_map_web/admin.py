@@ -25,7 +25,7 @@ class CommentAdmin(admin.ModelAdmin):
 
 @admin.register(Source)
 class SourceAdmin(admin.ModelAdmin):
-    list_display = ('_country', '_language', '_name', '_url')
+    list_display = ( '_name', '_country', '_language', '_url')
     list_editable = ('_country', '_language', '_url')
     list_filter = ('_country', '_language')
 
@@ -33,4 +33,4 @@ class SourceAdmin(admin.ModelAdmin):
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = '_name'
+    list_display = ['_name']
