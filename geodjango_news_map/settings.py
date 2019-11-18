@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*','0.0.0.0', '127.0.0.1', 'localhost']
 
 # Application definition
 
@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'geodjango_news_map_web',
     'storages',
-    'admin_honeypot',
+    # 'admin_honeypot',
 ]
 
 MIDDLEWARE = [
@@ -185,7 +185,7 @@ CSRF_TRUSTED_ORIGINS = ['*','127.0.0.1', 'localhost', 'geodjango-news-map.heroku
 #
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWAREDED_PROTO', 'https')
 
-ADMIN_HONEYPOT_EMAIL_ADMINS = False
+# ADMIN_HONEYPOT_EMAIL_ADMINS = False
 
 
 
@@ -198,34 +198,34 @@ GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
 if 'ON_HEROKU' in os.environ:
-    ALLOWED_HOSTS = ['geodjango-news-map.herokuapp.com']
+    ALLOWED_HOSTS = ['*', 'geodjango-news-map.herokuapp.com']
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
     DEBUG = False
     django_heroku.settings(locals(), allowed_hosts=False, logging=False) # Activate Django-Heroku
                                             # staticfiles=False
-if DEBUG:
-    INTERNAL_IPS = ('127.0.0.1', 'localhost')
-    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
-    INSTALLED_APPS.append('debug_toolbar')
-    DEBUG_TOOLBAR_PANELS = [
-        'debug_toolbar.panels.versions.VersionsPanel',
-        'debug_toolbar.panels.timer.TimerPanel',
-        'debug_toolbar.panels.settings.SettingsPanel',
-        'debug_toolbar.panels.headers.HeadersPanel',
-        'debug_toolbar.panels.request.RequestPanel',
-        'debug_toolbar.panels.sql.SQLPanel',
-        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-        'debug_toolbar.panels.templates.TemplatesPanel',
-        'debug_toolbar.panels.cache.CachePanel',
-        'debug_toolbar.panels.signals.SignalsPanel',
-        'debug_toolbar.panels.logging.LoggingPanel',
-        'debug_toolbar.panels.redirects.RedirectsPanel',
-    ]
-    DEBUG_TOOLBAR_CONFIG = {
-        'INTERCEPT_REDIRECTS': False,
-        'SHOW_COLLAPSED': True,
-        'SQL_WARNING_THRESHOLD': 100,
-    }
+# if DEBUG:
+#     INTERNAL_IPS = ('127.0.0.1', 'localhost')
+#     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+#     INSTALLED_APPS.append('debug_toolbar')
+#     DEBUG_TOOLBAR_PANELS = [
+#         'debug_toolbar.panels.versions.VersionsPanel',
+#         'debug_toolbar.panels.timer.TimerPanel',
+#         'debug_toolbar.panels.settings.SettingsPanel',
+#         'debug_toolbar.panels.headers.HeadersPanel',
+#         'debug_toolbar.panels.request.RequestPanel',
+#         'debug_toolbar.panels.sql.SQLPanel',
+#         'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+#         'debug_toolbar.panels.templates.TemplatesPanel',
+#         'debug_toolbar.panels.cache.CachePanel',
+#         'debug_toolbar.panels.signals.SignalsPanel',
+#         'debug_toolbar.panels.logging.LoggingPanel',
+#         'debug_toolbar.panels.redirects.RedirectsPanel',
+#     ]
+#     DEBUG_TOOLBAR_CONFIG = {
+#         'INTERCEPT_REDIRECTS': False,
+#         'SHOW_COLLAPSED': True,
+#         'SQL_WARNING_THRESHOLD': 100,
+#     }
 
 
 from .logger import LOGGING
