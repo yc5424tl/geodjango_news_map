@@ -145,17 +145,17 @@ AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400',}
 AWS_LOCATION = 'static'
 AWS_DEFAULT_ACL = None
 
-S3_URL = f'http://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}'
-DEFAULT_FILE_STORAGE = "s3utils.MediaRootS3BotoStorage"
-STATICFILES_STORAGE = "s3utils.StaticRootS3BotoStorage"
+# S3_URL = f'http://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}'
+# DEFAULT_FILE_STORAGE = "s3utils.MediaRootS3BotoStorage"
+# STATICFILES_STORAGE = "s3utils.StaticRootS3BotoStorage"
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_web/media/')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_web/media/')
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'geodjango_news_map_web/static'),]
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATICFILES_STORAGE = "geodjango_news_map.storage_backends.S3StaticStorage"
 # DEFAULT_FILE_STORAGE = "geodjango_news_map.storage_backends.S3MediaStorage"
 
@@ -164,10 +164,10 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-# STATIC_URL = f'https://{AWS_S3_STATIC_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+STATIC_URL = f'https://{AWS_S3_STATIC_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 # STATIC_URL = '/static/'
-# MEDIA_URL = '/media/'
-# ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+MEDIA_URL = '/media/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 
 CORS_ALLOW_CREDENTIALS = True
