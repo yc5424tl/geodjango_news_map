@@ -30,9 +30,9 @@ if os.path.isfile(dotenv_file):
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*','0.0.0.0', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -171,7 +171,7 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['*','127.0.0.1', 'localhost', 'geodjango-news-map.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['*']
 
 # CSRF_COOKIE_SECURE = True
 # SESSION_COOKIE_SECURE = True
@@ -198,10 +198,10 @@ GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
 if 'ON_HEROKU' in os.environ:
-    ALLOWED_HOSTS = ['*', 'geodjango-news-map.herokuapp.com']
+    ALLOWED_HOSTS = []
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
     DEBUG = False
-    django_heroku.settings(locals(), allowed_hosts=False, logging=False) # Activate Django-Heroku
+    django_heroku.settings(locals()) # Activate Django-Heroku
                                             # staticfiles=False
 # if DEBUG:
 #     INTERNAL_IPS = ('127.0.0.1', 'localhost')
