@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'geodjango_news_map_web',
     'storages',
+    'admin_honeypot',
 ]
 
 MIDDLEWARE = [
@@ -162,7 +163,20 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['*', '67.220.22.82']
+CSRF_TRUSTED_ORIGINS = ['127.0.0.1', 'localhost', 'geodjango-news-map.herokuapp.com']
+
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_PROXY_SSL = True
+SECURE_SSL_REDIRECT = True
+SECURE_HSTS_SECONDS = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XXS_FILTER = True
+X_FRAME_OPTIONS = 'DENY'
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWAREDED_PROTO', 'https')
+
 
 
 LOGIN_URL = 'login'
@@ -174,8 +188,34 @@ GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
 if 'ON_HEROKU' in os.environ:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['geodjango-news-map.herokuapp.com']
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    DEBUG = True
-    django_heroku.settings(locals()) # Activate Django-Heroku
+    DEBUG = False
+    django_heroku.settings(locals(), allowed_hosts=False, logging=False) # Activate Django-Heroku
 
+if DEBUG:
+    INTERNAL_IPS = ('127.0.0.1', 'localhost')
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+    INSTALLED_APPS.append('debug_toolbar')
+    DEBUG_TOOLBAR_PANELS = [
+        'debug_toolbar.panels.versions.VersionsPanel',
+        'debug_toolbar.panels.timer.TimerPanel',
+        'debug_toolbar.panels.settings.SettingsPanel',
+        'debug_toolbar.panels.headers.HeadersPanel',
+        'debug_toolbar.panels.request.RequestPanel',
+        'debug_toolbar.panels.sql.SQLPanel',
+        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+        'debug_toolbar.panels.templates.TemplatesPanel',
+        'debug_toolbar.panels.cache.CachePanel',
+        'debug_toolbar.panels.signals.SignalsPanel',
+        'debug_toolbar.panels.logging.LoggingPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+    ]
+    DEBUG_TOOLBAR_CONFIG = {
+        'INTERCEPT_REDIRECTS': False,
+        'SHOW_COLLAPSED': True,
+        'SQL_WARNING_THRESHOLD': 100,
+    }
+
+
+from .logger import LOGGING

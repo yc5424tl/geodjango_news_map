@@ -408,7 +408,6 @@ def import_sources(request):
             sys.stdout.write(f'POST data has no key "sources". ERROR: {e}')
             requests.get(os.getenv('STAY_ALIVE_URL'))
             return HttpResponse(status=204)
-    # return HttpResponse(status=200)
     else:
         sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
         requests.get(os.getenv('STAY_ALIVE_URL'))
