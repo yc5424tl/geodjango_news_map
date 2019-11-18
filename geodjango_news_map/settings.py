@@ -193,7 +193,7 @@ if 'ON_HEROKU' in os.environ:
     ALLOWED_HOSTS = ['geodjango-news-map.herokuapp.com']
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
     DEBUG = False
-    django_heroku.settings(locals(), allowed_hosts=False, logging=False) # Activate Django-Heroku
+    django_heroku.settings(locals(), allowed_hosts=False, logging=False, staticfiles=False) # Activate Django-Heroku
 
 if DEBUG:
     INTERNAL_IPS = ('127.0.0.1', 'localhost')
