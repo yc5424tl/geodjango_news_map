@@ -299,7 +299,7 @@ def view_sources(request):
         'country':     source.country,
         'name':        source.name,
         'language':    source.language,
-        'categories': [category.name for category in source.categories],
+        'categories': [category.name for category in source.categories.all()],
         'url':         source.url}
     for source in Source.objects.all()]
 
