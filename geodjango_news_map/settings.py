@@ -137,7 +137,7 @@ USE_TZ = True
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_S3_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SEC')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_MEDIA_BUCKET')
-AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
+# AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
 AWS_STATIC_BUCKET = os.environ.get('AWS_STATIC_BUCKET')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_STATIC_CUSTOM_DOMAIN = f'{AWS_STATIC_BUCKET}.s3.amazonaws.com'
@@ -171,19 +171,19 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 
 CORS_ALLOW_CREDENTIALS = True
-CSRF_TRUSTED_ORIGINS = ['127.0.0.1', 'localhost', 'geodjango-news-map.herokuapp.com']
+CSRF_TRUSTED_ORIGINS = ['*','127.0.0.1', 'localhost', 'geodjango-news-map.herokuapp.com']
 
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-SECURE_PROXY_SSL = True
-SECURE_SSL_REDIRECT = True
-SECURE_HSTS_SECONDS = True
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XXS_FILTER = True
-X_FRAME_OPTIONS = 'DENY'
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWAREDED_PROTO', 'https')
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_PROXY_SSL = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_BROWSER_XXS_FILTER = True
+# X_FRAME_OPTIONS = 'DENY'
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+#
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWAREDED_PROTO', 'https')
 
 ADMIN_HONEYPOT_EMAIL_ADMINS = False
 
@@ -201,8 +201,8 @@ if 'ON_HEROKU' in os.environ:
     ALLOWED_HOSTS = ['geodjango-news-map.herokuapp.com']
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
     DEBUG = False
-    django_heroku.settings(locals(), allowed_hosts=False, logging=False, staticfiles=False) # Activate Django-Heroku
-
+    django_heroku.settings(locals(), allowed_hosts=False, logging=False) # Activate Django-Heroku
+                                            # staticfiles=False
 if DEBUG:
     INTERNAL_IPS = ('127.0.0.1', 'localhost')
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
