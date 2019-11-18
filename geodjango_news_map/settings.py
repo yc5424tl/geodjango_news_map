@@ -200,7 +200,7 @@ GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 if 'ON_HEROKU' in os.environ:
     ALLOWED_HOSTS = []
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    DEBUG = False
+    DEBUG = True
     django_heroku.settings(locals()) # Activate Django-Heroku
                                             # staticfiles=False
 # if DEBUG:
