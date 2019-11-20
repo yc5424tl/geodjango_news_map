@@ -62,13 +62,13 @@
                         <div class="card-body src-card-body">
                             {% regroup categories|dictsort:'category' by category as sources_by_category %}
                             <ul class="src-ul">
-                                {% for category, source_list in sources_by_category %}
+                                {% for category in sources_by_category %}
                                     <li class="src-li">
                                         <span class="src-header">{{ category|capfirst }}</span>
                                         <ul>
-                                            {% for source in source_list %}
+                                            {% for source in category %}
                                                 <li>
-                                                    {% if source.url %}
+                                                    {% if source.url.strip != '' %}
                                                         <a href="{{ source.url }}">{{ source.name }}</a>
                                                     {% else %}
                                                         <span>{{ source.name }}</span>

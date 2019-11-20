@@ -162,7 +162,7 @@ class Source(models.Model):
     _country    = models.CharField(max_length=3)
     _language   = models.CharField(max_length=100)
     _categories = models.ManyToManyField(Category, related_name='sources')
-    _url        = models.URLField(null=True, blank=True, max_length=150)
+    _url        = models.URLField(blank=True, max_length=150)
 
     def __str__(self) -> str:
         return f'{self._name}, {self._country}, {self._country}'
