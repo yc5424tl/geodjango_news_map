@@ -118,22 +118,15 @@
                                             <ul>
                                                 {% for source in source_list  %}
                                                     <li>
-                                                        <span class="src-details">{{ source.country }} -
-                                                            [{% for cat in source.categories %}
-                                                                {% if sources.categories|last %}
-                                                                    {{ cat }}
-                                                                {% else %}
-                                                                    {{ cat }} -
-                                                                {% endif %}
-                                                            {% endfor %}]
+                                                        {% if source.url and source.url.trim %}
+                                                            <a href="{{ source.url }}">{{ source.name }}</a>
+                                                        {% else %}
+                                                            <span class="src-details">{{ source.name }}</span>
+                                                        {% endif %}
+                                                        <span class="src-details">
+                                                            {{ source.country }} - {% for category in source.categories %} {{ category }} {% endfor %}
                                                         </span>
                                                     </li>
-{#                                                    <li>#}
-{#                                                        <a href="{{ source.url }}">{{ source.name }}</a>#}
-{#                                                        <span class="src-details">#}
-{#                                                            {{ source.country }} - {% for category in source.categories %} {{ category }} {% endfor %}#}
-{#                                                        </span>#}
-{#                                                    </li>#}
                                                 {% endfor %}
                                             </ul>
                                         </li>
@@ -223,15 +216,8 @@
                                 {% for source in language.list %}
                                     <li>
                                         <a href="{{ source.url }}">{{ source.name }}</a>
-{#                                        <span class="src-details">{{ source.country }} - {{ source.category|capfirst }}</span>#}
+                                        <span class="src-details">{{ source.country }} - {{ source.category|capfirst }}</span>
                                         <span class="src-details">{{ source.country }} -
-                                            [{% for cat in source.categories %}
-                                                {% if sources.categories|last %}
-                                                    {{ cat }}
-                                                {% else %}
-                                                    {{ cat }} -
-                                                {% endif %}
-                                            {% endfor %}]
                                         </span>
                                     </li>
                                 {% endfor %}

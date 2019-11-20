@@ -297,6 +297,9 @@ def view_post(request, post_pk):
 
 def view_sources(request):
 
+    language_dict_list = [{}]
+
+
     source_dict_list = [{
         'country':     source.country_full,
         'name':        source.name,
