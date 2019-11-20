@@ -300,19 +300,31 @@ def view_sources(request):
     source_dict_list = [{
         'country':     source.country_full,
         'name':        source.name,
-        'language':    source.language_full,
+        'language':    source.language,
         'categories': [category.name for category in source.categories.all()],
         'url':         source.url}
     for source in Source.objects.all()]
 
     category_dict_list = [{
-        category.name: [{
-           'country': source.country_full,
-           'name': source.name,
-           'language': source.language_full,
-           'url': source.url
+        'category': category.name,
+        'sources':[{
+            'name':source.name,
+            'country': source.country_full,
+            'language':source.language_full,
+            'url':source.url,
         } for source in category.sources.all()]
     } for category in Category.objects.all()]
+
+
+
+
+    #     category.name: [{
+    #        'country': source.country_full,
+    #        'name': source.name,
+    #        'language': source.language_full,
+    #        'url': source.url
+    #     } for source in category.sources.all()]
+    # } for category in Category.objects.all()]
 
     pprint(f'category_dict_list = \n{category_dict_list}')
     return render(request, 'general/view_sources.html', {'sources': source_dict_list, 'categories': category_dict_list})
