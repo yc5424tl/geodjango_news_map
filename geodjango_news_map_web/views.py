@@ -310,7 +310,7 @@ def view_sources(request):
            'name': source.name,
            'language': source.language,
            'url': source.url
-        } for source in category.sources]
+        } for source in category.sources.all()]
     } for category in Category.objects.all()]
 
     return render(request, 'general/view_sources.html', {'sources': source_dict_list, 'categories': category_dict_list})
