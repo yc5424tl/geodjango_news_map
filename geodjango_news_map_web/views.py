@@ -100,6 +100,7 @@ def new_query(request):
         query_set.save()
 
         article_list = constructor.build_article_data(article_data, query_set)
+        # TODO get len of list for # of articles, in loop below map each to country
         for article in article_list:
             code = geo_map_mgr.map_source(source_country=article.source_country)
             geo_data_mgr.add_result(code)
@@ -309,7 +310,7 @@ def view_sources(request):
            'name': source.name,
            'language': source.language,
            'url': source.url
-        } for source in category.source_set]
+        } for source in category.sources]
     } for category in Category.objects.all()]
 
     return render(request, 'general/view_sources.html', {'sources': source_dict_list, 'categories': category_dict_list})
