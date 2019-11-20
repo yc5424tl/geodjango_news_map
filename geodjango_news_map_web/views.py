@@ -3,6 +3,7 @@ import logging
 import os
 import sys
 from logging import Logger
+from pprint import pprint
 
 import pycountry
 import requests
@@ -297,22 +298,23 @@ def view_post(request, post_pk):
 def view_sources(request):
 
     source_dict_list = [{
-        'country':     source.country,
+        'country':     source.country_full,
         'name':        source.name,
-        'language':    source.language,
+        'language':    source.language_full,
         'categories': [category.name for category in source.categories.all()],
         'url':         source.url}
     for source in Source.objects.all()]
 
     category_dict_list = [{
         category.name: [{
-           'country': source.country,
+           'country': source.country_full,
            'name': source.name,
-           'language': source.language,
+           'language': source.language_full,
            'url': source.url
         } for source in category.sources.all()]
     } for category in Category.objects.all()]
 
+    pprint(f'category_dict_list = \n{category_dict_list}')
     return render(request, 'general/view_sources.html', {'sources': source_dict_list, 'categories': category_dict_list})
 
 
