@@ -303,14 +303,14 @@ def view_sources(request):
     source_dict_list = [{
         'country':     source.country_full,
         'name':        source.name,
-        'language':    source.language,
+        'language':    source.language_full,
         'categories': [category.name for category in source.categories.all()],
         'url':         source.url}
     for source in Source.objects.all()]
 
     category_dict_list = [{
-        'category': category.name,
-        'sources':[{
+        'cat': category.name,
+        'src_list':[{
             'name':source.name,
             'country': source.country_full,
             'language':source.language_full,

@@ -65,9 +65,9 @@
 {#                                {% for category in sources_by_category %}#}
                                 {% for category in categories %}
                                     <li class="src-li">
-                                        <span class="src-header">{{ category|capfirst }}</span>
+                                        <span class="src-header">{{ category.cat|capfirst }}</span>
                                         <ul>
-                                            {% for source in category.sources %}
+                                            {% for source in category.src_list %}
                                                 <li>
                                                     {% if source.url.strip != '' %}
                                                         <a href="{{ source.url }}">{{ source.name }}</a>
@@ -217,8 +217,7 @@
                                     <li>
                                         <a href="{{ source.url }}">{{ source.name }}</a>
                                         <span class="src-details">{{ source.country }} - {{ source.category|capfirst }}</span>
-                                        <span class="src-details">{{ source.country }} -
-                                        </span>
+                                        <span class="src-details">{{ source.country }}</span>
                                     </li>
                                 {% endfor %}
                             </ul>
