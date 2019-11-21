@@ -62,7 +62,9 @@ class Query:
 
         response = requests.get(self.endpoint)
         article_count = int(response.json()['totalResults'])
-        article_data = response.json()['articles']
+        response_data = response.json()['articles']
+        article_data = []
+        article_data.extend(response_data)
 
         if article_count > 100:
 
