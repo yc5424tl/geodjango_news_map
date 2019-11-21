@@ -66,15 +66,15 @@ class Query:
 
         if article_count > 100:
 
-            pages = ((article_count//100) -1) # already handled the first page
+            pages = article_count//100
 
             if pages > 100:
                 pages = 100
 
-            for p in range(2, pages):
+            for p in range(2, pages+1):  # 1st page processed already, +1 to account for exclusive range 
                 try:
                     page = requests.get(f'{self.endpoint}&page={p}')
-                    article_data += page.json()['articles']
+                    article_data.extend(page.json()['articles'])
 
                 except requests.exceptions.RequestException as rE:
                     logger.log(level=logging.INFO, msg=f'RequestException while getting article_data @ page # {p}')
@@ -85,8 +85,9 @@ class Query:
                     logger.log(level=logging.INFO, msg=f'KeyErrorException while getting article_data on {p}')
                     logger.log(level=logging.ERROR, msg=logger.exception(kE))
                     continue
+             print(f'len(article data)={len(article data)} pages={pages} article_count={article_count}')
 
-        return article_data
+        return (article_data, article count, pages)
 
 
     def to_file(self, data):
