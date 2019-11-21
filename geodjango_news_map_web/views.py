@@ -96,7 +96,10 @@ def new_query(request):
         geo_data_mgr.verify_geo_data()
         query_mgr = Query(arg=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
         query_mgr.get_endpoint()
-        article_data = query_mgr.execute_query()
+        query_data = query_mgr.execute_query()
+        article_data = query_data[0]
+        article_count = query_data[1]
+        article_pages = query_data[2]
         query_set = QueryResultSet.objects.create(_query_type=query_mgr.focus, _argument=query_mgr.arg, _data=article_data, _author=request.user)
         query_set.save()
 
@@ -119,7 +122,7 @@ def new_query(request):
             qrs._choropleth = global_map._repr_html_()
             qrs.save()
 
-        return redirect('view_query', query_set.pk)
+        return redirect('view_query', query_set.pk, {'article_count':article_count, 'article_pages':article_pages, 'article_data_len':len(article_data)})
 
 
 

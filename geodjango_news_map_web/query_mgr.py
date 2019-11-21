@@ -61,7 +61,7 @@ class Query:
     def execute_query(self):
 
         response = requests.get(self.endpoint)
-        article_count = response.json()['totalResults']
+        article_count = int(response.json()['totalResults'])
         article_data = response.json()['articles']
 
         if article_count > 100:
@@ -74,6 +74,7 @@ class Query:
             for p in range(2, pages+1):  # 1st page processed already, +1 to account for exclusive range 
                 try:
                     page = requests.get(f'{self.endpoint}&page={p}')
+                    print(f'len(page.json()[articles])={len(page.json()["articles"])}')
                     article_data.extend(page.json()['articles'])
 
                 except requests.exceptions.RequestException as rE:
@@ -85,9 +86,10 @@ class Query:
                     logger.log(level=logging.INFO, msg=f'KeyErrorException while getting article_data on {p}')
                     logger.log(level=logging.ERROR, msg=logger.exception(kE))
                     continue
-             print(f'len(article data)={len(article data)} pages={pages} article_count={article_count}')
+            print(f'len(article data)={len(article_data)} pages={pages} article_count={article_count}')
 
-        return (article_data, article count, pages)
+        return (article_data, article_count, pages)
+
 
 
     def to_file(self, data):
