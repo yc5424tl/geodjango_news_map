@@ -99,7 +99,6 @@ def new_query(request):
         query_data = query_mgr.execute_query()
         article_data = query_data[0]
         article_count = query_data[1]
-        article_pages = query_data[2]
         query_set = QueryResultSet.objects.create(_query_type=query_mgr.focus, _argument=query_mgr.arg, _data=article_data, _author=request.user)
         query_set.save()
 
@@ -122,12 +121,12 @@ def new_query(request):
             qrs._choropleth = global_map._repr_html_()
             qrs.save()
 
-        return redirect('view_query', query_result_set_pk=query_set.pk, article_count=article_count, article_pages=article_pages, article_data_len=len(article_data))
+        return redirect('view_query',request=request, query_result_set_pk=query_set.pk, article_count=article_count, article_data_len=len(article_data))
 
 
 
 @login_required()
-def view_query(request, query_result_set_pk, article_count, article_pages, article_data_len):
+def view_query(request, query_result_set_pk, article_count, article_data_len):
     qrs = get_object_or_404(QueryResultSet, pk=query_result_set_pk)
     return render(request, 'general/view_query.html', {
         'query': qrs,
@@ -137,7 +136,6 @@ def view_query(request, query_result_set_pk, article_count, article_pages, artic
         'choro_html': qrs.choro_html,
         'filename': qrs.filename,
         'article_count':article_count,
-        'article_pages':article_pages,
         'article_data_len': article_data_len
     })
 

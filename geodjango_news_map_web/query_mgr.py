@@ -1,4 +1,3 @@
-import builtins
 import logging
 import os
 from datetime import datetime, timedelta
@@ -46,9 +45,9 @@ class Query:
 
         elif not valid_date_range:
             if self.focus == 'all':
-                self.endpoint = f'https://newsapi.org/v2/everything?q={self.arg}&apiKey={api_key}'
+                self.endpoint = f'https://newsapi.org/v2/everything?q={self.arg}&apiKey={api_key}&pageSize=100'
             elif self.focus == 'headlines':
-                self.endpoint = f'https://newsapi.org/v2/top-headlines?q={self.arg}&apiKey={api_key}'
+                self.endpoint = f'https://newsapi.org/v2/top-headlines?q={self.arg}&apiKey={api_key}&pageSize=100'
             else:
                 return False
 
@@ -64,33 +63,34 @@ class Query:
         article_count = int(response.json()['totalResults'])
         response_data = response.json()['articles']
         article_data = []
+
         article_data.extend(response_data)
 
-        if article_count > 100:
+        # if article_count > 100:
+        #
+        #     pages = article_count//100
+        #
+        #     if pages > 5:
+        #         pages = 5
+        #
+        #     for p in range(2, pages+2):  # 1st page processed already, +2 to account for exclusive range and remainder
+        #         try:
+        #             page = requests.get(f'{self.endpoint}&page={p}')
+        #             print(f'len(page.json()[articles])={len(page.json()["articles"])}')
+        #             article_data.extend(page.json()['articles'])
+        #
+        #         except requests.exceptions.RequestException as rE:
+        #             logger.log(level=logging.INFO, msg=f'RequestException while getting article_data @ page # {p}')
+        #             logger.log(level=logging.ERROR, msg=logger.exception(rE))
+        #             continue
+        #
+        #         except builtins.KeyError as kE:
+        #             logger.log(level=logging.INFO, msg=f'KeyErrorException while getting article_data on {p}')
+        #             logger.log(level=logging.ERROR, msg=logger.exception(kE))
+        #             continue
+        #     print(f'len(article data)={len(article_data)} pages={pages} article_count={article_count}')
 
-            pages = article_count//100
-
-            if pages > 100:
-                pages = 100
-
-            for p in range(2, pages+1):  # 1st page processed already, +1 to account for exclusive range 
-                try:
-                    page = requests.get(f'{self.endpoint}&page={p}')
-                    print(f'len(page.json()[articles])={len(page.json()["articles"])}')
-                    article_data.extend(page.json()['articles'])
-
-                except requests.exceptions.RequestException as rE:
-                    logger.log(level=logging.INFO, msg=f'RequestException while getting article_data @ page # {p}')
-                    logger.log(level=logging.ERROR, msg=logger.exception(rE))
-                    continue
-
-                except builtins.KeyError as kE:
-                    logger.log(level=logging.INFO, msg=f'KeyErrorException while getting article_data on {p}')
-                    logger.log(level=logging.ERROR, msg=logger.exception(kE))
-                    continue
-            print(f'len(article data)={len(article_data)} pages={pages} article_count={article_count}')
-
-        return (article_data, article_count, pages)
+        return article_data, article_count
 
 
 
