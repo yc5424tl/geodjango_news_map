@@ -121,7 +121,11 @@ def new_query(request):
             qrs._choropleth = global_map._repr_html_()
             qrs.save()
 
-        return redirect('view_query', query_set.pk, {'article_count':article_count, 'article_data_len': len(article_data)})
+        return redirect('view_query', {
+            'query_result_set_pk': query_set.pk,
+            'article_count':       article_count,
+            'article_data_len':len(article_data)
+        })
 
 
 
