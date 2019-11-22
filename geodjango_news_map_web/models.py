@@ -56,6 +56,17 @@ class QueryResultSet(models.Model):
     _query_type         = models.CharField(default='all', choices=query_types, max_length=50)
     _author             = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='queries')
     _archived           = models.BooleanField(default=False)
+    _article_count      = models.IntegerField(default=0)
+    _article_data_len   = models.IntegerField(default=0)
+
+
+    @property
+    def article_count(self):
+        return self._article_count
+
+    @property
+    def article_data_len(self):
+        return self._article_data_len
 
     @property
     def choropleth(self) -> str:
