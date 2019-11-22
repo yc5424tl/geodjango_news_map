@@ -119,8 +119,8 @@ def new_query(request):
             qrs._filename = filename
             qrs._author = User.objects.get(pk=request.user.pk)
             qrs._choropleth = global_map._repr_html_()
-            qrs.article_count = article_count
-            qrs.article_data_len = len(article_data)
+            qrs._article_count = article_count
+            qrs._article_data_len = len(article_data)
             qrs.save()
 
         return redirect('view_query', qrs.pk)
