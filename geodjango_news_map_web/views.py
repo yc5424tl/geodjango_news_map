@@ -412,7 +412,7 @@ def import_sources(request):
         try:
             source_data = payload['sources']
             for data in source_data:
-                source, s_created = Source.objects.get_or_create(_name=data['name'], defaults={'_country': data['country'], '_language': data['language'], '_url': data['url'] if data['url'] else None})
+                source, s_created = Source.objects.get_or_create(_name=data['name'], defaults={'_country': data['country'], '_language': data['language'], '_url': data['url'] if data['url'] else ''})
                 for cat_name in data['categories']:  # Source exists in DB
                     category, c_created = Category.objects.get_or_create(_name=cat_name)
                     try:
