@@ -121,12 +121,15 @@ def new_query(request):
             qrs._choropleth = global_map._repr_html_()
             qrs.save()
 
-        return redirect('view_query',request=request, query_result_set_pk=query_set.pk, article_count=article_count, article_data_len=len(article_data))
+        return redirect('view_query', query_set.pk, {'article_count':article_count, 'article_data_len': len(article_data)})
 
 
 
 @login_required()
-def view_query(request, query_result_set_pk, article_count, article_data_len):
+def view_query(request, query_result_set_pk):
+    article_count = request.POST.get('article_count')
+    article_data_len = len(request.POST.get('article_data'))
+
     qrs = get_object_or_404(QueryResultSet, pk=query_result_set_pk)
     return render(request, 'general/view_query.html', {
         'query': qrs,
