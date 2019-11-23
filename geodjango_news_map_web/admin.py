@@ -19,9 +19,6 @@ class PostAdmin(admin.ModelAdmin):
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('_body', '_date_published', '_date_last_edit', '_author', '_post')
 
-#
-# class SourceInstanceInline(admin.TabularInline):
-#     model = Source
 
 @admin.register(Source)
 class SourceAdmin(admin.ModelAdmin):
@@ -29,7 +26,6 @@ class SourceAdmin(admin.ModelAdmin):
     list_editable = ('_country', '_language', '_url')
     list_filter = ('_country', '_language')
     list_display_links = ['_name']
-
 
 
 @admin.register(Category)

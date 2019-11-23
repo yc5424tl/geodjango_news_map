@@ -3,7 +3,6 @@ import logging
 import os
 import sys
 from logging import Logger
-from pprint import pprint
 
 import pycountry
 import requests
@@ -112,14 +111,14 @@ def new_query(request):
         if data_tup is None:
             return redirect('index', messages='build choropleth returned None')
         else:
-            global_map = data_tup[0]
-            filename = data_tup[1]
             qrs = QueryResultSet.objects.get(pk=query_set.pk)
-            qrs._choro_html = global_map.get_root().render()
-            qrs._filename = filename
-            qrs._author = User.objects.get(pk=request.user.pk)
-            qrs._choropleth = global_map._repr_html_()
-            qrs._article_count = article_count
+            global_map =            data_tup[0]
+            filename =              data_tup[1]
+            qrs._choro_html =       global_map.get_root().render()
+            qrs._filename =         filename
+            qrs._author =           User.objects.get(pk=request.user.pk)
+            qrs._choropleth =       global_map._repr_html_()
+            qrs._article_count =    article_count
             qrs._article_data_len = len(article_data)
             qrs.save()
 
@@ -131,13 +130,13 @@ def new_query(request):
 def view_query(request, query_result_set_pk):
     qrs = get_object_or_404(QueryResultSet, pk=query_result_set_pk)
     return render(request, 'general/view_query.html', {
-        'query': qrs,
-        'query_author': qrs.author,
-        'articles': qrs.articles.all(),
-        'choro_map': qrs.choropleth,
-        'choro_html': qrs.choro_html,
-        'filename': qrs.filename,
-        'article_count':qrs.article_count,
+        'query':            qrs,
+        'query_author':     qrs.author,
+        'articles':         qrs.articles.all(),
+        'choro_map':        qrs.choropleth,
+        'choro_html':       qrs.choro_html,
+        'filename':         qrs.filename,
+        'article_count'    :qrs.article_count,
         'article_data_len': qrs.article_data_len
     })
 
@@ -303,9 +302,6 @@ def view_post(request, post_pk):
 
 def view_sources(request):
 
-    language_dict_list = [{}]
-
-
     source_dict_list = [{
         'country':     source.country_full,
         'name':        source.name,
@@ -324,19 +320,10 @@ def view_sources(request):
         } for source in category.sources.all()]
     } for category in Category.objects.all()]
 
-
-
-
-    #     category.name: [{
-    #        'country': source.country_full,
-    #        'name': source.name,
-    #        'language': source.language_full,
-    #        'url': source.url
-    #     } for source in category.sources.all()]
-    # } for category in Category.objects.all()]
-
-    pprint(f'category_dict_list = \n{category_dict_list}')
-    return render(request, 'general/view_sources.html', {'sources': source_dict_list, 'categories': category_dict_list})
+    return render(request, 'general/view_sources.html', {
+        'sources':    source_dict_list,
+        'categories': category_dict_list
+    })
 
 
 
