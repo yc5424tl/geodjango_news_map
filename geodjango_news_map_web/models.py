@@ -61,11 +61,11 @@ class QueryResultSet(models.Model):
 
 
     @property
-    def article_count(self):
+    def article_count(self) -> int:
         return self._article_count
 
     @property
-    def article_data_len(self):
+    def article_data_len(self) -> int:
         return self._article_data_len
 
     @property
@@ -174,9 +174,19 @@ class Source(models.Model):
     _language   = models.CharField(max_length=100)
     _categories = models.ManyToManyField(Category, related_name='sources')
     _url        = models.URLField(blank=True, default='', max_length=150)
+    _verified   = models.BooleanField(default=False, null=False)
+
 
     def __str__(self) -> str:
         return f'{self._name}, {self._country}, {self._country}'
+
+    @property
+    def verified(self) -> bool:
+        return self._verified
+
+    @verified.setter
+    def verified(self, is_verified) -> NoReturn:
+        self._verified = is_verified
 
     @property
     def country(self) -> str:
