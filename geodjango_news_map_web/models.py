@@ -168,10 +168,14 @@ class Category(models.Model):
 
 
 
+
+
+
 class Source(models.Model):
     _name       = models.CharField(max_length=500)
     _country    = models.CharField(max_length=3)
     _language   = models.CharField(max_length=100)
+    # _categories = models.ManyToManyField(Category, related_name='sources', through='Section')
     _categories = models.ManyToManyField(Category, related_name='sources')
     _url        = models.URLField(blank=True, default='', max_length=150)
     _verified   = models.BooleanField(default=False, null=False)
@@ -223,6 +227,12 @@ class Source(models.Model):
     @property
     def url(self) -> str:
         return self._url
+
+
+
+# class Section(models.Model):
+#     category = models.ForeignKey(Category, on_delete=models.CASCADE)
+#     source = models.ForeignKey(Source, on_delete=models.CASCADE)
 
 
 
