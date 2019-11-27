@@ -4266,6 +4266,122 @@ COPY public.source (id, name, country, language, url) FROM stdin;
 4270	Expreso.press	mx	es	\N
 4271	Lajornadamaya.mx	mx	es	\N
 4272	Telemetro.com	mx	es	\N
+4273	Pianetadonne.blog	it	it	\N
+4274	Belfasttelegraph.co.uk	za	en	\N
+4275	Girondins4ever.com	fr	fr	\N
+4276	Lfpress.com	ca	en	\N
+4277	Indystar.com	sa	ar	\N
+4278	Goodmorningamerica.com	sa	ar	\N
+4279	Ghanaweb.com	sa	ar	\N
+4280	Fiercepharma.com	sa	ar	\N
+4281	Gn-online.de	at	de	\N
+4282	Defatoonline.com.br	br	pt	\N
+4283	Tribunadonorte.com.br	br	pt	\N
+4284	Panditfootball.com	id	id	\N
+4285	Dcfever.com	hk	zh	\N
+4286	Coritiba.com.br	br	pt	\N
+4287	Riftherald.com	gb	en	\N
+4288	Epoznan.pl	pl	pl	\N
+4289	Kanald.ro	ro	ro	\N
+4290	Searchenginejournal.com	my	ms	\N
+4291	Thecentersquare.com	my	ms	\N
+4292	90minutos.co	co	es	\N
+4293	Oxigeno.fm	co	es	\N
+4294	Popbela.com	id	id	\N
+4295	Ohmynews.com	kr	ko	\N
+4296	Lawtalk.co.kr	kr	ko	\N
+4297	Finnewsnetwork.com.au	ph	en	\N
+4298	Telehit.com	mx	es	\N
+4299	Lifehacker.jp	jp	ja	\N
+4300	Zestadionu.pl	pl	pl	\N
+4301	Veol.hu	hu	hu	\N
+4302	Ranablad.no	no	no	\N
+4303	Bohemia.cu	cu	es	\N
+4304	Lademajagua.cu	cu	es	\N
+4305	Cuba.cu	cu	es	\N
+4306	Vtv.gob.ve	ve	es	\N
+4307	Entrelineas.com.mx	ve	es	\N
+4308	Limerickleader.ie	ie	en	\N
+4309	Eurovision-austria.com	at	de	\N
+4310	Belbalady.net	ae	en	\N
+4311	Saadaonline.net	ae	en	\N
+4313	Diez.hn	cu	es	\N
+4314	Cocinavital.mx	cu	es	\N
+4315	Radioangulo.cu	cu	es	\N
+4316	Diariomedico.com	cu	es	\N
+4317	Psychiatryadvisor.com	ph	en	\N
+4318	Wboy.com	ph	en	\N
+4319	Vogue.com	ph	en	\N
+4323	Gamekings.tv	nl	nl	\N
+4324	Computertotaal.nl	nl	nl	\N
+4325	Totaaltv.nl	nl	nl	\N
+4327	Notizie.it	it	it	\N
+4328	Palermotoday.it	it	it	\N
+4329	Tv-asahi.co.jp	jp	ja	\N
+4330	The-ans.jp	jp	ja	\N
+4331	Canadianinquirer.net	ph	en	\N
+4332	Lasillarota.com	mx	es	\N
+4333	Culturacolectiva.com	mx	es	\N
+4334	Lapagina.com.sv	mx	es	\N
+4335	Mina.news	rs	sr	\N
+4340	Therams.com	us	en	\N
+4342	Stcatharinesstandard.ca	ca	en	\N
+4343	Reddeeradvocate.com	ca	en	\N
+4344	Annals.org	ca	en	\N
+4346	Netsdaily.com	ph	en	\N
+4352	Real-france.fr	ma	fr	\N
+4355	Boxerdergisi.com.tr	tr	tr	\N
+4356	Log.com.tr	tr	tr	\N
+4363	Varna24.bg	bg	bg	\N
+4369	Mouv.fr	ma	fr	\N
+4371	Zone-turf.fr	ma	fr	\N
+4373	Music-covers-creations.com	ma	fr	\N
+4374	Swigg.fr	ma	fr	\N
+4376	Racoonbuzz.com	id	id	\N
+4383	Skiweltcup.tv	at	de	\N
+4387	Beta.h-a.no	no	no	\N
+4388	Laarena.com.ar	ar	es	\N
+4389	Elnueve.com	ar	es	\N
+4391	Mactechnews.de	ch	de	\N
+4395	Ice.co.il	il	he	\N
+4398	Nacionrex.com	co	es	\N
+4399	Cw.com.tw	tw	zh	\N
+4403	Www.vn.nl	nl	nl	\N
+4404	Astroblogs.nl	nl	nl	\N
+4405	Focus-wtv.be	nl	nl	\N
+4406	Pz-news.de	ch	de	\N
+4411	Coindesk.com	ph	en	\N
+4412	Liberal.gr	gr	el	\N
+4413	Goldcoastbulletin.com.au	au	en	\N
+4414	Daily.co.jp	jp	ja	\N
+4416	Www.mbs.jp	jp	ja	\N
+4417	Sfgate.com	sa	ar	\N
+4418	Lookoutlanding.com	sa	ar	\N
+4419	Kmbc.com	sa	ar	\N
+4420	Radiotimes.com	gb	en	\N
+4421	Afriquesports.net	ma	fr	\N
+4422	Lionsdelatlas.ma	ma	fr	\N
+4423	Www.noz.de	de	de	\N
+4424	Adnews.com.au	au	en	\N
+4425	Plataformamedia.com	pt	pt	\N
+4427	Thepressroom.gr	gr	el	\N
+4431	Elpilon.com.co	co	es	\N
+4432	Vix.com	co	es	\N
+4433	Komonews.com	sa	ar	\N
+4435	247wallst.com	sa	ar	\N
+4436	Hackaday.com	sa	ar	\N
+4437	Jamaica-star.com	sa	ar	\N
+4438	Fox5dc.com	sa	ar	\N
+4439	Naked-science.ru	ru	ru	\N
+4446	Timlo.net	id	id	\N
+4447	Connect.de	ch	de	\N
+4449	Www.sa.no	no	no	\N
+4450	Tachad.com	ma	fr	\N
+4451	Nightlife.ca	ma	fr	\N
+4452	Renseignementeconomique.net	ma	fr	\N
+4453	Clicanoo.re	ma	fr	\N
+4454	Thesneaklife.com	ma	fr	\N
+4459	Ifun.de	de	de	\N
 4242	Forexlive.com	my	ms	\N
 4243	Dailyexpress.com.my	my	ms	\N
 4244	Fxstreet.com	my	ms	\N
@@ -4277,6 +4393,77 @@ COPY public.source (id, name, country, language, url) FROM stdin;
 4256	Firenzeviola.it	it	it	\N
 4258	Sport.org.cn	cn	zh	\N
 4267	Philstar.com	ph	en	\N
+4312	Odishatv.in	in	hi	\N
+4320	Dailyddt.com	ng	en	\N
+4321	7thspace.com	za	en	\N
+4322	Ecns.cn	za	en	\N
+4326	Finanzen.net	at	de	\N
+4336	Telestar.fr	fr	fr	\N
+4337	Economiematin.fr	fr	fr	\N
+4338	Gamers.at	at	de	\N
+4339	Outnow.ch	at	de	\N
+4341	Jemin.com	kr	ko	\N
+4345	Nextnews.kr	kr	ko	\N
+4347	Itsvet.com	rs	sr	\N
+4348	Pcpress.rs	rs	sr	\N
+4349	Newcannabisventures.com	ca	en	\N
+4350	Onvista.de	de	de	\N
+4351	Wwd.com	ng	en	\N
+4353	Mundofranquicia.com	cu	es	\N
+4354	Infosalus.com	cu	es	\N
+4357	Entrackr.com	in	hi	\N
+4358	Techopital.com	be	nl	\N
+4359	Journaldebangui.com	be	nl	\N
+4360	Businessinsider.fr	be	nl	\N
+4361	Caducee.net	be	nl	\N
+4362	Acadienouvelle.com	be	nl	\N
+4364	Narcity.com	ca	en	\N
+4365	Rondoniaovivo.com	br	pt	\N
+4366	Vs.com.br	br	pt	\N
+4367	Elementy.ru	ru	ru	\N
+4368	Womanhit.ru	ru	ru	\N
+4370	Newstalkzb.co.nz	nz	en	\N
+4372	Thespinoff.co.nz	nz	en	\N
+4375	Vremeto.dir.bg	bg	bg	\N
+4377	Technews.bg	bg	bg	\N
+4378	Guru3d.com	au	en	\N
+4379	Portal-energia.com	pt	pt	\N
+4380	Watanserb.com	ae	en	\N
+4381	Elaph.com	ae	en	\N
+4382	Lebanondebate.com	ae	en	\N
+4384	Postimees.ee	ru	ru	\N
+4385	Www.nkj.ru	ru	ru	\N
+4386	Iza.ne.jp	jp	ja	\N
+4390	Avto.info	si	sl	\N
+4392	Vavel.com	mx	es	\N
+4393	Futboltotal.com.mx	mx	es	\N
+4394	E.gmw.cn	cn	zh	\N
+4396	Qhnews.com	cn	zh	\N
+4397	Internal.dbw.cn	cn	zh	\N
+4400	Ashkelonim.co.il	il	he	\N
+4401	Arimnews.co.il	il	he	\N
+4402	Uzladets.lv	lv	lv	\N
+4407	Tiempo.com	ar	es	\N
+4408	Diariocordoba.com	ar	es	\N
+4409	Radiosantiago.cl	ar	es	\N
+4410	Labotana.com	ve	es	\N
+4415	Keremeosreview.com	au	en	\N
+4426	Efesalud.com	cu	es	\N
+4428	Bulawayo24.com	za	en	\N
+4429	Newsroom.co.nz	nz	en	\N
+4430	Greatandhra.com	in	hi	\N
+4434	Autonetmagz.com	id	id	\N
+4440	Wrestlinginc.com	us	en	\N
+4441	Iflscience.com	ph	en	\N
+4442	Itv.com	gb	en	\N
+4443	Leeds-live.co.uk	gb	en	\N
+4444	Schweizerbauer.ch	ch	de	\N
+4445	Persoenlich.com	ch	de	\N
+4448	Fcbayern.com	at	de	\N
+4455	Ecoactu.ma	ma	fr	\N
+4456	Challenge.ma	ma	fr	\N
+4457	Sol.org.tr	tr	tr	\N
+4458	Dostor.org	ae	en	\N
 \.
 
 
@@ -12167,6 +12354,34 @@ COPY public.source_categories (source_id, category_id) FROM stdin;
 769	3
 772	3
 4272	3
+795	3
+3828	3
+4273	3
+4274	3
+3236	3
+1601	3
+1524	3
+992	7
+1473	7
+646	1
+2344	1
+1215	1
+4275	5
+1151	5
+1142	4
+3023	1
+2312	1
+4276	1
+1454	1
+4277	3
+4278	3
+4279	3
+4280	3
+4281	7
+281	4
+4282	4
+4283	4
+569	5
 4115	2
 4116	2
 4117	4
@@ -12333,6 +12548,422 @@ COPY public.source_categories (source_id, category_id) FROM stdin;
 4265	6
 540	6
 4266	6
+4284	5
+4285	6
+4286	5
+4287	6
+4235	6
+158	2
+3538	1
+175	1
+3619	1
+4288	1
+4289	2
+1257	1
+4290	3
+4291	3
+4292	2
+4293	2
+4294	2
+4251	2
+1912	2
+4295	2
+4296	2
+1463	5
+2734	5
+4042	2
+1723	2
+4297	1
+2991	2
+4298	2
+4299	6
+3179	7
+3289	7
+514	7
+1718	7
+3329	5
+4300	5
+620	7
+745	7
+1587	7
+2485	7
+4301	7
+4302	1
+4303	7
+317	7
+4304	7
+1229	7
+4305	7
+3506	4
+4306	4
+2737	3
+2800	4
+4307	4
+710	4
+1666	3
+2261	2
+4308	5
+1523	5
+3013	4
+629	4
+4309	2
+4310	7
+4311	7
+4312	2
+144	2
+1218	2
+3123	3
+4313	3
+4314	3
+4315	3
+1975	3
+4316	3
+4105	2
+1538	3
+3591	3
+1661	2
+4317	3
+4318	3
+4319	3
+4320	2
+2387	6
+937	6
+4321	4
+4322	4
+4323	6
+4324	6
+4325	6
+2831	1
+395	1
+189	1
+4326	6
+4327	3
+4328	3
+363	5
+4329	5
+4330	5
+4331	3
+728	4
+4332	4
+4333	4
+4334	4
+1742	3
+826	3
+1198	3
+4335	3
+4336	2
+4337	2
+4338	2
+4339	2
+4340	7
+509	7
+3511	7
+4341	2
+4342	3
+2073	2
+870	2
+4343	3
+4344	3
+1094	3
+1801	2
+4345	2
+3730	2
+615	7
+1848	5
+4346	5
+4347	7
+4348	7
+1195	7
+1214	7
+4349	1
+1905	2
+1458	1
+1455	1
+1573	1
+3641	3
+468	3
+4281	3
+4350	3
+1502	7
+2408	7
+3988	7
+1541	7
+4351	6
+1924	7
+2449	5
+3052	7
+4352	5
+4134	7
+2736	5
+2076	1
+4353	1
+4354	1
+311	1
+1690	6
+2317	6
+1047	6
+2573	6
+4355	6
+4356	6
+1689	6
+4357	1
+1523	6
+4358	3
+418	3
+4359	3
+4360	3
+4361	3
+4362	3
+460	3
+2342	3
+4363	4
+4364	1
+2262	7
+1781	7
+4283	7
+422	7
+2914	7
+1639	7
+531	7
+4365	7
+4366	7
+404	7
+1628	4
+4367	4
+4368	4
+2050	4
+4369	2
+4370	3
+4371	2
+1648	3
+814	2
+4372	3
+4373	2
+4374	2
+4375	4
+263	7
+4376	7
+4377	6
+854	6
+2877	3
+3626	3
+4378	6
+1224	6
+1164	6
+3190	3
+88	6
+2185	2
+279	1
+4379	1
+922	1
+285	1
+1243	5
+3775	5
+4380	6
+4381	6
+4382	6
+2252	5
+2181	5
+4383	5
+4384	4
+4385	4
+4386	3
+2548	4
+4387	4
+4295	4
+1995	6
+1996	3
+2408	3
+4388	3
+3899	3
+1502	3
+1577	3
+4389	3
+305	6
+4390	6
+1435	6
+4391	6
+4392	5
+4393	5
+768	5
+3515	2
+4394	2
+2075	2
+4395	6
+4396	2
+2394	6
+4397	2
+4398	2
+342	2
+4399	4
+4400	2
+4401	2
+3742	2
+3384	5
+2373	5
+4082	2
+4402	1
+2997	1
+2137	6
+1215	6
+838	4
+936	6
+1761	4
+4403	4
+4404	4
+4405	4
+4406	3
+2211	4
+4407	4
+3505	6
+4408	4
+2993	4
+4409	4
+1896	6
+501	3
+2396	3
+502	3
+2198	3
+3956	1
+4410	3
+4411	1
+271	7
+3326	7
+864	4
+1660	4
+4412	1
+8	7
+2462	7
+1857	1
+4415	4
+960	5
+349	1
+1911	4
+3716	7
+1660	7
+632	2
+589	4
+4426	4
+1209	4
+4428	5
+693	4
+4429	7
+4243	7
+1164	2
+4413	2
+1933	2
+448	2
+4414	2
+2677	2
+2332	2
+4416	2
+3540	2
+4417	5
+3765	5
+4418	5
+4419	5
+4420	6
+1490	7
+1436	7
+4421	5
+2290	5
+4422	5
+2272	5
+237	5
+4406	7
+4423	7
+1718	1
+4424	1
+1413	7
+4425	7
+1409	7
+3013	5
+1354	5
+3952	5
+4427	1
+3922	1
+309	6
+2546	6
+1153	7
+4430	2
+1091	7
+250	2
+2078	3
+2232	3
+727	2
+4431	3
+4432	3
+4433	3
+1059	1
+10	3
+4434	1
+4435	3
+701	1
+4436	3
+4437	3
+4438	3
+2331	7
+1424	7
+4439	7
+85	2
+3777	6
+1195	6
+1213	6
+4440	2
+8	2
+1685	4
+4441	4
+1874	7
+4442	7
+309	3
+1289	3
+38	7
+4443	7
+2155	1
+4444	1
+4445	1
+651	1
+1733	4
+1736	4
+4446	4
+1734	4
+4288	3
+3375	3
+1054	7
+2573	7
+4356	7
+2323	7
+2031	1
+222	1
+1311	1
+230	1
+495	4
+499	4
+537	4
+651	6
+4447	6
+980	1
+1219	2
+4448	5
+4449	7
+836	3
+4450	3
+4451	3
+4452	3
+219	3
+4453	3
+4454	3
+4455	1
+3228	6
+2616	1
+1076	6
+4456	1
+1529	2
+1861	2
+4457	2
+4458	7
+4459	6
+2356	6
 \.
 
 
@@ -12347,7 +12978,7 @@ SELECT pg_catalog.setval('public.category_id_seq', 7, true);
 -- Name: source_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.source_id_seq', 4272, true);
+SELECT pg_catalog.setval('public.source_id_seq', 4459, true);
 
 
 --
