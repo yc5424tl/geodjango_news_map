@@ -17,7 +17,7 @@ class QueryManager(models.Manager):
 
     def create_query(self, argument, date_created, query_type, author=None, choropleth=None, choro_html=None, data=None, date_range_end=None, date_range_start=None,public=False):
 
-        news_query = self.create(
+        return self.create(
             _argument =argument,
             _author=author,
             _choropleth=choropleth,
@@ -29,8 +29,6 @@ class QueryManager(models.Manager):
             _filename=self.filename,
             _public=public,
             _query_type=query_type)
-
-        return news_query
 
 
 class QueryResultSet(models.Model):

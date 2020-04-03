@@ -15,8 +15,7 @@ class Constructor:
     def new_article(self, response_data, query_set: QueryResultSet):
         source = self.verify_source(response_data['source']['name'])
         date_published = self.verify_date(response_data['publishedAt'])
-        article_url = response_data['url']
-        image_url = response_data['urlToImage'] if response_data['urlToImage'] is not None else None
+
         try:
             description = self.verify_str(response_data['description']) if response_data['description'] is not None else 'Unavailable'
         except UnicodeDecodeError:
@@ -31,7 +30,10 @@ class Constructor:
                 author = 'Unknown'
         except UnicodeEncodeError:
             author = 'Unknown'
+
         if source:
+            article_url = response_data['url']
+            image_url = response_data['urlToImage'] if response_data['urlToImage'] is not None else None
             new_article = Article(
                 _article_url=article_url,
                 _author=author,
@@ -81,12 +83,11 @@ class Constructor:
     def verify_source(source_name):
         if source_name:
             try:
-                source = Source.objects.get(_name=source_name)
-                return source
+                 return Source.objects.get(_name=source_name)
             except (AttributeError, Source.DoesNotExist) as e:
                 logger.exception(f'{e} propagating from constructor.verify_source({source_name})')
                 return False
-        elif not source_name:
+        else:
             logger.error(f'{source_name} retrieval failed.')
             return False
 
@@ -146,8 +147,7 @@ class Constructor:
     def build_sources(self):
         response = requests.get(os.getenv('NEWS_API_SOURCES_URL'))
         response_data = response.json()
-        source_list = list(filter(self.filter_source, response_data))
-        return (source for source in source_list)
+        return list(filter(self.filter_source, response_data))
 
     @staticmethod
     def record_sources(source_json):
