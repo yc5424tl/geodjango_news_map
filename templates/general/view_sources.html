@@ -1,24 +1,127 @@
-
-{% extends 'general/base.html' %}
+{% extends 'general/root.html' %}
+{% load staticfiles %}
+{% load static %}
 
 {% block title %}
     News Sources - {{ block.super }}
 {% endblock %}
 
+{% block styles %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/view_sources.css' %}">
+{% endblock %}
+
 {% block content %}
-    <div class="container">
+    <div id="accordion">
+        <div class="row">
+            <div class="col-1 src-pad-col"></div>
+            <div class="col" id="src-accordion-wrapper">
+                <div class="card src-card">
+                    <div class="card-header" id="headingOne">
+                        <h1 class="mb-0">
+                            <button class="btn btn-link accordion-btn" data-toggle="collapse" data-target="#byCountry">
+                                Sources By Country
+                            </button>
+                        </h1>
+                    </div>
+                    <div id="byCountry" class="collapse " data-parent="#accordion">
+                        <div class="card-body src-card-body">
+                            {% regroup sources|dictsort:'country' by country as sources_by_country %}
+                            <ul class="src-ul">
+                                {% for country in sources_by_country %}
+                                    <li class="src-li">
+                                        <span class="src-header">{{ country.grouper }}</span>
+                                        <ul>
+                                            {% for source in country.list %}
+                                                <li>
+                                                    <a href="{{ source.url }}">{{ source.name }}</a>
+                                                    <span class="src-details">{{ source.category|capfirst }} - {{ source.full_lang }}</span>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card src-card" id="middle-src-card">
+                    <div class="card-header" id="headingTwo">
+                        <h1 class="mb-0">
+                            <button class="btn btn-link accordion-btn" data-toggle="collapse" data-target="#byCategory">
+                                Sources By Category
+                            </button>
+                        </h1>
+                    </div>
+                    <div id="byCategory" class="collapse" data-parent="#accordion">
+                        <div class="card-body src-card-body">
+                            {% regroup sources|dictsort:'category' by category as sources_by_category %}
+                            <ul class="src-ul">
+                                {% for category in sources_by_category %}
+                                    <li class="src-li">
+                                        <span class="src-header">{{ category.grouper|capfirst }}</span>
+                                        <ul>
+                                            {% for source in category.list %}
+                                                <li>
+                                                    <a href="{{ source.url }}">{{ source.name }}</a>
+                                                    <span class="src-details">{{ source.country }} - {{ source.full_lang }}</span>
+                                                </li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="card src-card">
+                    <div class="card-header" id="headingThree">
+                        <h1 class="mb-0">
+                            <button class="btn btn-link accordion-btn" data-toggle="collapse" data-target="#byLanguage">
+                                Sources By Language
+                            </button>
+                        </h1>
+                    </div>
+                    <div id="byLanguage" class="collapse" data-parent="#accordion">
+                        <div class="card-body src-card-body">
+                            {% regroup sources|dictsort:'full_lang' by full_lang as sources_by_language %}
+                                <ul class="src-ul">
+                                    {% for full_lang in sources_by_language %}
+                                        <li class="src-li">
+                                            <span class="src-header">{{ full_lang.grouper }}</span>
+                                            <ul>
+                                                {% for source in full_lang.list %}
+                                                    <li>
+                                                        <a href="{{ source.url }}">{{ source.name }}</a>
+                                                        <span class="src-details">{{ source.country }} - {{ source.category|capfirst }}</span>
+                                                    </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-1 src-pad-col"></div>
+        </div>
+    </div>
+
+    <div class="container" id="view-src-col-container">
         <div class="row" id="view-src-row">
             <div class="col sources" id="sources-left">
                 <h2 class="view-sources-cat-head">Sources by Country</h2>
                 {% regroup sources|dictsort:'country' by country as sources_by_country %}
-                <ul>
+                <ul class="src-ul">
                     {% for country in sources_by_country %}
-                        <li>{{ country.grouper }}
+                        <li class="src-li">
+                            <span class="src-header">{{ country.grouper }}</span>
                             <ul>
                                 {% for source in country.list %}
                                     <li>
                                         <a href="{{ source.url }}">{{ source.name }}</a>
-                                        <sub>{{ source.category|capfirst }} - {{ source.full_lang }}</sub>
+                                        <span class="src-details">{{ source.category|capfirst }} - {{ source.full_lang }}</span>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -29,14 +132,15 @@
             <div class="col sources" id="sources-center">
                 <h2 class="view-sources-cat-head">Sources by Category</h2>
                 {% regroup sources|dictsort:'category' by category as sources_by_category %}
-                <ul>
+                <ul class="src-ul">
                     {% for category in sources_by_category %}
-                        <li>{{ category.grouper|capfirst }}
+                        <li class="src-li">
+                            <span class="src-header">{{ category.grouper|capfirst }}</span>
                             <ul>
                                 {% for source in category.list %}
                                     <li>
                                         <a href="{{ source.url }}">{{ source.name }}</a>
-                                        <sub>{{ source.country }} - {{ source.full_lang }}</sub>
+                                        <span class="src-details">{{ source.country }} - {{ source.full_lang }}</span>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -47,14 +151,15 @@
             <div class="col sources">
                 <h2 class="view-sources-cat-head">Sources by Language</h2>
                 {% regroup sources|dictsort:'full_lang' by full_lang as sources_by_language %}
-                <ul>
+                <ul class="src-ul">
                     {% for full_lang in sources_by_language %}
-                        <li>{{ full_lang.grouper }}
+                        <li class="src-li">
+                            <span class="src-header">{{ full_lang.grouper }}</span>
                             <ul>
                                 {% for source in full_lang.list %}
                                     <li>
                                         <a href="{{ source.url }}">{{ source.name }}</a>
-                                        <sub>{{ source.country }} - {{ source.category|capfirst }}</sub>
+                                        <span class="src-details">{{ source.country }} - {{ source.category|capfirst }}</span>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -64,5 +169,4 @@
             </div>
         </div>
     </div>
-
 {% endblock %}

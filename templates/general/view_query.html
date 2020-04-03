@@ -1,5 +1,6 @@
-
-{% extends 'general/base.html' %}
+{% extends 'general/root.html' %}
+{% load staticfiles %}
+{% load static %}
 
 {% block title %}
     Query Results - {{ block.super }}
@@ -7,19 +8,18 @@
 
 {% block styles %}
     {{ block.super }}
+    <link rel="stylesheet" href="{% static 'css/view_query.css' %}">
 {% endblock %}
-
-
 
 {% block content %}
     <div class="container" id="view-query-parent-container">
+
         <div class="row">
-            <div class="col-4">
-                <h1 class="title-center" id="view-query-details-title">Query Details</h1>
+            <div class="col">
                 <div id="adjacent-target">
                     <table id="view-query-table">
-                        <tr id="view-query-th">
-                            <th></th><th></th>
+                        <tr>
+                            <th colspan="2" class="text-center">Query Details</th>
                         </tr>
                         <tr class="view-query-tr">
                             <td class="view-query-details-row-title">Query: </td>
@@ -39,26 +39,20 @@
                         </tr>
                     </table>
                 </div>
-
                 {% if user.pk == query_author.id %}
-
                     {% if query.archived is False %}
-
-                        <div class="post-query-container">
-
-                            <form method="post" action="{% url 'new_post' %}">
+                        <div id="post-query-container">
+                            <form method="post" action="{% url 'new_post' %}" id="new-post-form">
                                 {% csrf_token %}
                                 <div class="input-group view-query" id="view-query-form-header">
-                                    <div class="input-group-prepend view-query" id="new-post-span-container">
-                                        <p class="input-group-text title-center" id="new-post-span">Post Your Query</p>
-                                    </div>
+                                        <p class="input-group-text title-center text-center" id="new-post-span">Post Your Query</p>
                                     <input type="text" id="view-query-form-input-title" class="form-control view-query" placeholder="Enter Title Here" aria-label="Post Title" name="_title">
                                 </div>
                                 <div class="input-group view-query" id="view-query-form-textarea-container">
                                     <label class="input-group-prepend view-query" id="textarea-label">
-                                        <textarea class="form-control view-query" id="new-post-textarea" aria-label="Post Body" name="_body" rows="11"><</textarea>
+                                        <textarea class="form-control view-query" id="new-post-textarea" aria-label="Post Body" name="_body" rows="11"></textarea>
                                     </label>
-                                    <div id="pre-textarea" contenteditable style="border:solid 1px black; padding: 1em; width: 100%; min-height: 2em;"></div>
+                                    <div id="pre-textarea" contenteditable="true" placeholder="share your thoughts!"></div>
                                 </div>
                                 <div class="input-group view-query" id="view-query-form-controls">
                                     <div class="form-check form-check-inline">
@@ -70,21 +64,20 @@
                                         <input type="radio" class="form-check-input" id="public-save-false" name="save_radio" value="True">
                                     </div>
                                     <div class="btn-group-sm float-right">
-                                        <a href="#"><button type="submit" class="btn btn-link btn-sm" id="view-query-save-btn">SAVE</button></a>
-                                        <a href={% url 'delete_query' query.pk %}><button class="btn btn-link btn-sm" role="link" id="view-query-del-btn">DELETE</button></a>
+                                        <a href="#">
+                                            <button type="submit" class="btn btn-link btn-sm" id="view-query-save-btn">SAVE</button>
+                                        </a>
+                                        <a href={% url 'delete_query' query.pk %}>
+                                            <button class="btn btn-link btn-sm" role="link" id="view-query-del-btn">DELETE</button>
+                                        </a>
                                     </div>
                                 </div>
                                 <input type="hidden" name="user_pk" value="{{ user.pk }}">
                                 <input type="hidden" name="query_pk" value="{{ query.pk }}">
                             </form>
-
                         </div>
                     {% endif %}
-
-
-
                     {% if query.archived is True %}
-
                         <form method="post" action="{% url 'update_post' post.pk %}">
                             {% csrf_token %}
                             <div class="input-group">
@@ -103,90 +96,80 @@
                             <input type="hidden" name="user_pk" value="{{ user.pk }}">
                             <input type="hidden" name="query_pk" value="{{ query.pk }}">
                         </form>
-
                         <form method="post" action="{% url 'delete_post' post.pk %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-danger">Delete Post</button>
                             <sub>* Query will also be deleted</sub>
                         </form>
-
                     {% endif %}
-
                 {% endif %}
             </div>
-            <div class="col-8 view-query-articles-container">
-                <div class="row" id="view-query-iframe-row">
-                    <div class="col-12" id="view-query-iframe-col">
-                        <div class="embed-responsive-16by9" id="view-query-iframe-div">
-                            <iframe class="embed-responsive-item" id="view-query-iframe" src="{% url 'view_choro' query.pk %}"></iframe>
-                        </div>
-                    </div>
+            <div class="col-sm-12 col-xl-8" id="view-query-iframe-container">
+                <div class="embed-responsive-16by9" id="view-query-iframe-div">
+                    {{ choro_map|safe }}
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col view-query-articles">
-                <div class="card" id="view-query-card">
-                    <div class="card-header view-query-card-header-container">
-                        <h1 class="title-center view-query-card-header">Articles from Query</h1>
+
+        <div class="row" id="articles-row">
+            <div class="col-sm-0 col-lg-1"></div>
+            <div class="col-sm-12 col-lg-10" id="articles-wrapper">
+                <div class="col" id="articles-col">
+                    <div class="card" id="articles-card">
+                        <div class="card-header" id="card-header-wrapper">
+                            <h1 class="title-center" id="card-hdr">Articles from Query</h1>
+                        </div>
+                        <ul class="list-group" id="articles-list">
+                            {% for article in articles %}
+                                {% if article %}
+                                    <li class="article-li">
+                                        <div class="row article-row">
+                                            <div class="col-xl-1 col-sm-0 left-buffer"></div>
+                                            <div class="col-xl-7 col-sm-12 article-details-container">
+                                                <a href="{{ article.article_url }}" class="img-link">
+                                                    <h4 class="article-title title-center">{{ article.title }}</h4>
+                                                </a>
+                                                 <img class="article-img-sm" src="{{ article.image_url }}" alt="{{ article.description }}">
+                                                 <h6 class="title-center article-subtitle-container">
+                                                     <sub class="article-subtitle title-center">
+                                                         By <span class="article-author"> {{ article.author }}</span>
+                                                         {{ article.date_published|date:"DATETIME_FORMAT"}}
+                                                    </sub>
+                                                 </h6>
+                                                <p class="article-body">{{ article.description }}</p>
+                                            </div>
+                                            <div class="col-xl-3 col-sm-0 article-img-xl-container">
+                                                <img class="article-img-xl" src="{{ article.image_url }}" alt="{{ article.description }}">
+                                            </div>
+                                            <div class="col-xl-1 col-sm-0 right-buffer"></div>
+                                        </div>
+                                    </li>
+                                {% endif %}
+                            {% empty %}
+                                <p class="list-group-item">No Articles Found for Query</p>
+                            {% endfor %}
+                        </ul>
                     </div>
-                    <ul class="list-group" id="view-query-articles-list">
-                        {% for article in articles %}
-                            {% if article %}
-                                <li class="view-query-li">
-                                    <div class="row view-query-article">
-                                        <div class="col-1" id="view-query-articles-left-buffer"></div>
-                                        <div class="col-7 view-query-article-txt-container">
-                                             <h4 class="view-query-article-title title-center">{{ article.title }}</h4>
-                                             <h6 class="title-center view-query-article-subtitle-container">
-                                                 <sub class="view-query-article-subtitle title-center">By <span class="article-author">{{ article.author }}</span> {{ article.date_published|date:"DATETIME_FORMAT"}}
-                                                    <a class="view-query-article-link title-center" href="{{ article.article_url }}">Link</a>
-                                                </sub>
-                                             </h6>
-                                            <p class="view-query-article-body">{{ article.description }}</p>
-                                        </div>
-                                        <div class="col-3 view-query-article-img-container">
-                                            <img class="view-query-article-img " src="{{ article.image_url }}" alt="{{ article.description }}">
-                                        </div>
-                                        <div class="col-1" id="view-query-articles-right-buffer"></div>
-                                    </div>
-                                </li>
-                            {% endif %}
-                        {% empty %}
-                            <p class="list-group-item">No Articles Found for Query</p>
-                        {% endfor %}
-                    </ul>
                 </div>
             </div>
-            <div class="col-2"></div>
+            <div class="col-sm-0 col-lg-1"></div>
         </div>
     </div>
 {% endblock %}
 
+
 {% block scripts %}
     {{ block.super }}
     <script>
-        function htmlToTemplate(html) {
-            let template = document.getElementById('template');
-            template.setAttribute('width', '100%');
-            template.setAttribute('padding', '0');
-            template.setAttribute('margin', '0');
-            template.setAttribute('max-width', '80%');
-            html = html.trim();
-            template.innerHTML = html;
-            return (template.content.childNodes);
-        }
-        $(document).ready(function() {
-            htmlToTemplate( {{ query.choro_html|safe }} );
-        })
-    </script>
-
-    <script>
-    jQuery(function(){
-        jQuery('form').submit(function(e) {
-            jQuery('textarea').val(jQuery('#pre-textarea').html() );
+        jQuery(function(){
+            jQuery('form').submit(() => {
+                jQuery('textarea').val(jQuery('#pre-textarea').html() );
+            });
         });
-    });
     </script>
+{% endblock %}
+
+{% block footer-scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/view_query.js' %}"></script>
 {% endblock %}

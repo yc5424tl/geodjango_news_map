@@ -1,11 +1,10 @@
-{% extends 'general/base.html' %}
+{% extends 'general/root.html' %}
 
-{% block title %}Update Comment - {{ block.super }}{% endblock %}
-
-{% block scripts %} {{ block.super }} {% endblock %}
+{% block title %}
+    Update Comment - {{ block.super }}
+{% endblock %}
 
 {% block content%}
-
     {% if messages %}
         <div class="message-div center">
             <ul>
@@ -15,7 +14,6 @@
             </ul>
         </div>
     {% endif %}
-
     <div class="update-comment-container">
         <h4 class="update-comment-title">
             Comment by
@@ -26,23 +24,17 @@
             <a href="{% url 'view_user' comment.post.author.pk %}">{{ comment.post.author.first_name }}</a>
         </h4>
         <small class="view-comment-subtitle">Published {{ comment.date_published }}</small>
-
-
         {% if user.pk == comment.author.pk %}
             <form method="post" action={% url 'update_comment' comment.pk %}>
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn view-comment-upt-btn">SAVE</button>
             </form>
-
             <form method="post" action={% url 'delete_comment' comment.pk %}>
                 {% csrf_token %}
                 <input type="hidden" name="redirect_url" value="{% url 'view_post' comment.post.pk %}">
                 <button type="submit" class="btn view-comment-del-btn">DELETE</button>
             </form>
-
         {% endif %}
-
     </div>
-
 {% endblock %}

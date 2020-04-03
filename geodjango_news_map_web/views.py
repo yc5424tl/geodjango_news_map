@@ -1,3 +1,5 @@
+from logging import Logger
+
 import pycountry
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
@@ -9,12 +11,13 @@ from django.db import transaction
 from django.shortcuts import render, redirect, get_object_or_404, Http404
 
 from .constructor import Constructor
-from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, \
-    NewCommentForm
+from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, NewCommentForm
 from .geo_data_mgr import GeoDataManager
-from .geo_map_mgr import GeoMapManager, CHORO_MAP_ROOT
+from .geo_map_mgr import GeoMapManager
 from .models import QueryResultSet, Source, Post, Comment
 from .query_mgr import Query
+
+logger = Logger(__name__)
 
 constructor = Constructor()
 geo_data_mgr = GeoDataManager()
@@ -39,7 +42,6 @@ def register_user(request):
             messages.info(request, message=form.errors)
             form = CustomUserCreationForm()
             return render(request, 'general/new_user.html', {'form': form})
-
     if request.method == 'GET':
         form = CustomUserCreationForm()
         return render(request, 'general/new_user.html', {'form': form})
@@ -64,7 +66,6 @@ def login_user(request):
         return render(request, 'general/login_user.html', {'form': form})
 
 
-
 def logout_user(request):
     if request.user.is_authenticated:
         messages.info(request, 'Logout Successful', extra_tags='alert')
@@ -83,16 +84,27 @@ def new_query(request):
         query_mgr = Query(argument=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
         query_mgr.get_endpoint()
         article_data = query_mgr.execute_query()
-        query_set = QueryResultSet.objects.create(
-            _query_type=query_mgr.focus, _argument=query_mgr.argument, _data=article_data, _author=request.user)
+        query_set = QueryResultSet.objects.create(_query_type=query_mgr.focus, _argument=query_mgr.argument, _data=article_data, _author=request.user)
         query_set.save()
 
         article_list = constructor.build_article_data(article_data, query_set)
         for article in article_list:
             code = geo_map_mgr.map_source(source_country=article.source_country)
             geo_data_mgr.add_result(code)
+
         data_tup = geo_map_mgr.build_choropleth(query_mgr.argument, query_mgr.focus, geo_data_mgr)
-        QueryResultSet.objects.filter(pk=query_set.pk).update(_choropleth=data_tup[0], _choro_html=data_tup[1], _filename=data_tup[2], _filepath=CHORO_MAP_ROOT + data_tup[2], _author=request.user.pk)
+        if data_tup is None:
+            return redirect('index', messages='build choropleth returned None')
+        else:
+            global_map = data_tup[0]
+            filename = data_tup[1]
+            qrs = QueryResultSet.objects.get(pk=query_set.pk)
+            qrs._choro_html = global_map.get_root().render()
+            qrs._filename = filename
+            qrs._author = User.objects.get(pk=request.user.pk)
+            qrs._choropleth = global_map._repr_html_()
+            qrs.save()
+
         return redirect('view_query', query_set.pk)
 
 
@@ -107,7 +119,6 @@ def view_query(request, query_result_set_pk):
         'choro_html': qrs.choro_html,
         'filename': qrs.filename
     })
-
 
 
 @login_required()
@@ -142,6 +153,7 @@ def delete_query(request, query_pk):
     QueryResultSet.objects.filter(pk=query_pk).delete()
     messages.info(request, "Query Successfully Deleted")
     return redirect('new_query')
+
 
 @login_required()
 def view_user(request, member_pk):
@@ -181,7 +193,6 @@ def view_user(request, member_pk):
         raise Http404
 
 
-
 @login_required()
 def new_post(request):
     if request.method == 'GET':
@@ -206,6 +217,8 @@ def new_post(request):
                     qrs = QueryResultSet.objects.get(pk=qrs_pk)
                     post = Post(_title=title, _public=public, _body=body, _query=qrs, _author=author)
                     post.save()
+                    qrs.archived = True
+                    qrs.save()
                     return redirect('view_post', post.pk)
                 else:
                     print('Errors = ' + form.errors) # TODO apply useful logic
@@ -213,6 +226,7 @@ def new_post(request):
                 raise Http404
     else:
         raise Http404
+
 
 @login_required()
 def update_post(request, post_pk):
@@ -245,15 +259,16 @@ def view_post(request, post_pk):
             messages.info(request, 'Post Details Updated')
         else:
             messages.error(request, form.errors)
-        return redirect('post_details', post_pk=post_pk)
+        return redirect('   post_details', post_pk=post_pk)
     else:
         post = Post.objects.get(pk=post_pk)
         qrs = post.query
+        articles = post.query.articles.all()
         if post.author.id == request.user.id:
             edit_post_form = EditPostForm(instance=Post) #Pre-populate form with the post's current field values
-            return render(request, 'general/view_post.html', {'post': post, 'edit_post_form': edit_post_form, 'query': qrs})
+            return render(request, 'general/view_post.html', {'post': post, 'edit_post_form': edit_post_form, 'query': qrs, 'articles': articles})
         else:
-            return render(request, 'general/view_post.html', {'post': post, 'query': qrs})
+            return render(request, 'general/view_post.html', {'post': post, 'query': qrs, 'articles': articles})
 
 
 def view_sources(request):
@@ -276,6 +291,7 @@ def lang_a2_to_name(source):
         return name
     except LookupError:
         return source.language
+
 
 def country_a2_to_name(source):
     try:
@@ -329,13 +345,16 @@ def delete_comment(request, comment_pk):
     messages.info(request, 'Failed to Delete Comment')
     return redirect(request, last_url)
 
+
 #TODO def password_reset(request)
+
 
 def view_choro(request, query_pk):
     qrs = QueryResultSet.objects.get(pk=query_pk)
     return render(request, 'general/view_choro.html', {
         'query': qrs
     })
+
 
 @login_required()
 def view_test_page(request):

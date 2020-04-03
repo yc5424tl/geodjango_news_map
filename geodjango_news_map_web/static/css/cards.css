@@ -1,0 +1,27 @@
+/*For view_post and view_public_posts and view_query*/
+/***
+ *     ██████╗ █████╗ ██████╗ ██████╗ ███████╗
+ *    ██╔════╝██╔══██╗██╔══██╗██╔══██╗██╔════╝
+ *    ██║     ███████║██████╔╝██║  ██║███████╗
+ *    ██║     ██╔══██║██╔══██╗██║  ██║╚════██║
+ *    ╚██████╗██║  ██║██║  ██║██████╔╝███████║
+ *     ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝ ╚══════╝
+ *
+ */
+.card {
+    background-color: var(--main-light);
+}
+
+.card * {
+    background-color: var(--main-light);
+    color: var(--main-grey);
+}
+
+.card-header h1 {
+    align-content: center;
+}
+
+.card-link {
+    color: var(--main-link-color);
+    transition: 0.4s;
+}

@@ -9,7 +9,6 @@ import requests
 
 logger = Logger(__name__)
 
-
 class Constructor:
 
     def new_article(self, response_data, query_set: QueryResultSet):
@@ -164,14 +163,17 @@ class Constructor:
 
 
     def new_source(self, data):
+
         try:
             name = self.verify_str(data['name'])
         except UnicodeDecodeError:
             name = self.verify_str(data['id'])
+
         try:
             description = self.verify_str(data['description'])
         except UnicodeDecodeError:
             description = 'Unavailable'
+
         if name:
             return Source(_api_id=data['id'],
                           _category=data['category'],

@@ -1,6 +1,8 @@
-{% extends 'general/base.html' %}
+{% extends 'general/root.html' %}
 
-{% block title %} New Post - {{ block.super }}{% endblock %}
+{% block title %}
+    New Post - {{ block.super }}
+{% endblock %}
 
 {% block content %}
     <p>New Post Form</p>
@@ -9,6 +11,4 @@
         {{ form.as_p }}
         <button type="submit" class="btn btn-success">Submit Post</button>
     </form>
-
-
 {% endblock %}
