@@ -1,33 +1,43 @@
-from datetime import datetime
-from . models import Article, QueryResultSet, Source
-from logging import Logger
-from dateutil.parser import parse
-import json
+import logging
 import os
-import requests
+from datetime import datetime
+
+from dateutil.parser import parse
+
+from .models import Article, QueryResultSet, Source
+
+api_key = os.environ.get('NEWS_API_KEY_2')
+
+logger = logging.getLogger(__name__)
 
 
-logger = Logger(__name__)
 
 class Constructor:
 
     def new_article(self, response_data, query_set: QueryResultSet):
         source = self.verify_source(response_data['source']['name'])
         date_published = self.verify_date(response_data['publishedAt'])
+        article_url = response_data['url']
+        image_url = response_data['urlToImage'] if response_data['urlToImage'] is not None else None
 
         try:
             description = self.verify_str(response_data['description']) if response_data['description'] is not None else 'Unavailable'
-        except UnicodeDecodeError:
+        except UnicodeDecodeError as e:
+            logger.log(level=logging.DEBUG, msg=f'UnicodeDecodeError while parsing description for new article: {e}\nSource Data: {response_data}')
             description = 'Unavailable'
+
         try:
             title = self.verify_str(response_data['title'])
-        except UnicodeDecodeError:
+        except UnicodeDecodeError as e:
+            logger.log(level=logging.DEBUG, msg=f'UnicodeDecodeError while parsing title for new article: {e}\nSource Data {e}')
             title = 'Unavailable'
+
         try:
             author = self.verify_str(response_data['author'])
             if author is None:
                 author = 'Unknown'
-        except UnicodeEncodeError:
+        except UnicodeEncodeError as e:
+            logger.log(level=logging.DEBUG, msg=f'UnicodeDecodeError while parsing author for new article: {e}\nSource Data {e}')
             author = 'Unknown'
 
         if source:
@@ -56,6 +66,7 @@ class Constructor:
                 article_list.append(new_article)
         return article_list
 
+
     @staticmethod
     def verify_str(data):
         if data and isinstance(data, str):
@@ -63,12 +74,14 @@ class Constructor:
         else:
             return None
 
+
     def verify_date(self, data):
         f_data = self.format_date(data)
         if data and isinstance(f_data, datetime):
             return f_data
         else:
             return None
+
 
     @staticmethod
     def format_date(data):
@@ -84,103 +97,10 @@ class Constructor:
             try:
                  return Source.objects.get(_name=source_name)
             except (AttributeError, Source.DoesNotExist) as e:
-                logger.exception(f'{e} propagating from constructor.verify_source({source_name})')
+                logger.log(level=logging.ERROR, msg=f'{e} propagating from constructor.verify_source({source_name})')
                 return False
         else:
             logger.error(f'{source_name} retrieval failed.')
             return False
 
 
-
-    def get_sources(self):
-        try:
-            db_has_sources = Source.objects.get(pk=1)
-            print('past db_has_sources')
-            return bool(db_has_sources)
-        except (UnicodeDecodeError, FileNotFoundError, Source.DoesNotExist, TypeError):
-            try:
-                with open('./geodjango_news_map_web/static/js/sources.json') as sources:
-                    source_list = json.load(sources)
-                    print('loaded sources to source_list in constructor')
-                    print(f'type(source_list) = {type(source_list)}')
-                    print(f'source_list.keys = {source_list.keys()}')
-                    print(f'source_list[sources] type = {type(source_list["sources"])}')
-                    print(f'source_list[sources] = {source_list["sources"]}')
-                    for source_data in source_list['sources']:
-                        try:
-                            print(f"id = {source_data['id']}")
-                            print(f"name = {source_data['name']}")
-                            print(f"description = {source_data['description']}")
-                            print(f"url = {source_data['url']}")
-                            print(f"category = {source_data['category']}")
-                            print(f"language = {source_data['language']}")
-                            print(f"country = {source_data['country']}")
-                            new_source = Source(_api_id=source_data['id'],
-                                                _name = source_data['name'],
-                                                _description=source_data['description'],
-                                                _url = source_data['url'],
-                                                _category = source_data['category'],
-                                                _language = source_data['language'],
-                                                _country = source_data['country'])
-                            new_source.save()
-                        except TypeError:
-                            logger.error(f'{TypeError} while constructing new Source')
-            except (FileNotFoundError, UnicodeDecodeError):
-                print('final attempt, calling self.build_sources()')
-                source_dict = self.build_sources
-                print(f'sources = {source_dict}')
-                self.record_sources(source_dict)
-                return True
-
-
-    def filter_source(self, source_data):
-        try:
-            new_source = self.new_source(source_data)
-            if new_source:
-                new_source.save()
-        except TypeError:
-            print(f'TypeError while building_sources with {source_data}')
-            logger.error(f'{TypeError} while building new Source')
-
-
-    def build_sources(self):
-        response = requests.get(os.getenv('NEWS_API_SOURCES_URL'))
-        response_data = response.json()
-        return list(filter(self.filter_source, response_data))
-
-    @staticmethod
-    def record_sources(source_json):
-        try:
-            with open('sources.json', 'a') as json_file:
-                json_file.write(str(source_json))
-        except UnicodeEncodeError:
-            logger.exception(UnicodeEncodeError, 'UnicodeDecodeError in QueryManager.build_sources()')
-        except AttributeError:
-            logger.exception(AttributeError, 'AttributeError in QueryManager.build_sources()')
-        except KeyError:
-            logger.exception(KeyError, 'KeyError in QueryManager.build_sources()')
-
-
-
-    def new_source(self, data):
-
-        try:
-            name = self.verify_str(data['name'])
-        except UnicodeDecodeError:
-            name = self.verify_str(data['id'])
-
-        try:
-            description = self.verify_str(data['description'])
-        except UnicodeDecodeError:
-            description = 'Unavailable'
-
-        if name:
-            return Source(_api_id=data['id'],
-                          _category=data['category'],
-                          _country=data['country'],
-                          _description=description,
-                          _language=data['language'],
-                          _name=name,
-                          _url=data['url'])
-        else:
-            return False

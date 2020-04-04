@@ -1,24 +1,33 @@
-from django.contrib.gis.admin import OSMGeoAdmin
-from django.contrib.gis import admin
-from .models import Source, Post, QueryResultSet, Article, Comment
+from django.contrib import admin
+
+from .models import Source, Post, QueryResultSet, Article, Comment, Category
 
 
 @admin.register(Article)
-class ArticleAdmin(OSMGeoAdmin):
-    list_display = ('_author', '_date_published', '_source', '_title', '_query')
+class ArticleAdmin(admin.ModelAdmin):
+    list_display = ('_title','_author', '_date_published', '_source', '_query')
 
 @admin.register(QueryResultSet)
-class QueryResultSetAdmin(OSMGeoAdmin):
+class QueryResultSetAdmin(admin.ModelAdmin):
     list_display = ('_argument', '_query_type', '_filename', '_filepath', '_author', '_archived', '_date_created', '_public', '_choropleth')
 
 @admin.register(Post)
-class PostAdmin(OSMGeoAdmin):
+class PostAdmin(admin.ModelAdmin):
     list_display = ('_title', '_date_published', '_author', '_query', '_public', '_date_last_edit')
 
 @admin.register(Comment)
-class CommentAdmin(OSMGeoAdmin):
+class CommentAdmin(admin.ModelAdmin):
     list_display = ('_body', '_date_published', '_date_last_edit', '_author', '_post')
 
+
 @admin.register(Source)
-class SourceAdmin(OSMGeoAdmin):
-    list_display = ('_api_id', '_category', '_country', '_country_alpha_code', '_description', '_language', '_name', '_url')
+class SourceAdmin(admin.ModelAdmin):
+    list_display = ( '_name', '_country', '_language', '_url')
+    list_editable = ('_country', '_language', '_url')
+    list_filter = ('_country', '_language')
+    list_display_links = ['_name']
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['_name']

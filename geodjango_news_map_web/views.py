@@ -1,22 +1,31 @@
+import json
+import logging
+import os
+import sys
 from logging import Logger
 
 import pycountry
+import requests
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import transaction
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, Http404
+from django.views.decorators.csrf import csrf_exempt
 
 from .constructor import Constructor
 from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, NewCommentForm
 from .geo_data_mgr import GeoDataManager
 from .geo_map_mgr import GeoMapManager
-from .models import QueryResultSet, Source, Post, Comment
+from .models import QueryResultSet, Source, Post, Comment, Category
 from .query_mgr import Query
 
+logging.basicConfig(filename='news_map.log', level=logging.INFO)
 logger = Logger(__name__)
 
 constructor = Constructor()
@@ -24,11 +33,13 @@ geo_data_mgr = GeoDataManager()
 geo_map_mgr = GeoMapManager()
 
 
+
 @transaction.atomic
 def index(request):
     if request.method == 'GET':
         form = AuthenticationForm()
         return render(request, 'general/index.html', {'form': form})
+
 
 
 def register_user(request):
@@ -45,6 +56,7 @@ def register_user(request):
     if request.method == 'GET':
         form = CustomUserCreationForm()
         return render(request, 'general/new_user.html', {'form': form})
+
 
 
 def login_user(request):
@@ -66,9 +78,11 @@ def login_user(request):
         return render(request, 'general/login_user.html', {'form': form})
 
 
+
 def logout_user(request):
     if request.user.is_authenticated:
         messages.info(request, 'Logout Successful', extra_tags='alert')
+
 
 
 @login_required()
@@ -79,46 +93,53 @@ def new_query(request):
 
     elif request.method == 'POST':
         geo_data_mgr.verify_geo_data()
-        constructor.get_sources()
-
-        query_mgr = Query(argument=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
+        query_mgr = Query(arg=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
         query_mgr.get_endpoint()
-        article_data = query_mgr.execute_query()
-        query_set = QueryResultSet.objects.create(_query_type=query_mgr.focus, _argument=query_mgr.argument, _data=article_data, _author=request.user)
+        query_data = query_mgr.execute_query()
+        article_data = query_data[0]
+        article_count = query_data[1]
+        query_set = QueryResultSet.objects.create(_query_type=query_mgr.focus, _argument=query_mgr.arg, _data=article_data, _author=request.user)
         query_set.save()
 
         article_list = constructor.build_article_data(article_data, query_set)
+        # TODO get len of list for # of articles, in loop below map each to country
         for article in article_list:
             code = geo_map_mgr.map_source(source_country=article.source_country)
             geo_data_mgr.add_result(code)
 
-        data_tup = geo_map_mgr.build_choropleth(query_mgr.argument, query_mgr.focus, geo_data_mgr)
+        data_tup = geo_map_mgr.build_choropleth(query_mgr.arg, query_mgr.focus, geo_data_mgr)
         if data_tup is None:
             return redirect('index', messages='build choropleth returned None')
         else:
-            global_map = data_tup[0]
-            filename = data_tup[1]
             qrs = QueryResultSet.objects.get(pk=query_set.pk)
-            qrs._choro_html = global_map.get_root().render()
-            qrs._filename = filename
-            qrs._author = User.objects.get(pk=request.user.pk)
-            qrs._choropleth = global_map._repr_html_()
+            global_map =            data_tup[0]
+            filename =              data_tup[1]
+            qrs._choro_html =       global_map.get_root().render()
+            qrs._filename =         filename
+            qrs._author =           User.objects.get(pk=request.user.pk)
+            qrs._choropleth =       global_map._repr_html_()
+            qrs._article_count =    article_count
+            qrs._article_data_len = len(article_data)
             qrs.save()
 
-        return redirect('view_query', query_set.pk)
+        return redirect('view_query', qrs.pk)
+
 
 
 @login_required()
 def view_query(request, query_result_set_pk):
     qrs = get_object_or_404(QueryResultSet, pk=query_result_set_pk)
     return render(request, 'general/view_query.html', {
-        'query': qrs,
-        'query_author': qrs.author,
-        'articles': qrs.articles.all(),
-        'choro_map': qrs.choropleth,
-        'choro_html': qrs.choro_html,
-        'filename': qrs.filename
+        'query':            qrs,
+        'query_author':     qrs.author,
+        'articles':         qrs.articles.all(),
+        'choro_map':        qrs.choropleth,
+        'choro_html':       qrs.choro_html,
+        'filename':         qrs.filename,
+        'article_count'    :qrs.article_count,
+        'article_data_len': qrs.article_data_len
     })
+
 
 
 @login_required()
@@ -155,18 +176,22 @@ def delete_query(request, query_pk):
     return redirect('new_query')
 
 
+
 @login_required()
 def view_user(request, member_pk):
     try:
         member = User.objects.get(pk=member_pk)
+
         try:
             last_post = member.posts.order_by('-id')[0]
         except IndexError:
             last_post = None
+
         try:
             recent_posts = member.posts.order_by('-id')[1:5]
         except IndexError:
             recent_posts = None
+
         try:
             recent_comments = None
             has_comments = member.comments.all()[0]
@@ -174,6 +199,7 @@ def view_user(request, member_pk):
                 recent_comments = member.comments.all()[0:5]
         except IndexError:
             recent_comments = None
+
         try:
             recent_queries = None
             has_queries = member.queries.all()[0]
@@ -233,6 +259,7 @@ def update_post(request, post_pk):
     return render(request, 'general/update_post.html')
 
 
+
 @login_required()
 def update_comment(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
@@ -249,6 +276,7 @@ def update_comment(request, comment_pk):
         return redirect('view_comment', comment_pk=comment_pk)
 
 
+
 @login_required()
 def view_post(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk)
@@ -259,7 +287,7 @@ def view_post(request, post_pk):
             messages.info(request, 'Post Details Updated')
         else:
             messages.error(request, form.errors)
-        return redirect('   post_details', post_pk=post_pk)
+        return redirect('post_details', post_pk=post_pk)
     else:
         post = Post.objects.get(pk=post_pk)
         qrs = post.query
@@ -271,18 +299,32 @@ def view_post(request, post_pk):
             return render(request, 'general/view_post.html', {'post': post, 'query': qrs, 'articles': articles})
 
 
+
 def view_sources(request):
-    constructor.get_sources()
+
     source_dict_list = [{
-        '''country''': country_a2_to_name(source),
-        '''country_a2''': source.country,
-        '''name''': source.name,
-        '''language''': str(source.language),
-        '''full_lang''': lang_a2_to_name(source),
-        '''category''': str(source.category),
-        '''url''': str(source.url)}
+        'country':     source.country_full,
+        'name':        source.name,
+        'language':    source.language_full,
+        'categories': [category.name for category in source.categories.all()],
+        'url':         source.url}
     for source in Source.objects.all()]
-    return render(request, 'general/view_sources.html', {'sources': source_dict_list})
+
+    category_dict_list = [{
+        'cat': category.name,
+        'src_list':[{
+            'name':source.name,
+            'country': source.country_full,
+            'language':source.language_full,
+            'url':source.url,
+        } for source in category.sources.all()]
+    } for category in Category.objects.all()]
+
+    return render(request, 'general/view_sources.html', {
+        'sources':    source_dict_list,
+        'categories': category_dict_list
+    })
+
 
 
 def lang_a2_to_name(source):
@@ -293,12 +335,14 @@ def lang_a2_to_name(source):
         return source.language
 
 
+
 def country_a2_to_name(source):
     try:
         name = pycountry.countries.lookup(source.country).name
         return name
     except LookupError:
         return source.country
+
 
 
 @login_required()
@@ -311,6 +355,7 @@ def delete_post(request):
         return redirect('index')
     else:
         messages.error(request, 'Action Not Authorized')
+
 
 
 @login_required()
@@ -328,6 +373,7 @@ def new_comment(request, post_pk):
         return redirect('view_comment', c.pk)
 
 
+
 @login_required()
 def view_comment(request, comment_pk):
     try:
@@ -335,6 +381,7 @@ def view_comment(request, comment_pk):
         return render(request, 'general/view_comment.html', {'comment': comment})
     except Comment.DoesNotExist:
         raise Http404
+
 
 
 @login_required()
@@ -346,6 +393,38 @@ def delete_comment(request, comment_pk):
     return redirect(request, last_url)
 
 
+
+@csrf_exempt
+def import_sources(request):
+    if request.method == 'POST':
+        payload = json.loads(request.body)
+        try:
+            source_data = payload['sources']
+            for data in source_data:
+                source, s_created = Source.objects.get_or_create(_name=data['name'], defaults={'_country': data['country'], '_language': data['language'], '_url': data['url'] if data['url'] else ''})
+                for cat_name in data['categories']:  # Source exists in DB
+                    category, c_created = Category.objects.get_or_create(_name=cat_name)
+                    try:
+                        source.categories.get(_name=category.name)
+                    except ObjectDoesNotExist:
+                        source.categories.add(category)
+                        source.save()
+                    except BaseException as e:
+                        sys.stdout.write(f'\n CATCH-ALL EXCEPTION on has_category=record.categories.get(_name=category.name)\n{e}')
+                        pass
+            requests.get(os.getenv('STAY_ALIVE_URL'))
+            return HttpResponse(status=200)
+
+        except (ValueError, BaseException) as e:
+            sys.stdout.write(f'POST data has no key "sources". ERROR: {e}')
+            requests.get(os.getenv('STAY_ALIVE_URL'))
+            return HttpResponse(status=204)
+    else:
+        sys.stdout.write(f'USER NOT AUTHENTICATED, STOPPING SOURCES IMPORT')
+        requests.get(os.getenv('STAY_ALIVE_URL'))
+        return HttpResponse(status=401)
+
+
 #TODO def password_reset(request)
 
 
@@ -354,9 +433,3 @@ def view_choro(request, query_pk):
     return render(request, 'general/view_choro.html', {
         'query': qrs
     })
-
-
-@login_required()
-def view_test_page(request):
-    return render(request, 'general/test_choro.html')
-
