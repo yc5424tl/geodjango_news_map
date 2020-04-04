@@ -1,10 +1,13 @@
+from django.db import models
+
 import os
 from datetime import datetime
 from typing import NoReturn
 
 import pycountry
 from django.conf import settings
-from django.db import models
+from django.contrib.gis.db import models
+
 
 BASE_DIR         = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SETTINGS_DIR     = os.path.dirname(__file__)
@@ -68,8 +71,9 @@ class QueryResultSet(models.Model):
     def article_data_len(self) -> int:
         return self._article_data_len
 
+
     @property
-    def choropleth(self) -> str:
+    def choropleth(self):
         return self._choropleth
 
     @choropleth.setter
@@ -77,15 +81,15 @@ class QueryResultSet(models.Model):
         self._choropleth = new_choro
 
     @property
-    def choro_html(self) -> str:
+    def choro_html(self):
         return self._choro_html
 
     @property
-    def data(self) -> str:
+    def data(self):
         return self._data
 
     @property
-    def filename(self) -> str:
+    def filename(self):
         return self._filename
 
     @property
@@ -123,6 +127,7 @@ class QueryResultSet(models.Model):
     @date_last_modified.setter
     def date_last_modified(self, new_date) -> NoReturn:
         self._date_last_modified = new_date
+
 
     def __str__(self):
         details = f'Argument: {self._argument}\n Query Type: {self._query_type}\n Author: {self._author}\n Archived: {self._archived}\n' \
@@ -295,6 +300,7 @@ class Post(models.Model):
     _date_last_edit = models.DateTimeField(auto_now_add=True)
     _query          = models.OneToOneField(QueryResultSet, on_delete=models.PROTECT)
     _public         = models.BooleanField(default=False)
+
 
     @property
     def author(self) -> settings.AUTH_USER_MODEL:

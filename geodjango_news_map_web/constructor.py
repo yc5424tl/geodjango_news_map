@@ -41,6 +41,8 @@ class Constructor:
             author = 'Unknown'
 
         if source:
+            article_url = response_data['url']
+            image_url = response_data['urlToImage'] if response_data['urlToImage'] is not None else None
             new_article = Article(
                 _article_url=article_url,
                 _author=author,
@@ -93,12 +95,11 @@ class Constructor:
     def verify_source(source_name):
         if source_name:
             try:
-                source = Source.objects.get(_name=source_name)
-                return source
+                 return Source.objects.get(_name=source_name)
             except (AttributeError, Source.DoesNotExist) as e:
                 logger.log(level=logging.ERROR, msg=f'{e} propagating from constructor.verify_source({source_name})')
                 return False
-        elif not source_name:
+        else:
             logger.error(f'{source_name} retrieval failed.')
             return False
 
