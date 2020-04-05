@@ -316,7 +316,7 @@ def view_sources(request):
             'name':source.name,
             'country': source.country_full,
             'language':source.language_full,
-            'url':source.url,
+            'url':source.url
         } for source in category.sources.all()]
     } for category in Category.objects.all()]
 

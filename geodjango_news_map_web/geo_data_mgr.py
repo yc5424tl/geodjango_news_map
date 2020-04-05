@@ -26,7 +26,7 @@ class GeoDataManager:
             return self.get_geo_data() and self.fix_cyprus_country_code()
 
 
-    def get_geo_data(self):
+    def get_geo_data(self) -> bool:
         try:
             self.req_data = requests.get('https://raw.githubusercontent.com/johan/world.geo.json/master/countries.geo.json')
             self.json_data = self.req_data.json()

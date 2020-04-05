@@ -14,11 +14,11 @@ logger = logging.getLogger(__name__)
 
 class Constructor:
 
-    def new_article(self, response_data, query_set: QueryResultSet):
+    def new_article(self, response_data, query_set: QueryResultSet) -> Article or False:
         source = self.verify_source(response_data['source']['name'])
         date_published = self.verify_date(response_data['publishedAt'])
-        article_url = response_data['url']
-        image_url = response_data['urlToImage'] if response_data['urlToImage'] is not None else None
+        # article_url = response_data['url']
+        # image_url = response_data['urlToImage'] if response_data['urlToImage'] is not None else None
 
         try:
             description = self.verify_str(response_data['description']) if response_data['description'] is not None else 'Unavailable'
@@ -58,7 +58,7 @@ class Constructor:
             return False
 
 
-    def build_article_data(self, article_data_list, query_set: QueryResultSet):
+    def build_article_data(self, article_data_list:[{}], query_set: QueryResultSet) -> [Article]:
         article_list = []
         for article_data in article_data_list:
             new_article = self.new_article(article_data, query_set)
@@ -68,14 +68,14 @@ class Constructor:
 
 
     @staticmethod
-    def verify_str(data):
+    def verify_str(data:str) -> str or None:
         if data and isinstance(data, str):
             return data
         else:
             return None
 
 
-    def verify_date(self, data):
+    def verify_date(self, data:datetime) -> datetime or None:
         f_data = self.format_date(data)
         if data and isinstance(f_data, datetime):
             return f_data
@@ -92,7 +92,7 @@ class Constructor:
 
 
     @staticmethod
-    def verify_source(source_name):
+    def verify_source(source_name) -> str or False:
         if source_name:
             try:
                  return Source.objects.get(_name=source_name)
