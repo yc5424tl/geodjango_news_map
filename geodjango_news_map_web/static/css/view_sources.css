@@ -111,7 +111,8 @@
 /*============================= COLUMNS =============================*/
 .sources {
     margin           : 2em 0.5em 2em;
-    padding-left     : 5%;
+    /* padding-left    : 5%; */
+    padding-left     : 0.5em;
     padding-right    : 0;
     text-align       : left;
     padding-top      : 1em;
@@ -126,6 +127,13 @@
     margin-top    : 20px;
     margin-bottom : 10px;
     color         : var(--main-link-hover);
+
+    width         : 100%;
+    height        : auto;
+    text-align    : center;
+    justify-content: center;
+    justify-self: center;
+
 }
 
 #middle-src-card {
