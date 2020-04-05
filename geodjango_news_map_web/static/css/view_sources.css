@@ -8,6 +8,20 @@
  *
  */
 
+.src-url:link {
+    color: var(--main-link-color);
+}
+
+.src-url:visited {
+    color: var(--btn-hover-bg);
+}
+
+.src-url:hover,
+.src-url:focus,
+.src-url:active {
+    color: var(--main-link-hover);
+}
+
 @media (min-width: 1200px) {
     #view-src-col-container {
         display          : block;

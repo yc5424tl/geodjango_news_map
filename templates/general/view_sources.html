@@ -34,7 +34,7 @@
                                         <ul>
                                             {% for source in source_list %}
                                                 <li>
-                                                    <a href="{{ source.url }}">{{ source.name }}</a>
+                                                    <a class="src-url" href="{{ source.url }}">{{ source.name }}</a>
                                                     <small class="src-details">
                                                         {% for category in source.categories %}
                                                             {{ category.name }}
@@ -70,7 +70,7 @@
                                             {% for source in category.src_list %}
                                                 <li>
                                                     {% if source.url.strip != '' %}
-                                                        <a href="{{ source.url }}">{{ source.name }}</a>
+                                                        <a class="src-url" href="{{ source.url }}">{{ source.name }}</a>
                                                     {% else %}
                                                         <span>{{ source.name }}</span>
                                                     {% endif %}
@@ -119,7 +119,7 @@
                                                 {% for source in source_list  %}
                                                     <li>
                                                         {% if source.url and source.url.trim %}
-                                                            <a href="{{ source.url }}">{{ source.name }}</a>
+                                                            <a class="src-url" href="{{ source.url }}">{{ source.name }}</a>
                                                         {% else %}
                                                             <span class="src-details">{{ source.name }}</span>
                                                         {% endif %}
@@ -152,7 +152,7 @@
                             <ul>
                                 {% for source in country.list %}
                                     <li>
-                                        <a href="{{ source.url }}">{{ source.name }}</a>
+                                        <a class="src-url" href="{{ source.url }}">{{ source.name }}</a>
                                         <span class="src-details">{{ source.category|capfirst }} - {{ source.language }}</span>
                                     </li>
                                 {% endfor %}
@@ -173,7 +173,7 @@
                                 {% for source in category.src_list %}
                                     <li>
                                          {% if source.url.strip != '' %}
-                                             <a href="{{ source.url }}">{{ source.name }}</a>
+                                             <a class="src-url" href="{{ source.url }}">{{ source.name }}</a>
                                          {% else %}
                                              <span>{{ source.name }}</span>
                                          {% endif %}
@@ -215,7 +215,7 @@
                             <ul>
                                 {% for source in language.list %}
                                     <li>
-                                        <a href="{{ source.url }}">{{ source.name }}</a>
+                                        <a class="src-url" href="{{ source.url }}">{{ source.name }}</a>
                                         <span class="src-details">{{ source.country }} - {{ source.category|capfirst }}</span>
                                         <span class="src-details">{{ source.country }}</span>
                                     </li>
