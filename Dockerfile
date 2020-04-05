@@ -24,10 +24,10 @@ ENV DEBUG 0
 
 COPY requirements.txt ./
 
-RUN apt-get update && apt-get install -y python3 python-pip gcc libgdal20 libgdal-dev \
+RUN apt-get update && apt-get install -y python3 python3-pip gcc libgdal20 libgdal-dev \
 && apt install -y gdal-bin python-gdal python3-gdal python3-rtree \
 #&& apt install -y postgresql-10 python3-psycopg2 python3-postresql / # install prompt would need <2> and <37> entered
-&& pip3 install fiona shapely pyproj \
+RUN pip3 install fiona shapely pyproj \
 && pip3 install -r requirements.txt
 
 COPY . .
