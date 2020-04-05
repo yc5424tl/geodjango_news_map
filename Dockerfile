@@ -32,7 +32,7 @@ RUN pip3 install fiona shapely pyproj \
 
 COPY . .
 
-RUN adduser -D g1zmodo
-USER g1zmodo
+#RUN adduser -D g1zmodo
+#USER g1zmodo
 
 CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
