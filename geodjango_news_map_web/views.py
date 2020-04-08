@@ -35,7 +35,7 @@ geo_map_mgr = GeoMapManager()
 
 
 @transaction.atomic
-def index(request):
+def index(request) -> render:
     if request.method == 'GET':
         form = AuthenticationForm()
         return render(request, 'general/index.html', {'form': form})
@@ -86,48 +86,48 @@ def logout_user(request):
 
 
 @login_required()
-def new_query(request):
+def new_query(request:requests.request) -> render or redirect:
     if request.method == 'GET':
         form = NewQueryForm()
         return render(request, 'general/new_query.html', {'search_form': form})
 
     elif request.method == 'POST':
-        geo_data_mgr.verify_geo_data()
-        query_mgr = Query(arg=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
-        query_mgr.get_endpoint()
-        query_data = query_mgr.execute_query()
-        article_data = query_data[0]
-        article_count = query_data[1]
-        query_set = QueryResultSet.objects.create(_query_type=query_mgr.focus, _argument=query_mgr.arg, _data=article_data, _author=request.user)
-        query_set.save()
+        if geo_data_mgr.verify_geo_data():
+            query_mgr = Query(arg=request.POST.get('_argument'), focus=request.POST.get('_query_type'))
+            query_mgr.get_endpoint()
+            query_data = query_mgr.execute_query()
+            article_data = query_data[0]
+            article_count = query_data[1]
+            query_set = QueryResultSet.objects.create(_query_type=query_mgr.focus, _argument=query_mgr.arg, _data=article_data, _author=request.user)
+            query_set.save()
 
-        article_list = constructor.build_article_data(article_data, query_set)
-        # TODO get len of list for # of articles, in loop below map each to country
-        for article in article_list:
-            code = geo_map_mgr.map_source(source_country=article.source_country)
-            geo_data_mgr.add_result(code)
+            article_list = constructor.build_article_data(article_data, query_set)
+            # TODO get len of list for # of articles, in loop below map each to country
+            for article in article_list:
+                code = geo_map_mgr.map_source(source_country=article.source_country)
+                geo_data_mgr.add_result(code)
 
-        data_tup = geo_map_mgr.build_choropleth(query_mgr.arg, query_mgr.focus, geo_data_mgr)
-        if data_tup is None:
-            return redirect('index', messages='build choropleth returned None')
-        else:
-            qrs = QueryResultSet.objects.get(pk=query_set.pk)
-            global_map =            data_tup[0]
-            filename =              data_tup[1]
-            qrs._choro_html =       global_map.get_root().render()
-            qrs._filename =         filename
-            qrs._author =           User.objects.get(pk=request.user.pk)
-            qrs._choropleth =       global_map._repr_html_()
-            qrs._article_count =    article_count
-            qrs._article_data_len = len(article_data)
-            qrs.save()
+            data_tup = geo_map_mgr.build_choropleth(query_mgr.arg, query_mgr.focus, geo_data_mgr)
+            if data_tup is None:
+                return redirect('index', messages='build choropleth returned None')
+            else:
+                qrs = QueryResultSet.objects.get(pk=query_set.pk)
+                global_map =            data_tup[0]
+                filename =              data_tup[1]
+                qrs._choro_html =       global_map.get_root().render()
+                qrs._filename =         filename
+                qrs._author =           User.objects.get(pk=request.user.pk)
+                qrs._choropleth =       global_map._repr_html_()
+                qrs._article_count =    article_count
+                qrs._article_data_len = len(article_data)
+                qrs.save()
 
-        return redirect('view_query', qrs.pk)
+            return redirect('view_query', qrs.pk)
 
 
 
 @login_required()
-def view_query(request, query_result_set_pk):
+def view_query(request, query_result_set_pk:int):
     qrs = get_object_or_404(QueryResultSet, pk=query_result_set_pk)
     return render(request, 'general/view_query.html', {
         'query':            qrs,
@@ -158,7 +158,7 @@ def view_public_posts(request):
 
 
 @login_required()
-def delete_comment(request, comment_pk):
+def delete_comment(request, comment_pk:int):
     if request.method == 'POST':
         comment = Comment.objects.get(pk=comment_pk)
         post_pk = comment.post.pk
@@ -170,7 +170,7 @@ def delete_comment(request, comment_pk):
 
 
 @login_required()
-def delete_query(request, query_pk):
+def delete_query(request, query_pk:int):
     QueryResultSet.objects.filter(pk=query_pk).delete()
     messages.info(request, "Query Successfully Deleted")
     return redirect('new_query')

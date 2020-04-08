@@ -19,10 +19,10 @@ class Query:
         self.endpoint = endpoint
 
 
+    @property
     def filename(self) -> str:
         date_created = datetime.now().strftime('%Y%m%d-%H%M%S')
-        filename = f'api_data-{self.arg}_{self.focus}-{date_created}.json'
-        return filename
+        return f'api_data-{self.arg}_{self.focus}-{date_created}.json'
 
 
     def validate_date_range(self) -> bool:
@@ -31,29 +31,30 @@ class Query:
         return has_range and is_past
 
 
-    def get_endpoint(self):
+    def get_endpoint(self) -> bool:
 
         valid_date_range = self.validate_date_range() if self.from_date and self.to_date else False
+
         if valid_date_range:
             if self.focus == 'all':
-                pass
+                self.endpoint = 'a'
             elif self.focus == 'headlines':
-                pass
+                self.endpoint = 'b'
             else:
+                self.endpoint = 'c'
                 return False
-        elif not valid_date_range:
+        else:
             if self.focus == 'all':
                 self.endpoint = f'https://newsapi.org/v2/everything?q={self.arg}&apiKey={api_key}&pageSize=100'
             elif self.focus == 'headlines':
                 self.endpoint = f'https://newsapi.org/v2/top-headlines?q={self.arg}&apiKey={api_key}&pageSize=100'
             else:
+                self.endpoint = None
                 return False
-        else:
-            return False
         return True
 
 
-    def execute_query(self):
+    def execute_query(self) -> ([dict], int):
 
         response = requests.get(self.endpoint)
         article_count = int(response.json()['totalResults'])
@@ -90,13 +91,17 @@ class Query:
 
 
 
-    def to_file(self, data):
+    def to_file(self, data) -> bool:
         try:
-            with open(self.filename(), 'w+') as file:
+            with open(self.filename, 'w+') as file:
                 file.write(str(data))
+            return True
         except UnicodeEncodeError:
             logger.exception(UnicodeEncodeError, 'UnicodeEncodeError during writing articles.json to file (QueryManager)')
+            return False
         except AttributeError:
             logger.exception(AttributeError, 'AttributeException during writing articles.json to file (QueryManager)')
+            return False
         except TypeError:
             logger.exception(TypeError, 'TypeError while ')
+            return False

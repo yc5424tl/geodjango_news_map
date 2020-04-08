@@ -9,6 +9,7 @@ import pandas as pd
 import pycountry
 
 from geodjango_news_map.settings import BASE_DIR
+from geodjango_news_map_web.geo_data_mgr import GeoDataManager
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +25,7 @@ class GeoMapManager:
         return (pycountry.countries.get(alpha_2=str(source_country).upper())).alpha_3 if source_country else None
 
 
-    def build_choropleth(self, argument, focus, geo_data_mgr):
+    def build_choropleth(self, argument, focus, geo_data_mgr:GeoDataManager):
         world_df = gp.read_file(geo_data_mgr.filename)
         global_map = folium.Map(location=[0, 0], tiles='OpenStreetMap', zoom_start=3)
         articles_per_country = pd.Series(geo_data_mgr.result_dict)
@@ -60,7 +61,7 @@ class GeoMapManager:
 
 
     @staticmethod
-    def get_threshold(articles_per_country):
+    def get_threshold(articles_per_country:[dict]) -> [int]:
 
         if articles_per_country.values.max() <= 16:
             threshold_scale = np.linspace(
@@ -85,7 +86,7 @@ class GeoMapManager:
 
 
     @staticmethod
-    def choro_to_file(choro_html, filename):
+    def choro_to_file(choro_html:str, filename:str) -> bool:
         try:
             with open(CHORO_MAP_ROOT+filename, "w") as file:
                 file.write(choro_html)
