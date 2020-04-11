@@ -22,31 +22,32 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 ENV DEBUG 0
 
-RUN export SECRET_KEY=$( cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 32 )
+
 
 COPY requirements.txt ./
-
-RUN apt-get update && apt-get install -y python3 python3-pip gcc libgdal20 libgdal-dev \
-&& apt install -y gdal-bin python-gdal python3-gdal python3-rtree
+RUN export SECRET_KEY=$( cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 32 ) \
+apt-get update && apt-get install -y python3 python3-pip gcc libgdal20 libgdal-dev \
+apt install -y gdal-bin python-gdal python3-gdal python3-rtree \
 #&& apt install -y postgresql-10 python3-psycopg2 python3-postresql / # install prompt would need <2> and <37> entered
-RUN pip3 install fiona shapely pyproj \
-&& pip3 install -r requirements.txt
+pip3 install fiona shapely pyproj \
+pip3 install -r requirements.txt
 
 COPY . .
 ARG ON_HEROKU=true
 RUN if [-z ${ON_HEROKU}]; then
         CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT;
     else
-        apt update && apt install -y curl
-        curl https://cli-assets.heroku.com/install.sh | sh
-        DATABASE_URL=$(heroku config:get DATABASE_URL -a geodjango-news-map) #target process
-        CONN_STR_LIST=($(python parse_conn_str.py ${DATABASE_URL} | tr 0d '[],'))
-        export NEWS_MAP_DB_USER=${CONN_STR_LIST[0]}
-        export NEWS_MAP_DB_PW=${CONN_STR_LIST[1]}
-        export NEWS_MAP_DB_HOST=${CONN_STR_LIST[2]}
-        export NEWS_MAP_DB_PORT=${CONN_STR_LIST[3]}
-        export NEWS_MAP_DB_NAME=${CONN_STR_LIST[4]}
-        CMD ["python", "manage.py", "runserver", "0.0.0.0", "8000"]
+        EXPOSE 8000
+        RUN apt update && apt install -y curl \
+        curl https://cli-assets.heroku.com/install.sh | sh \
+        DATABASE_URL=$(heroku config:get DATABASE_URL -a geodjango-news-map) \ #target process
+        CONN_STR_LIST=($(python parse_conn_str.py ${DATABASE_URL} | tr 0d '[],')) \
+        export NEWS_MAP_DB_USER=${CONN_STR_LIST[0]} \
+        export NEWS_MAP_DB_PW=${CONN_STR_LIST[1]} \
+        export NEWS_MAP_DB_HOST=${CONN_STR_LIST[2]} \
+        export NEWS_MAP_DB_PORT=${CONN_STR_LIST[3]} \
+        export NEWS_MAP_DB_NAME=${CONN_STR_LIST[4]} \
+        ["python", "manage.py", "runserver", "0.0.0.0", "8000"]; fi
 
 
 #IF [[ -z ${ON_HEROKU} ]]; then CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
