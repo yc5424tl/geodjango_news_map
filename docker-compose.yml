@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/geodjango_news_map
+    ports:
+      - "8000:8000"
+    environment:
+      - "HEROKU_API_KEY=${TEST_HEROKU_API_KEY}"
+      - "SECRET_KEY=${SECRET_KEY}"

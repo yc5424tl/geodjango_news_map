@@ -31,8 +31,13 @@ RUN pip3 install fiona shapely pyproj \
 && pip3 install -r requirements.txt
 
 COPY . .
+ARG ON_HEROKU=true
+RUN if [-z ${ON_HEROKU}]; then
+        CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT;
+    else
+        apt update && apt install -y curl
+        curl https://cli-assets.heroku.com/install.sh | sh
 
-#RUN adduser -D g1zmodo
-#USER g1zmodo
 
-CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
+#IF [[ -z ${ON_HEROKU} ]]; then CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
+
