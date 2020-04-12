@@ -42,7 +42,7 @@ COPY . .
 # RUN ECHO "EUID == next line"
 # RUN echo "${ON_HEROKU}"
 
-RUN if [[ ! -z "${ON_HEROKU}"]] then \
+RUN if [[ ! -z "${ON_HEROKU}"]];then \
 apt update && \
 apt install -y curl && \
 curl https://cli-assets.heroku.com/install.sh | sh && \
@@ -54,7 +54,7 @@ export NEWS_MAP_DB_HOST=${CONN_STR_LIST[2]} && \
 export NEWS_MAP_DB_PORT=${CONN_STR_LIST[3]} && \
 export NEWS_MAP_DB_NAME=${CONN_STR_LIST[4]} && \
 PORT = 8000 \
-fi
+; fi
     # gunicorn geodjango_news_map.wsgi:application 0.0.0.0:8000; fi
     #["python", "manage.py", "runserver", "0.0.0.0", "8000"]) ; fi
 EXPOSE 8000
