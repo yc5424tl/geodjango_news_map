@@ -66,7 +66,7 @@ RUN CONN_STR_LIST=($(python parse_conn_str.py "${DATABASE_URL}" | tr -d '[],')) 
 export NEWS_MAP_DB_PW=${CONN_STR_LIST[1]} && \
 export NEWS_MAP_DB_HOST=${CONN_STR_LIST[2]} && \
 export NEWS_MAP_DB_PORT=${CONN_STR_LIST[3]} && \
-export NEWS_MAP_DB_NAME=${CONN_STR_LIST[4]}
+export NEWS_MAP_DB_NAME=${CONN_STR_LIST[4]};
 
 RUN export PORT=8000
 
