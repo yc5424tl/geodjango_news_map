@@ -16,10 +16,10 @@ class DBConnectionStr:
     def __init__(self, cstr):
         __re_dbstr = compile(r'^(?P<engine>[^:]+)://((?P<user>[^\(:]+)(\((?P<role>.+)\))?(:(?P<password>[^@]+))?(@(?P<host>[^\/:]+)(:(?P<port>\d+))?)?)?/(?P<name>.+)')
         try:
-            print('line before self.__db assignment')
+            #print('line before self.__db assignment')
             self.__db = __re_dbstr.search(cstr).groupdict()
-            print('line below should be self.__db value')
-            print(f'{self.__db}')
+            #print('line below should be self.__db value')
+           #print(f'{self.__db}')
             # Fix for sqlite path
             if self.__db['engine'].startswith('sqlite'):
                 self.__db['name'] = "/%s" % self.__db['name']
@@ -64,8 +64,8 @@ class DBConnectionStr:
 
 def parse_connection_string():
     c = DBConnectionStr(cstr=sys.argv[1])
-    print('next line is sys.argv[1]')
-    print(f'{sys.argv[1]}')
+    #print('next line is sys.argv[1]')
+    #print(f'{sys.argv[1]}')
     return [c.user, c.password, c.host, c.port, c.name]
 
 if __name__ == '__main__':
