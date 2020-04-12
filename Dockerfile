@@ -60,9 +60,7 @@ COPY . .
 RUN if [[ -z "${ON_HEROKU}" ]];then \
 apt update && \
 apt install -y curl && \
-curl https://cli-assets.heroku.com/install.sh | sh; fi
-
-RUN DATABASE_URL=$(heroku config:get DATABASE_URL -a geodjango-news-map) && export DATABASE_URL=${DATABASE_URL}
+curl https://cli-assets.heroku.com/install.sh | sh && DATABASE_URL=$(heroku config:get DATABASE_URL -a geodjango-news-map) && export DATABASE_URL=${DATABASE_URL}
 
 RUN CONN_STR_LIST=($(python parse_conn_str.py "${DATABASE_URL}" | tr -d '[],')) &&  export NEWS_MAP_DB_USER=${CONN_STR_LIST[0]} && \
 export NEWS_MAP_DB_PW=${CONN_STR_LIST[1]} && \
