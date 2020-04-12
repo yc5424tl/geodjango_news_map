@@ -35,13 +35,17 @@ RUN pip3 install fiona shapely pyproj \
 COPY . .
 # ARG ON_HEROKU=false
 RUN echo ${ON_HEROKU}
+
+#RUN if [[ -z "${ON_HEROKU}"] ]; then \
+    #gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT; fi
+
 RUN if ! [[ -z "${ON_HEROKU}"] ]; then \
     #gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT; else \
     apt update && \
     apt install -y curl && \
     curl https://cli-assets.heroku.com/install.sh | sh && \
     DATABASE_URL=$( heroku config:get DATABASE_URL -a geodjango-news-map ) && \
-    CONN_STR_LIST=$(( (python parse_conn_str.py "${DATABASE_URL}") | tr 0d '[],' )) && \
+    CONN_STR_LIST=($(python parse_conn_str.py "${DATABASE_URL}" | tr -d '[],' )) && \
     export NEWS_MAP_DB_USER=${CONN_STR_LIST[0]} && \
     export NEWS_MAP_DB_PW=${CONN_STR_LIST[1]} && \
     export NEWS_MAP_DB_HOST=${CONN_STR_LIST[2]} && \
@@ -51,6 +55,7 @@ RUN if ! [[ -z "${ON_HEROKU}"] ]; then \
     # gunicorn geodjango_news_map.wsgi:application 0.0.0.0:8000; fi
     #["python", "manage.py", "runserver", "0.0.0.0", "8000"]) ; fi
 EXPOSE 8000
+
 CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
 
 #IF [[ -z ${ON_HEROKU} ]]; then CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
