@@ -34,18 +34,20 @@ RUN pip3 install fiona shapely pyproj \
 
 COPY . .
 # ARG ON_HEROKU=false
-RUN echo ${ON_HEROKU}
+#RUN echo ${ON_HEROKU}
 
 #RUN if [[ -z "${ON_HEROKU}"] ]; then \
     #gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT; fi
 #gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT; else \
+RUN ECHO "EUID == next line"
+RUN echo "${ON_HEROKU}"
 
-RUN if ! [[ -z "${ON_HEROKU}"] ] then \
+RUN if [[ ! -z "${ON_HEROKU}"]] then \
 apt update && \
 apt install -y curl && \
 curl https://cli-assets.heroku.com/install.sh | sh && \
-DATABASE_URL=$( heroku config:get DATABASE_URL -a geodjango-news-map ) && \
-CONN_STR_LIST=($(python parse_conn_str.py "${DATABASE_URL}" | tr -d '[],' )) && \
+DATABASE_URL=$(heroku config:get DATABASE_URL -a geodjango-news-map) && \
+CONN_STR_LIST=($(python parse_conn_str.py "${DATABASE_URL}" | tr -d '[],')) && \
 export NEWS_MAP_DB_USER=${CONN_STR_LIST[0]} && \
 export NEWS_MAP_DB_PW=${CONN_STR_LIST[1]} && \
 export NEWS_MAP_DB_HOST=${CONN_STR_LIST[2]} && \
