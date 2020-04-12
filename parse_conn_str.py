@@ -66,7 +66,8 @@ def parse_connection_string():
     c = DBConnectionStr(cstr=sys.argv[1])
     #print('next line is sys.argv[1]')
     #print(f'{sys.argv[1]}')
-    return [c.user, c.password, c.host, c.port, c.name]
+    print ([c.user, c.password, c.host, c.port, c.name])
+    sys.exit(0)
 
 if __name__ == '__main__':
     parse_connection_string()
