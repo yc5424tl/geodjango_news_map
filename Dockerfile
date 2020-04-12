@@ -39,8 +39,8 @@ COPY . .
 #RUN if [[ -z "${ON_HEROKU}"] ]; then \
     #gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT; fi
 #gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT; else \
-RUN ECHO "EUID == next line"
-RUN echo "${ON_HEROKU}"
+# RUN ECHO "EUID == next line"
+# RUN echo "${ON_HEROKU}"
 
 RUN if [[ ! -z "${ON_HEROKU}"]] then \
 apt update && \
