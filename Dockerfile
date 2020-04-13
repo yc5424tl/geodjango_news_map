@@ -30,8 +30,9 @@ COPY requirements.txt ./
 RUN export SECRET_KEY=$( cat /dev/urandom | tr -dc 'a-zA-Z0-9' | head -c 32 ) && \
 apt-get update && \
 apt-get install -y python3 python3-pip gcc libgdal20 libgdal-dev && \
-apt install -y gdal-bin python-gdal python3-gdal python3-rtree && \
-pip3 install fiona shapely pyproj -r requirements.txt
+apt update && \
+apt install -y gdal-bin python-gdal python3-gdal python3-rtree curl && \
+pip3 install -r requirements.txt
 
 COPY . .
 # ARG ON_HEROKU=false
@@ -59,8 +60,6 @@ COPY . .
     #["python", "manage.py", "runserver", "0.0.0.0", "8000"]) ; fi
 
 RUN if [[ -z "${ON_HEROKU}" ]];then \
-apt update && \
-apt install -y curl && \
 curl https://cli-assets.heroku.com/install.sh | sh && \
 DATABASE_URL=$(heroku config:get DATABASE_URL -a geodjango-news-map) && \
 CONN_STR_LIST=($(python parse_conn_str.py ${DATABASE_URL} | tr -d '[],')) && \
