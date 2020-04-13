@@ -69,8 +69,7 @@ export NEWS_MAP_DB_PW=${CONN_STR_LIST[1]} && \
 export NEWS_MAP_DB_HOST=${CONN_STR_LIST[2]} && \
 export NEWS_MAP_DB_PORT=${CONN_STR_LIST[3]} && \
 export NEWS_MAP_DB_NAME=${CONN_STR_LIST[4]} && \
-export PORT=8000
-fi
+export PORT=8000;fi
 
 EXPOSE 8000
 
