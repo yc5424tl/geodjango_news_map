@@ -16,7 +16,7 @@
 #RUN pip3 install -y gdal
 FROM ubuntu:latest
 
-SHELL['bash', '-c']
+SHELL["/bin/bash", "-c"]
 
 WORKDIR /app
 
