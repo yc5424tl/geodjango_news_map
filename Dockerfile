@@ -1,3 +1,6 @@
+#!/bin/bash
+
+
 #FROM osgeo/gdal
 #RUN add-apt-repository ppa:thomas-schiex/blender \
 #&& add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable \
@@ -16,7 +19,7 @@
 #RUN pip3 install -y gdal
 FROM ubuntu:latest
 
-SHELL["/bin/bash", "-c"]
+SHELL ["/bin/bash", "-c"]
 
 WORKDIR /app
 
