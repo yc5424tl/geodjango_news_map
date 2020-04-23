@@ -11,25 +11,22 @@ news_api = NewsApiClient(api_key=api_key)
 
 
 class Query:
-    def __init__(self, arg: str, focus:str, from_date:datetime=None, to_date:datetime=None, endpoint:str=None):
+    def __init__(self, arg: str, focus: str, from_date: datetime = None, to_date: datetime = None, endpoint: str = None):
         self.arg = arg
         self.focus = focus
         self.from_date = from_date
         self.to_date = to_date
         self.endpoint = endpoint
 
-
     @property
     def filename(self) -> str:
         date_created = datetime.now().strftime('%Y%m%d-%H%M%S')
         return f'api_data-{self.arg}_{self.focus}-{date_created}.json'
 
-
     def validate_date_range(self) -> bool:
-        has_range =  self.to_date - self.from_date >= timedelta(0)
+        has_range = self.to_date - self.from_date >= timedelta(0)
         is_past = datetime.now() - self.to_date >= timedelta(0)
         return has_range and is_past
-
 
     def get_endpoint(self) -> bool:
 
@@ -52,7 +49,6 @@ class Query:
                 self.endpoint = None
                 return False
         return True
-
 
     def execute_query(self) -> ([dict], int):
 
@@ -88,8 +84,6 @@ class Query:
         #     print(f'len(article data)={len(article_data)} pages={pages} article_count={article_count}')
 
         return article_data, article_count
-
-
 
     def to_file(self, data) -> bool:
         try:

@@ -33,13 +33,11 @@ geo_data_mgr = GeoDataManager()
 geo_map_mgr = GeoMapManager()
 
 
-
 @transaction.atomic
 def index(request) -> render:
     if request.method == 'GET':
         form = AuthenticationForm()
         return render(request, 'general/index.html', {'form': form})
-
 
 
 def register_user(request):
@@ -56,7 +54,6 @@ def register_user(request):
     if request.method == 'GET':
         form = CustomUserCreationForm()
         return render(request, 'general/new_user.html', {'form': form})
-
 
 
 def login_user(request):
@@ -78,15 +75,13 @@ def login_user(request):
         return render(request, 'general/login_user.html', {'form': form})
 
 
-
 def logout_user(request):
     if request.user.is_authenticated:
         messages.info(request, 'Logout Successful', extra_tags='alert')
 
 
-
 @login_required()
-def new_query(request:requests.request) -> render or redirect:
+def new_query(request: requests.request) -> render or redirect:
     if request.method == 'GET':
         form = NewQueryForm()
         return render(request, 'general/new_query.html', {'search_form': form})
@@ -112,22 +107,21 @@ def new_query(request:requests.request) -> render or redirect:
                 return redirect('index', messages='build choropleth returned None')
             else:
                 qrs = QueryResultSet.objects.get(pk=query_set.pk)
-                global_map =            data_tup[0]
-                filename =              data_tup[1]
-                qrs._choro_html =       global_map.get_root().render()
-                qrs._filename =         filename
-                qrs._author =           User.objects.get(pk=request.user.pk)
-                qrs._choropleth =       global_map._repr_html_()
-                qrs._article_count =    article_count
+                global_map = data_tup[0]
+                filename = data_tup[1]
+                qrs._choro_html = global_map.get_root().render()
+                qrs._filename = filename
+                qrs._author = User.objects.get(pk=request.user.pk)
+                qrs._choropleth = global_map._repr_html_()
+                qrs._article_count = article_count
                 qrs._article_data_len = len(article_data)
                 qrs.save()
 
             return redirect('view_query', qrs.pk)
 
 
-
 @login_required()
-def view_query(request, query_result_set_pk:int):
+def view_query(request, query_result_set_pk: int):
     qrs = get_object_or_404(QueryResultSet, pk=query_result_set_pk)
     return render(request, 'general/view_query.html', {
         'query':            qrs,
@@ -136,10 +130,9 @@ def view_query(request, query_result_set_pk:int):
         'choro_map':        qrs.choropleth,
         'choro_html':       qrs.choro_html,
         'filename':         qrs.filename,
-        'article_count'    :qrs.article_count,
+        'article_count':    qrs.article_count,
         'article_data_len': qrs.article_data_len
     })
-
 
 
 @login_required()
@@ -156,9 +149,8 @@ def view_public_posts(request):
     return render(request, 'general/view_public_posts.html', {'posts': posts})
 
 
-
 @login_required()
-def delete_comment(request, comment_pk:int):
+def delete_comment(request, comment_pk: int):
     if request.method == 'POST':
         comment = Comment.objects.get(pk=comment_pk)
         post_pk = comment.post.pk
@@ -168,13 +160,11 @@ def delete_comment(request, comment_pk:int):
         return redirect('view_post', post_pk)
 
 
-
 @login_required()
-def delete_query(request, query_pk:int):
+def delete_query(request, query_pk: int):
     QueryResultSet.objects.filter(pk=query_pk).delete()
     messages.info(request, "Query Successfully Deleted")
     return redirect('new_query')
-
 
 
 @login_required()
@@ -247,7 +237,7 @@ def new_post(request):
                     qrs.save()
                     return redirect('view_post', post.pk)
                 else:
-                    print('Errors = ' + form.errors) # TODO apply useful logic
+                    print('Errors = ' + form.errors)  # TODO apply useful logic
             except User.DoesNotExist:
                 raise Http404
     else:
@@ -256,8 +246,8 @@ def new_post(request):
 
 @login_required()
 def update_post(request, post_pk):
-    return render(request, 'general/update_post.html')
-
+    if post_pk:
+        return render(request, 'general/update_post.html')
 
 
 @login_required()
@@ -276,7 +266,6 @@ def update_comment(request, comment_pk):
         return redirect('view_comment', comment_pk=comment_pk)
 
 
-
 @login_required()
 def view_post(request, post_pk):
     post = get_object_or_404(Post, pk=post_pk)
@@ -293,11 +282,10 @@ def view_post(request, post_pk):
         qrs = post.query
         articles = post.query.articles.all()
         if post.author.id == request.user.id:
-            edit_post_form = EditPostForm(instance=Post) #Pre-populate form with the post's current field values
+            edit_post_form = EditPostForm(instance=Post)  # Pre-populate form with the post's current field values
             return render(request, 'general/view_post.html', {'post': post, 'edit_post_form': edit_post_form, 'query': qrs, 'articles': articles})
         else:
             return render(request, 'general/view_post.html', {'post': post, 'query': qrs, 'articles': articles})
-
 
 
 def view_sources(request):
@@ -308,15 +296,15 @@ def view_sources(request):
         'language':    source.language_full,
         'categories': [category.name for category in source.categories.all()],
         'url':         source.url}
-    for source in Source.objects.all()]
+        for source in Source.objects.all()]
 
     category_dict_list = [{
         'cat': category.name,
-        'src_list':[{
-            'name':source.name,
+        'src_list': [{
+            'name': source.name,
             'country': source.country_full,
-            'language':source.language_full,
-            'url':source.url
+            'language': source.language_full,
+            'url': source.url
         } for source in category.sources.all()]
     } for category in Category.objects.all()]
 
@@ -324,7 +312,6 @@ def view_sources(request):
         'sources':    source_dict_list,
         'categories': category_dict_list
     })
-
 
 
 def lang_a2_to_name(source):
@@ -335,14 +322,12 @@ def lang_a2_to_name(source):
         return source.language
 
 
-
 def country_a2_to_name(source):
     try:
         name = pycountry.countries.lookup(source.country).name
         return name
     except LookupError:
         return source.country
-
 
 
 @login_required()
@@ -355,7 +340,6 @@ def delete_post(request):
         return redirect('index')
     else:
         messages.error(request, 'Action Not Authorized')
-
 
 
 @login_required()
@@ -373,7 +357,6 @@ def new_comment(request, post_pk):
         return redirect('view_comment', c.pk)
 
 
-
 @login_required()
 def view_comment(request, comment_pk):
     try:
@@ -383,7 +366,6 @@ def view_comment(request, comment_pk):
         raise Http404
 
 
-
 @login_required()
 def delete_comment(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
@@ -391,7 +373,6 @@ def delete_comment(request, comment_pk):
     last_url = request.POST['redirect_url']
     messages.info(request, 'Failed to Delete Comment')
     return redirect(request, last_url)
-
 
 
 @csrf_exempt
@@ -425,7 +406,7 @@ def import_sources(request):
         return HttpResponse(status=401)
 
 
-#TODO def password_reset(request)
+# TODO def password_reset(request)
 
 
 def view_choro(request, query_pk):

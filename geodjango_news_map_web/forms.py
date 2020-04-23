@@ -18,7 +18,6 @@ class NewPostForm(forms.ModelForm):
         super(NewPostForm, self).__init__(*args, **kwargs)
         self.fields['_body'].widget.attrs['readonly'] = True
 
-
     class Meta:
         model = Post
         fields = ('_title', '_public', '_body')
@@ -33,13 +32,12 @@ class NewCommentForm(forms.ModelForm):
 
     _body = forms.CharField(widget=forms.Textarea(
         attrs={''
-               'cols':75,
-               'rows':12,
+               'cols': 75,
+               'rows': 12,
                'class': 'resizable',
                'required': True}),
         label=''
     )
-
 
 
 class NewQueryForm(forms.ModelForm):
@@ -85,12 +83,9 @@ class LogoutForm(forms.ModelForm):
 class NewUserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ['email',]
+        fields = ['email', ]
 
 
 class UpdateUserForm(UserChangeForm):
     model = User
     fields = ['email']
-
-
-

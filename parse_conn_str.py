@@ -74,8 +74,3 @@ def parse_connection_string():
 
 if __name__ == '__main__':
     parse_connection_string()
-
-
-
-
-

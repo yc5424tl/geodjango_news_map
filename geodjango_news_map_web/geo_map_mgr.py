@@ -24,7 +24,7 @@ class GeoMapManager:
     def map_source(source_country):
         return (pycountry.countries.get(alpha_2=str(source_country).upper())).alpha_3 if source_country else None
 
-    def build_choropleth(self, argument, focus, geo_data_mgr:GeoDataManager):
+    def build_choropleth(self, argument, focus, geo_data_mgr: GeoDataManager):
         world_df = gp.read_file(geo_data_mgr.filename)
         global_map = folium.Map(location=[0, 0], tiles='OpenStreetMap', zoom_start=3)
         articles_per_country = pd.Series(geo_data_mgr.result_dict)
@@ -44,9 +44,9 @@ class GeoMapManager:
                           fill_opacity=0.7,
                           line_opacity=0.2).add_to(global_map)
 
-                          # YlGrBu - RdYlGn - YlOrBr - RdYlBu - PuBuGn - YlOrRd
-                          # Oranges - Greens -Purples - Reds - Greys - Blues
-                          # Pastel1 - Pastel2 - Spectral - Set1 - Set2 - Set3 - Dark2
+    # YlGrBu - RdYlGn - YlOrBr - RdYlBu - PuBuGn - YlOrRd
+    # Oranges - Greens -Purples - Reds - Greys - Blues
+    # Pastel1 - Pastel2 - Spectral - Set1 - Set2 - Set3 - Dark2
 
         folium.TileLayer("stamenwatercolor", attr='attr').add_to(global_map)
         folium.TileLayer("stamenterrain", attr='attr').add_to(global_map)
@@ -59,7 +59,7 @@ class GeoMapManager:
         return global_map, filename if global_map and filename else None
 
     @staticmethod
-    def get_threshold(articles_per_country:[dict]) -> [int]:
+    def get_threshold(articles_per_country: [dict]) -> [int]:
 
         if articles_per_country.values.max() <= 16:
             threshold_scale = np.linspace(
@@ -83,7 +83,7 @@ class GeoMapManager:
         return threshold_scale
 
     @staticmethod
-    def choro_to_file(choro_html:str, filename:str) -> bool:
+    def choro_to_file(choro_html: str, filename: str) -> bool:
         try:
             with open(CHORO_MAP_ROOT+filename, "w") as file:
                 file.write(choro_html)

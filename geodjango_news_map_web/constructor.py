@@ -11,7 +11,6 @@ api_key = os.environ.get('NEWS_API_KEY_2')
 logger = logging.getLogger(__name__)
 
 
-
 class Constructor:
 
     def new_article(self, response_data, query_set: QueryResultSet) -> Article or False:
@@ -57,8 +56,7 @@ class Constructor:
         else:
             return False
 
-
-    def build_article_data(self, article_data_list:[{}], query_set: QueryResultSet) -> [Article]:
+    def build_article_data(self, article_data_list: [{}], query_set: QueryResultSet) -> [Article]:
         article_list = []
         for article_data in article_data_list:
             new_article = self.new_article(article_data, query_set)
@@ -66,22 +64,19 @@ class Constructor:
                 article_list.append(new_article)
         return article_list
 
-
     @staticmethod
-    def verify_str(data:str) -> str or None:
+    def verify_str(data: str) -> str or None:
         if data and isinstance(data, str):
             return data
         else:
             return None
 
-
-    def verify_date(self, data:datetime) -> datetime or None:
+    def verify_date(self, data: datetime) -> datetime or None:
         f_data = self.format_date(data)
         if data and isinstance(f_data, datetime):
             return f_data
         else:
             return None
-
 
     @staticmethod
     def format_date(data):
@@ -90,17 +85,14 @@ class Constructor:
         except ValueError:
             return None
 
-
     @staticmethod
     def verify_source(source_name) -> str or False:
         if source_name:
             try:
-                 return Source.objects.get(_name=source_name)
+                return Source.objects.get(_name=source_name)
             except (AttributeError, Source.DoesNotExist) as e:
                 logger.log(level=logging.ERROR, msg=f'{e} propagating from constructor.verify_source({source_name})')
                 return False
         else:
             logger.error(f'{source_name} retrieval failed.')
             return False
-
-
