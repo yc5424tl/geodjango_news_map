@@ -167,7 +167,7 @@ AWS_STATIC_BUCKET = os.environ.get('AWS_STATIC_BUCKET')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_STATIC_CUSTOM_DOMAIN = f'{AWS_STATIC_BUCKET}.s3.amazonaws.com'
 
-AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400',}
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
 AWS_LOCATION = 'static'
 AWS_DEFAULT_ACL = None
 
@@ -180,8 +180,8 @@ STATIC_ROOT = 'staticfiles'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_web/media/')
 
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'geodjango_news_map_web/static'),]
-STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'geodjango_news_map_web/static'), ]
+# STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
 
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -219,8 +219,6 @@ CSRF_TRUSTED_ORIGINS = ['*']
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWAREDED_PROTO', 'https')
 
 # ADMIN_HONEYPOT_EMAIL_ADMINS = False
-
-
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'index'
