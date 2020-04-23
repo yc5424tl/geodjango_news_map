@@ -15,6 +15,8 @@ import os
 import dj_database_url
 import django_heroku
 import dotenv
+import storages
+import boto3
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -95,11 +97,11 @@ WSGI_APPLICATION = 'geodjango_news_map.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE':  'django.db.backends.postgresql_psycopg2',
-        'NAME':     os.environ.get('NEWS_MAP_DB_NAME'),
-        'USER':     os.environ.get('NEWS_MAP_DB_USER'),
-        'PASSWORD': os.environ.get('NEWS_MAP_DB_PW'),
-        'HOST':     os.environ.get('NEWS_MAP_DB_HOST'),
-        'PORT':     os.environ.get('NEWS_MAP_DB_PORT'),
+        'NAME':     os.environ.get('NEWS_MAP_DB_NAME', default=''),
+        'USER':     os.environ.get('NEWS_MAP_DB_USER', default=''),
+        'PASSWORD': os.environ.get('NEWS_MAP_DB_PW',   default=''),
+        'HOST':     os.environ.get('NEWS_MAP_DB_HOST', default=''),
+        'PORT':     os.environ.get('NEWS_MAP_DB_PORT', default=''),
     }
 }
 
@@ -154,13 +156,17 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-AWS_ACCESS_KEY_ID = os.environ.get('AWS_S3_ID')
-AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SEC')
-AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_MEDIA_BUCKET')
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_S3_ID', "")
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SEC', "")
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', "")
+
+AWS_QUERYSTRING_AUTH = False  # Ensures that the file URL doesn't have unneeded parameters like access key
+
 # AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
 AWS_STATIC_BUCKET = os.environ.get('AWS_STATIC_BUCKET')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_STATIC_CUSTOM_DOMAIN = f'{AWS_STATIC_BUCKET}.s3.amazonaws.com'
+
 AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400',}
 AWS_LOCATION = 'static'
 AWS_DEFAULT_ACL = None
@@ -170,10 +176,13 @@ AWS_DEFAULT_ACL = None
 # STATICFILES_STORAGE = "s3utils.StaticRootS3BotoStorage"
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = 'staticfiles'
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_web/media/')
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'geodjango_news_map_web/static'),]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'geodjango_news_map_web/static'),]
+STATICFILES_DIRS = ( os.path.join(BASE_DIR, "static"), )
+
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATICFILES_STORAGE = "geodjango_news_map.storage_backends.S3StaticStorage"
@@ -185,9 +194,12 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-STATIC_URL = f'https://{AWS_S3_STATIC_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+# STATIC_URL = f'https://{AWS_S3_STATIC_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
 # STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
+
+MEDIA_URL = STATIC_URL + 'media/'
+# MEDIA_URL = '/media/'
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 
