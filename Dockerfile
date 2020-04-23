@@ -31,7 +31,7 @@ COPY . .
 
 # RUN python3 manage.py collectstatic --noinput
 
-RUN adduser -D myuser
+RUN adduser --disabled-login myuser
 USER myuser
 
 CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
