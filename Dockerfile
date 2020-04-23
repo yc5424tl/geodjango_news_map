@@ -7,7 +7,7 @@ WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV DEBUG 0
+ENV DEBUG 1
 
 COPY requirements.txt ./
 
@@ -29,7 +29,7 @@ RUN apt-get update && \
 
 COPY . .
 
-# RUN python3 manage.py collectstatic --noinput
+RUN python3 manage.py collectstatic --noinput
 
 RUN adduser --disabled-login myuser
 USER myuser
