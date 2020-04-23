@@ -24,7 +24,6 @@ class GeoMapManager:
     def map_source(source_country):
         return (pycountry.countries.get(alpha_2=str(source_country).upper())).alpha_3 if source_country else None
 
-
     def build_choropleth(self, argument, focus, geo_data_mgr:GeoDataManager):
         world_df = gp.read_file(geo_data_mgr.filename)
         global_map = folium.Map(location=[0, 0], tiles='OpenStreetMap', zoom_start=3)
@@ -45,9 +44,9 @@ class GeoMapManager:
                           fill_opacity=0.7,
                           line_opacity=0.2).add_to(global_map)
 
-                            # YlGrBu - RdYlGn - YlOrBr - RdYlBu - PuBuGn - YlOrRd
-                            # Oranges - Greens -Purples - Reds - Greys - Blues
-                            # Pastel1 - Pastel2 - Spectral - Set1 - Set2 - Set3 - Dark2
+                          # YlGrBu - RdYlGn - YlOrBr - RdYlBu - PuBuGn - YlOrRd
+                          # Oranges - Greens -Purples - Reds - Greys - Blues
+                          # Pastel1 - Pastel2 - Spectral - Set1 - Set2 - Set3 - Dark2
 
         folium.TileLayer("stamenwatercolor", attr='attr').add_to(global_map)
         folium.TileLayer("stamenterrain", attr='attr').add_to(global_map)
@@ -58,7 +57,6 @@ class GeoMapManager:
         filename = f"{datetime.ctime(datetime.now()).replace(' ', '_').replace(':', '-')}_{focus}_query_{argument}_choropleth_map.html"
         global_map.save(CHORO_MAP_ROOT + filename)
         return global_map, filename if global_map and filename else None
-
 
     @staticmethod
     def get_threshold(articles_per_country:[dict]) -> [int]:
@@ -78,12 +76,11 @@ class GeoMapManager:
             threshold_scale = [0, 1, 2, 5, 10, articles_per_country.values.max()]
 
         else:
-            logger.log(level=logging.ERROR, msg='threshold-scale not being set in choropleth by articles_per_country.max')
+            logger.log(level=logging.ERROR,
+                       msg='threshold-scale not being set in choropleth by articles_per_country.max')
             threshold_scale = [0, 1, 2, 3, 4, 5]
 
         return threshold_scale
-
-
 
     @staticmethod
     def choro_to_file(choro_html:str, filename:str) -> bool:

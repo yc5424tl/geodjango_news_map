@@ -1,6 +1,7 @@
 #!/bin/bash
 
-FROM ubuntu:latest
+#FROM ubuntu:latest
+FROM ubuntu:eoan-20200313
 SHELL ["/bin/bash", "-c"]
 WORKDIR /app
 
@@ -11,26 +12,37 @@ ENV DEBUG 0
 COPY requirements.txt ./
 
 RUN apt-get update && \
-apt-get install -y \
-    python3 \
-    python3-pip \
-    gcc \
-    libgdal20 \
-    libgdal-dev && \
-apt update && \
-apt install -y \
-    gdal-bin \
-    python-gdal \
-    python3-gdal \
-    python3-rtree \
-    curl && \
-pip3 install -r requirements.txt
+    apt-get install -y \
+        python3 \
+        python3-pip \
+        gcc \
+        libgdal20 \
+        libgdal-dev && \
+    apt update && \
+    apt install -y \
+        gdal-bin \
+        python-gdal \
+        python3-gdal \
+        python3-rtree \
+        curl && \
+    pip3 install -r requirements.txt
 
 COPY . .
 
-EXPOSE 8000
+RUN python manage.py collectstatic --noinput
 
-CMD ["/bin/bash", "-c", "entrypoint.sh"]
+RUN adduser -D myuser
+USER myuser
+
+CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
+
+# CMD /bin/bash ./entrypoint.sh
+
+# EXPOSE 8000
+
+# CMD ["/bin/bash", "-c", "entrypoint.sh"]
+
+# docker run -p 8000:8000 --env .env --name mtn-ctnr-1.0 -it mtn:1.0 bash
 
 
 #FROM osgeo/gdal

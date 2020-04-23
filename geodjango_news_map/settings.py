@@ -27,12 +27,12 @@ if os.path.isfile(dotenv_file):
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY', default='imahseekwret')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = int(os.environ.get('DEBUG', default=0))
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'geodjango-news-map.herokuapp.com']
 
 # Application definition
 
@@ -67,8 +67,7 @@ ROOT_URLCONF = 'geodjango_news_map.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -86,6 +85,13 @@ WSGI_APPLICATION = 'geodjango_news_map.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases'''
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE':  'django.db.backends.postgresql_psycopg2',
@@ -96,6 +102,20 @@ DATABASES = {
         'PORT':     os.environ.get('NEWS_MAP_DB_PORT'),
     }
 }
+
+DATABASE_URL = os.environ.get('DATABASE_URL')
+db_from_env = dj_database_url.config(default=DATABASE_URL, conn_max_age=500, ssl_require=True)
+DATABASES['default'].update(db_from_env)
+# DATABASES = {
+#     'default': {
+#         'ENGINE':  'django.db.backends.postgresql_psycopg2',
+#         'NAME':     os.environ.get('NEWS_MAP_DB_NAME'),
+#         'USER':     os.environ.get('NEWS_MAP_DB_USER'),
+#         'PASSWORD': os.environ.get('NEWS_MAP_DB_PW'),
+#         'HOST':     os.environ.get('NEWS_MAP_DB_HOST'),
+#         'PORT':     os.environ.get('NEWS_MAP_DB_PORT'),
+#     }
+# }
 
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
@@ -158,6 +178,7 @@ STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATICFILES_STORAGE = "geodjango_news_map.storage_backends.S3StaticStorage"
 # DEFAULT_FILE_STORAGE = "geodjango_news_map.storage_backends.S3MediaStorage"
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -198,9 +219,9 @@ GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
 if 'ON_HEROKU' in os.environ:
-    ALLOWED_HOSTS = []
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    DEBUG = True
+    # ALLOWED_HOSTS = []
+    # DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    # DEBUG = True
     django_heroku.settings(locals()) # Activate Django-Heroku
                                             # staticfiles=False
 # if DEBUG:
@@ -226,6 +247,5 @@ if 'ON_HEROKU' in os.environ:
 #         'SHOW_COLLAPSED': True,
 #         'SQL_WARNING_THRESHOLD': 100,
 #     }
-
 
 from .logger import LOGGING
