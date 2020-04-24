@@ -34,7 +34,7 @@ COPY . .
 RUN adduser --disabled-login myuser
 USER myuser
 
-ENTRYPOINT /bin/bash
+#ENTRYPOINT /bin/bash
 CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
 
 # CMD /bin/bash ./entrypoint.sh

@@ -1,0 +1,7 @@
+body {
+    color: hotpink;
+}
+
+p:hover, p:focus {
+    background-color: dodgerblue;
+}

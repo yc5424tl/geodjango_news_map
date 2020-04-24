@@ -21,3 +21,6 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'geodjango_news_map.settings')
 application = get_wsgi_application()
 # application = WhiteNoise(application, root=MEDIA_ROOT)
 # application.add_files(STATIC_ROOT)
+
+# from dj_static import Cling
+# application = Cling(get_wsgi_application())
