@@ -25,7 +25,6 @@ urlpatterns = [
     path('admin/password_reset/done/', auth_views.PasswordResetDoneView.as_view(), name='password_reset_done',),
     path('reset/<uidb64>/<token>/', auth_views.PasswordResetConfirmView.as_view(), name='password_reset_confirm',),
     path('reset/done/', auth_views.PasswordResetCompleteView.as_view(), name='password_reset_complete',),
-    # path('admin/', include('admin_honeypot.urls', namespace='admin_honeypot')),
     path('admin/', admin.site.urls),
     path('', include('geodjango_news_map_web.urls')),
     path('accounts/', include('django.contrib.auth.urls')),

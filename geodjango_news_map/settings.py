@@ -32,7 +32,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'geodjango_news_map.herokuapp.com']
 
 # Application definition
 
@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'geodjango_news_map_web',
     'storages',
-    # 'admin_honeypot',
 ]
 
 MIDDLEWARE = [
@@ -67,8 +66,7 @@ ROOT_URLCONF = 'geodjango_news_map.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,7 +135,6 @@ USE_TZ = True
 AWS_ACCESS_KEY_ID = os.environ.get('AWS_S3_ID')
 AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SEC')
 AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_MEDIA_BUCKET')
-# AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
 AWS_STATIC_BUCKET = os.environ.get('AWS_STATIC_BUCKET')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 AWS_S3_STATIC_CUSTOM_DOMAIN = f'{AWS_STATIC_BUCKET}.s3.amazonaws.com'
@@ -145,6 +142,7 @@ AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400',}
 AWS_LOCATION = 'static'
 AWS_DEFAULT_ACL = None
 
+# AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
 # S3_URL = f'http://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}'
 # DEFAULT_FILE_STORAGE = "s3utils.MediaRootS3BotoStorage"
 # STATICFILES_STORAGE = "s3utils.StaticRootS3BotoStorage"
@@ -188,7 +186,6 @@ CSRF_TRUSTED_ORIGINS = ['*']
 # ADMIN_HONEYPOT_EMAIL_ADMINS = False
 
 
-
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'index'
 
@@ -198,11 +195,10 @@ GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
 if 'ON_HEROKU' in os.environ:
-    ALLOWED_HOSTS = []
+    ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'geodjango_news_map.herokuapp.com']
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    DEBUG = True
-    django_heroku.settings(locals()) # Activate Django-Heroku
-                                            # staticfiles=False
+    DEBUG = 0
+    django_heroku.settings(locals()) # Activate Django-Heroku # staticfiles=False
 # if DEBUG:
 #     INTERNAL_IPS = ('127.0.0.1', 'localhost')
 #     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
