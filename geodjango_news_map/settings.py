@@ -182,26 +182,49 @@ USE_TZ = True
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'geodjango_news_map/static'),
-]
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+STATICFILES_LOCATION ='static'
+STATICFILES_STORAGE = 'geodjango_news_map.storage_backends.StaticStorage'
+
+MEDIAFILES_LOCATION = 'media'
+DEFAULT_FILE_STORAGE = 'geodjango_news_map.storage_backends.MediaStorage'
+
 
 AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
-AWS_DEFAULT_ACL = None
+
+STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
+MEDIA_URL = STATIC_URL + 'media/'
+STATICFILES_DIRECTORY = (os.path.join(BASE_DIR, 'static'), )
+STATIC_ROOT = 'staticfiles'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
+
+AWS_QUERYSTRING_AUTH = False
+AWS_DEFAULT_ACL = 'public-read'
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'geodjango_news_map/static'),
+# ]
+
+
+# AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
+
 
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 
 AWS_LOCATION = 'static'
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
 
-DEFAULT_FILE_STORAGE = 'geodjango_news_map.storage_backends.MediaStorage'
+# STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -211,7 +234,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 #     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 # )
 
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+# ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['*']

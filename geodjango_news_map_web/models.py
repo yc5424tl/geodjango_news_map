@@ -39,8 +39,6 @@ class QueryManager(models.Manager):
         return news_query
 
 
-
-
 class QueryResultSet(models.Model):
     query_types = (('headlines', 'Headlines'), ('all', 'All'))
     _argument = models.CharField(max_length=500)
@@ -161,9 +159,9 @@ class QueryResultSet(models.Model):
             raise TypeError('Property "archived" must be type bool.')
 
 
-class Document(models.Model):
-    uploaded_at = models.DateTimeField(auto_add_now=True)
-    upload = models.FileField()
+# class Document(models.Model):
+#     uploaded_at = models.DateTimeField(auto_add_now=True)
+#     upload = models.FileField()
 
 
 class Category(models.Model):
