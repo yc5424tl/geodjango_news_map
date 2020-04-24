@@ -184,7 +184,7 @@ USE_TZ = True
 
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-STATICFILES_LOCATION ='static'
+STATICFILES_LOCATION = 'static'
 STATICFILES_STORAGE = 'geodjango_news_map.storage_backends.StaticStorage'
 
 MEDIAFILES_LOCATION = 'media'
@@ -196,7 +196,7 @@ AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
-STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
+STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static'
 MEDIA_URL = STATIC_URL + 'media/'
 STATICFILES_DIRECTORY = (os.path.join(BASE_DIR, 'static'), )
 STATIC_ROOT = 'staticfiles'
@@ -251,4 +251,4 @@ if 'ON_HEROKU' in os.environ:
     django_heroku.settings(locals())  # Activate Django-Heroku
 
 #  del STATICFILES_STORAGE
-# from .logger import LOGGING
+from .logger import LOGGING
