@@ -197,7 +197,7 @@ AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
 STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/static'
-MEDIA_URL = STATIC_URL + 'media/'
+MEDIA_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/media'
 STATICFILES_DIRECTORY = (os.path.join(BASE_DIR, 'static'), )
 STATIC_ROOT = 'staticfiles'
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
@@ -210,9 +210,9 @@ STATICFILES_FINDERS = (
 AWS_QUERYSTRING_AUTH = False
 AWS_DEFAULT_ACL = 'public-read'
 
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, 'geodjango_news_map/static'),
-# ]
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'geodjango_news_map/static'),
+]
 
 
 # AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
