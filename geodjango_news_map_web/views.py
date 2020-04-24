@@ -16,13 +16,15 @@ from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import transaction
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, Http404
+from django.urls import reverse_lazy
 from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import CreateView
 
 from .constructor import Constructor
 from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, NewCommentForm
 from .geo_data_mgr import GeoDataManager
 from .geo_map_mgr import GeoMapManager
-from .models import QueryResultSet, Source, Post, Comment, Category
+from .models import QueryResultSet, Source, Post, Comment, Category, Document
 from .query_mgr import Query
 
 logging.basicConfig(filename='news_map.log', level=logging.INFO)
@@ -414,3 +416,15 @@ def view_choro(request, query_pk):
     return render(request, 'general/view_choro.html', {
         'query': qrs
     })
+
+
+class DocumentCreateView(CreateView):
+    model = Document
+    fields = ['upload', ]
+    success_url = reverse_lazy('home')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        documents = Document.objects.all()
+        context['documents'] = documents
+        return context

@@ -39,6 +39,8 @@ class QueryManager(models.Manager):
         return news_query
 
 
+
+
 class QueryResultSet(models.Model):
     query_types = (('headlines', 'Headlines'), ('all', 'All'))
     _argument = models.CharField(max_length=500)
@@ -72,7 +74,10 @@ class QueryResultSet(models.Model):
 
     @choropleth.setter
     def choropleth(self, new_choro: str) -> NoReturn:
-        self._choropleth = new_choro
+        if isinstance(new_choro, str):
+            self._choropleth = new_choro
+        else:
+            raise Exception('Type str needed as argument to update choropleth value.')
 
     @property
     def choro_html(self) -> str:
@@ -154,6 +159,11 @@ class QueryResultSet(models.Model):
             self._archived = is_archived
         else:
             raise TypeError('Property "archived" must be type bool.')
+
+
+class Document(models.Model):
+    uploaded_at = models.DateTimeField(auto_add_now=True)
+    upload = models.FileField()
 
 
 class Category(models.Model):

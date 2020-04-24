@@ -16,6 +16,7 @@ import dj_database_url
 import django_heroku
 import dotenv
 import storages
+
 # import boto3
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -119,6 +120,8 @@ DATABASES['default'].update(db_from_env)
 #     }
 # }
 
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 AUTHENTICATION_BACKENDS = ('django.contrib.auth.backends.ModelBackend',)
 
 # Password validation
@@ -157,88 +160,61 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 
-USE_S3 = os.getenv('USE_S3') == 'TRUE'
-
-if USE_S3:
-    AWS_ACCESS_KEY_ID = os.environ.get('AWS_S3_ID')
-    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_S3_SEC')
-    AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
-    AWS_DEFAULT_ACL = 'public-read'
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    AWS_LOCATION = 'static'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-else:
-    STATIC_URL = '/staticfiles/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-MEDIA_URL = '/mediafiles/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
-    # AWS_QUERYSTRING_AUTH = False  # Ensures that the file URL doesn't have unneeded parameters like access key
-    #
-    # # AWS_S3_REGION_NAME = os.environ.get('AWS_S3_REGION_NAME')
-    # AWS_STATIC_BUCKET = os.environ.get('AWS_STATIC_BUCKET')
-    # AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    # AWS_S3_STATIC_CUSTOM_DOMAIN = f'{AWS_STATIC_BUCKET}.s3.amazonaws.com'
-    #
-    # AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400', }
-    # AWS_LOCATION = 'static'
-    # AWS_DEFAULT_ACL = None
-
-# S3_URL = f'http://s3.amazonaws.com/{AWS_STORAGE_BUCKET_NAME}'
-# DEFAULT_FILE_STORAGE = "s3utils.MediaRootS3BotoStorage"
-# STATICFILES_STORAGE = "s3utils.StaticRootS3BotoStorage"
-
-PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-# STATIC_ROOT = 'staticfiles'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_web/media/')
+# USE_S3 = os.getenv('USE_S3') == 'TRUE'
+#
+# if USE_S3:
+#     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+#     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+#     AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME')
+#     AWS_DEFAULT_ACL = 'public-read'
+#     AWS_S3_CUSTOM_DOMAIN = f'http://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+#     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+#     AWS_LOCATION = 'static'
+#     # STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
+#     STATIC_URL = AWS_S3_CUSTOM_DOMAIN
+#     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# else:
+#     STATIC_URL = '/staticfiles/'
+#     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+# MEDIA_URL = '/mediafiles/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'geodjango_news_map_web/static'), ]
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'geodjango_news_map/static'),
+]
 
-# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-# STATICFILES_STORAGE = "geodjango_news_map.storage_backends.S3StaticStorage"
-# DEFAULT_FILE_STORAGE = "geodjango_news_map.storage_backends.S3MediaStorage"
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_REGION_NAME = os.getenv('AWS_S3_REGION_NAME')
+AWS_DEFAULT_ACL = None
 
-STATICFILES_FINDERS = (
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-)
+AWS_S3_OBJECT_PARAMETERS = {
+    'CacheControl': 'max-age=86400',
+}
 
-# STATIC_URL = f'https://{AWS_S3_STATIC_CUSTOM_DOMAIN}/{AWS_LOCATION}/'
-# STATIC_URL = '/static/'
-# STATIC_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com/'
-# STATIC_URL = '/staticfiles/'
+AWS_LOCATION = 'static'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+STATIC_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/{AWS_LOCATION}/"
 
-# MEDIA_URL = '/mediafiles/'
-# MEDIA_URL = STATIC_URL + 'mediafiles/'
-# MEDIA_URL = '/mediafiles/'
+DEFAULT_FILE_STORAGE = 'geodjango_news_map.storage_backends.MediaStorage'
+
+PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
+
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_FINDERS = (
+#     'django.contrib.staticfiles.finders.FileSystemFinder',
+#     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+# )
+
 ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-
 
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['*']
-
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
-# SECURE_PROXY_SSL = True
-# SECURE_SSL_REDIRECT = True
-# SECURE_HSTS_SECONDS = True
-# SECURE_CONTENT_TYPE_NOSNIFF = True
-# SECURE_BROWSER_XXS_FILTER = True
-# X_FRAME_OPTIONS = 'DENY'
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-#
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWAREDED_PROTO', 'https')
-
-# ADMIN_HONEYPOT_EMAIL_ADMINS = False
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'index'
@@ -249,33 +225,7 @@ GDAL_LIBRARY_PATH = os.environ.get('GDAL_LIBRARY_PATH')
 GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 
 if 'ON_HEROKU' in os.environ:
-    # ALLOWED_HOSTS = []
-    # DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    # DEBUG = True
-    django_heroku.settings(locals()) # Activate Django-Heroku
-                                            # staticfiles=False
-# if DEBUG:
-#     INTERNAL_IPS = ('127.0.0.1', 'localhost')
-#     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
-#     INSTALLED_APPS.append('debug_toolbar')
-#     DEBUG_TOOLBAR_PANELS = [
-#         'debug_toolbar.panels.versions.VersionsPanel',
-#         'debug_toolbar.panels.timer.TimerPanel',
-#         'debug_toolbar.panels.settings.SettingsPanel',
-#         'debug_toolbar.panels.headers.HeadersPanel',
-#         'debug_toolbar.panels.request.RequestPanel',
-#         'debug_toolbar.panels.sql.SQLPanel',
-#         'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-#         'debug_toolbar.panels.templates.TemplatesPanel',
-#         'debug_toolbar.panels.cache.CachePanel',
-#         'debug_toolbar.panels.signals.SignalsPanel',
-#         'debug_toolbar.panels.logging.LoggingPanel',
-#         'debug_toolbar.panels.redirects.RedirectsPanel',
-#     ]
-#     DEBUG_TOOLBAR_CONFIG = {
-#         'INTERCEPT_REDIRECTS': False,
-#         'SHOW_COLLAPSED': True,
-#         'SQL_WARNING_THRESHOLD': 100,
-#     }
+    django_heroku.settings(locals())  # Activate Django-Heroku
 
-from .logger import LOGGING
+#  del STATICFILES_STORAGE
+# from .logger import LOGGING

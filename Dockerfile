@@ -7,7 +7,7 @@ WORKDIR /app
 
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
-ENV DEBUG 1
+ENV DEBUG 0
 
 COPY requirements.txt ./
 
@@ -29,11 +29,12 @@ RUN apt-get update && \
 
 COPY . .
 
-RUN python3 manage.py collectstatic --noinput
+# RUN python3 manage.py collectstatic --noinput
 
 RUN adduser --disabled-login myuser
 USER myuser
 
+ENTRYPOINT /bin/bash
 CMD gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
 
 # CMD /bin/bash ./entrypoint.sh
