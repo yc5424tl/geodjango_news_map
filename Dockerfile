@@ -30,7 +30,9 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["/bin/bash", "-c", "entrypoint.sh"]
+#ENTRYPOINT ["/bin/bash", "-c"]
+#CMD ["entrypoint.sh"]
+CMD "/bin/bash entrypoint.sh"
 
 
 #FROM osgeo/gdal

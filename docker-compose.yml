@@ -2,12 +2,18 @@ version: '3'
 
 services:
   web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+#    command: python manage.py runserver 0.0.0.0:8000
+    command: gunicorn geodjango_news_map.wsgi:application --bind 0.0.0.0:$PORT
     volumes:
-      - .:/geodjango_news_map
+      - .:/app
+      - static_volume:./staticfiles
+      - media_volume:./mediafilles
     ports:
       - "8000:8000"
     environment:
-      - "HEROKU_API_KEY=${TEST_HEROKU_API_KEY}"
-      - "SECRET_KEY=${SECRET_KEY}"
+      - HEROKU_API_KEY=${HEROKU_API_KEY}
+    expose:
+      - "8000"
