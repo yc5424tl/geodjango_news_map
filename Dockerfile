@@ -32,7 +32,8 @@ EXPOSE 8000
 
 #ENTRYPOINT ["/bin/bash", "-c"]
 #CMD ["entrypoint.sh"]
-CMD "entrypoint.sh"
+CMD ["/bin/bash", "-c", "entrypoint.sh"]
+
 
 
 #FROM osgeo/gdal
