@@ -1,6 +1,6 @@
 #!/bin/bash
 
-FROM ubuntu:latest
+FROM ubuntu:eoan-20200410
 SHELL ["/bin/bash", "-c"]
 WORKDIR /app
 
