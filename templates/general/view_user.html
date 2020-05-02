@@ -1,6 +1,5 @@
 {% extends 'general/root.html' %}
 {% load static %}
-{% load staticfiles %}
 
 {% block title %}
     {{ member.username }}'s Profile - {{ block.super }}
@@ -21,7 +20,7 @@
                     {% else %}
                         <h2>Viewing {{ member.username }}'s Profile</h2>
                     {% endif %}
-                     <small>Member Since {{ member.date_joined }}</small>
+                    <small>Member Since {{ member.date_joined }}</small>
                 </div>
             </div>
         </div>
@@ -51,7 +50,7 @@
                             </div>
                         </div>
                     {% else %}
-                            Add How To Guide for Posts
+                        Add How To Guide for Posts
                     {% endif %}
                 </div>
                 <div class="col-12">
@@ -61,8 +60,7 @@
                                 {% if comment %}
                                     <div class="view-user-last-post-comment-div">
                                         <h3>Comment by
-                                            <a href="{% url 'view_user' comment.author.id %}">{{ comment.author }}</a>
-                                            - {{ comment.date_published }}
+                                            <a href="{% url 'view_user' comment.author.id %}">{{ comment.author }}</a> - {{ comment.date_published }}
                                         </h3>
                                         <hr class="view-user-last-post-comment-hr">
                                         <blockquote>{{ comment.body }}</blockquote>
@@ -116,7 +114,9 @@
                     <ul>
                         {% for comment in comments %}
                             {% if comment %}
-                                <li class="view-user-comment-li"><a  class="view-user-comment-a" href="{% url 'view_comment' comment.pk %}">{{ comment.body|truncatechars:175 }}</a></li>
+                                <li class="view-user-comment-li">
+                                    <a  class="view-user-comment-a" href="{% url 'view_comment' comment.pk %}">{{ comment.body|truncatechars:175 }}</a>
+                                </li>
                             {% endif %}
                         {% empty %}
                             <li>No Comments Yet</li>
@@ -145,7 +145,7 @@
             </div>  {% comment %} END COL-*-5 {% endcomment %}
         </div>  {% comment %} END ROW {% endcomment %}
     </div>  {% comment %} END CONTAINER {% endcomment %}
- {% endblock %}
+{% endblock %}
 
 {% block footer-scripts %}
     <script>

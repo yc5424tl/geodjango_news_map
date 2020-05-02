@@ -1,5 +1,4 @@
 {% extends 'general/root.html' %}
-{% load staticfiles %}
 {% load static %}
 
 {% block title %}
@@ -13,8 +12,10 @@
 
 {% block content %}
     <div class="new-comment-container">
-        <h4>Commenting <a href="{% url 'view_post' post.pk %}">{{ post.title|capfirst }}</a>
-        by <a href="{% url 'view_user' post.author.pk %}">{{ post.author.username }}</a></h4>
+        <h4>Commenting
+            <a href="{% url 'view_post' post.pk %}">{{ post.title|capfirst }}</a> by
+            <a href="{% url 'view_user' post.author.pk %}">{{ post.author.username }}</a>
+        </h4>
         <br>
         <h3>Comment:</h3>
         <form method="post" action="{% url 'new_comment' post.pk %}">

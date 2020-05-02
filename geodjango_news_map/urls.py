@@ -19,6 +19,8 @@ from django.contrib.auth import views as auth_views
 from django.contrib.gis import admin
 from django.urls import path, include
 
+import geodjango_news_map_web
+
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/password_reset/', auth_views.PasswordResetView.as_view(), name='admin_password_reset',),
@@ -30,6 +32,7 @@ urlpatterns = [
     path('', include('geodjango_news_map_web.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 
 if settings.DEBUG:

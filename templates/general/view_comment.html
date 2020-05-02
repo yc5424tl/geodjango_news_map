@@ -1,5 +1,4 @@
 {% extends 'general/root.html' %}
-{% load staticfiles %}
 {% load static %}
 
 {% block title %}
@@ -13,17 +12,13 @@
 
 {% block content%}
     <div class="view-comment-container">
-
         <h4 class="view-comment-title">
             Comment by<a class="view-comment-title-link" href="{% url 'view_user' comment.author.pk %}">{{ comment.author.first_name }}</a>
             to post<a class="view-comment-title-link" href="{% url 'view_post' comment.post.pk %}">{{ comment.post.title }}</a>
             by<a class="view-comment-title-link" href="{% url 'view_user' comment.post.author.pk %}">{{ comment.post.author.first_name }}</a>
         </h4>
-
         <small class="view-comment-subtitle">Published {{ comment.date_published }}</small>
-
         <blockquote class="view-comment-body">{{ comment.body }}</blockquote>
-
         {% if user.pk == comment.author.id %}
             <div class="row">
             <div class="col-4"></div>
@@ -43,7 +38,6 @@
             <div class="col-4"></div>
             </div>
         {% endif %}
-
     </div>
 {% endblock %}
 

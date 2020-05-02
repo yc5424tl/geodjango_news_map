@@ -1,0 +1,24 @@
+{% extends 'general/root.html' %}
+{% load static %}
+
+{% block title %}
+    404 Page Not Found
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+
+{% endblock %}
+
+{% block content %}
+    <div class="row error-row">
+        <div class="col"></div>
+        <div class="col-6">
+            <h1>Somebody snagged a page from our book!</h1>
+            <sub>404 Page Not Found</sub>
+            <br>
+            <img src="{% static 'img/404e.png' %}" alt="404 Error">
+        </div>
+        <div class="col"></div>
+    </div>
+{% endblock %}

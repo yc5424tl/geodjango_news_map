@@ -1,5 +1,4 @@
 {% extends 'general/root.html' %}
-{% load staticfiles %}
 {% load static %}
 
 {% block title %}
@@ -9,7 +8,6 @@
 {% block styles %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'css/view_post.css' %}">
-{#    <link rel="stylesheet" href="{% static 'css/cards.css' %}">#}
 {% endblock %}
 
 {% block content%}
@@ -74,7 +72,6 @@
                                         </div>
                                     </li>
                                 {% endif %}
-
                             {% empty %}
                                 <p class="list-group-item">No Articles Found for Query</p>
                             {% endfor %}

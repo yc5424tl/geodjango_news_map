@@ -3,6 +3,7 @@ import logging
 import os
 import sys
 from logging import Logger
+from typing import NoReturn
 
 import pycountry
 import requests
@@ -42,7 +43,7 @@ def index(request) -> render:
 
 
 
-def register_user(request):
+def register_user(request: requests.request) -> render or redirect:
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
@@ -59,7 +60,7 @@ def register_user(request):
 
 
 
-def login_user(request):
+def login_user(request: requests.request) -> render or redirect:
     if request.method == 'POST':
         form = AuthenticationForm(request.POST)
         if form.is_valid():
@@ -79,7 +80,7 @@ def login_user(request):
 
 
 
-def logout_user(request):
+def logout_user(request: requests.request) -> NoReturn:
     if request.user.is_authenticated:
         messages.info(request, 'Logout Successful', extra_tags='alert')
 
@@ -123,6 +124,8 @@ def new_query(request:requests.request) -> render or redirect:
                 qrs.save()
 
             return redirect('view_query', qrs.pk)
+
+        else redirect('handler404', request=request)
 
 
 
@@ -329,8 +332,7 @@ def view_sources(request):
 
 def lang_a2_to_name(source):
     try:
-        name = pycountry.languages.lookup(source.language).name
-        return name
+        return pycountry.languages.lookup(source.language).name
     except LookupError:
         return source.language
 
@@ -338,8 +340,7 @@ def lang_a2_to_name(source):
 
 def country_a2_to_name(source):
     try:
-        name = pycountry.countries.lookup(source.country).name
-        return name
+        return pycountry.countries.lookup(source.country).name
     except LookupError:
         return source.country
 
@@ -411,7 +412,6 @@ def import_sources(request):
                         source.save()
                     except BaseException as e:
                         sys.stdout.write(f'\n CATCH-ALL EXCEPTION on has_category=record.categories.get(_name=category.name)\n{e}')
-                        pass
             requests.get(os.getenv('STAY_ALIVE_URL'))
             return HttpResponse(status=200)
 
@@ -433,3 +433,11 @@ def view_choro(request, query_pk):
     return render(request, 'general/view_choro.html', {
         'query': qrs
     })
+
+def handler404(request: requests.request, exception: Exception) -> render:
+    data = {}
+    return render(request, 'error/404.html', status=404, data)
+
+def handler500(request: requests.request, exception: Exception) -> render:
+    data = {}
+    return render(request, 'error/500.html', status=500, data)

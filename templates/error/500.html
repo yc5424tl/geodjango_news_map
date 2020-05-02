@@ -1,0 +1,24 @@
+{% extends 'general/root.html' %}
+{% load static %}
+
+{% block title %}
+    500 Internal Server Error
+{% endblock %}
+
+{% block styles %}
+    {{ block.super }}
+    
+{% endblock %}
+
+{% block content %}
+    <div class="row error-row">
+        <div class="col"></div>
+        <div class="col-6">
+            <h1>Even a working clock is wrong twice a day!</h1>
+            <sub>500 Internal Server Error</sub>
+            <br>
+            <img src="{% static 'img/500b.png' %}" alt="404 Error">
+        </div>
+        <div class="col"></div>
+    </div>
+{% endblock %}
