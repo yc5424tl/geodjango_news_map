@@ -125,7 +125,7 @@ def new_query(request:requests.request) -> render or redirect:
 
             return redirect('view_query', qrs.pk)
 
-        else redirect('handler404', request=request)
+        else: redirect('handler404', request)
 
 
 
@@ -435,9 +435,7 @@ def view_choro(request, query_pk):
     })
 
 def handler404(request: requests.request, exception: Exception) -> render:
-    data = {}
-    return render(request, 'error/404.html', status=404, data)
+    return render(request, 'error/404.html', status=404)
 
 def handler500(request: requests.request, exception: Exception) -> render:
-    data = {}
-    return render(request, 'error/500.html', status=500, data)
+    return render(request, 'error/500.html', status=500)
