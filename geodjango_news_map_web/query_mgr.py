@@ -1,7 +1,6 @@
 import logging
 import os
 from datetime import datetime, timedelta
-
 import requests
 from newsapi import NewsApiClient
 
@@ -11,33 +10,30 @@ news_api = NewsApiClient(api_key=api_key)
 
 
 class Query:
-    def __init__(self, arg: str, focus:str, from_date:datetime=None, to_date:datetime=None, endpoint:str=None):
+   # def __init__(self, arg: str, focus:str, from_date:datetime=None, to_date:datetime=None, endpoint:str=None, category:str=None):
+    def __init__(self, arg: str, focus: str, from_date: datetime = None, to_date: datetime = None, endpoint: str = None):
         self.arg = arg
         self.focus = focus
         self.from_date = from_date
         self.to_date = to_date
         self.endpoint = endpoint
-
+       # self.category = category
 
     @property
     def filename(self) -> str:
         date_created = datetime.now().strftime('%Y%m%d-%H%M%S')
         return f'api_data-{self.arg}_{self.focus}-{date_created}.json'
 
-
     def validate_date_range(self) -> bool:
         has_range =  self.to_date - self.from_date >= timedelta(0)
         is_past = datetime.now() - self.to_date >= timedelta(0)
         return has_range and is_past
 
-
     def get_endpoint(self) -> bool:
-
         valid_date_range = self.validate_date_range() if self.from_date and self.to_date else False
-
         if valid_date_range:
             if self.focus == 'all':
-                self.endpoint = 'a'
+                self.endpoint = f'https://newsapi.org/v2/everything?q={self.arg}&from={self.from_date}&to={self.to_date}&apiKey={api_key}&pageSize=100'
             elif self.focus == 'headlines':
                 self.endpoint = 'b'
             else:
@@ -52,6 +48,9 @@ class Query:
                 self.endpoint = None
                 return False
         return True
+
+  #  if self.focus == 'headlines':
+  #      sortBy =
 
 
     def execute_query(self) -> ([dict], int):

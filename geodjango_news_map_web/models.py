@@ -1,15 +1,8 @@
-import os
 from datetime import datetime
 from typing import NoReturn
-
 import pycountry
 from django.conf import settings
 from django.db import models
-
-BASE_DIR         = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SETTINGS_DIR     = os.path.dirname(__file__)
-PROJECT_ROOT     = os.path.abspath(os.path.dirname(SETTINGS_DIR))
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'geodjango_news_map_web/static'),]
 
 
 class QueryManager(models.Manager):
@@ -24,19 +17,18 @@ class QueryManager(models.Manager):
                      date_range_end  :datetime.date=None,
                      date_range_start:datetime.date=None,
                      public          :bool=False):
-                news_query = self.create(
-                    _argument         =arg,
-                    _author           =author,
-                    _choropleth       =choropleth,
-                    _choro_html       =choro_html,
-                    _data             =data,
-                    _date_created     =date_created,
-                    _date_range_end   =date_range_end,
-                    _date_range_start =date_range_start,
-                    _filename         =self.filename,
-                    _public           =public,
-                    _query_type       =query_type)
-                return news_query
+                return self.create(
+                                _argument         =arg,
+                                _author           =author,
+                                _choropleth       =choropleth,
+                                _choro_html       =choro_html,
+                                _data             =data,
+                                _date_created     =date_created,
+                                _date_range_end   =date_range_end,
+                                _date_range_start =date_range_start,
+                                _filename         =self.filename,
+                                _public           =public,
+                                _query_type       =query_type)
 
 
 
@@ -158,17 +150,12 @@ class QueryResultSet(models.Model):
             raise TypeError('Property "archived" must be type bool.')
 
 
-
 class Category(models.Model):
     _name = models.CharField(max_length=50)
 
     @property
     def name(self) -> str:
         return self._name
-
-
-
-
 
 
 class Source(models.Model):
@@ -178,7 +165,7 @@ class Source(models.Model):
     # _categories = models.ManyToManyField(Category, related_name='sources', through='Section')
     _categories = models.ManyToManyField(Category, related_name='sources')
     _url        = models.URLField(blank=True, default='', max_length=150)
-    _verified   = models.BooleanField(default=False, null=False)
+    _verified   = models.BooleanField(default=False)
 
 
     def __str__(self) -> str:
@@ -197,10 +184,9 @@ class Source(models.Model):
         return self._country
 
     @property
-    def country_full(self) -> str:
+    def country_full_name(self) -> str:
         try:
-            name = pycountry.countries.lookup(self.country).name
-            return name
+            return pycountry.countries.lookup(self.country).name
         except LookupError:
             return self._country
 
@@ -213,10 +199,9 @@ class Source(models.Model):
         return self._language
 
     @property
-    def language_full(self) -> str:
+    def language_full_name(self) -> str:
         try:
-            name = pycountry.languages.lookup(self.language).name
-            return name
+            return pycountry.languages.lookup(self.language).name
         except LookupError:
             return self._language
 
@@ -227,13 +212,6 @@ class Source(models.Model):
     @property
     def url(self) -> str:
         return self._url
-
-
-
-# class Section(models.Model):
-#     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-#     source = models.ForeignKey(Source, on_delete=models.CASCADE)
-
 
 
 class Article(models.Model):
@@ -286,7 +264,6 @@ class Article(models.Model):
         return self._title
 
 
-
 class Post(models.Model):
     _title          = models.CharField(max_length=300, default='', null=True, blank=True)
     _body           = models.CharField(max_length=50000, default='', null=True, blank=True)
@@ -329,7 +306,6 @@ class Post(models.Model):
             qrs_pk = self._query.pk
             qrs = QueryResultSet.objects.get(pk=qrs_pk)
             return qrs.choropleth if qrs.choropleth else None
-
 
 
 class Comment(models.Model):
