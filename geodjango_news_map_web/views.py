@@ -328,23 +328,17 @@ def view_sources(request):
         'categories': category_dict_list
     })
 
-
-
 def lang_a2_to_name(source):
     try:
         return pycountry.languages.lookup(source.language).name
     except LookupError:
         return source.language
 
-
-
 def country_a2_to_name(source):
     try:
         return pycountry.countries.lookup(source.country).name
     except LookupError:
         return source.country
-
-
 
 @login_required()
 def delete_post(request):
@@ -356,8 +350,6 @@ def delete_post(request):
         return redirect('index')
     else:
         messages.error(request, 'Action Not Authorized')
-
-
 
 @login_required()
 def new_comment(request, post_pk):
@@ -373,8 +365,6 @@ def new_comment(request, post_pk):
         c.save()
         return redirect('view_comment', c.pk)
 
-
-
 @login_required()
 def view_comment(request, comment_pk):
     try:
@@ -383,8 +373,6 @@ def view_comment(request, comment_pk):
     except Comment.DoesNotExist:
         raise Http404
 
-
-
 @login_required()
 def delete_comment(request, comment_pk):
     comment = get_object_or_404(Comment, pk=comment_pk)
@@ -392,8 +380,6 @@ def delete_comment(request, comment_pk):
     last_url = request.POST['redirect_url']
     messages.info(request, 'Failed to Delete Comment')
     return redirect(request, last_url)
-
-
 
 @csrf_exempt
 def import_sources(request):
@@ -428,11 +414,9 @@ def import_sources(request):
 #TODO def password_reset(request)
 
 
-def view_choro(request, query_pk):
+def view_choro(request: requests.request, query_pk) -> render:
     qrs = QueryResultSet.objects.get(pk=query_pk)
-    return render(request, 'general/view_choro.html', {
-        'query': qrs
-    })
+    return render(request, 'general/view_choro.html', {'query': qrs})
 
 def handler404(request: requests.request, exception: Exception) -> render:
     return render(request, 'error/404.html', status=404)

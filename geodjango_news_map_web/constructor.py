@@ -28,6 +28,8 @@ class Constructor:
 
         try:
             title = self.verify_str(response_data['title'])
+            if title is None:
+                title = 'Unavailable'
         except UnicodeDecodeError as e:
             logger.log(level=logging.DEBUG, msg=f'UnicodeDecodeError while parsing title for new article: {e}\nSource Data {e}')
             title = 'Unavailable'
@@ -35,10 +37,10 @@ class Constructor:
         try:
             author = self.verify_str(response_data['author'])
             if author is None:
-                author = 'Unknown'
+                author = 'Unavailable'
         except UnicodeEncodeError as e:
             logger.log(level=logging.DEBUG, msg=f'UnicodeDecodeError while parsing author for new article: {e}\nSource Data {e}')
-            author = 'Unknown'
+            author = 'Unavailable'
 
         if source:
             article_url = response_data['url']
