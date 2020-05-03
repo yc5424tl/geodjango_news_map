@@ -3,8 +3,8 @@ from django.conf.urls import url
 from . import views
 
 
-handler404 = 'geodjango_news_map_web.views.handler404'
-handler500 = 'geodjango_news_map_web.views.handler500'
+# handler404 = 'geodjango_news_map_web.views.handler404'
+# handler500 = 'geodjango_news_map_web.views.handler500'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
