@@ -15,7 +15,8 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.db import transaction
 from django.http import HttpResponse
-from django.shortcuts import render, redirect, get_object_or_404, Http404
+from django.shortcuts import render, redirect, get_object_or_404, Http404, render_to_response
+from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
 from .constructor import Constructor
 from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, NewCommentForm
@@ -381,3 +382,7 @@ def handler404(request: requests.request, exception: Exception) -> render:
 
 def handler500(request: requests.request, exception: Exception) -> render:
     return render(request, 'error/500.html', status=500)
+
+# def handler404(request, *args, **argv):
+#     response = render_to_response('error/404.html', {})
+#     response.status_code = 404
