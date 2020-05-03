@@ -379,19 +379,32 @@ def view_choro(request: requests.request, query_pk) -> render:
     qrs = QueryResultSet.objects.get(pk=query_pk)
     return render(request, 'general/view_choro.html', {'query': qrs})
 
+
+# def handler404(request, exception, template_name="error/404.html"):
+#     response = render_to_response('error/404.html', {}, context_instance=RequestContext(request))
+#     response.status_code = 404
+#     return response
+
 def handler404(request):
-    return page_not_found(request, template_name="error/404.html")
-  #  response = render_to_response('error/404.html')
-  #  response.status_code = 404
- #   return response
-    # return render(request, 'error/404.html', status=404)
+    return render(request, "error/404.html", status=404)
 
 def handler500(request):
-    return server_error(request, template_name="error/500.html")
-  #  response = render_to_response('error/500.html')
-  #  response.status_code = 500
-#    return response
-    # return render(request, 'error/500.html', status=500)
+    return render(request, "error/500.html", status=500)
+
+
+# def handler404(request):
+#     return page_not_found(request, template_name="error/404.html")
+#   #  response = render_to_response('error/404.html')
+#   #  response.status_code = 404
+#  #   return response
+#     # return render(request, 'error/404.html', status=404)
+#
+# def handler500(request):
+#     return server_error(request, template_name="error/500.html")
+#   #  response = render_to_response('error/500.html')
+#   #  response.status_code = 500
+# #    return response
+#     # return render(request, 'error/500.html', status=500)
 
 # def handler404(request, *args, **argv):
 # #     response = render_to_response('error/404.html', {})
