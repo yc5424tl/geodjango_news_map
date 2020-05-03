@@ -18,6 +18,8 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, Http404, render_to_response
 from django.template import RequestContext
 from django.views.decorators.csrf import csrf_exempt
+from django.views.defaults import page_not_found, server_error
+
 from .constructor import Constructor
 from .forms import CustomUserCreationForm, NewQueryForm, NewPostForm, EditPostForm, EditCommentForm, NewCommentForm
 from .geo_data_mgr import GeoDataManager
@@ -377,11 +379,19 @@ def view_choro(request: requests.request, query_pk) -> render:
     qrs = QueryResultSet.objects.get(pk=query_pk)
     return render(request, 'general/view_choro.html', {'query': qrs})
 
-def handler404(request: requests.request, exception: Exception) -> render:
-    return render(request, 'error/404.html', status=404)
+def handler404(request, exception):
+    return page_not_found(request, exception, template_name="errors/404.html")
+  #  response = render_to_response('error/404.html')
+  #  response.status_code = 404
+ #   return response
+    # return render(request, 'error/404.html', status=404)
 
-def handler500(request: requests.request, exception: Exception) -> render:
-    return render(request, 'error/500.html', status=500)
+def handler500(request, exception):
+    return server_error(request, exception, template_name="errors/500.html")
+  #  response = render_to_response('error/500.html')
+  #  response.status_code = 500
+#    return response
+    # return render(request, 'error/500.html', status=500)
 
 # def handler404(request, *args, **argv):
 # #     response = render_to_response('error/404.html', {})
