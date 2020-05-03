@@ -9,3 +9,8 @@
     height: 100%;
     object-fit: contain;
 }
+
+.err-h1,
+.err-sub {
+    text-align: center;
+}
