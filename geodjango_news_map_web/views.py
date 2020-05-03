@@ -385,8 +385,10 @@ def view_choro(request: requests.request, query_pk) -> render:
 #     response.status_code = 404
 #     return response
 
-def handler404(request):
-    return render(request, "error/404.html", status=404)
+def handler404(request, exception):
+    context = RequestContext(request)
+    return render(request, "error/404.html", locals())
+    # return render(request, "error/404.html", {'exception': exception, 'context': context}, status=404)
 
 def handler500(request):
     return render(request, "error/500.html", status=500)
