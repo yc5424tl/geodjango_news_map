@@ -380,14 +380,14 @@ def view_choro(request: requests.request, query_pk) -> render:
     return render(request, 'general/view_choro.html', {'query': qrs})
 
 def handler404(request):
-    return page_not_found(request, template_name="errors/404.html")
+    return page_not_found(request, template_name="error/404.html")
   #  response = render_to_response('error/404.html')
   #  response.status_code = 404
  #   return response
     # return render(request, 'error/404.html', status=404)
 
 def handler500(request):
-    return server_error(request, template_name="errors/500.html")
+    return server_error(request, template_name="error/500.html")
   #  response = render_to_response('error/500.html')
   #  response.status_code = 500
 #    return response
