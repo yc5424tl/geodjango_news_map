@@ -201,7 +201,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+# ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['*']
@@ -229,7 +229,7 @@ GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 if 'ON_HEROKU' in os.environ:
     ALLOWED_HOSTS = ['geodjango-news-map.herokuapp.com']
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    django_heroku.settings(locals()) # Activate Django-Heroku
+    django_heroku.settings(locals(), staticfiles=False) # Activate Django-Heroku
 
 # staticfiles=False
 # if DEBUG:
