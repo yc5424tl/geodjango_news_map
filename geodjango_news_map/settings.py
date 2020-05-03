@@ -153,7 +153,7 @@ if USE_S3:
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'geodjango_news_map.storage_backends.MediaStorage'
     MEDIA_ROOT = MEDIA_URL
-else:
+if not USE_S3:
     STATIC_URL = '/staticfiles/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
     MEDIA_URL = '/mediafiles/'
