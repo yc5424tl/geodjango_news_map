@@ -29,7 +29,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('geodjango_news_map_web.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]\
+              #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 

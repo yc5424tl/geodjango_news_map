@@ -384,5 +384,5 @@ def handler500(request: requests.request, exception: Exception) -> render:
     return render(request, 'error/500.html', status=500)
 
 # def handler404(request, *args, **argv):
-#     response = render_to_response('error/404.html', {})
-#     response.status_code = 404
+# #     response = render_to_response('error/404.html', {})
+# #     response.status_code = 404
