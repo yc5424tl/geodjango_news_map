@@ -19,8 +19,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.gis import admin
 from django.urls import path, include
 
-handler404 = 'geodjango_news_map_web.views.handler404'
-handler500 = 'geodjango_news_map_web.views.handler500'
+
 
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
@@ -32,7 +31,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('geodjango_news_map_web.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-]\
+]
+handler404 = 'geodjango_news_map_web.views.handler404'
+handler500 = 'geodjango_news_map_web.views.handler500'
+
               #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
