@@ -30,8 +30,7 @@ DJANGO_READ_DOT_ENV_FILE=True
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = os.getenv('DEBUG')
-DEBUG = False
+DEBUG = (os.getenv('DEBUG'), False)
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -48,7 +47,6 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'geodjango_news_map_web',
     'storages',
-    # 'admin_honeypot',
 ]
 
 MIDDLEWARE = [
@@ -160,39 +158,7 @@ else:
     MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 
-
-# AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
-# AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
-# AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-# AWS_DEFAULT_ACL  = None
-# #AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-# AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-# # s3 static settings
-# #STATIC_LOCATION = 'static'
-# #STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-# #STATICFILES_STORAGE = 'geodjango_news_map.storage_backends.StaticStorage'
-# #STATIC_ROOT = STATIC_URL
-# # s3 media settings
-# #MEDIA_LOCATION = 'media'
-# #MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
-# #DEFAULT_FILE_STORAGE = 'geodjango_news_map.storage_backends.MediaStorage'
-# #MEDIA_ROOT = MEDIA_URL
-#
-# STATIC_URL = os.getenv('STATIC_URL')
-# STATIC_ROOT = os.getenv('STATIC_ROOT')
-# MEDIA_URL = os.getenv('MEDIA_URL')
-# MEDIA_ROOT = os.getenv('MEDIA_ROOT')
-# DEFAULT_FILE_STORAGE = os.getenv('DEFAULT_FILE_STORAGE')
-# STATICFILES_STORAGE = os.getenv('STATICFILES_STORAGE')
-# ADMIN_MEDIA_PREFIX = os.getenv('ADMIN_MEDIA_PREFIX')
-
-
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.2/howto/static-files/
-## AWS_LOCATION -- "a path prefix that will be prepended to all uploads"
-## possibly need to set to '/media/', but custom MediaStorage likely covers this
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -205,18 +171,6 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['*']
-
-# CSRF_COOKIE_SECURE = True
-# SESSION_COOKIE_SECURE = True
-# SECURE_PROXY_SSL = True
-# SECURE_SSL_REDIRECT = True
-# SECURE_HSTS_SECONDS = True
-# SECURE_CONTENT_TYPE_NOSNIFF = True
-# SECURE_BROWSER_XXS_FILTER = True
-# X_FRAME_OPTIONS = 'DENY'
-# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWAREDED_PROTO', 'https')
-# ADMIN_HONEYPOT_EMAIL_ADMINS = False
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'index'
@@ -231,29 +185,29 @@ if 'ON_HEROKU' in os.environ:
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
     django_heroku.settings(locals(), staticfiles=False) # Activate Django-Heroku
 
-# staticfiles=False
-# if DEBUG:
-#     INTERNAL_IPS = ('127.0.0.1', 'localhost')
-#     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
-#     INSTALLED_APPS.append('debug_toolbar')
-#     DEBUG_TOOLBAR_PANELS = [
-#         'debug_toolbar.panels.versions.VersionsPanel',
-#         'debug_toolbar.panels.timer.TimerPanel',
-#         'debug_toolbar.panels.settings.SettingsPanel',
-#         'debug_toolbar.panels.headers.HeadersPanel',
-#         'debug_toolbar.panels.request.RequestPanel',
-#         'debug_toolbar.panels.sql.SQLPanel',
-#         'debug_toolbar.panels.staticfiles.StaticFilesPanel',
-#         'debug_toolbar.panels.templates.TemplatesPanel',
-#         'debug_toolbar.panels.cache.CachePanel',
-#         'debug_toolbar.panels.signals.SignalsPanel',
-#         'debug_toolbar.panels.logging.LoggingPanel',
-#         'debug_toolbar.panels.redirects.RedirectsPanel',
-#     ]
-#     DEBUG_TOOLBAR_CONFIG = {
-#         'INTERCEPT_REDIRECTS': False,
-#         'SHOW_COLLAPSED': True,
-#         'SQL_WARNING_THRESHOLD': 100,
-#     }
+
+if DEBUG:
+    INTERNAL_IPS = ('127.0.0.1', 'localhost')
+    MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
+    INSTALLED_APPS.append('debug_toolbar')
+    DEBUG_TOOLBAR_PANELS = [
+        'debug_toolbar.panels.versions.VersionsPanel',
+        'debug_toolbar.panels.timer.TimerPanel',
+        'debug_toolbar.panels.settings.SettingsPanel',
+        'debug_toolbar.panels.headers.HeadersPanel',
+        'debug_toolbar.panels.request.RequestPanel',
+        'debug_toolbar.panels.sql.SQLPanel',
+        'debug_toolbar.panels.staticfiles.StaticFilesPanel',
+        'debug_toolbar.panels.templates.TemplatesPanel',
+        'debug_toolbar.panels.cache.CachePanel',
+        'debug_toolbar.panels.signals.SignalsPanel',
+        'debug_toolbar.panels.logging.LoggingPanel',
+        'debug_toolbar.panels.redirects.RedirectsPanel',
+    ]
+    DEBUG_TOOLBAR_CONFIG = {
+        'INTERCEPT_REDIRECTS': False,
+        'SHOW_COLLAPSED': True,
+        'SQL_WARNING_THRESHOLD': 100,
+    }
 
 from .logger import LOGGING
