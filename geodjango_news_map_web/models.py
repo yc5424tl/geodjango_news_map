@@ -28,11 +28,11 @@ class QueryResultSet(models.Model):
 
     @property
     def article_count(self) -> int:
-        return self.article_count
+        return self._article_count
 
     @property
     def article_data_len(self) -> int:
-        return self.article_data_len
+        return self._article_data_len
 
     @property
     def choropleth(self) -> str:
@@ -44,82 +44,82 @@ class QueryResultSet(models.Model):
 
     @property
     def choro_html(self) -> str:
-        return self.choro_html
+        return self._choro_html
 
     @property
     def data(self) -> str:
-        return self.data
+        return self._data
 
     @property
     def filename(self) -> str:
-        return self.filename
+        return self._filename
 
     @property
     def filepath(self) -> str:
-        return self.filepath
+        return self._filepath
 
     @property
     def author(self) -> settings.AUTH_USER_MODEL:
-        return self.author
+        return self._author
 
     @property
     def public(self) -> bool:
-        return self.public
+        return self._public
 
     @property
     def query_type(self) -> str:
-        return self.query_type
+        return self._query_type
 
     @property
     def date_created(self) -> datetime.date:
-        return self.date_created
+        return self._date_created
 
     @property
     def date_range_end(self) -> datetime.date:
-        return self.date_range_end
+        return self._date_range_end
 
     @property
     def date_range_start(self) -> datetime.date:
-        return self.date_range_start
+        return self._date_range_start
 
     @property
     def date_last_modified(self) -> datetime.date:
-        return self.date_last_modified
+        return self._date_last_modified
 
     @date_last_modified.setter
     def date_last_modified(self, new_date) -> NoReturn:
-        self.date_last_modified = new_date
+        self._date_last_modified = new_date
 
     def __str__(self):
         details = f'Argument: {self._argument}\n Query Type: {self._query_type}\n Author: {self._author}\n Archived: {self._archived}\n' \
                   f'Public: {self._public}\n Data[:500]: {self._data[:500]}\n ChoroHTML: {self._choro_html[:500]}'
         if self.filename:
-            details = f'{details}\nFilename = {self.filename}'
+            details = f'{details}\nFilename = {self._filename}'
         return details
 
     @property
     def argument(self) -> str:
-        return self.argument
+        return self._argument
 
     @argument.setter
     def argument(self, new_argument) -> NoReturn:
         if isinstance(new_argument, str):
-            self.argument = new_argument
+            self._argument = new_argument
         else:
             raise Exception("Invalid Value for argument")
 
     @property
     def date_created_readable(self) -> str:
-        return f'{self.date_created.month}, {self.date_created.day}, {self.date_created.year}'
+        return f'{self._date_created.month}, {self._date_created.day}, {self._date_created.year}'
 
     @property
     def archived(self) -> bool:
-        return self.archived
+        return self._archived
 
     @archived.setter
     def archived(self, is_archived: bool) -> NoReturn:
         if isinstance(is_archived, bool):
-            self.archived = is_archived
+            self._archived = is_archived
         else:
             raise TypeError('Property "archived" must be type bool.')
 
@@ -129,7 +129,7 @@ class Category(models.Model):
 
     @property
     def name(self) -> str:
-        return self.name
+        return self._name
 
 
 class Source(models.Model):
@@ -142,49 +142,49 @@ class Source(models.Model):
 
 
     def __str__(self) -> str:
-        return f'{self.name}, {self.country}, {self.country}'
+        return f'{self._name}, {self._country}, {self._country}'
 
     @property
     def verified(self) -> bool:
-        return self.verified
+        return self._verified
 
     @verified.setter
     def verified(self, is_verified) -> NoReturn:
-        self.verified = is_verified
+        self._verified = is_verified
 
     @property
     def country(self) -> str:
-        return self.country
+        return self._country
 
     @property
     def country_full_name(self) -> str:
         try:
-            return pycountry.countries.lookup(self.country).name
+            return pycountry.countries.lookup(self._country).name
         except LookupError:
-            return self.country
+            return self._country
 
     @property
     def name(self) -> str:
-        return self.name
+        return self._name
 
     @property
     def language(self) -> str:
-        return self.language
+        return self._language
 
     @property
     def language_full_name(self) -> str:
         try:
-            return pycountry.languages.lookup(self.language).name
+            return pycountry.languages.lookup(self._language).name
         except LookupError:
-            return self.language
+            return self._language
 
     @property
     def categories(self) -> [Category]:
-        return self.categories
+        return self._categories
 
     @property
     def url(self) -> str:
-        return self.url
+        return self._url
 
 
 class Article(models.Model):
@@ -198,43 +198,43 @@ class Article(models.Model):
     _title          = models.CharField(max_length=300)
 
     def __str__(self):
-        return f'{self.title}, {self.author}, {self.date_published}, {self.source.name}'
+        return f'{self._title}, {self._author}, {self._date_published}, {self._source.name}'
 
     @property
     def source(self) -> Source:
-        return self.source
+        return self._source
 
     @property
     def source_country(self) -> str:
-        return self.source.country
+        return self._source.country
 
     @property
     def article_url(self) -> str:
-        return self.article_url
+        return self._article_url
 
     @property
     def author(self) -> str:
-        return self.author
+        return self._author
 
     @property
     def date_published(self) -> datetime.date:
-        return self.date_published
+        return self._date_published
 
     @property
     def description(self) -> str:
-        return self.description
+        return self._description
 
     @property
     def image_url(self) -> str or None:
-        return self.image_url
+        return self._image_url
 
     @property
     def query(self) -> QueryResultSet:
-        return self.query
+        return self._query
 
     @property
     def title(self) -> str:
-        return self.title
+        return self._title
 
 
 class Post(models.Model):
@@ -248,35 +248,35 @@ class Post(models.Model):
 
     @property
     def author(self) -> settings.AUTH_USER_MODEL:
-        return self.author
+        return self._author
 
     @property
     def title(self) -> str:
-        return self.title
+        return self._title
 
     @property
     def body(self) -> str:
-        return self.body
+        return self._body
 
     @property
     def date_published(self) -> datetime.date:
-        return self.date_published
+        return self._date_published
 
     @property
     def date_last_edit(self) -> datetime.date:
-        return self.date_last_edit
+        return self._date_last_edit
 
     @property
     def public(self) -> bool:
-        return self.public
+        return self._public
 
     @property
     def query(self) -> QueryResultSet:
-        return self.query
+        return self._query
 
     def get_choro_map(self) -> str or NoReturn:
-        if self.query:
-            qrs_pk = self.query.pk
+        if self._query:
+            qrs_pk = self._query.pk
             qrs = QueryResultSet.objects.get(qrs_pk)
             # qrs = QueryResultSet.objects.get(pk=qrs_pk)
             return qrs.choropleth if qrs.choropleth else None
@@ -287,51 +287,50 @@ class Comment(models.Model):
     _body           = models.CharField(max_length=25000)
     _date_published = models.DateTimeField(auto_now_add=True)
     _date_last_edit = models.DateTimeField(auto_now_add=True)
-    _author         = models.ForeignKey(settings.AUTH_USER_MODEL, db_column='user', on_delete=models.PROTECT, related_name='comments')
+    _author         = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name='comments')
 
     def __str__(self) -> str:
-        author = User.objects.get(id=self._author_id)
-        return f'Comment from {author.first_name} {author.last_name} on {self.date_published} to post "{self.post.title}", made {self.date_published}'
+        return f'Comment from {self._author.first_name} {self._author.last_name} on {self._date_published} to post "{self._post.title}", made {self._date_published}'
 
     @property
     def post(self) -> Post:
-        return self.post
+        return self._post
 
     @post.setter
     def post(self, new_post) -> NoReturn:
-        self.post = new_post
+        self._post = new_post
 
     @property
     def body(self) -> str:
-        return self.body
+        return self._body
 
     @body.setter
     def body(self, new_body) -> NoReturn:
-        self.body = new_body
+        self._body = new_body
 
     @property
     def date_published(self) -> datetime.date:
-        return self.date_published
+        return self._date_published
 
     @date_published.setter
     def date_published(self, new_date) -> NoReturn:
-        self.date_published = new_date
+        self._date_published = new_date
 
     @property
     def date_last_edit(self) -> datetime.date:
-        return self.date_last_edit
+        return self._date_last_edit
 
     @date_last_edit.setter
     def date_last_edit(self, new_date) -> NoReturn:
-        self.date_last_edit = new_date
+        self._date_last_edit = new_date
 
     @property
-    def author(self) -> str:
-        return self.author
+    def author(self) -> settings.AUTH_USER_MODEL:
+        return self._author
 
     @author.setter
     def author(self, new_author) -> NoReturn:
-        self.author = new_author
+        self._author = new_author
 
 #======================================================================================#
 # enum help from

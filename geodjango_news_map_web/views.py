@@ -225,7 +225,7 @@ def new_post(request):
 
 @login_required()
 def update_post(request, post_pk):
-    return render(request, 'general/update_post.html', {'post':post_pk})
+    return render(request, 'general/update_post.html')
 
 @login_required()
 def update_comment(request, comment_pk):
@@ -379,6 +379,6 @@ def handler404(request, exception):
 def handler500(request):
     return render(request, "error/500.html", status=500)
 
-def handler401(request, exception):
-    context = RequestContext(request)
-    return render(request, "error/401.html", locals())
+# def handler401(request, exception):
+#     context = RequestContext(request)
+#     return render(request, "error/401.html", locals())

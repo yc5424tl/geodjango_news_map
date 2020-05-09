@@ -36,10 +36,10 @@ urlpatterns = [
 
 handler404 = 'geodjango_news_map_web.views.handler404'
 handler500 = 'geodjango_news_map_web.views.handler500'
-handler401 = 'geodjango_news_map_web.views.handler401'
+# handler401 = 'geodjango_news_map_web.views.handler401'
 
 
 
-if os.environ.get('DEBUG') == 'TRUE':
-    import debug_toolbar
-    urlpatterns.append(path(r'__debug__', include(debug_toolbar.urls)))
+# if os.environ.get('DEBUG') == 'TRUE':
+#     import debug_toolbar
+#     urlpatterns.append(path(r'__debug__', include(debug_toolbar.urls)))

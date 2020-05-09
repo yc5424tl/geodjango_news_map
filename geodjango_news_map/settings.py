@@ -30,8 +30,7 @@ DJANGO_READ_DOT_ENV_FILE=True
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = (os.getenv('DEBUG'), False)
-DEBUG = False
+DEBUG = os.getenv('DEBUG')
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
@@ -48,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'geodjango_news_map_web',
     'storages',
+    # 'admin_honeypot',
 ]
 
 MIDDLEWARE = [
@@ -132,33 +132,36 @@ USE_TZ = True
 
 
 
-USE_S3 = os.getenv('USE_S3')
+USE_S3 = os.getenv('USE_S3') == 'TRUE'
 
 if USE_S3:
     # aws settings
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
-    AWS_DEFAULT_ACL  = None
+    AWS_DEFAULT_ACL  = 'public-read'
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
     # s3 static settings
     STATIC_LOCATION = 'static'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
     STATICFILES_STORAGE = 'geodjango_news_map.storage_backends.StaticStorage'
-    STATIC_ROOT = STATIC_URL
     # s3 media settings
     MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'geodjango_news_map.storage_backends.MediaStorage'
-    MEDIA_ROOT = MEDIA_URL
 else:
-    STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    MEDIA_URL = '/media/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    STATIC_URL = '/staticfiles/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    MEDIA_URL = '/mediafiles/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/2.2/howto/static-files/
+## AWS_LOCATION -- "a path prefix that will be prepended to all uploads"
+## possibly need to set to '/media/', but custom MediaStorage likely covers this
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -172,13 +175,17 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['*']
 
-
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-X_FRAME_OPTIONS = 'DENY'
-
+# CSRF_COOKIE_SECURE = True
+# SESSION_COOKIE_SECURE = True
+# SECURE_PROXY_SSL = True
+# SECURE_SSL_REDIRECT = True
+# SECURE_HSTS_SECONDS = True
+# SECURE_CONTENT_TYPE_NOSNIFF = True
+# SECURE_BROWSER_XXS_FILTER = True
+# X_FRAME_OPTIONS = 'DENY'
+# SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+# SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWAREDED_PROTO', 'https')
+# ADMIN_HONEYPOT_EMAIL_ADMINS = False
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'index'
@@ -191,10 +198,10 @@ GEOS_LIBRARY_PATH = os.environ.get('GEOS_LIBRARY_PATH')
 if 'ON_HEROKU' in os.environ:
     ALLOWED_HOSTS = ['geodjango-news-map.herokuapp.com']
     DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-    django_heroku.settings(locals(), staticfiles=False) # Activate Django-Heroku
+    django_heroku.settings(locals()) # Activate Django-Heroku
 
-
-if os.environ.get('DEBUG') == 'TRUE':
+staticfiles=False
+if DEBUG:
     INTERNAL_IPS = ('127.0.0.1', 'localhost')
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
     INSTALLED_APPS.append('debug_toolbar')
