@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+import os
+
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth import views as auth_views
@@ -36,6 +38,8 @@ handler404 = 'geodjango_news_map_web.views.handler404'
 handler500 = 'geodjango_news_map_web.views.handler500'
 handler401 = 'geodjango_news_map_web.views.handler401'
 
-if settings.DEBUG:
+
+
+if os.environ.get('DEBUG') == 'TRUE':
     import debug_toolbar
     urlpatterns.append(path(r'__debug__', include(debug_toolbar.urls)))
