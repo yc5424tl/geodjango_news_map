@@ -10,14 +10,13 @@ news_api = NewsApiClient(api_key=api_key)
 
 
 class Query:
-   # def __init__(self, arg: str, focus:str, from_date:datetime=None, to_date:datetime=None, endpoint:str=None, category:str=None):
+
     def __init__(self, arg: str, focus: str, from_date: datetime = None, to_date: datetime = None, endpoint: str = None):
         self.arg = arg
         self.focus = focus
         self.from_date = from_date
         self.to_date = to_date
         self.endpoint = endpoint
-       # self.category = category
 
     @property
     def filename(self) -> str:
@@ -49,23 +48,17 @@ class Query:
                 return False
         return True
 
-  #  if self.focus == 'headlines':
-  #      sortBy =
-
-
     def execute_query(self) -> ([dict], int):
-
         response = requests.get(self.endpoint)
         article_count = int(response.json()['totalResults'])
         response_data = response.json()['articles']
         article_data = []
-
         article_data.extend(response_data)
 
+        # ********************* FREE VERSION OF NEWS_API LIMITS RESULTS TO 100 PER REQUEST, BELOW IS FOR PAGING THROUGH MORE THAN 100 RESULTS *****************
+        #
         # if article_count > 100:
-        #
         #     pages = article_count//100
-        #
         #     if pages > 5:
         #         pages = 5
         #
@@ -87,8 +80,6 @@ class Query:
         #     print(f'len(article data)={len(article_data)} pages={pages} article_count={article_count}')
 
         return article_data, article_count
-
-
 
     def to_file(self, data) -> bool:
         try:

@@ -18,7 +18,6 @@ class NewPostForm(forms.ModelForm):
         super(NewPostForm, self).__init__(*args, **kwargs)
         self.fields['_body'].widget.attrs['readonly'] = True
 
-
     class Meta:
         model = Post
         fields = ('_title', '_public', '_body')
@@ -41,8 +40,8 @@ class NewCommentForm(forms.ModelForm):
     )
 
 
-
 class NewQueryForm(forms.ModelForm):
+
     class Meta:
         model = QueryResultSet
         fields = ('_argument', '_query_type')
@@ -56,12 +55,14 @@ class SaveQueryForm(forms.ModelForm):
 
 
 class EditPostForm(forms.ModelForm):
+
     class Meta:
         model = Post
         fields = ('_title', '_body')
 
 
 class EditCommentForm(forms.ModelForm):
+
     class Meta:
         model = Comment
         fields = ['_body']
@@ -71,18 +72,21 @@ class EditCommentForm(forms.ModelForm):
 
 
 class LoginForm(forms.ModelForm):
+
     class Meta:
         model = User
         fields = ['email']
 
 
 class LogoutForm(forms.ModelForm):
+
     class Meta:
         model = None
         fields = None
 
 
 class NewUserForm(UserCreationForm):
+
     class Meta:
         model = User
         fields = ['email',]

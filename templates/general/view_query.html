@@ -46,7 +46,9 @@
                         </tr>
                     </table>
                 </div>
+
                 {% if user.pk == query_author.id %}
+
                     {% if query.archived is False %}
                         <div id="post-query-container">
                             <form method="post" action="{% url 'new_post' %}" id="new-post-form">
@@ -84,6 +86,7 @@
                             </form>
                         </div>
                     {% endif %}
+
                     {% if query.archived is True %}
                         <form method="post" action="{% url 'update_post' post.pk %}">
                             {% csrf_token %}
@@ -109,13 +112,16 @@
                             <sub>* Query will also be deleted</sub>
                         </form>
                     {% endif %}
+
                 {% endif %}
             </div>
+
             <div class="col-sm-12 col-xl-8" id="view-query-iframe-container">
                 <div class="embed-responsive-16by9" id="view-query-iframe-div">
                     {{ choro_map|safe }}
                 </div>
             </div>
+
         </div>
 
         <div class="row" id="articles-row">

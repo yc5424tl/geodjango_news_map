@@ -153,11 +153,10 @@ if USE_S3:
     DEFAULT_FILE_STORAGE = 'geodjango_news_map.storage_backends.MediaStorage'
     MEDIA_ROOT = MEDIA_URL
 else:
-    STATIC_URL = '/staticfiles/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    MEDIA_URL = '/mediafiles/'
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
-
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 
@@ -172,6 +171,14 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 
 CORS_ALLOW_CREDENTIALS = True
 CSRF_TRUSTED_ORIGINS = ['*']
+
+
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+X_FRAME_OPTIONS = 'DENY'
+
 
 LOGIN_URL = 'login'
 LOGOUT_REDIRECT_URL = 'index'

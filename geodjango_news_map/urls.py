@@ -20,7 +20,6 @@ from django.contrib.gis import admin
 from django.urls import path, include
 
 
-
 urlpatterns = [
     path('admin/doc/', include('django.contrib.admindocs.urls')),
     path('admin/password_reset/', auth_views.PasswordResetView.as_view(), name='admin_password_reset',),
@@ -32,14 +31,11 @@ urlpatterns = [
     path('', include('geodjango_news_map_web.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-    #, static(settings.STATIC_URL, docuement_root=settings.STATIC_URL)
+
 handler404 = 'geodjango_news_map_web.views.handler404'
 handler500 = 'geodjango_news_map_web.views.handler500'
+handler401 = 'geodjango_news_map_web.views.handler401'
 
-              #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
-# if settings.DEBUG:
-#     import debug_toolbar
-#     urlpatterns.append(path(r'__debug__', include(debug_toolbar.urls)))
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns.append(path(r'__debug__', include(debug_toolbar.urls)))

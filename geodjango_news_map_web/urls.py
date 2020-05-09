@@ -2,10 +2,6 @@ from django.conf.urls import url
 
 from . import views
 
-
-# handler404 = 'geodjango_news_map_web.views.handler404'
-# handler500 = 'geodjango_news_map_web.views.handler500'
-
 urlpatterns = [
     url(r'^$', views.index, name='index'),
 
@@ -31,8 +27,6 @@ urlpatterns = [
     url(r'^sources/$', views.view_sources, name='view_sources'),
     url(r'^choro/view/(?P<query_pk>\d+)$', views.view_choro, name="view_choro")
 ]
-
-
 
 
 # ----- Generated urls from import django.contrib.auth.views in project.urls -----

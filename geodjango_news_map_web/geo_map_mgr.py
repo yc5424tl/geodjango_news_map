@@ -8,8 +8,8 @@ import numpy as np
 import pandas as pd
 import pycountry
 
-from geodjango_news_map.settings import BASE_DIR
-from geodjango_news_map_web.geo_data_mgr import GeoDataManager
+from geodjango_news_map.geodjango_news_map.settings import BASE_DIR
+from geodjango_news_map.geodjango_news_map_web.geo_data_mgr import GeoDataManager
 
 logger = logging.getLogger(__name__)
 

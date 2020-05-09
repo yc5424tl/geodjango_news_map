@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    404 Page Not Found
+    401 Unauthorized
 {% endblock %}
 
 {% block styles %}
@@ -12,10 +12,10 @@
 
 {% block content %}
     <div class="err-wrapper">
-        <h1 class="err-h1">Somebody snagged a page from our book!</h1>
+{#        <h1 class="err-h1">You are authorized to not view this.</h1>#}
         <div class="img-wrapper">
-            <img class="err-img" src="{% static 'img/404e.png' %}" alt="404 Error">
+            <img class="err-img" src="{% static 'img/401a.jpg' %}" alt="401 Error">
         </div>
-        <sub class="err-sub">404 Page Not Found</sub>
+{#        <sub class="err-sub">401 Unauthorized</sub>#}
     </div>
 {% endblock %}

@@ -120,7 +120,7 @@ def view_query(request, query_result_set_pk:int):
         'choro_map':        qrs.choropleth,
         'choro_html':       qrs.choro_html,
         'filename':         qrs.filename,
-        'article_count'    :qrs.article_count,
+        'article_count':    qrs.article_count,
         'article_data_len': qrs.article_data_len
     })
 
@@ -140,7 +140,7 @@ def view_public_posts(request):
 @login_required()
 def delete_comment(request, comment_pk:int):
     if request.method == 'POST':
-        comment = Comment.objects.get(pk=comment_pk)
+        comment = get_object_or_404(klass=Comment, pk=comment_pk)
         post_pk = comment.post.pk
         if comment.author.pk == request.user.pk:
             comment.delete()
@@ -366,9 +366,7 @@ def import_sources(request):
         requests.get(os.getenv('STAY_ALIVE_URL'))
         return HttpResponse(status=401)
 
-
 #TODO def password_reset(request)
-
 
 def view_choro(request: requests.request, query_pk) -> render:
     qrs = QueryResultSet.objects.get(pk=query_pk)
@@ -380,3 +378,7 @@ def handler404(request, exception):
 
 def handler500(request):
     return render(request, "error/500.html", status=500)
+
+def handler401(request, exception):
+    context = RequestContext(request)
+    return render(request, "error/401.html", locals())
