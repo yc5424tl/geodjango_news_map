@@ -194,7 +194,7 @@ if 'ON_HEROKU' in os.environ:
     django_heroku.settings(locals(), staticfiles=False) # Activate Django-Heroku
 
 
-if DEBUG:
+if os.environ.get('DEBUG') == 'TRUE':
     INTERNAL_IPS = ('127.0.0.1', 'localhost')
     MIDDLEWARE.append('debug_toolbar.middleware.DebugToolbarMiddleware')
     INSTALLED_APPS.append('debug_toolbar')
