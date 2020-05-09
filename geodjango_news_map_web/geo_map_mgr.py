@@ -13,8 +13,8 @@ from geodjango_news_map.geodjango_news_map_web.geo_data_mgr import GeoDataManage
 
 logger = logging.getLogger(__name__)
 
-SETTINGS_DIR = os.path.dirname(__file__)
-PROJECT_ROOT = os.path.abspath(os.path.dirname(SETTINGS_DIR))
+# SETTINGS_DIR = os.path.dirname(__file__)
+# PROJECT_ROOT = os.path.abspath(os.path.dirname(SETTINGS_DIR))
 CHORO_MAP_ROOT = os.path.join(BASE_DIR, 'geodjango_news_map_')
 
 

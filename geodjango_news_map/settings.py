@@ -131,9 +131,9 @@ USE_TZ = True
 
 
 
-USE_S3 = os.getenv('USE_S3')
+# USE_S3 = os.getenv('USE_S3')
 
-if USE_S3 in os.environ:
+if 'USE_S3' in os.environ:
     # aws settings
     AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
