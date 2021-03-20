@@ -23,7 +23,7 @@ folium==0.10.0
 geopandas==0.5.1
 gunicorn==20.0.0
 idna==2.8
-Jinja2==2.10.3
+Jinja2==2.11.3
 jmespath==0.9.4
 kiwisolver==1.1.0
 MarkupSafe==1.1.1
