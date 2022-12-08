@@ -4,7 +4,7 @@ boto3==1.9.244
 botocore==1.12.244
 branca==0.3.1
 Brotli==1.0.7
-certifi==2019.9.11
+certifi==2022.12.7
 chardet==3.0.4
 Click==7.0
 click-plugins==1.1.1
